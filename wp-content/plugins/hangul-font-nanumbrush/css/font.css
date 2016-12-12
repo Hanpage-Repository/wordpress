@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'NanumBrush';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../font/NanumBrush.eot);
+  src: url(../font/NanumBrush.eot?#iefix) format('embedded-opentype'),
+       url(../font/NanumBrush.woff2) format('woff2'),
+       url(../font/NanumBrush.woff) format('woff'),
+       url(../font/NanumBrush.ttf) format('truetype');
+}
