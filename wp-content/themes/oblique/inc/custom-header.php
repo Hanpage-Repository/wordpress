@@ -47,7 +47,7 @@ function oblique_header_style() {
 		?>
 		<style type="text/css">
 					.site-header {
-					    background: url(<?php echo get_header_image(); ?>) no-repeat;
+					    background: url(http://d1fav6wwj1iaz1.cloudfront.net/wp-content/uploads/2016/12/10120248/cropped-header.jpg) no-repeat;
 					    background-position: center top;
 					    background-attachment: fixed;
 					    background-size: cover;
