@@ -1169,7 +1169,7 @@ Top bar
 .single-post .entry-meta,
 .single-post #comments,
 .page-template-kh-home-page-php .entry-header,
-.page-template-kh-home-page-php .svg-container,
+.page-template-kh-home-page-php #main .svg-container,
 .post-template-kh-151515-single-php .svg-container,
 .page-template-kh-home-page-php .kc-blog-posts .post-grid h2.post-title-alt::before,
 .post-template-kh-46130E-single-php .svg-container {
@@ -1183,8 +1183,23 @@ Top bar
 	font-size: 64px;
 }
 
+/* deleted by KH
 .page-template-kh-home-page-php .site-header {
 	margin-bottom: 54px;
+}
+*/
+.page-template-kh-home-page-php .site-header {
+	margin-bottom: 0px;
+}
+
+.page-template-kh-home-page-php .pt-cv-title a {
+	color: white;
+	margin-left: 5px;
+}
+
+.page-template-kh-home-page-php #masthead .overlay {
+	z-index: 0;
+	opacity: 0;
 }
 
 .page-template-kh-home-page-php .container {

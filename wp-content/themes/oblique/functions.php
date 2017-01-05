@@ -223,13 +223,39 @@ add_filter('excerpt_more', 'oblique_excerpt_more');
  * Footer credits
  */
 function oblique_footer_credits() {
-	echo '<a href="' . esc_url( __( 'http://hanpage.net', 'oblique' ) ) . '" rel="nofollow" style="float:right;margin-right:30px;">';
-		printf( __( ' Made in %s', 'oblique' ), 'Han Page - 한 페이지' );
-	echo '</a>';
-	/* edit by KH
+		/* edit by KH
 	echo '<span class="sep"> | </span>';
 	printf( __( 'Theme: %2$s by %1$s.', 'oblique' ), 'Themeisle', '<a href="http://themeisle.com/themes/oblique/" rel="nofollow">Oblique</a>' );
 	*/
+
+	if(is_front_page()) {
+
+	echo '<div style="width:100%; text-align:center;">';
+		printf( __( '회사명 : 아이제너럴스토어 | 대표 : 배경환') );
+	echo '<br>';
+		printf( __( '사업자등록번호 : 632-13-00388') );
+	echo '<br>';
+		printf( __( '부산 남구 용당동 부경대학교용당캠퍼스 신선로 365 (부경대학교 용당캠퍼스 內) 부산창업지원센터 325', 'oblique' ) );
+	echo '</div>';
+
+	} else {
+
+	echo '<a href="' . esc_url( __( 'http://hanpage.net', 'oblique' ) ) . '" rel="nofollow" style="color:#ccc;float:right;margin-right:30px;">';
+		printf( __( ' Made in %s', 'oblique' ), '<b>HAN PAGE</b>' );
+	echo '</a>';
+
+	}
+
+
+	echo '<br>';
+	echo '<br>';
+
+	echo '<div style="color:white; text-align:center;">';
+		printf( __( 'COPYRIGHT © 2012 - %d  HAN PAGE', 'oblique' ), 2017 );
+	echo '<br>';
+		printf( __( 'ALL RIGHTS RESERVED', 'oblique' ) );
+	echo '</div>';
+
 }
 add_action( 'oblique_footer', 'oblique_footer_credits' );
 
