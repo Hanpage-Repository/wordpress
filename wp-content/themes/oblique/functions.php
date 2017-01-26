@@ -235,6 +235,10 @@ function oblique_footer_credits() {
 	echo '<br>';
 		printf( __( '사업자등록번호 : 632-13-00388') );
 	echo '<br>';
+		printf( __( '대표번호 : 010-6381-9307') );
+	echo '<br>';
+		printf( __( '팩스번호 : 050-4406-9308') );
+	echo '<br>';
 		printf( __( '부산 남구 용당동 부경대학교용당캠퍼스 신선로 365 (부경대학교 용당캠퍼스 內) 부산창업지원센터 325', 'oblique' ) );
 	echo '</div>';
 
@@ -251,7 +255,7 @@ function oblique_footer_credits() {
 	echo '<br>';
 
 	echo '<div style="color:white; text-align:center;">';
-		printf( __( 'COPYRIGHT © 2012 - %d  HAN PAGE', 'oblique' ), 2017 );
+		printf( __( 'COPYRIGHT © 2016 - %d  HAN PAGE', 'oblique' ), 2017 );
 	echo '<br>';
 		printf( __( 'ALL RIGHTS RESERVED', 'oblique' ) );
 	echo '</div>';
