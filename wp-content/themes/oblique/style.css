@@ -1172,7 +1172,8 @@ Top bar
 .page-template-kh-home-page-php #main .svg-container,
 .post-template-kh-151515-single-php .svg-container,
 .page-template-kh-home-page-php .kc-blog-posts .post-grid h2.post-title-alt::before,
-.post-template-kh-46130E-single-php .svg-container {
+.post-template-kh-46130E-single-php .svg-container,
+.post-template-kh-1561AC-single-php .svg-container {
 	display: none;
 }
 
@@ -1260,29 +1261,16 @@ Top bar
 
 /* added by KH - 46130E */
 .post-template-kh-46130E-single-php {
-	/*
-	background-color: rgba(70,19,14,0.6);
-	*/
 	background-color: #46130E;
 }
 .post-template-kh-46130E-single-php .entry-title {
 	color: #000;
-	/* sub color 
-	color: #7C413B;
-	*/
 	margin-top: 40px;
 }
 .post-template-kh-46130E-single-php .site-footer {
-	/*
-	background-color: rgba(70,19,14,0.6);
-	*/
 	background-color: #642721;
 }
 .post-template-kh-46130E-single-php article.post {
-	/*
-	background-color: rgba(70,19,14,0.1);
-	background-color: #2A0602;
-	*/
 	padding-left: 0;
 	padding-right: 0;
 	padding-bottom: 0;
@@ -1302,17 +1290,50 @@ Top bar
 	background: #642721;
 }
 
-/*
-.post-template-kh-46130E-single-php img {
-    background-repeat: no-repeat !important;
-    background-position: center top !important;
-    background-attachment: fixed !important;
-    background-width: 100% auto !important;
-    -o-background-size: fixed;
-    -moz-background-size: fixed;
-    -webkit-background-size: fixed !important;
+/* added by KH - 1561AC */
+.post-template-kh-1561AC-single-php {
+	background-color: #1561AC;
 }
-*/
+
+.post-template-kh-1561AC-single-php .ufbl-form-wrapper {
+	color: #eee;
+}
+
+.post-template-kh-1561AC-single-php main#main .entry-header {
+	display: none;
+}
+
+.post-template-kh-1561AC-single-php .entry-title {
+	color: #fff;
+	background-color: #5A90C5;
+	margin-top: 40px;
+}
+.post-template-kh-1561AC-single-php .site-footer {
+	background-color: #063A6C;
+	/*
+	background-color: #642721;
+	*/
+}
+.post-template-kh-1561AC-single-php article.post {
+	padding-top: 0;
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background-color: #FFFFFF;
+	color: rgba(137, 137, 137, 0.9);
+}
+.post-template-kh-1561AC-single-php .widget-area {
+	background-color: #094B8A;
+}
+
+.post-template-kh-1561AC-single-php .sidebar-toggle {
+	color: #063A6C;
+}
+
+.post-template-kh-1561AC-single-php .kc-multi-icons-wrapper a {
+	background: #063A6C;
+}
 
 /*--------------------------------------------------------------
 Responsive
