@@ -1299,13 +1299,8 @@ Top bar
 	color: #eee;
 }
 
-.post-template-kh-1561AC-single-php main#main .entry-header {
-	display: none;
-}
-
 .post-template-kh-1561AC-single-php .entry-title {
 	color: #fff;
-	background-color: #5A90C5;
 	margin-top: 40px;
 }
 .post-template-kh-1561AC-single-php .site-footer {
@@ -1315,12 +1310,17 @@ Top bar
 	*/
 }
 .post-template-kh-1561AC-single-php article.post {
+	background-color: #1561AC !important;
+	/*
 	padding-top: 0;
 	padding-left: 0;
 	padding-right: 0;
 	padding-bottom: 0;
+	*/
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
 
-	background-color: #FFFFFF;
 	color: rgba(137, 137, 137, 0.9);
 }
 .post-template-kh-1561AC-single-php .widget-area {
