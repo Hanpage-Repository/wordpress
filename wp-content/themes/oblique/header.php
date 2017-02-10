@@ -12,6 +12,10 @@
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<!-- added by KH  -->
+<meta name="naver-site-verification" content="b676af98f9416dcfe882719998d94a34ba22dbcc"/>
+
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
