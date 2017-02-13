@@ -15,6 +15,13 @@
 
 <!-- added by KH  -->
 <meta name="naver-site-verification" content="b676af98f9416dcfe882719998d94a34ba22dbcc"/>
+<meta name="description" content="개인용 프로필, 기업 홈페이지, 동호회·동아리·이벤트 전용 페이지 제작 등 서비스 제공.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="한 페이지">
+<meta property="og:description" content="개인용 프로필, 기업 홈페이지, 동호회·동아리·이벤트 전용 페이지 제작 등 서비스 제공.">
+<meta property="og:url" content="http://hanpage.net">
+<meta property="og:image" content="http://d1fav6wwj1iaz1.cloudfront.net/public/016.png">
+
 
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
