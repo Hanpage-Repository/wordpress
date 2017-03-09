@@ -152,7 +152,10 @@ $form_width = (isset( $form_design['form_width'] ) && $form_design['form_width']
 						?>
 						<div class="ufbl-form-field-wrap <?php echo ($val['field_class'] != '') ? esc_attr( $val['field_class'] ) : ''; ?>" <?php echo ($val['field_id'] != '') ? 'id="' . esc_attr( $val['field_id'] ) . '"' : ''; ?>>
 							<div class="ufbl-form-field">
+							<!-- edit by KH
 								<input type="submit" class="ufbl-form-submit" name="<?php echo $key; ?>" value="<?php echo (isset( $val['button_label'] ) && $val['button_label'] != '') ? esc_attr( $val['button_label'] ) : __( 'Submit', 'ultimate-form-builder-lite' ); ?>"/>
+							-->
+								<input type="submit" class="ufbl-form-submit" name="<?php echo $key; ?>" value="확  인"/>
 								<?php if(isset($val['show_reset_button'])){?>
 								<input type="reset" class="ufbl-form-reset" value="<?php echo (isset( $val['reset_label'] ) && $val['reset_label'] != '') ? esc_attr( $val['reset_label'] ) : __( 'Reset', 'ultimate-form-builder-lite' ); ?>"/>
 								<?php }?>
