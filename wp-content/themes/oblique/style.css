@@ -1173,6 +1173,7 @@ Top bar
 .post-template-kh-151515-single-php .svg-container,
 .page-template-kh-home-page-php .kc-blog-posts .post-grid h2.post-title-alt::before,
 .post-template-kh-46130E-single-php .svg-container,
+.post-template-kh-FFFFFF-single-php .svg-container,
 .post-template-kh-1561AC-single-php .svg-container {
 	display: none;
 }
@@ -1334,6 +1335,39 @@ Top bar
 .post-template-kh-1561AC-single-php .kc-multi-icons-wrapper a {
 	background: #063A6C;
 }
+
+
+/* added by KH - FFFFFF */
+.post-template-kh-FFFFFF-single-php {
+	background-color: #9DBCE1;
+}
+.post-template-kh-FFFFFF-single-php .entry-title {
+	color: #174781;
+	margin-top: 40px;
+}
+.post-template-kh-FFFFFF-single-php .site-footer {
+	background-color: #2E5F9A;
+}
+.post-template-kh-FFFFFF-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background-color: #FFFFFF;
+	color: rgba(137, 137, 137, 0.9);
+}
+.post-template-kh-FFFFFF-single-php .widget-area {
+	background-color: #2E5F9A;
+}
+
+.post-template-kh-FFFFFF-single-php .sidebar-toggle {
+	color: #2E5F9A;
+}
+
+.post-template-kh-FFFFFF-single-php .kc-multi-icons-wrapper a {
+	background: #9DBCE1;
+}
+
 
 /*--------------------------------------------------------------
 Responsive
