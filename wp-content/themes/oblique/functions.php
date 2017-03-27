@@ -315,3 +315,18 @@ function oblique_customizer_styles() {
 	wp_enqueue_style( 'oblique-customizer-styles', get_template_directory_uri() . '/css/customizer.css' );
 }
 add_action( 'customize_controls_print_styles', 'oblique_customizer_styles' );
+
+/* added by KH */
+// 곧바로 체크아웃시키기
+add_filter ('add_to_cart_redirect', 'redirect_to_checkout');
+
+function redirect_to_checkout() {
+	return WC()->cart->get_checkout_url();
+}
+
+// 장바구니 텍스트 변경하기
+add_filter( 'woocommerce_product_single_add_to_cart_text', 'woo_custom_cart_button_text' );    // 2.1 +
+
+function woo_custom_cart_button_text() {
+	return __( '바로 구매', 'woocommerce' );
+}
