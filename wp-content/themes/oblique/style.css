@@ -1160,6 +1160,36 @@ Top bar
 	display: none;
 }
 
+/* plugin setting -- WooCommerce by KH */
+
+.woocommerce.woocommerce-page .product_title.entry-title,
+.woocommerce.woocommerce-page h1,
+.woocommerce.woocommerce-page h2,
+.woocommerce.woocommerce-page h3 {
+	color: white;
+}
+
+.woocommerce.woocommerce-page .summary.entry-summary #product-total-price,
+.woocommerce.woocommerce-page .summary.entry-summary table td.label,
+.woocommerce.woocommerce-page .summary.entry-summary table td.price .woocommerce-Price-amount.amount {
+	color: #aaa;
+}
+
+.woocommerce.woocommerce-page .ufbl-form-field-wrap {
+	padding-bottom: 0px;
+}
+
+.woocommerce.woocommerce-page .ufbl-form-title {
+	display: none;
+}
+
+.woocommerce.woocommerce-page h1.product_title.entry-title {
+	margin-bottom: 40px;
+}
+.woocommerce.woocommerce-page .single_add_to_cart_button.button.alt {
+	margin-top: 30px;
+}
+
 /*
 .page-template-kh-home-page-php .svg-container,
 */
@@ -1490,5 +1520,8 @@ Responsive
 	.comments-area {
 		padding-left: 15px;
 		padding-right: 15px;
+	}
+	.woocommerce.woocommerce-page #content.site-content {
+		padding: 10px;
 	}
 }

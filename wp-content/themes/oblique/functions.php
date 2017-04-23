@@ -318,15 +318,77 @@ add_action( 'customize_controls_print_styles', 'oblique_customizer_styles' );
 
 /* added by KH */
 // 곧바로 체크아웃시키기
-add_filter ('add_to_cart_redirect', 'redirect_to_checkout');
 
+add_filter ('add_to_cart_redirect', 'redirect_to_checkout');
 function redirect_to_checkout() {
 	return WC()->cart->get_checkout_url();
 }
 
 // 장바구니 텍스트 변경하기
 add_filter( 'woocommerce_product_single_add_to_cart_text', 'woo_custom_cart_button_text' );    // 2.1 +
-
 function woo_custom_cart_button_text() {
 	return __( '바로 구매', 'woocommerce' );
 }
+
+// 장바구니 비우기, 
+// 바로 구매 버튼 눌렸을 때 아이템이 중첩되거나 qty가 1인 아이가 늘어나는 상황에 에러를 리턴해서 페이지가 출력되면 장바구니를 아예 비워버리는 방식을 채택했다. 
+add_action( 'woocommerce_before_single_product', 'kh_clear_cart', 10 );
+function kh_clear_cart() {
+	WC()->cart->empty_cart();
+}
+
+
+// added by KH
+add_action( 'woocommerce_single_product_summary', 'woocommerce_total_product_price', 31 ); 
+function woocommerce_total_product_price() { 
+	global $woocommerce, $product; 
+	echo '<div id="product-total-price">'; 
+	_e('총 결제 금액 : ','woocommerce'); 
+	echo '<span class="currency">' . get_woocommerce_currency_symbol() . '</span><span class="price"></span>'; 
+	echo '</div>'; 
+	?> 
+	    <script> 
+	    jQuery(function($){ 
+	            var current_cart_total = <?php echo $woocommerce->cart->cart_contents_total; ?>, currency = '<?php echo get_woocommerce_currency_symbol(); ?>'; 
+
+	            <?php
+
+	            	$phpQueryExist = 0; // as false value
+	            	$phpQueryValue = 1;
+
+	            	if( isset($_GET['set_quantity']) ) {
+	            		$phpQueryExist = 1;
+	            		$phpQueryValue = $_GET['set_quantity'];
+	            	}
+
+	            ?>
+
+				// added by KH
+	            var queryExist = <?php echo $phpQueryExist; ?>;
+	            var queryValue = <?php echo $phpQueryValue; ?>;
+
+	            $('.input-text.qty, .quantity_select .qty').on('change',function(){ 
+	               	
+	               	if(queryExist && $(this).attr("name")=="quantity[676]")
+	               		$(this).val(queryValue); 
+
+	                var overall_total = 0; 
+	                $('.input-text.qty, .quantity_select .qty').each(function(){ 
+	                    var price = $(this).parents('.grouped-product-item').data('price'); 
+	                    var items = $(this).val(); 
+	                    var total = price * items; 
+	                    overall_total = overall_total + total; 
+	                    }); 
+
+	                if ( overall_total > 0 ) { 
+	                $('#product-total-price').fadeIn('fast'); 
+	                $('#product-total-price .price').html( overall_total.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
+	                } 
+	                else { 
+	                $('#product-total-price .price').html('0'); } 
+	                }).trigger('change');
+
+	            }); 
+	</script> 
+<?php }
+

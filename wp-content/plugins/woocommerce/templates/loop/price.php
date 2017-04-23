@@ -24,5 +24,17 @@ global $product;
 ?>
 
 <?php if ( $price_html = $product->get_price_html() ) : ?>
-	<span class="price"><?php echo $price_html; ?></span>
+	<span class="price"><?php 
+		// edit by KH
+		//echo $price_html; 
+		$total;
+		foreach ( $product->get_children() as $child_id ) { 
+	    	$child = wc_get_product($child_id);
+	    	$total += intval($child->get_price_including_tax());
+		}   
+
+		echo number_format($total) . "원부터";
+
+	
+	?></span>
 <?php endif; ?>

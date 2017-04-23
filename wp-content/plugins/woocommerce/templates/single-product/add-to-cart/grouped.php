@@ -41,8 +41,10 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 					$post    = $product->post;
 					setup_postdata( $post );
+
+					// added by KH
 					?>
-					<tr>
+					<tr class="grouped-product-item" data-price="<?php echo $product->get_price() ?>">
 						<td>
 							<?php if ( $product->is_sold_individually() || ! $product->is_purchasable() ) : ?>
 								<?php woocommerce_template_loop_add_to_cart(); ?>
