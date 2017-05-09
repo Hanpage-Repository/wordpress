@@ -4,7 +4,7 @@ Donate link: http://www.iamport.kr
 Tags: woocommerce, commerce, payment, checkout, 카카오페이, 페이코, payco, kakao, kakaopay, 이니시스, kpay, inicis, 유플러스, lguplus, uplus, 나이스, 나이스페이, nice, nicepay, 제이티넷, 티페이, jtnet, tpay, 다날, danal, 모빌리언스, mobilians, 정기결제, subscription, 해외카드, visa, master, jcb, shopping, mall, iamport
 Requires at least: 3.5
 Tested up to: 4.5.3
-Stable tag: 1.6.18
+Stable tag: 1.6.23
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,21 @@ https://www.facebook.com/iamportservice
 
 
 == Changelog ==
+= 1.6.23 =
+* 플러그인 영문 번역파일 추가
+
+= 1.6.22 =
+* jQuery 버전 체크해서 iOS카카오페이 바로오픈하는 속성 추가
+
+= 1.6.21 =
+* 다른 플러그인에서 billing_phone(우커머스 기본 required field)를 required항목에서 제외하고 입력창을 제거하는 경우가 있음.(ex. BEOMPS) 이 경우 KG이니시스 등 일부 PG사에서 buyer_tel누락오류가 발생할 수 있어 dummy number추가
+
+= 1.6.20 =
+* 모빌리언스도 휴대폰 소액결제 가능하도록 플러그인 업데이트
+
+= 1.6.19 =
+* (1.6.16기능 보충)아임포트 관리자 페이지에서 부분취소를 하는 경우에도 그 기록이 모두 저장될 수 있도록 수정.(환불 가능한 잔액이 남아있을 때까지는 결제 상태를 "환불됨"으로 바꾸지 않음)
+
 = 1.6.18 =
 * #order\_review관련 handler등록 방식 변경. 1.6.13버전 패치보다 안정적인 방식으로 변경(체크아웃 페이지에서 id="order\_review" name="check" 2가지 속성을 모두 가진 테마가 종종 발견됨)
 

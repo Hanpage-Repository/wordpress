@@ -3,7 +3,7 @@
  * Plugin Name: 우커머스용 아임포트 플러그인(국내 모든 PG를 한 번에)
  * Plugin URI: http://www.iamport.kr
  * Description: 우커머스용 한국PG 연동 플러그인 ( 신용카드 / 실시간계좌이체 / 가상계좌 / 휴대폰소액결제 - 에스크로포함 )
- * Version: 1.6.18
+ * Version: 1.6.23
  * Author: SIOT
  * Author URI: http://www.siot.do
  * 
@@ -603,7 +603,7 @@ function woocommerce_gateway_iamport_init() {
 							
 							$order = new WC_Order( $order_id ); //lock잡은 후 호출(2017-01-16 : 의미없음. [1.6.8] synced_row의 값을 활용해서 status체크해야 함)
 
-							if ( $order->order_total == $payment_data->amount ) {
+							if ( $order->get_total() == $payment_data->amount ) {
 								if ( !$this->has_status($synced_row->post_status, array('processing', 'completed')) ) {
 									$order->payment_complete( $payment_data->imp_uid ); //imp_uid 
 									$order->set_payment_method( $gateway );
@@ -686,8 +686,32 @@ function woocommerce_gateway_iamport_init() {
 							$order = new WC_Order( $order_id ); //lock잡은 후 호출(2017-01-16 : 의미없음. [1.6.8] synced_row의 값을 활용해서 status체크해야 함)
 
 							if ( !$this->has_status($synced_row->post_status, array('cancelled', 'refunded')) ) {
-								$order->update_status( 'refunded' ); //imp_uid 
-								$order->add_order_note( __( '아임포트 관리자 페이지(https://admin.iamport.kr)에서 취소하여 우커머스 결제 상태를 "환불됨"으로 수정합니다.', 'iamport-for-woocommerce' ));
+								$amountLeft = $payment_data->amount > $payment_data->cancel_amount; //취소할 잔액이 남음
+
+								if ( $amountLeft ) { //한 번 더 환불이 가능함. 다음 번 환불이 가능하도록 status는 바꾸지 않음
+									$len = count($payment_data->cancel_history); // always > 0
+									$increment = $len - count($order->get_refunds());
+
+									for ($i=0; $i < $increment; $i++) { 
+										$cancelItem = $payment_data->cancel_history[$len-$increment+$i];
+
+										// 취소내역을 만들어줌 (부분취소도 대응가능)
+										$refund = wc_create_refund( array(
+											'amount'     => $cancelItem->amount,
+											'reason'     => $cancelItem->reason,
+											'order_id'   => $order_id
+										) );
+
+										if ( is_wp_error( $refund ) ) {
+											$order->add_order_note( $refund->get_error_message() );
+										} else {
+											$order->add_order_note( sprintf(__( '아임포트 관리자 페이지(https://admin.iamport.kr)에서 부분취소(%s원)하였습니다.', 'iamport-for-woocommerce' ), number_format($cancelItem->amount)) );
+										}
+									}
+								} else {
+									$order->update_status( 'refunded' ); //imp_uid 
+									$order->add_order_note( __( '아임포트 관리자 페이지(https://admin.iamport.kr)에서 취소하여 우커머스 결제 상태를 "환불됨"으로 수정합니다.', 'iamport-for-woocommerce' ));
+								}
 
 								$wpdb->query("COMMIT");
 
@@ -718,10 +742,10 @@ function woocommerce_gateway_iamport_init() {
 					$default_redirect_url = '/';
 				}
 
-				$called_from_iamport ? exit('IamportForWoocommerce 1.6.18') : wp_redirect( $default_redirect_url );
+				$called_from_iamport ? exit('IamportForWoocommerce 1.6.23') : wp_redirect( $default_redirect_url );
 			} else {
 				//just test(아임포트가 지원하는대로 호출되지 않음)
-				exit( 'IamportForWoocommerce 1.6.18' );
+				exit( 'IamportForWoocommerce 1.6.23' );
 			}
 		}
 
@@ -792,7 +816,7 @@ function woocommerce_gateway_iamport_init() {
 		public function enqueue_iamport_script() {
 			wp_register_script( 'iamport_script', 'https://service.iamport.kr/js/iamport.payment-1.1.2.js', array('jquery') );
 			wp_register_script( 'iamport_jquery_url', plugins_url( '/assets/js/url.min.js',plugin_basename(__FILE__) ));
-			wp_register_script( 'iamport_script_for_woocommerce', plugins_url( '/assets/js/iamport.woocommerce.js',plugin_basename(__FILE__) ), array('jquery'), '20170315');
+			wp_register_script( 'iamport_script_for_woocommerce', plugins_url( '/assets/js/iamport.woocommerce.js',plugin_basename(__FILE__) ), array('jquery'), '20170420a');
 			wp_register_script( 'samsung_runnable', 'https://d3sfvyfh4b9elq.cloudfront.net/pmt/web/device.json' );
 			wp_enqueue_script('iamport_script');
 			wp_enqueue_script('iamport_jquery_url');
@@ -811,10 +835,10 @@ function woocommerce_gateway_iamport_init() {
 				'user_code' => $this->imp_user_code,
 				'name' => $order_name,
 				'merchant_uid' => $order->order_key,
-				'amount' => $order->order_total, //amount
+				'amount' => $order->get_total(), //amount
 				'buyer_name' => $order->billing_last_name . $order->billing_first_name, //name
 				'buyer_email' => $order->billing_email, //email
-				'buyer_tel' => $order->billing_phone, //tel
+				'buyer_tel' => empty($order->billing_phone) ? '010-1234-5678':$order->billing_phone, //tel. KG이니시스 오류 방지. 다른 플러그인을 통해 전화번호 required해제한 경우가 있음
 				'buyer_addr' => strip_tags($order->get_formatted_shipping_address()), //address
 				'buyer_postcode' => $order->shipping_postcode,
 				// 'vbank_due' => date('Ymd', strtotime("+1 day")),

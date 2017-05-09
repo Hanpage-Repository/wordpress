@@ -91,7 +91,9 @@ class WC_Query {
 				$title = __( 'Pay for Order', 'woocommerce' );
 			break;
 			case 'order-received' :
-				$title = __( 'Order Received', 'woocommerce' );
+				// edit by KH
+				//$title = __( 'Order Received', 'woocommerce' );
+				$title = __( '접수 완료', 'woocommerce' );
 			break;
 			case 'orders' :
 				if ( ! empty( $wp->query_vars['orders'] ) ) {

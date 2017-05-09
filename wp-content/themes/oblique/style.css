@@ -1179,6 +1179,9 @@ Top bar
 	padding-bottom: 0px;
 }
 
+.woocommerce-result-count,
+.woocommerce-message,
+.woocommerce-breadcrumb,
 .woocommerce.woocommerce-page .ufbl-form-title {
 	display: none;
 }
@@ -1186,8 +1189,30 @@ Top bar
 .woocommerce.woocommerce-page h1.product_title.entry-title {
 	margin-bottom: 40px;
 }
+
 .woocommerce.woocommerce-page .single_add_to_cart_button.button.alt {
 	margin-top: 30px;
+}
+
+/* WooCommerce Checkout */
+.woocommerce-checkout.woocommerce-page #billing_email_field {
+	width: 100%;
+}
+
+.woocommerce-checkout.woocommerce-page .woocommerce-info,
+.woocommerce-checkout.woocommerce-page .woocommerce-shipping-fields,
+.woocommerce-checkout.woocommerce-page .create-account.woocommerce-validated {
+	display: none;
+}
+
+/* Woocommerce Subscription */
+.woocommerce .recurring-totals {
+	color: white;
+}
+
+.woocommerce .cart-subtotal.recurring-total,
+.woocommerce .subscription-details {
+	display: none;
 }
 
 /*

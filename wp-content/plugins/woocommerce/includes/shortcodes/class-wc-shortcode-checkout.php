@@ -138,7 +138,9 @@ class WC_Shortcode_Checkout {
 					?>
 					<ul class="order_details">
 						<li class="order">
-							<?php _e( 'Order Number:', 'woocommerce' ); ?>
+							<?php 
+							_e( 'Order Number:', 'woocommerce' ); 
+							?>
 							<strong><?php echo $order->get_order_number(); ?></strong>
 						</li>
 						<li class="date">
@@ -151,7 +153,9 @@ class WC_Shortcode_Checkout {
 						</li>
 						<?php if ($order->payment_method_title) : ?>
 						<li class="method">
-							<?php _e( 'Payment Method:', 'woocommerce' ); ?>
+							<?php 
+							_e( 'Payment Method:', 'woocommerce' ); 
+							?>
 							<strong><?php
 								echo $order->payment_method_title;
 							?></strong>
@@ -169,7 +173,9 @@ class WC_Shortcode_Checkout {
 				}
 
 			} else {
-				wc_add_notice( __( 'Sorry, this order is invalid and cannot be paid for.', 'woocommerce' ), 'error' );
+				// edit by KH
+				wc_add_notice( __( '죄송합니다. 접수 과정이 올바르지 않아, 결제 접수가 이루어지지 않았습니다.', 'woocommerce' ), 'error' );
+				//wc_add_notice( __( 'Sorry, this order is invalid and cannot be paid for.', 'woocommerce' ), 'error' );
 			}
 
 		} else {

@@ -20,7 +20,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<header><h2><?php _e( 'Customer Details', 'woocommerce' ); ?></h2></header>
+<header><h2><?php 
+// edit by KH
+//_e( 'Customer Details', 'woocommerce' ); 
+_e( '고객 정보', 'woocommerce' ); 
+?></h2></header>
 
 <table class="shop_table customer_details">
 	<?php if ( $order->customer_note ) : ?>
@@ -54,12 +58,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php endif; ?>
 
+<!-- edit by KH
 <header class="title">
-	<h3><?php _e( 'Billing Address', 'woocommerce' ); ?></h3>
+	<h3><?php 
+	_e( 'Billing Address', 'woocommerce' ); 
+	?></h3>
 </header>
 <address>
 	<?php echo ( $address = $order->get_formatted_billing_address() ) ? $address : __( 'N/A', 'woocommerce' ); ?>
 </address>
+-->
 
 <?php if ( ! wc_ship_to_billing_address_only() && $order->needs_shipping_address() ) : ?>
 

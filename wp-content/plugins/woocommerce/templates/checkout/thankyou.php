@@ -37,9 +37,16 @@ if ( $order ) : ?>
 
 		<p class="woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); ?></p>
 
+		<!-- added by KH -->
+		<br>
+
 		<ul class="woocommerce-thankyou-order-details order_details">
 			<li class="order">
-				<?php _e( 'Order Number:', 'woocommerce' ); ?>
+				<?php 
+				// edit by KH
+				//_e( 'Order Number:', 'woocommerce' ); 
+				_e( '접수 번호:', 'woocommerce' ); 
+				?>
 				<strong><?php echo $order->get_order_number(); ?></strong>
 			</li>
 			<li class="date">
@@ -52,7 +59,11 @@ if ( $order ) : ?>
 			</li>
 			<?php if ( $order->payment_method_title ) : ?>
 			<li class="method">
-				<?php _e( 'Payment Method:', 'woocommerce' ); ?>
+				<?php 
+				// edit by KH
+				//_e( 'Payment Method:', 'woocommerce' ); 
+				_e( '결제 방법:', 'woocommerce' ); 
+				?>
 				<strong><?php echo $order->payment_method_title; ?></strong>
 			</li>
 			<?php endif; ?>

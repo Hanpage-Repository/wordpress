@@ -20,6 +20,21 @@ jQuery(function($) {
 		return arr;
 	}());
 
+	function versionCompare(a, b) {
+		var va = a.split('.'),
+			vb = b.split('.');
+
+		for (var i = 0; i < 3; i++) {
+			if ( parseInt(va[i]) > parseInt(vb[i]) ) {
+				return 1;
+			} else if ( parseInt(va[i]) < parseInt(vb[i]) ) {
+				return -1;
+			}
+		}
+
+		return 0;
+	}
+
 	function isSamsungPayRunnable() {
 		var runnable = false;
 		var isAndroid = navigator.userAgent.match(/Android/i);
@@ -150,8 +165,12 @@ jQuery(function($) {
 						    biz_num : result.iamport.biz_num
 						};
 
-						if ( result.iamport.pg )	req_param.pg = result.iamport.pg;
+						if ( result.iamport.pg )		req_param.pg = result.iamport.pg;
 						if ( result.iamport.language )	req_param.language = result.iamport.language;
+						if ( versionCompare($.fn.jquery, "1.8.0") >= 0 ) {
+							if ( typeof window.$ == 'undefined' ) window.$ = $;
+							req_param.kakaoOpenApp = true; //iOS 카카오페이 바로 오픈
+						}
 
 						IMP.init(result.iamport.user_code);
 						IMP.request_pay(req_param, function(rsp) {
@@ -241,7 +260,12 @@ jQuery(function($) {
 						    biz_num : result.iamport.biz_num
 						};
 
-						if ( result.iamport.pg )	req_param.pg = result.iamport.pg;
+						if ( result.iamport.pg )		req_param.pg = result.iamport.pg;
+						if ( result.iamport.language )	req_param.language = result.iamport.language;
+						if ( versionCompare($.fn.jquery, "1.8.0") >= 0 ) {
+							if ( typeof window.$ == 'undefined' ) window.$ = $;
+							req_param.kakaoOpenApp = true; //iOS 카카오페이 바로 오픈
+						}
 
 						IMP.init(result.iamport.user_code);
 						IMP.request_pay(req_param, function(rsp) {

@@ -12,6 +12,7 @@ class WC_Gateway_Iamport_Phone extends Base_Gateway_Iamport {
 		//settings
 		$this->title = $this->settings['title'];
 		$this->description = $this->settings['description'];
+		$this->pg_provider = $this->settings['pg_provider'];
 
 		//actions
 		// add_action( 'woocommerce_thankyou_'.$this->id, array( $this, 'iamport_order_detail' ) ); woocommerce_order_details_after_order_table 로 대체. 중복으로 나오고 있음
@@ -30,12 +31,6 @@ class WC_Gateway_Iamport_Phone extends Base_Gateway_Iamport {
 				'type' => 'checkbox',
 				'label' => __( '아임포트(휴대폰소액결제) 결제 사용', 'iamport-for-woocommerce' ),
 				'default' => 'yes'
-			),
-			'danal_user' => array(
-				'title' => __( '다날을 통해 휴대폰결제 사용', 'iamport-for-woocommerce' ),
-				'type' => 'checkbox',
-				'label' => __( '다날 계약을 통해 휴대폰결제 사용 중이시면 체크해주세요.', 'iamport-for-woocommerce' ),
-				'default' => 'no'
 			),
 			'title' => array(
 				'title' => __( 'Title', 'woocommerce' ),
@@ -57,7 +52,34 @@ class WC_Gateway_Iamport_Phone extends Base_Gateway_Iamport {
 				'label' => __( '디지털 상품인 경우 체크해주세요', 'iamport-for-woocommerce' ),
 				'default' => 'no'
 			),
+			'pg_provider' => array(
+				'title' => __( '복수 PG설정', 'iamport-for-woocommerce' ),
+				'type' => 'select',
+				'default' => '',
+				'description' => __( '2개 이상의 PG사를 이용 중이라면, 신용카드를 서비스할 PG사를 선택해주세요. 선택된 PG사의 결제창이 호출됩니다.', 'iamport-for-woocommerce' ),
+				'options' => array(
+					'none' => '해당사항없음',
+					'html5_inicis' => 'KG이니시스-웹표준결제',
+					'uplus' => 'LGU+',
+					'nice' => '나이스정보통신',
+					'jtnet' => 'JTNet',
+					'danal' => '다날-휴대폰소액결제',
+					'mobilians' => '모빌리언스'
+				)
+			)
 		), $this->form_fields);
+	}
+
+	public function init_settings() {
+		parent::init_settings();
+
+		if ( $this->legacy_danal_user() ) {
+			$p = $this->settings['pg_provider'];
+			if ( empty($p) || $p === 'none' ) {
+				//기존에 다날 사용하던 사용자. pg_provider가 생긴 이후 한 번도 설정한 적이 없음
+				$this->pg_provider = $this->settings['pg_provider'] = 'danal';
+			}
+		}
 	}
 
 	public function iamport_order_detail( $order_id ) {
@@ -95,10 +117,13 @@ class WC_Gateway_Iamport_Phone extends Base_Gateway_Iamport {
 		$iamport_info = parent::iamport_payment_info( $order_id );
 		$iamport_info['digital'] = filter_var($this->settings['digital_contents'], FILTER_VALIDATE_BOOLEAN);
 
-		$is_danal_user = filter_var($this->settings['danal_user'], FILTER_VALIDATE_BOOLEAN);
-		if ( $is_danal_user )	$iamport_info['pg'] = 'danal';
+		if ( !empty($this->pg_provider) && $this->pg_provider != 'none' ) $iamport_info['pg'] = $this->pg_provider;
 
 		return $iamport_info;
+	}
+
+	private function legacy_danal_user() {
+		return filter_var($this->settings['danal_user'], FILTER_VALIDATE_BOOLEAN);
 	}
 
 }

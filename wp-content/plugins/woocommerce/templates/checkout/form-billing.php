@@ -29,8 +29,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<h3><?php _e( 'Billing &amp; Shipping', 'woocommerce' ); ?></h3>
 
 	<?php else : ?>
-
+<!-- edit byKH
 		<h3><?php _e( 'Billing Details', 'woocommerce' ); ?></h3>
+-->
+		<h3><?php _e( '필수 정보', 'woocommerce' ); ?></h3>
 
 	<?php endif; ?>
 
