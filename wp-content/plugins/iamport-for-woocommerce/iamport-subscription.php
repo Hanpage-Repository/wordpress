@@ -80,10 +80,9 @@ class WC_Gateway_Iamport_Subscription extends WC_Payment_Gateway {
 		if ( $id !== $this->id ) 	return $default_fields;
 
 		$args = array('fields_have_names'=>true);
-		// Card Number -> 카드 번호 
 		$iamoprt_fields = array(
 			'card-number-field' => '<p class="form-row form-row-first">
-			<label for="' . esc_attr( $id ) . '-card-number">' . __( '카드 번호', 'woocommerce' ) . ' <span class="required">*</span></label>
+			<label for="' . esc_attr( $id ) . '-card-number">' . __( 'Card Number', 'woocommerce' ) . ' <span class="required">*</span></label>
 			<input id="' . esc_attr( $id ) . '-card-number" class="input-text wc-credit-card-form-card-number" type="text" maxlength="20" autocomplete="off" placeholder="•••• •••• •••• ••••" name="' . ( $args['fields_have_names'] ? $this->id . '-card-number' : '' ) . '" />
 			</p>',
 			'card-expiry-field' => '<p class="form-row form-row-last">

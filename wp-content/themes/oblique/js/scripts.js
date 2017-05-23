@@ -31,6 +31,15 @@ jQuery(function($) {
 	*/
 });
 
+// added by KH
+// Check First Item on payment_method
+/*
+jQuery(function($) {
+	$("input[name=payment_method][disabled=false]:first").attr('checked', true);
+});
+*/
+
+
 function sidebar_toggle() {
 	jQuery('.widget-area').toggleClass('widget-area-visible');
 	jQuery('.sidebar-toggle').toggleClass('sidebar-toggled');

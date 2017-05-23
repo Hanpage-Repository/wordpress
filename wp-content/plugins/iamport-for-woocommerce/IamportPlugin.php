@@ -3,7 +3,7 @@
  * Plugin Name: 우커머스용 아임포트 플러그인(국내 모든 PG를 한 번에)
  * Plugin URI: http://www.iamport.kr
  * Description: 우커머스용 한국PG 연동 플러그인 ( 신용카드 / 실시간계좌이체 / 가상계좌 / 휴대폰소액결제 - 에스크로포함 )
- * Version: 1.6.23
+ * Version: 1.7.1
  * Author: SIOT
  * Author URI: http://www.siot.do
  * 
@@ -589,8 +589,8 @@ function woocommerce_gateway_iamport_init() {
 					$order_id = wc_get_order_id_by_order_key( $payment_data->merchant_uid );
 					$gateway = find_gateway($payment_data->pg_provider, $payment_data->pay_method);
 
-					$this->_iamport_post_meta($order_id, '_iamport_rest_key', $this->imp_rest_key);
-					$this->_iamport_post_meta($order_id, '_iamport_rest_secret', $this->imp_rest_secret);
+					$this->_iamport_post_meta($order_id, '_iamport_rest_key', $auth['imp_rest_key']);
+					$this->_iamport_post_meta($order_id, '_iamport_rest_secret', $auth['imp_rest_secret']);
 					$this->_iamport_post_meta($order_id, '_iamport_provider', $payment_data->pg_provider);
 					$this->_iamport_post_meta($order_id, '_iamport_paymethod', $payment_data->pay_method);
 					$this->_iamport_post_meta($order_id, '_iamport_receipt_url', $payment_data->receipt_url);
@@ -742,10 +742,10 @@ function woocommerce_gateway_iamport_init() {
 					$default_redirect_url = '/';
 				}
 
-				$called_from_iamport ? exit('IamportForWoocommerce 1.6.23') : wp_redirect( $default_redirect_url );
+				$called_from_iamport ? exit('IamportForWoocommerce 1.7.1') : wp_redirect( $default_redirect_url );
 			} else {
 				//just test(아임포트가 지원하는대로 호출되지 않음)
-				exit( 'IamportForWoocommerce 1.6.23' );
+				exit( 'IamportForWoocommerce 1.7.1' );
 			}
 		}
 
@@ -816,7 +816,7 @@ function woocommerce_gateway_iamport_init() {
 		public function enqueue_iamport_script() {
 			wp_register_script( 'iamport_script', 'https://service.iamport.kr/js/iamport.payment-1.1.2.js', array('jquery') );
 			wp_register_script( 'iamport_jquery_url', plugins_url( '/assets/js/url.min.js',plugin_basename(__FILE__) ));
-			wp_register_script( 'iamport_script_for_woocommerce', plugins_url( '/assets/js/iamport.woocommerce.js',plugin_basename(__FILE__) ), array('jquery'), '20170420a');
+			wp_register_script( 'iamport_script_for_woocommerce', plugins_url( '/assets/js/iamport.woocommerce.js',plugin_basename(__FILE__) ), array('jquery'), '20170507');
 			wp_register_script( 'samsung_runnable', 'https://d3sfvyfh4b9elq.cloudfront.net/pmt/web/device.json' );
 			wp_enqueue_script('iamport_script');
 			wp_enqueue_script('iamport_jquery_url');
@@ -897,7 +897,7 @@ function woocommerce_gateway_iamport_init() {
 			return apply_filters( 'woocommerce_order_get_status', 'wc-' === substr( $raw_status, 0, 3 ) ? substr( $raw_status, 3 ) : $raw_status, null );
 		}
 
-		private function http_param($name, $default_method) {
+		protected function http_param($name, $default_method) {
 			if ( $default_method == 'GET' ) {
 				if ( isset($_GET[ $name ]) )	return $_GET[ $name ];
 			} else if ( $default_method == 'POST' ) {
@@ -915,7 +915,7 @@ function woocommerce_gateway_iamport_init() {
 			return null;
 		}
 
-		private function paymentLanguage() {
+		protected function paymentLanguage() {
 			$locale = get_locale();
 			if ( $locale !== 'ko_KR' )	return 'en';
 
@@ -944,6 +944,20 @@ function woocommerce_gateway_iamport_init() {
 			);
 		}
 
+		protected function isMobile() {
+			$userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+			$mobiles = array(
+				'Android', 'AvantGo', 'BlackBerry', 'DoCoMo', 'Fennec', 'iPod', 'iPhone', 'iPad',
+				'J2ME', 'MIDP', 'NetFront', 'Nokia', 'Opera Mini', 'Opera Mobi', 'PalmOS', 'PalmSource',
+				'portalmmm', 'Plucker', 'ReqwirelessWeb', 'SonyEricsson', 'Symbian', 'UP\\.Browser',
+				'webOS', 'Windows CE', 'Windows Phone OS', 'Xiino'
+			);
+
+			$pattern = '/' . implode('|', $mobiles) . '/i';
+			return (bool)preg_match($pattern, $userAgent);
+		}
+
 	}
 
 	require_once('iamport-card.php');
@@ -958,6 +972,7 @@ function woocommerce_gateway_iamport_init() {
 	require_once('includes/IamportStatusButton.php');
 	require_once('includes/IamportSettingTab.php');
 	require_once('iamport-subscription.php');// KEY-IN결제에 사용될 수 있음
+	require_once('iamport-subscription-ex.php');// PG사 결제창을 통한 빌링키 발급 방식의 정기결제
 
 	new WC_Tools_Iamport_Status_Button();
 
@@ -983,6 +998,7 @@ function woocommerce_add_gateway_iamport_gateway($methods) {
 		'WC_Gateway_Iamport_Payco',
 		'WC_Gateway_Iamport_Kpay',
 		'WC_Gateway_Iamport_Subscription',// KEY-IN결제에 사용될 수 있음
+		'WC_Gateway_Iamport_Subscription_Ex',// PG사 결제창을 통한 빌링키 발급 방식의 정기결제
 		'WC_Gateway_Iamport_Foreign'
 	);
 

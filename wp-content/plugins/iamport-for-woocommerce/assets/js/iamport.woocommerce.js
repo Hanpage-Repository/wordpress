@@ -7,7 +7,8 @@ jQuery(function($) {
 		'iamport_phone',
 		'iamport_kakao',
 		'iamport_kpay',
-		'iamport_payco'
+		'iamport_payco',
+		'iamport_subscription_ex'
 	];
 
 	var iamport_checkout_types = (function() {
@@ -167,6 +168,7 @@ jQuery(function($) {
 
 						if ( result.iamport.pg )		req_param.pg = result.iamport.pg;
 						if ( result.iamport.language )	req_param.language = result.iamport.language;
+						if ( result.iamport.customer_uid )	req_param.customer_uid = result.iamport.customer_uid;
 						if ( versionCompare($.fn.jquery, "1.8.0") >= 0 ) {
 							if ( typeof window.$ == 'undefined' ) window.$ = $;
 							req_param.kakaoOpenApp = true; //iOS 카카오페이 바로 오픈
@@ -260,8 +262,9 @@ jQuery(function($) {
 						    biz_num : result.iamport.biz_num
 						};
 
-						if ( result.iamport.pg )		req_param.pg = result.iamport.pg;
-						if ( result.iamport.language )	req_param.language = result.iamport.language;
+						if ( result.iamport.pg )			req_param.pg = result.iamport.pg;
+						if ( result.iamport.language )		req_param.language = result.iamport.language;
+						if ( result.iamport.customer_uid )	req_param.customer_uid = result.iamport.customer_uid;
 						if ( versionCompare($.fn.jquery, "1.8.0") >= 0 ) {
 							if ( typeof window.$ == 'undefined' ) window.$ = $;
 							req_param.kakaoOpenApp = true; //iOS 카카오페이 바로 오픈

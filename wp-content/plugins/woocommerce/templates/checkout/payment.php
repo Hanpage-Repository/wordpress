@@ -27,8 +27,29 @@ if ( ! is_ajax() ) {
 	<?php if ( WC()->cart->needs_payment() ) : ?>
 		<ul class="wc_payment_methods payment_methods methods">
 			<?php
+
+				///* added by KH
+				$contains_subscription = false;
+
+				if ( ! empty( WC()->cart->cart_contents ) && ! wcs_cart_contains_renewal() ) {
+					foreach ( WC()->cart->cart_contents as $cart_item ) {
+				    	if ( WC_Subscriptions_Product::is_subscription( $cart_item['data'] ) ) {
+				        	$contains_subscription = true;
+				        	break;
+				    	}    
+					}    
+				}    
+
+				//*/ added by KH
+
 				if ( ! empty( $available_gateways ) ) {
 					foreach ( $available_gateways as $gateway ) {
+
+						// added by KH
+						if($gateway->method_title == "아임포트(정기결제-결제창방식)" && !$contains_subscription) 
+							continue;
+						//*/ added by KH
+
 						wc_get_template( 'checkout/payment-method.php', array( 'gateway' => $gateway ) );
 					}
 				} else {
