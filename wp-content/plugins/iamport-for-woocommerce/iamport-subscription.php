@@ -80,6 +80,27 @@ class WC_Gateway_Iamport_Subscription extends WC_Payment_Gateway {
 		if ( $id !== $this->id ) 	return $default_fields;
 
 		$args = array('fields_have_names'=>true);
+
+		$iamoprt_fields = array(
+			'card-number-field' => '<p class="form-row form-row-first">
+			<label for="' . esc_attr( $id ) . '-card-number">' . __( '카드 번호', 'woocommerce' ) . ' <span class="required">*</span></label>
+			<input id="' . esc_attr( $id ) . '-card-number" class="input-text wc-credit-card-form-card-number" type="text" maxlength="20" autocomplete="off" placeholder="•••• •••• •••• ••••" name="' . ( $args['fields_have_names'] ? $this->id . '-card-number' : '' ) . '" />
+			</p>',
+			'card-expiry-field' => '<p class="form-row form-row-last">
+			<label for="' . esc_attr( $id ) . '-card-expiry">' . __( 'Expiry (MM/YY)', 'woocommerce' ) . ' <span class="required">*</span></label>
+			<input id="' . esc_attr( $id ) . '-card-expiry" class="input-text wc-credit-card-form-card-expiry" type="text" autocomplete="off" placeholder="' . esc_attr__( 'MM / YY', 'woocommerce' ) . '" name="' . ( $args['fields_have_names'] ? $this->id . '-card-expiry' : '' ) . '" />
+			</p>',
+			'card-birth-field' => '<p class="form-row form-row-first">
+			<label for="' . esc_attr( $id ) . '-card-birth">' . __( '소지자확인(생년월일6자리 또는 사업자등록번호10자리)', 'iamport-for-woocommerce' ) . ' <span class="required">*</span></label>
+			<input id="' . esc_attr( $id ) . '-card-birth" class="input-text wc-credit-card-form-card-birth" type="password" autocomplete="off" placeholder="' . esc_attr__( '카드소지자확인(생년월일6자리 또는 사업자등록번호10자리)', 'iamport-for-woocommerce' ) . '" name="' . ( $args['fields_have_names'] ? $this->id . '-card-birth' : '' ) . '" maxlength="10"/>
+			</p>',
+			'card-pwd-field' => '<p class="form-row form-row-last">
+			<label for="' . esc_attr( $id ) . '-card-pwd">' . __( '카드비밀번호 앞2자리', 'iamport-for-woocommerce' ) . ' <span class="required">*</span></label>
+			<input id="' . esc_attr( $id ) . '-card-pwd" class="input-text wc-credit-card-form-card-pwd" type="password" autocomplete="off" placeholder="' . esc_attr__( '카드비밀번호 앞2자리', 'iamport-for-woocommerce' ) . '" name="' . ( $args['fields_have_names'] ? $this->id . '-card-pwd' : '' ) . '" maxlength="2"/>
+			</p>'
+		);
+		// edit by KH
+		/*
 		$iamoprt_fields = array(
 			'card-number-field' => '<p class="form-row form-row-first">
 			<label for="' . esc_attr( $id ) . '-card-number">' . __( 'Card Number', 'woocommerce' ) . ' <span class="required">*</span></label>
@@ -98,6 +119,7 @@ class WC_Gateway_Iamport_Subscription extends WC_Payment_Gateway {
 			<input id="' . esc_attr( $id ) . '-card-pwd" class="input-text wc-credit-card-form-card-pwd" type="password" autocomplete="off" placeholder="' . esc_attr__( '카드비밀번호 앞2자리', 'iamport-for-woocommerce' ) . '" name="' . ( $args['fields_have_names'] ? $this->id . '-card-pwd' : '' ) . '" maxlength="2"/>
 			</p>'
 		);
+		*/
 
 		return $iamoprt_fields;
 	}

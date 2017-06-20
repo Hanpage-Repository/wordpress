@@ -1179,6 +1179,11 @@ Top bar
 	padding-bottom: 0px;
 }
 
+.woocommerce-account .woocommerce-MyAccount-content {
+	width: 100%;
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation,
 .iamport-error-wrap,
 .woocommerce-result-count,
 .woocommerce-message,
@@ -1211,6 +1216,7 @@ Top bar
 	color: white;
 }
 
+.woocommerce.woocommerce-page .sidebar-toggle,
 .woocommerce .cart-subtotal.recurring-total,
 .woocommerce .subscription-details {
 	display: none;
@@ -1219,6 +1225,7 @@ Top bar
 /*
 .page-template-kh-home-page-php .svg-container,
 */
+div.header-search,
 .single-post #masthead,
 .single-post .header-search,
 .single-post .single-thumb,
@@ -1231,7 +1238,7 @@ Top bar
 .post-template-kh-46130E-single-php .svg-container,
 .post-template-kh-FFFFFF-single-php .svg-container,
 .post-template-kh-1561AC-single-php .svg-container {
-	display: none;
+	display: none !important;
 }
 
 /* added by KH - HOME */
