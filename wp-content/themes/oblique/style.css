@@ -1216,7 +1216,7 @@ Top bar
 	color: white;
 }
 
-.woocommerce.woocommerce-page .sidebar-toggle,
+.woocommerce-page .sidebar-toggle,
 .woocommerce .cart-subtotal.recurring-total,
 .woocommerce .subscription-details {
 	display: none;
