@@ -1233,6 +1233,7 @@ div.header-search,
 .page-template-kh-home-page-php .entry-header,
 .page-template-kh-home-page-php #main .svg-container,
 .post-template-kh-151515-single-php .svg-container,
+.post-template-kh-FFFFFF-A2A0A0-single-php .svg-container,
 .page-template-kh-home-page-php .kc-blog-posts .post-grid h2.post-title-alt::before,
 .post-template-kh-46130E-single-php .svg-container,
 .post-template-kh-FFFFFF-single-php .svg-container,
@@ -1430,6 +1431,24 @@ div.header-search,
 	background: #9DBCE1;
 }
 
+/* added by KH - FFFFFF-A2A0A0 */
+
+.post-template-kh-FFFFFF-A2A0A0-single-php {
+	background-color: #CECECE;
+}
+
+.post-template-kh-FFFFFF-A2A0A0-single-php .entry-title {
+	color: #151515;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-A2A0A0-single-php article.post {
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-A2A0A0-single-php .sidebar-toggle {
+	color: #151515;
+}
 
 /*--------------------------------------------------------------
 Responsive
