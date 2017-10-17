@@ -1,6 +1,6 @@
 <?php
 
-$output 	= $thumb_data = $speed = '';
+$output 	= $thumb_data = $speed = $items_tablet = $mobile = '';
 $img_size 	= 'full';
 $onclick 	= 'none';
 $wrp_class 	= apply_filters( 'kc-el-class', $atts );
@@ -8,6 +8,8 @@ $wrp_class 	= apply_filters( 'kc-el-class', $atts );
 extract( $atts );
 
 $items_number 	= ( !empty( $items_number ) ) ? $items_number : 4;
+$tablet 	= ( !empty( $tablet ) ) ? $tablet : 2;
+$mobile 	= ( !empty( $mobile ) ) ? $mobile : 1;
 
 if( !empty( $images ) )
 	$images 	= explode( ',', $images );
@@ -44,6 +46,8 @@ if( isset($atts['nav_style']) && $nav_style !='' ){
 
 $owl_option = array(
 	'items' 		=> $items_number,
+	'tablet' 	=> $tablet,
+	'mobile' 	=> $mobile,
 	'speed' 		=> $speed,
 	'navigation' 	=> $navigation,
 	'pagination' 	=> $pagination,
@@ -75,19 +79,21 @@ kc_js_callback( 'kc_front.owl_slider' );
 		<div <?php echo implode( ' ', $element_attribute ); ?>>
 	
 		<?php
-	
+		$i = 0;
 		foreach( $attachment_data as $i => $image ):
-	
+			$alttext = '';
+			if( $alt_text == 'yes')
+				$alttext = get_post_meta( $images[$i], '_wp_attachment_image_alt', true);
+			
 		?>
-	
 			<div class="item">
 	
 			<?php
-	
+
 			if( 'none' === $onclick ){
 	
 			?>
-				<img src="<?php echo $image[0]; ?>" />
+				<img src="<?php echo $image[0]; ?>"  alt="<?php echo esc_attr( $alttext );?>"/>
 	
 			<?php
 	
@@ -97,17 +103,17 @@ kc_js_callback( 'kc_front.owl_slider' );
 	
 					case 'lightbox':
 	
-						echo '<a class="kc-image-link kc-pretty-photo" data-lightbox="kc-lightbox" rel="prettyPhoto" href="'. esc_attr( esc_attr( $attachment_data_full[$i][0] ) ) .'">'
-							.'<img src="'. esc_attr( $image[0] ) .'" alt="" /></a>';
+						echo '<a class="kc-image-link kc-pretty-photo" data-lightbox="kc-lightbox" rel="prettyPhoto['. $atts['_id'] .']" href="'. esc_attr( esc_attr( $attachment_data_full[$i][0] ) ) .'">'
+							.'<img src="'. esc_attr( $image[0] ) .'" alt="'. $alttext .'" /></a>';
 						break;
 	
 					case 'custom_link':
 	
 						if( isset( $custom_links_arr[$i] ) ){
 							echo '<a href="'. esc_attr( strip_tags( $custom_links_arr[$i] ) ) .'" target="'. esc_attr( $custom_links_target ) .'">'
-								.'<img src="'. esc_attr( $image[0] ) .'" alt="" /></a>';
+								.'<img src="'. esc_attr( $image[0] ) .'" alt="'. esc_attr( $alttext ) .'" /></a>';
 						}else{
-							echo '<img src="'. esc_attr( $image[0] ) .'" alt="" />';
+							echo '<img src="'. esc_attr( $image[0] ) .'" alt="'. esc_attr( $alttext ) .'" />';
 						}
 	
 						break;
@@ -120,7 +126,10 @@ kc_js_callback( 'kc_front.owl_slider' );
 	
 			</div>
 	
-		<?php endforeach; ?>
+		<?php
+			$i++;
+			endforeach;
+		?>
 	
 		</div>
 	

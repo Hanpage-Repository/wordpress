@@ -23,6 +23,8 @@ var atts		= ( data.atts !== undefined ) ? data.atts : {},
 	data_desc 		= '',
 	data_position 	= '',
 	data_button 	= '',
+	btn_title       = '',
+	btn_target       = '',
 	wrap_class		= [];
 
 wrap_class = kc.front.el_class( atts );
@@ -33,8 +35,8 @@ if ( custom_class !=='' ) {
 	wrap_class.push( custom_class );
 }
 
-if ( image > 0 ) {
-	image 	= image.replace( /[^\d]/, '' );
+if ( image !='' ) {
+	//image 	= image.replace( /[^\d]/, '' );
 	img_link 	= ajaxurl + '?action=kc_get_thumbn&id=' + image + '&size=full';
 
 	data_img += '<figure class="content-image">';
@@ -63,9 +65,15 @@ if ( show_button == 'yes' ) {
 		but_link_text = button_link.split( '|' );
 		button_link = but_link_text[0];
 	}
+	if( but_link_text[1] !== undefined )
+		btn_title =  but_link_text[1];
+	
+	if( but_link_text[2] !== undefined )
+		btn_target =  but_link_text[2];
+	
 
 	data_button += '<div class="content-button">';
-		data_button += '<a href="'+ button_link +'">'+ button_text +'</a>';
+		data_button += '<a href="'+ button_link +'" title="' + btn_title + '" target="' + btn_target + '">'+ button_text +'</a>';
 	data_button += '</div>';
 }
 

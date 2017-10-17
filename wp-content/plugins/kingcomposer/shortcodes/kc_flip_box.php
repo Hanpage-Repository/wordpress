@@ -1,5 +1,5 @@
 <?php
-$front_data			= $back_data = $show_icon = $icon = $title = $description = $show_button = $text_on_button = $link = $direction = $wrap_class = $b_show_icon = $b_icon = $b_title = $b_description = $b_show_button = $b_text_on_button = $b_link = '';
+$front_data			= $back_data = $show_icon = $icon = $title = $description = $show_button = $text_on_button = $link = $direction = $wrap_class = $b_show_icon = $b_icon = $b_title = $b_description = $b_show_button = $b_text_on_button = $b_link = $button_href = $button_target = $button_title = '';
 $element_atttribute = array();
 $el_classess		= apply_filters( 'kc-el-class', $atts );
 
@@ -43,13 +43,19 @@ if( $b_show_button == 'yes' ){
 
 	if ( empty( $b_text_on_button ) )
 		$b_text_on_button = __( 'Read more', 'kingcomposer' );
+	
+	$b_link	= ( '||' === $b_link ) ? '' : $b_link;
 
-	if ( !empty( $b_link ) ) {
-		$b_link_text = explode( '|', $b_link );
-		$b_link = $b_link_text[0];
+	$button_link	= kc_parse_link($b_link);
+
+	if ( strlen( $button_link['url'] ) > 0 ) {
+		$button_href 	= $button_link['url'];
+		$button_title 	= $button_link['title'];
+		$button_target 	= strlen( $button_link['target'] ) > 0 ? $button_link['target'] : '_self';
 	}
+	
+	$back_data .= '<a class="button" href="'. esc_url( $button_href ) .'" target="'. $button_target .'" title="'. $button_title .'">'. $b_text_on_button .'</a>';
 
-	$back_data .= '<a class="button" href="'. esc_url( $b_link ) .'">'. $b_text_on_button .'</a>';
 
 }
 

@@ -22,7 +22,7 @@ if( isset($post_taxonomy_data) ){
 
 		if( isset( $post_taxonomy_tmp[1] ) )
 			$taxonomy_term[] = $post_taxonomy_tmp[1];
-		
+
 	}
 
 }
@@ -76,6 +76,8 @@ if( isset($atts['nav_style']) && $nav_style !='' ){
 
 $owl_option = array(
 	'items' 		=> $items_number,
+	'mobile' 		=> $mobile,
+	'tablet' 		=> $tablet,
 	'speed' 		=> intval( $speed ),
 	'navigation' 	=> $navigation,
 	'pagination' 	=> $pagination,
@@ -108,6 +110,9 @@ if ( $the_query->have_posts() ) {
 			<div class="post-content">
 
 				<?php
+
+				$post_content = apply_filters('the_content', get_the_content() );
+
 				if ( has_post_thumbnail($post->ID) && 'yes' === strtolower($thumbnail) ) {
 
 					echo '<div class="image">';
@@ -139,10 +144,10 @@ if ( $the_query->have_posts() ) {
 
 				?>
 
-				<div class="in-post-content"><?php echo wp_trim_words( get_the_content(), 25, ' ...' ); ?></div>
+				<div class="in-post-content"><?php echo wp_trim_words( $post_content, 25, ' ...' ); ?></div>
 				<?php if( !empty($show_button) && strtolower($show_button) == 'yes' ): ?>
 					<div class="footer-button">
-						<a class="read-more" href="<?php echo esc_attr( get_permalink( $post->ID ) ); ?>"><?php echo esc_html( $readmore_text ); ?></a>
+						<a class="kc-read-more" href="<?php echo esc_attr( get_permalink( $post->ID ) ); ?>"><?php echo esc_html( $readmore_text ); ?></a>
 					</div>
 				<?php endif; ?>
 			</div>

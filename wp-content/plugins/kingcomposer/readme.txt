@@ -1,10 +1,13 @@
 === Page Builder: KingComposer - Free Drag and Drop page builder by King-Theme ===
 Contributors: kingthemes
+Donate link: https://www.paypal.me/kingcomposer/5
+Plugin URI: https://kingcomposer.com
+Author URI: https://kingcomposer.com
 Store link: https://kingcomposer.com
 Tags: wordpress, builder, drag drop, website builder, site-builder, site builder, page-builder, website-builder, page builder, king builder, kingcomposer, design, Adaptive Editor, responsive, custom pages, Drag And Drop editor, edit, editing, fonts, drag and drop builder, editor, BackEnd builder, BackEnd editor, FrontEnd builder, FrontEnd editor, html5, image, image backgrounds, images, home page builder, landing page builder, live editor, widgets , king theme, TinyMCE, transitions, video backgrounds, visual editor, content composer layout builder, page, builder, page builder plugin, Page Layout, site builder, Template Builder, visual builder, website builder, wysiwyg editor, theme builder, visual builder, visual composer, visual editor, layout, layout builder, layout builder plugin, page editor, all in one, coming soon page, create landing pages, creating landing pages, responsive, short, short code, shortcode, template, templates
 Requires at least: 4.0
-Tested up to: 4.6
-Stable tag: 4.6
+Tested up to: 4.8
+Stable tag: 4.8
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -19,14 +22,14 @@ Lightweight and extremely powerful Page Builder. Allow you to easily create page
 KingComposer is the fastest page builder ever. It’s real-time and instant process. With professional Back-End Editor for free 100%, it comes complete with top-notch features embedded and a truly intuitive UI. With no programming knowledge required. KingComposer can save you both time and headache, allowing you to easily create pages like a true professional web designer.
 
 
-= Important Notice: = 
+= Important Notice: =
 
 - If you are Wordpress theme author, you can use and include this plugin as free to build themes for sale.
 - The Front—End Editor & Addons are only available on pro version.
 
 
 = Free Version:  =
-	 
+
 	&#9658; Full features Back-End Editor.
 	&#9658; CSS system in backend
 	&#9658; RESPONSIVE system in backend
@@ -36,7 +39,7 @@ KingComposer is the fastest page builder ever. It’s real-time and instant proc
 	&#9658; Access our documents
 	&#9658; Access our videos tutorials
 	&#9658; Access our articles tutorials
-                    
+
 =  Pro Version: =
 
 	&#9658; All features from free version
@@ -46,18 +49,18 @@ KingComposer is the fastest page builder ever. It’s real-time and instant proc
 	&#9658; Install online section presets
 	&#9658; Front-End & Back-End editors
 	&#9658; Support to convert any existing element to Front-End usability
-	&#9658; Premium support, chat with our developers       
+	&#9658; Premium support, chat with our developers
 	&#9658; Access our free online presets
 	&#9658; Commerce license & support to integrate with Wordpress theme for sell
-	&#9658; White Labelling & support to rename plugin to your brand    
+	&#9658; White Labelling & support to rename plugin to your brand
 
 [youtube https://www.youtube.com/watch?v=kFANGxXh6Fw]
 
-= Pre-render content = 
+= Pre-render content =
 
 - Build with KingComposer page builder, your pages will still display well even the KingComposer plugin is deactived or deleted
 
-= Powerful CSS system = 
+= Powerful CSS system =
 
 - KingComposer has super CSS system, allow you customize the styling of any elements in any screen size (Responsive)
 
@@ -83,9 +86,9 @@ KingComposer is the fastest page builder ever. It’s real-time and instant proc
 
 = Unlimited Containers =
 
-- There is no limit to the amount of rows and containers KingComposer allows. Allow you imagination to run wild! KingComposer will take care of all the technical aspects. 
+- There is no limit to the amount of rows and containers KingComposer allows. Allow you imagination to run wild! KingComposer will take care of all the technical aspects.
 
-= Flexible Columns = 
+= Flexible Columns =
 
 - Support 5 columns layout, plus the ability of doubling the last column’s content and sorting columns in a row. Last but not least, it allows you to re-size the column width by a mouse click & mouse drag.
 
@@ -154,15 +157,134 @@ Do you have questions or issues with KingComposer? Use these support channels ap
 7. screenshot-7.jpg
 
 == Changelog ==
+= 2.6.15 (Sep 16, 2017) =
+* [Fix] Content disappeared on Chrome 6.1.
+* [Fix] Error loading icon on some hosting
+* [Fix] Popup menu on TinyMCE
+* [Fix] Conflict with Easy Download 
+* [Fix] Link wrapper on Image Gallery
+* [Fix] Other bugs
+* [Improve] Add setting to disable inline text editor on Live mode.
+* [Improve] Add read more setting for Blog Post element
 
-= 2.5.7 (Oct 3, 2016) =
+= 2.6.14 (Jun 16, 2017) =
+* [Fix] Conflict shortcode render with WordPress 4.8
+* [Fix] Column wrapper display
+* [Fix] Add some prefix for class of elements
+* [Improve] Enable vertical-align CSS field for whole system and add for Single Image
 
+= 2.6.13 (Jun 7, 2017) =
+* [Fix] Errors on elements Instagram, Image gallery & Blog
+* [Fix] Column screen size
+* [Fix] Error on kc.optimized.php
+
+= 2.6.12 (Jun 6, 2017) =
+* [Fix] Contact Form 7 Textarea setting style missing some fields.
+* [Fix] Error when insert new column inner on backend.
+* [Fix] Conflict between multi tabs slider
+* [Fix] Fix Instagram SSL error for getting images
+* [Fix] Post status auto change to Published after save
+* [Improve] Speed up performance relation fields. Now you can add more than 50 fields at same tab setting!
+* [Improve] Remove default images if image is not exists.
+* [Improve] Remove video background url default on param.
+* [Improve] Add Inside options for columns - more control on style with columns.
+* [Improve] Use new system for Presets & Templates online. Now you can have exactly how section display on preset site event that section include image.
+
+= 2.6.11 (Feb 24, 2017) =
+* [New Feature] Live editor inline for text block.
+* [New Element] Add contact form 7 element.
+* [Improve] Enable Save page content to a section.
+* [Improve] Enable items number on tablet & mobile for all carousel elements.
+* [Improve] Add Image align for Blog Posts element - Layout 2 only.
+* [Improve] Enable select other post type for Blog Posts element.
+* [Improve] Remove Edit link on list of posts when set KC_FORCE_DEFAULT is true.
+* [Improve] Enable Force Full-width to support full-width for other theme/website which is not compatibility with KingComposer fullwidth rule.
+* [Improve] Auto load custom live template for all elements without clear cache.
+* [Improve] Support Unicode for name and category of Presets.
+* [Improve] Add more option for video player element.
+* [Fix] Fix scrollbar hidden when click somewhere which not on elements.
+* [Fix] Fix CSS Responsive has wrong ordering of screen size.
+* [Fix] Fix Duplicate icons social on layout 4 of Blog Post element.
+* [Fix] post_title unsplash when save
+* [Fix] Alt text for image in Image Gallery
+* [Fix] Columns Setting icon focusing
+* [Fix] Background CSS field important
+
+= 2.6.10.1 (Jan 23, 2017) =
+
+* [Fix] Image size input for Team, Testimonial elements
+* [Fix] Disable force publish status of post when saving
+* [Fix] List all post items for Blog Post element
+* [Fix] Language for field params
+* [Fix] Meta Blog Post
+* [Improve] Add step for number_slider field
+* [Improve] Add extra option for video youtube background
+* [Improve] Support set order for element in the list with 'priority' param
+
+= 2.6.10 (Dec 29, 2016) =
+
+* [Fix] Accordion active status
+* [Fix] Columns width of row equal height on mobile
+* [Fix] Fix row_inner width from level 2
+* [Fix] Fix FlipBox on Safari
+* [Improve] Force Featured Image for blog post
+
+= 2.6.8 (Dec 11, 2016) =
+
+* [Fix] background image
+* [Improve] styling tab faster
+* [Fix] minify css and js for optimazation mode
+* [Fix] some of CSS system issues
+* [New] add prebuilt templates http://docs.kingcomposer.com/prebuilt-templates/
+* [New] Clear cache option
+* [Fix] Color picker position
+* [Fix] Clear cache optimized when update page
+* [New] assests register via map for each element
+* [Remove] tab icons in editting popup
+* [Fix] prevent window scroll after close popup
+* [Improve] UX and new tabs for icon picker
+* [Improve] Add screens for CSS style of elements
+* [Improve] minify css and js
+* [Improve] Style Screensize for all elements
+* [Fix] for Safari browser
+* [Fix] Flipbox + Equal height for row inner
+
+= 2.6 (Nov 18, 2016) =
+
+* [Fix] enable optimize for specific pages
+* [Fix] issues with some 3-rd party plugin
+* [Fix] compatible with Yoast SEO plugin
+* [New] Share your section presets to KC Hub
+* [Improve] editing popup
+* [Improve] keep collapse rows after saving
+* [New] Optimized and speed up website
+* [New] Fully support shortcode nested http://docs.kingcomposer.com/nested-shortcodes/
+* [New] right-click panel for copy, cut, paste ..etc
+* [New] copy style, paste style, clear style
+* [Improve] Allow to delete color presets
+* [Improve] dialog for adding elements
+* [Improve] Keep builder collapsed even reload
+* [Improve] Background Youtube video for column and row inner
+* [Fix] css for wp widgets
+* [Fix] Select multiple images in text block element
+* [Fix] Custom CSS with quote charator
+* [Fix] Equal height columns and align content
+* [Fix] Image size for blog posts element
+* [Fix] Correct link attribute for Flip Box element
+* [Fix] Margin option for button on list post type element
+
+= 2.5.7 (Nov 4, 2016) =
+
+* [Improve] New option Multiple for field autocomplete, allow to choose multiple or only 1 item
+* [Fix] Relation on field group http://docs.kingcomposer.com/available-param-types/group-fields/
+* [Fix] image size for single image and gallery
 * [New] Shortcode mapper, help to build shortcodes very easy
 * [Fix] Missing data when edit by quick edit
 * [Improve] fields style, shortcode style
 
 = 2.5.6 (Sep 28, 2016) =
 
+* [Improve] Icon picker with easier to search and select icon
 * [Fix] styling background gradient broken when re editing
 * [Fix] field radio image in group field
 * [Fix] and improve field autocomplete
@@ -238,7 +360,7 @@ Do you have questions or issues with KingComposer? Use these support channels ap
 = 2.4 (May 30, 2016) =
 
 * [New] Backend presets for all elements http://docs.kingcomposer.com/presets/
-* [Fix] some css issues 
+* [Fix] some css issues
 
 = 2.3.9.2 (May 29, 2016) =
 
@@ -278,7 +400,7 @@ Do you have questions or issues with KingComposer? Use these support channels ap
 
 * Move column percent to global css instead css inline
 * [Fix] default value and auto decode for field group and children params
-* NOTICE: THIS UPDATE CAN MAKE SOME OF 3rd PARTY ELEMENTS DISPLAY INCORRECT. PLEASE UPDATE ALL ELEMENTS WHICH USE FIELD editor, textarea, group 
+* NOTICE: THIS UPDATE CAN MAKE SOME OF 3rd PARTY ELEMENTS DISPLAY INCORRECT. PLEASE UPDATE ALL ELEMENTS WHICH USE FIELD editor, textarea, group
 
 = 2.3.1 (May 19, 2016) =
 
@@ -332,13 +454,13 @@ Do you have questions or issues with KingComposer? Use these support channels ap
 
 = 2.2 (May 1, 2016) =
 
-* [Fix] AutoP wp editor 
+* [Fix] AutoP wp editor
 
 = 2.1.9 (April 28, 2016) =
 
 * [Fix] notice php kc_column
 * [Fix] js error notice row full width
-* [Fix] tabs sliders 
+* [Fix] tabs sliders
 
 = 2.1.8 (April 26, 2016) =
 
@@ -355,11 +477,11 @@ Do you have questions or issues with KingComposer? Use these support channels ap
 = 2.1.5 (April 24, 2016) =
 
 * Improve drag & drop front-end editor
-* [Fix] row settings front-end editor 
+* [Fix] row settings front-end editor
 
 = 2.1.4 (April 22, 2016) =
 
-* [Fix] css box 
+* [Fix] css box
 * [Remove] unuse maps
 
 = 2.1.3 (April 21, 2016) =

@@ -14,15 +14,17 @@ var atts 				= ( data.atts !== undefined ) ? data.atts : {},
 	title 				= '',
 	description 		= '',
 	wrap_class 			= '',
+	tmp_class 			= '',
 	element_attributes 	= [],
 	size 				= 120,
 	auto_width 			= 'no',
 	linewidth  			= 10,
 	css_classes 		= [ 'kc_shortcode', 'kc_piechart', custom_class ],
 	icon				= '';
-
-wrap_class = kc.front.el_class( atts );
-wrap_class = wrap_class.join( ' ' );
+	
+tmp_class = kc.front.el_class( atts );
+tmp_class.push( wrap_class );
+wrap_class = tmp_class.join( ' ' );
 
 if( atts['title'] !== undefined && atts['title'] !== '' )
 	title = '<h3>' + atts['title'] + '</h3>';

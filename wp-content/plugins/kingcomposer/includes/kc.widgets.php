@@ -44,7 +44,7 @@ class kc_widget_content extends WP_Widget {
 			$id = explode('#', $id);
 			$id = trim ($id[1]);
 				
-			if ($id == $post->ID || (isset($kc_prevent_infinity_loop[$id]) && $kc_prevent_infinity_loop[$id] === true))
+			if (isset($post) && (is_object($post) && $id == $post->ID) || (isset($kc_prevent_infinity_loop[$id]) && $kc_prevent_infinity_loop[$id] === true))
 			{
 				echo '<div class="kc-content-widget">Error: Infinite loop, do not include widget into itself.</div>';
 				return false;

@@ -8,20 +8,20 @@
 */
 
 ( function($){
-	
+
 	if( typeof( kc ) == 'undefined' )
 		window.kc = {};
-		
+
 	$().extend( kc.params, {
 
 		process : function() {
-			
+
 			/*
-			*	Start getting the content to process 
+			*	Start getting the content to process
 			*/
 			if( typeof( tinyMCE ) != 'undefined' )
 				tinyMCE.triggerSave();
-				
+
 			var content = $('#content').val();
 			/*
 			*	do not process empty content
@@ -46,7 +46,7 @@
 				content = kc.tools.reverse (content);
 				if (content.indexOf(']wor_ck/[') > 0)
 				{
-					content = content.substring (content.indexOf(']wor_ck/['));	
+					content = content.substring (content.indexOf(']wor_ck/['));
 				}
 				// reverse back
 				content = kc.tools.reverse (content);
@@ -59,14 +59,14 @@
 		},
 
 		process_rows : function(content) {
-		
+
 			if (content.indexOf('[kc_row') !== 0)
 			{
 				/*
 				*	Make sure the content wrapped inside [kc_row]...[/kc_row]
 				*/
 				content = '[kc_row'+this.get_atts('kc_row')+']'+content.replace(/kc_row/g,'kc_row#')+'[/kc_row]';
-				
+
 			}
 			/*
 			*	render rows level 1
@@ -78,9 +78,9 @@
 			}, 'kc_row');
 
 		},
-		
+
 		process_columns : function(content, parent_row) {
-			
+
 			this.process_shortcodes(content, function(args) {
 
 				parent_row.append(kc.views.column.render (args));
@@ -149,7 +149,7 @@
 					setTimeout(function(content, el) {
 						kc.params.process_all(content, el);
 					},1, args.args.content, el.find('> .kc-views-section-wrap'));
-					
+
 					kc.views.views_section.init(args, el);
 				}
 
@@ -165,7 +165,7 @@
 							end: '[/kc_undefined]',
 							full: content
 						 });
-						 
+
 				id = el.data('model');
 				wrp.append( el );
 
@@ -177,10 +177,10 @@
 		},
 
 		process_alter : function(input, tag) {
-			
+
 			if (input === undefined)
 				input = '';
-			
+
 			/* remove ### of containers loop */
 			var start = input.indexOf('['+tag+'#');
 			if (start > -1)
@@ -201,7 +201,7 @@
 
 			var regx = new RegExp( '\\[(\\[?)(' + tags + ')(?![\\w-])([^\\]\\/]*(?:\\/(?!\\])[^\\]\\/]*)*?)(?:(\\/)\\]|\\](?:([^\\[]*(?:\\[(?!\\/\\2\\])[^\\[]*)*)(\\[\\/\\2\\]))?)(\\]?)', 'g' ), result, agrs, content = input;
 
-			var split_arguments = /([a-zA-Z0-9\-\_]+)="([^"]+)+"/gi;
+			var split_arguments = /([a-zA-Z0-9\-\_\.]+)="([^"]+)+"/gi;
 
 			while (result = regx.exec(input)) {
 
@@ -209,13 +209,13 @@
 				while (agrs = split_arguments.exec( result[3])) {
 					paramesArg[ agrs[1] ] = agrs[2];
 				}
-				
+
 				/*
 				*	(!) Make sure that the id of each element is not identical
 				*/
-				
+
 				paramesArg['_id'] = Math.round(Math.random()*1000000);
-				
+
 				var args = {
 					full		: result[0],
 					name 		: result[2],
@@ -226,15 +226,15 @@
 					/*input		: input,
 					result		: result*/
 				};
-				
+
 				if (!_.isUndefined( result[5]))
 					args.args.content = kc.params.process_alter(result[5], result[2]);
-				
+
 				callback(args);
 				content = content.replace(result[0], '');
 
 			}
-			
+
 			if (content !== '')
 				callback({ full: content, name: 'kc_column_text', end: '[/kc_column_text]', args: { content: content } });
 
@@ -262,7 +262,7 @@
 					}
 
 				}
-				
+
 				var dmp = kc.params.merge( data.map.params ), dp = data.params, mpa = kc.params.admin_label;
 
 				for (var n in dmp) {
@@ -270,7 +270,7 @@
 					item = '';
 
 					if (dmp[n].name == 'image' && dp.args[dmp[n].name] === undefined)
-						dp.args[dmp[n].name] = 'undefined';
+						dp.args[dmp[n].name] = '';
 
 					if (dmp[n].admin_label === true && dp.args[dmp[n].name] !== undefined && dp.args[dmp[n].name] != '__empty__')
 					{
@@ -343,7 +343,7 @@
 			textarea_html : function( content ){
 				return content;
 			},
-			
+
 			editor : function( content ){
 				return kc.tools.base64.decode( content );
 			},
@@ -415,7 +415,7 @@
 			},
 
 			wp_widget : function( data ){
-				
+
 				var obj;
 				try{
 					obj = JSON.parse( kc.tools.base64.decode( data ) );
@@ -515,10 +515,10 @@
 			gmaps : function( params, el ){
 
 				var value = '', html = '';
-				
+
 				if (typeof(params['title'] ) != 'undefined' && params['title'] !== '')
 					html += '<strong>Title</strong>: '+params['title']+' ';
-				
+
 				if (typeof(params['map_location'] ) != 'undefined' && params['map_location'] !== '')
 					value = kc.tools.base64.decode (params['map_location']);
 
@@ -533,7 +533,7 @@
 							html += '<strong>Location</strong>: '+kc.tools.base64.decode (value);
 					}
 				}
-				
+
 				return html;
 			},
 
@@ -571,7 +571,7 @@
 					  }
 
 				}, 10, el );
-				
+
 				if( window.switchEditors !== undefined )
 					return switchEditors.wpautop( params['content'] );
 				else return params['content'];
@@ -589,23 +589,26 @@
 
 				var param, value, atts;
 
+				/* Since ver 2.6.3.3*/
+				var events_stack = [];
+
 				for( var index in params )
 				{
 
 					param = params[ index ]; value = '';
-					
+
 					if( data[param.name] !== undefined )
 						value = data[param.name];
 					else if( param !== undefined && param.value !== undefined )
 					{
-					
+
 						value = param.value.toString();
-						
+
 						if( value.indexOf( '%time%' ) > -1 ){
 							var d = new Date();
 							value = value.replace( '%time%', d.getTime() );
 						}
-		
+
 					}
 
 					if( value == '__empty__' )
@@ -613,7 +616,7 @@
 
 					if( kc_param_types_support.indexOf( param.type ) == -1 )
 						param.type = 'undefined';
-					
+
 					atts = {
 							value 	: value,
 							options : (( param.options !== undefined ) ? param.options : [] ),
@@ -633,190 +636,358 @@
 										base: param.name,
 										relation: param.relation
 									});
-					
+
 					tmpl_html = tmpl_html.replace( /\&lt\;script/g, '<script' ).replace( /\&lt\;\/script\&gt\;/g, '</script>' );
-					
+
 					var field = $( tmpl_html );
-					
+
 					$( el ).append( field );
 
-					if( param.relation !== undefined ){
+					events_stack.push([$.extend(true, {}, param), $.extend(true, {}, atts), field, value]);
 
-						var thru = false, pr = param.relation;
+					/*setTimeout( function (param, el, atts, field) {
 
-						if( pr.parent !== undefined && ( pr.show_when !== undefined || pr.hide_when !== undefined  ) ){
+						if (param.relation !== undefined ) {
 
-							var parent = el.find('>.field-base-'+pr.parent);
+							var thru = false, pr = param.relation;
 
-							if( parent.get(0) ){
+							if( pr.parent !== undefined && ( pr.show_when !== undefined || pr.hide_when !== undefined  ) ){
 
-								if( parent.data('child') !== undefined )
-								{
-									var child = parent.data('child');
-									child[child.length] = field;
-								}
-								else
-								{
-									var child = [];
-									child[0] = field;
-								}
+								var parent = el.find('>.field-base-'+pr.parent);
 
-								parent.data({ child : child });
+								if( parent.get(0) ){
 
-								var iparent = parent.find('input.kc-param[type="radio"],input.kc-param[type="checkbox"],select.kc-param');
-								if( pr.show_when !== undefined ){
-									if( typeof pr.show_when != 'object' )
-										pr.show_when = pr.show_when.toString().split(',');
-								}
-								if( pr.hide_when !== undefined ){
-									if( typeof pr.hide_when != 'object' )
-										pr.hide_when = pr.hide_when.toString().split(',');
-								}
+									if( parent.data('child') !== undefined )
+									{
+										var child = parent.data('child');
+										child[child.length] = field;
+									}
+									else
+									{
+										var child = [];
+										child[0] = field;
+									}
 
-								if( iparent.get(0) ){
+									parent.data({ child : child });
 
-									thru = true;
-									iparent.on( 'change',
+									var iparent = parent.find('input.kc-param[type="radio"],input.kc-param[type="checkbox"],select.kc-param');
+									if( pr.show_when !== undefined ){
+										if( typeof pr.show_when != 'object' )
+											pr.show_when = pr.show_when.toString().split(',');
+									}
+									if( pr.hide_when !== undefined ){
+										if( typeof pr.hide_when != 'object' )
+											pr.hide_when = pr.hide_when.toString().split(',');
+									}
 
-										{ 
-											el: field, 
-											std: value,
-											show: pr.show_when, 
-											hide: pr.hide_when, 
-											iparent: iparent, 
-											parent : parent 
-										},
+									if( iparent.get(0) ){
 
-										function(e){
+										thru = true;
+										iparent.on( 'change',
 
-											var vparent = e.data.iparent.serializeArray(), sh, hi;
-											if( e.data.show !== undefined )
-												sh = false;
-											if( e.data.hide !== undefined )
-												hi = true;
-												
-											for( var n in vparent ){
-												
-												if( e.data.show !== undefined ){
-													if( e.data.show.indexOf( vparent[n].value ) > -1 ){
-														e.data.el.removeClass('relation-hidden');
-														e.data.el.find('.kc-param:not(.kc-empty-param)').each(function(){
-															if( this.value === '' ){
-																if( $(this).data('encode') == 'base64' )
-																	e.data.std = kc.tools.base64.decode(e.data.std);
-																$(this).val(kc.tools.unesc_attr(e.data.std)).change();
-																$(this).closest('.m-p-r-content').find('.kc-attach-field-wrp .img-wrp').remove();
-															}
-														});
-														
-														sh = true;
+											{
+												el: field,
+												std: value,
+												show: pr.show_when,
+												hide: pr.hide_when,
+												iparent: iparent,
+												parent : parent
+											},
+
+											function(e){
+
+												var vparent = e.data.iparent.serializeArray(), sh, hi;
+												if( e.data.show !== undefined )
+													sh = false;
+												if( e.data.hide !== undefined )
+													hi = true;
+
+												for( var n in vparent ){
+
+													if( e.data.show !== undefined ){
+														if( e.data.show.indexOf( vparent[n].value ) > -1 ){
+															e.data.el.removeClass('relation-hidden');
+															e.data.el.find('.kc-param:not(.kc-empty-param)').each(function(){
+																if( this.value === '' ){
+																	if( $(this).data('encode') == 'base64' )
+																		e.data.std = kc.tools.base64.decode(e.data.std);
+																	$(this).val(kc.tools.unesc_attr(e.data.std)).change();
+																	$(this).closest('.m-p-r-content').find('.kc-attach-field-wrp .img-wrp').remove();
+																}
+															});
+
+															sh = true;
+														}
 													}
+													if( e.data.hide !== undefined ){
+														if( e.data.hide.indexOf( vparent[n].value ) > -1 ){
+															e.data.el.addClass('relation-hidden');
+															hi = false;
+														}
+													}
+												}
+
+												if( e.data.show !== undefined ){
+													if( sh === false )
+														e.data.el.addClass('relation-hidden');
 												}
 												if( e.data.hide !== undefined ){
-													if( e.data.hide.indexOf( vparent[n].value ) > -1 ){
-														e.data.el.addClass('relation-hidden');
-														hi = false;
-													}
+													if( hi === true )
+														e.data.el.removeClass('relation-hidden');
 												}
-											}
-											
-											if( e.data.show !== undefined ){
-												if( sh === false )
+
+												if( e.data.parent.hasClass('relation-hidden'))
 													e.data.el.addClass('relation-hidden');
-											}
-											if( e.data.hide !== undefined ){
-												if( hi === true )
-													e.data.el.removeClass('relation-hidden');
-											}
 
-											if( e.data.parent.hasClass('relation-hidden'))
-												e.data.el.addClass('relation-hidden');
+												if( e.data.el.data('child') !== undefined ){
+													if( e.data.el.hasClass('relation-hidden') ){
 
-											if( e.data.el.data('child') !== undefined ){
-												if( e.data.el.hasClass('relation-hidden') ){
+														function hide_children( child ){
+															child.forEach( function(_child){
+																_child.addClass('relation-hidden');
+																if( _child.data('child') !== undefined ){
+																	hide_children( _child.data('child') );
+																}
+															});
+														}
 
-													function hide_children( child ){
-														child.forEach( function(_child){
-															_child.addClass('relation-hidden');
-															if( _child.data('child') !== undefined ){
-																hide_children( _child.data('child') );
-															}
-														});
+														hide_children( e.data.el.data('child') );
+
+													}else{
+														e.data.el.find('input.kc-param[type="radio"],input.kc-param[type="checkbox"],select.kc-param').trigger('change');
 													}
-
-													hide_children( e.data.el.data('child') );
-
-												}else{
-													e.data.el.find('input.kc-param[type="radio"],input.kc-param[type="checkbox"],select.kc-param').trigger('change');
 												}
+
 											}
+										).addClass('m-p-rela');
 
-										}
-									).addClass('m-p-rela');
-									
-									iparent.trigger('change');
+										iparent.trigger('change');
 
+									}
 								}
 							}
+							// Show back if invalid config
+							if( thru === false )
+								field.removeClass('relation-hidden');
 						}
-						/*Show back if invalid config*/
-						if( thru === false )
-							field.removeClass('relation-hidden');
-					}
 
-					if( typeof atts.callback == 'function' ){
-						/* callback from field-type template */
-						setTimeout( atts.callback, 1, field, $, atts );
-					}
+						if( typeof atts.callback == 'function' ){
+							// callback from field-type template
+							//setTimeout( atts.callback, 1, field, $, atts );
+							atts.callback(field, $, atts);
+						}
+
+					}, 1, param, el, atts, field);*/
 
 				}
-				
+
 				$(el).find('.kc-param').on( 'change keyup', function(e){
 
 					var pop = kc.get.popup( el );
-					
+
 					if( pop === null || typeof pop.data('change') ===  undefined )
 						return;
-						
+
 					var calb = pop.data('change');
 					if( typeof calb == 'function' ){
 						calb( this );
 					}else if( calb !== undefined && calb.length > 0 ){
 						for( i = 0; i< calb.length; i++ ){
 							if( typeof calb[i] == 'function' )
-								calb[i]( this, pop, e );	
+								calb[i]( this, pop, e );
 						}
 					}
-					
+
 				});
 
+				setTimeout(function(datas, el){
+
+					var param, atts, field, value, parents = [], iparents = [];
+
+					for (var i in datas) {
+						param = datas[i][0];
+						atts = datas[i][1];
+						field = datas[i][2];
+						value = datas[i][3];
+
+						if( param.relation !== undefined ){
+
+							var thru = false, pr = param.relation, iparent;
+
+							if( pr.parent !== undefined && ( pr.show_when !== undefined || pr.hide_when !== undefined  ) ){
+
+								if( parents[ pr.parent ] !== undefined ){
+									parent = parents[ pr.parent ];
+								}
+								else{
+									parent = el.find('>.field-base-'+pr.parent);
+									parents[ pr.parent ] = parent;
+								}
+
+								if( parent.get(0) ){
+
+									if( parent.data('child') !== undefined )
+									{
+										var child = parent.data('child');
+										child[child.length] = field;
+									}
+									else
+									{
+										var child = [];
+										child[0] = field;
+									}
+
+									parent.data({ child : child });
+
+									if( iparents[ pr.parent ] !== undefined ){
+										iparent = iparents[ pr.parent ];
+									}
+									else{
+										iparent = parent.find('input.kc-param[type="radio"],input.kc-param[type="checkbox"],select.kc-param');
+										iparents[ pr.parent ] = iparent;
+									}
+
+									if( pr.show_when !== undefined ){
+										if( typeof pr.show_when != 'object' )
+											pr.show_when = pr.show_when.toString().split(',');
+									}
+									if( pr.hide_when !== undefined ){
+										if( typeof pr.hide_when != 'object' )
+											pr.hide_when = pr.hide_when.toString().split(',');
+									}
+
+									if( iparent.get(0) ){
+
+										thru = true;
+										iparent.on( 'change',
+
+											{
+												el: field,
+												std: value,
+												show: pr.show_when,
+												hide: pr.hide_when,
+												iparent: iparent,
+												parent : parent
+											},
+
+											function(e){
+
+												var vparent = e.data.iparent.serializeArray(), sh, hi;
+												if( e.data.show !== undefined )
+													sh = false;
+												if( e.data.hide !== undefined )
+													hi = true;
+
+												for( var n in vparent ){
+
+													if( e.data.show !== undefined ){
+														if( e.data.show.indexOf( vparent[n].value ) > -1 ){
+															e.data.el.removeClass('relation-hidden');
+															e.data.el.find('.kc-param:not(.kc-empty-param)').each(function(){
+																if( this.value === '' ){
+																	if( $(this).data('encode') == 'base64' )
+																		e.data.std = kc.tools.base64.decode(e.data.std);
+																	$(this).val(kc.tools.unesc_attr(e.data.std)).change();
+																	$(this).closest('.m-p-r-content').find('.kc-attach-field-wrp .img-wrp').remove();
+																}
+															});
+
+															sh = true;
+														}
+													}
+													if( e.data.hide !== undefined ){
+														if( e.data.hide.indexOf( vparent[n].value ) > -1 ){
+															e.data.el.addClass('relation-hidden');
+															hi = false;
+														}
+													}
+												}
+
+												if( e.data.show !== undefined ){
+													if( sh === false )
+														e.data.el.addClass('relation-hidden');
+												}
+												if( e.data.hide !== undefined ){
+													if( hi === true )
+														e.data.el.removeClass('relation-hidden');
+												}
+
+												if( e.data.parent.hasClass('relation-hidden'))
+													e.data.el.addClass('relation-hidden');
+
+												if( e.data.el.data('child') !== undefined ){
+													if( e.data.el.hasClass('relation-hidden') ){
+
+														function hide_children( child ){
+															child.forEach( function(_child){
+																_child.addClass('relation-hidden');
+																if( _child.data('child') !== undefined ){
+																	hide_children( _child.data('child') );
+																}
+															});
+														}
+
+														hide_children( e.data.el.data('child') );
+
+													}else{
+														e.data.el.find('input.kc-param[type="radio"],input.kc-param[type="checkbox"],select.kc-param').trigger('change');
+													}
+												}
+
+											}
+										).addClass('m-p-rela');
+
+									}
+								}
+							}
+							// Show back if invalid config
+							if( thru === false )
+								field.removeClass('relation-hidden');
+						}
+
+						if( typeof atts.callback == 'function' ){
+							// callback from field-type template
+							//setTimeout( atts.callback, 1, field, $, atts );
+							atts.callback(field, $, atts);
+						}
+
+					}
+
+					for(var ip in iparents){
+						if( iparents[ip].get(0) ) iparents[ip].trigger('change');
+					}
+
+					delete datas, param, atts, field, value;
+
+				}, 1, events_stack, el);
+
 			},
-			
+
 			tabs : function( tab, form ){
-					
+
 				form.addClass('fields-edit-form'); // make this form as settings param to save
-					
+
 				var model = kc.get.model( tab ),
 					tab_content = $(tab).closest('.m-p-wrap').find('.m-p-body').find('>.'+$(tab).data('tab') ),
 					fields = $(tab).closest('.m-p-wrap').find('.m-p-body').find('>.fields-edit-form');
-					
+
 				var cfg = $(tab).data( 'cfg' ).split('|'),
 					data = kc.storage[ cfg[1] ],
 					map = $().extend( {}, kc.maps['_std'] );
 
 				if( data === undefined || kc.maps[ data.name ] === undefined )
 					return false;
-					
+
 				map = $().extend( map, kc.maps[ cfg[2] ] );
-				
+
 				kc.params.fields.render( tab_content, map.params[cfg[0]] , data.args );
-				
+
 				$(tab).data( 'callback', function( tit, tab ){/* ... */ });
 
 				return tab_content;
-				
+
 			},
-						
+
 			group : {
 
 				callback : function( wrp ){
@@ -851,7 +1022,7 @@
 							case 'double' : e.data.double( target, e.data, wrp ); break;
 						}
 					}
-					
+
 					if (!target.hasClass('kc-add-group') && (target.hasClass('kc-group-controls') || target.hasClass('counter'))) {
 						e.data.collapse( target );
 					}
@@ -861,7 +1032,7 @@
 				collapse : function( el ){
 
 					var row = el.closest('.kc-group-row');
-					
+
 					if( row.hasClass('active') )
 					{
 						row.removeClass('active');
@@ -871,7 +1042,7 @@
 						el.closest('.kc-group-rows').
 								find('.kc-group-row.active').
 								removeClass('active');
-						
+
 						row.addClass('active');
 
 					}
@@ -924,12 +1095,12 @@
 					$(this).before( grow );
 
 					var params = kc.params.fields.group.set_index( wrp.data('params'), wrp.data('name'), 0 );
-					
+
 					kc.params.fields.render( grow.find('.kc-group-body'), params, {} );
 
 					// reset index of groups list
 					kc.params.fields.group.re_index( wrp );
-					
+
 					e.data.collapse( grow.find('li.collapse') );
 
 					e.data.sortable();
@@ -948,7 +1119,7 @@
 								params[ params.length-1 ]['name'] = data_name+'['+index+']['+data_params[i]['name']+']';
 						}
 					}
-					
+
 					return params;
 
 				},
@@ -957,10 +1128,10 @@
 
 					var i = 1;
 					wrp.find('.kc-group-row').each(function(){
-						
+
 						$(this).find('input.kc-param, select.kc-param, textarea.kc-param').each(function(){
 							if( this.name.indexOf('[') > -1 ){
-								
+
 								var name = this.name.substring(0, this.name.indexOf('[')+1);
 								name += i;
 								name += this.name.substr(this.name.indexOf(']'));
@@ -968,29 +1139,29 @@
 							}
 
 							this.label = this.name.substr(this.name.indexOf('][')+2 ).replace(']','');
-							
+
 						});
-						
+
 						var label = $(this).find('.kc-param-row').first().find('input.kc-param, select.kc-param, textarea.kc-param');
-						
+
 						if (label.data('added-change') !== 1) {
-							
+
 							label.data({'added-change': 1});
-							
+
 							label.on('change',function() {
 								var ct = $(this).closest('.kc-group-row').find('li.counter');
 								ct.html(this.label + ': ' + kc.tools.esc(this.value));
-					
+
 							});
 						}
-						
+
 						var data = label.serializeArray();
-						
+
 						if (data[0] !== undefined)
 							$(this).find('li.counter').html( label.get(0).label+': '+kc.tools.esc( data[0].value ));
-						
+
 						i++;
-						
+
 					});
 
 				},
@@ -1012,13 +1183,13 @@
 				}
 
 			},
-			
+
 			/*
 			 * (!) Field type CSS
 			 * @ since ver 2.5
 			*/
 			css : {
-				
+
 				/*
 				*	(!) All screens registered
 				*/
@@ -1027,7 +1198,7 @@
 				*	(!) re-map css-field to kc-fields with default value options
 				*/
 				fields : {
-					
+
 					'undefined' : 'text',
 					'font-family' : 'css_family',
 					'font-size' : {
@@ -1049,6 +1220,25 @@
 								'600': '600',
 								'700': '700',
 								'800': '<strong>800</strong>',
+							}
+						}
+					},
+					'vertical-align' : {
+						type: 'select_group',
+						options: {
+							custom: true,
+							tooltip: true,
+							buttons: {
+								'': '<i class="fa-ban"></i>',
+								'initial': 'initial',
+								'baseline': 'baseline',
+								'top': 'top',
+								'bottom': 'bottom',
+								'middle': 'middle',
+								'sub': 'sub',
+								'super': 'super',
+								'text-top': 'text-top',
+								'text-bottom': 'text-bottom',
 							}
 						}
 					},
@@ -1105,13 +1295,13 @@
 					'line-height' : {
 						type: 'number',
 						options: {
-							units: ['px','em','%'] 
+							units: ['px','em','%']
 						}
 					},
 					'letter-spacing' : {
 						type: 'number',
 						options: {
-							units: ['px','em','%'] 
+							units: ['px','em','%']
 						}
 					},
 					'overflow' : {
@@ -1161,6 +1351,19 @@
 							'inherit': 'Inherit',
 						}
 					},
+                    'align-items' : {
+                        type: 'select',
+                        options: {
+                            '': '=== Select ===',
+                            'inherit': 'Inherit',
+                            'baseline': 'Baseline',
+                            'center': 'Center',
+                            'flex-end': 'Flex-end',
+                            'flex-start': 'Flex-start',
+                            'initial': 'Tnitial',
+                            'stretch': 'Stretch',
+                        }
+                    },
 					'border-width' : {
 						type: 'number',
 						options: {
@@ -1174,15 +1377,15 @@
 					'width' : {
 						type: 'number',
 						options: {
-							units: ['px','em','%'] 
+							units: ['px','em','%']
 						}
-					},	
+					},
 					'height' : {
 						type: 'number',
 						options: {
-							units: ['px','em','%'] 
+							units: ['px','em','%']
 						}
-					},	
+					},
 					'margin' : {
 						type: 'corners',
 						options: {
@@ -1208,8 +1411,8 @@
 							'padding-left': 'Left',
 						},
 						des: 'Drag on input to change the value, double click to remove value'
-					},	
-					'border' : 'css_border',	
+					},
+					'border' : 'css_border',
 					'border-radius' : {
 						type: 'corners',
 						options: {
@@ -1218,7 +1421,7 @@
 							'border-bottom-right-radius': 'Bottom Right',
 							'border-bottom-left-radius': 'Bottom Left',
 						}
-					},	
+					},
 					'float' : {
 						type: 'select_group',
 						options: {
@@ -1233,7 +1436,23 @@
 								'none': 'None',
 							}
 						}
-					},	
+					},
+					'position' : {
+						type: 'select_group',
+						options: {
+							custom: true,
+							tooltip: true,
+							buttons: {
+								'': '<i class="fa-ban"></i>',
+								'static': 'Static',
+								'absolute': 'Absolute',
+								'fixed': 'Fixed',
+								'relative': 'Relative',
+								'initial': 'Initial',
+								'inherit': 'Inherit',
+							}
+						}
+					},
 					'display' : {
 						type: 'select_group',
 						options: {
@@ -1262,7 +1481,7 @@
 								'help': 'Help',
 							}
 						}
-					},	
+					},
 					'opacity' : {
 						type: 'number_slider',
 						options: {
@@ -1271,240 +1490,255 @@
 							ratio: 0.01
 						},
 						value: ''
-					},	
+					},
 					'box-shadow' : 'text',
 					'text-shadow' : 'text',
 					'gap' : {
 						type: 'number',
 						options: {
-							units: ['px','em'] 
+							units: ['px','em']
 						}
 					},
 					'max-width' : {
 						type: 'number',
 						options: {
-							units: ['px','em','%'] 
+							units: ['px','em','%']
 						}
 					},
 					'custom' : {
 						type: 'custom',
 						des: '<ul><li>- Click outside of the textarea to apply changes.</li><li>- This has a higher priority than the visual selection</li></ul>'
 					}
-						
+
 				},
-				
+
 				/*
-				 * (!) remap structure { 
-		 				screen: { 
-		 					property|selector: { selector, label, group }  
-		 					color|a:hover: { selector, label, group }  
-		 				} 
+				 * (!) remap structure {
+		 				screen: {
+		 					property|selector: { selector, label, group }
+		 					color|a:hover: { selector, label, group }
+		 				}
 		 			}
 		 		*/
 				remap : function( ops ){
-					
+
 					this.screens = {};
 					// loop sections
 					for( var i = 0; i < ops.length; i++ ){
 						this.remap_screen( ops[i] );
 					}
-					
+
 					return this.screens;
-					
+
 				},
-				
+
 				remap_screen : function( op ){
-					
-					var np, i, gr, itm, scr, screens = ['any'];
-					
+
+					var np, i, gr, itm, scr, screens = ['any'], properties, prs;
+
 					if( op.screens !== undefined )
 						screens = op.screens.split(',');
-								
-					for( gr in op ){ // loop grs
 
-						if( gr != 'screens' ){
-							
-							for( itm = 0; itm < op[gr].length; itm++ ){ // loop in itms
-								
+					for (gr in op) { // loop grs
+
+						if (gr != 'screens') {
+
+							for (itm = 0; itm < op[gr].length; itm++) { // loop in itms
+
 								if( op[gr][itm].property !== undefined ){
-									
-									np = op[gr][itm].property+'|';
-								
-									if( op[gr][itm].selector !== undefined && op[gr][itm].selector !== '' )
-										np += op[gr][itm].selector;
-									
-									for( i = 0; i < screens.length; i++ ){ // loop screens
-										
+									/* start update multiple properties */
+									properties = op[gr][itm].property.replace(/\ /g, '').split(',');
+									labels = (op[gr][itm].label !== undefined) ? op[gr][itm].label.split(',') : [];
+
+									for (prs in properties) {
+
+										if (labels[prs] !== undefined)
+										 	op[gr][itm].label = labels[prs];
+										else op[gr][itm].label = properties[prs].replace(/\-/g, ' ').replace(/\_/g, ' ');
+
+										np = properties[prs]+'|';
+									/* end update multiple properties */
+										if( op[gr][itm].selector !== undefined && op[gr][itm].selector !== '' )
+											np += op[gr][itm].selector;
+
+										for( i = 0; i < screens.length; i++ ){ // loop screens
+
 										scr = screens[i].trim();
-										
+
 										if( this.screens[scr] === undefined )
 											this.screens[scr] = {};
-										
+
 										if( this.screens[scr][gr] === undefined )
 											this.screens[scr][gr] = {};
-										
-										this.screens[scr][gr][np] = op[gr][itm];
-										
+
+										this.screens[scr][gr][np] = $.extend({}, op[gr][itm]);
+
 									}
+
+									}
+
 								}
-								
+
 							}
 						}
 					}
-					
+
 				},
-				
+
 				render : function( data, wrp ){
-					
+
 					var screens = this.remap( data.options ), i, li, values,
 						scr_nav = $('<ul class="kc-css-screens-nav"></ul>'),
 						keys = Object.keys(screens).sort(function(a,b){ return parseInt(a) < parseInt(b); });
-					
+
 					try{
-						
+
 						values = JSON.parse( data.value.replace(/(?:\r\n|\r|\n)/g, '').replace(/\`/g, '"') );
-						
+
 						if( values['kc-css'] === undefined || typeof values['kc-css'] != 'object' )
 							values = {};
 						else values = values['kc-css'];
-						
+
 					}catch( ex ){ values = {}; }
-					
+
 					for( i = 0; i < keys.length; i++ ){
-						
-						li = '<li data-screen="'+keys[i]+'">'+this.responsive_icon(keys[i])+'</li>';
-						
+
+						li = $('<li data-screen="'+keys[i]+'">'+this.responsive_icon(keys[i])+'</li>');
+
 						if( keys[i] == 'any' )
 							scr_nav.prepend( li );
 						else scr_nav.append( li );
-						
-						this.render_groups( screens[keys[i]], wrp, keys[i], (values[keys[i]] !== undefined ? values[keys[i]] : {}) );
-						
+
+						li.data('predatas', [
+							screens[keys[i]],
+							wrp.get(0),
+							keys[i],
+							(values[keys[i]] !== undefined ? values[keys[i]] : {})
+						]);
+
+						/*
+						this.render_groups(
+							screens[keys[i]],
+							wrp,
+							keys[i],
+							(values[keys[i]] !== undefined ? values[keys[i]] : {})
+						);*/
+
 					}
-					
+
 					/*
 					*	If there are only screen "any", then hidden the screens nav
 					*/
-					
+
 					if( keys.length === 1 && keys[0] == 'any' )
 						scr_nav.addClass('kc-css-hidden');
-					
+
 					wrp.prepend( scr_nav );
-					
-					// return to default height, 
+
+					// return to default height,
 					// set a default height to prevent flash screen when switching tabs
 					wrp.css({ 'min-height': '' });
-					
+
 					// Add events after everything has been rendered
 					kc.trigger({
-						
+
 						el: wrp,
 						events: {
 							'click': 'click',
-							'.kc-css-group-nav li:click': 'group_tabs',
 							'.kc-css-screens-nav li:click': 'screen_tabs'
 						},
-						
+
 						click: function(e){
-							
+
 							if( e.target.className == 'kc-css-important' ){
-								
+
 								var prow = $(e.target).closest('.kc-param-row');
-								
+
 								if( prow.hasClass('is-important') )
 									prow.removeClass('is-important');
 								else prow.addClass('is-important');
-								
+
 								$(e.target).parent().find('.kc-css-param').trigger('change');
-								
+
 							}
 						},
-						
-						group_tabs: function(e){
-							
-							var el = $(this), 
-								rows = el.closest('.kc-css-screen').find('>.kc-param-row');
-								slug = kc.tools.esc_slug( el.html() );
-							
-							if( el.hasClass('right') )
-								return;
-								
-							el.parent().find('>li.active').removeClass('active');
-							el.addClass('active');
-							
-							rows.addClass('kc-css-hidden');
-							rows.filter('.kc-css-group-'+slug).removeClass('kc-css-hidden');
-							
-						},
-						
+
 						screen_tabs: function(e){
-							
-							var el = $(this),
-								rows = el.closest('.kc-css-rows').find('.kc-css-screen'),
-								sc = el.data('screen');
-								
+
+							var el = $(this), sc = el.data('screen'), pd = el.data('predatas');
+
+							if (pd !== null) {
+								kc.params.fields.css.render_groups( pd[0], $(pd[1]), pd[2], pd[3] );
+								el.data('predatas', null);
+							}
+
 							el.parent().find('>li.active').removeClass('active');
 							el.addClass('active');
-							
+
+							var rows = el.closest('.kc-css-rows').find('.kc-css-screen');
+
 							rows.addClass('kc-css-hidden');
 							rows.filter('.kc-css-screen-'+sc).removeClass('kc-css-hidden');
-							
-							if( rows.filter('.kc-css-screen-'+sc).find('.kc-css-group-nav li.active').length === 0 )
-								rows.filter('.kc-css-screen-'+sc).find('.kc-css-group-nav li').first().trigger('click');
-							
+
 						}
-						
+
 					});
 
-					wrp.find('.kc-css-screens-nav li').first().trigger('click');
-					
-					var size = $('body').data('screen-size');
-					
-					if( size !== undefined ){
-						if( size == '100%' )
-							size = 'any';
-						wrp.find('.kc-css-screens-nav li[data-screen="'+size+'"]').trigger('click');
-					}
-										
+					var screen = $('body').data('screen-size');
+
+					if ($('#kc-top-toolbar li.active').length > 0)
+						screen = $('#kc-top-toolbar li.active').data('screen');
+
+					if( screen == '100%' )
+						screen = 'any';
+					else if( screen == '768' )
+						screen = '999';
+
+					if( screen !== undefined && scr_nav.find('li[data-screen="'+screen+'"]').length > 0 ) {
+
+						scr_nav.find('li[data-screen="'+screen+'"]').trigger('click');
+
+					}else wrp.find('.kc-css-screens-nav li').first().trigger('click');
+
 				},
-				
+
 				render_groups : function( groups, wrp, sc, values ){
-					
-					var screen_el = $('<div data-screen="'+sc+'" class="kc-css-screen kc-css-hidden kc-css-screen-'+sc+'"></div>'), 
+
+					var screen_el = $('<div data-screen="'+sc+'" class="kc-css-screen kc-css-hidden kc-css-screen-'+sc+'"></div>'),
 						nav = $('<ul class="kc-css-group-nav"></ul>'),
 						grps = Object.keys( groups ),
 						name, des, type, n, label, value, is_impt, i;
-					
+
 					for( n in grps )
 						nav.append( '<li>'+grps[n].replace(/\_/g,' ')+'</li>' );
-					
+
 					if( sc == 'any' )
 						nav.append( '<li class="right">any screens</li>' );
 					else if( sc.indexOf('-') > -1 )
 						nav.append( '<li class="right">screen '+sc.replace('-','=>')+'</li>' );
 					else nav.append( '<li class="right">screen Max '+sc+'px</li>' );
-					
+
 					screen_el.append( nav );
-					
+
 					if( grps.length <= 1 )
 						nav.addClass('kc-css-hidden');
-					
-					for( i in groups ){
-					
-						for( n in groups[i] ){
-							
+
+					for (i in groups) {
+
+						for (n in groups[i]) {
+
 							name = n.split('|')[0];
 							des = '';
 							is_impt = false;
-							
+
 							label = name.replace(/\-/g,' ');
 							atts = kc.params.fields.css.fields[name];
-							
+
 							if( atts === undefined ){
 								console.error('KingComposer: The css property '+name+' is not defined.');
 								atts = kc.params.fields.css.fields['undefined'];
 							}
-							
+
 							if( values[kc.tools.esc_slug(i)] !== undefined && values[kc.tools.esc_slug(i)][n] !== undefined )
 								value = values[kc.tools.esc_slug(i)][n];
 							else if( groups[i][n].value !== undefined )
@@ -1512,7 +1746,7 @@
 							else if( atts.value !== undefined )
 								value = atts.value;
 							else value = '';
-							
+
 							if( atts === undefined ){
 								type = 'underfined';
 								atts = [];
@@ -1522,31 +1756,31 @@
 								type = atts.type;
 							else if( atts.type === undefined )
 								type = 'text';
-							
+
 							if( atts.label !== undefined )
 								label = atts.label;
-									
+
 							if( groups[i][n].label !== undefined )
 								label = groups[i][n].label;
-							
+
 							if( atts.des !== undefined )
 								des = atts.des;
-									
+
 							if( groups[i][n].des !== undefined )
 								des = groups[i][n].des;
-							
+
 							if( kc_param_types_support.indexOf( type ) == -1 )
 								type = 'text';
-							
+
 							if( value.toString().indexOf('!important') > -1 ){
 								value = value.replace('!important','').trim();
 								is_impt = true;
 							}
-							
+
 							if( type == 'custom' ){
 								value = value.replace(/\;/g, ";\n");
 							}
-							
+
 							atts = {
 									value 	: value,
 									options : (( atts.options !== undefined ) ? atts.options : [] ),
@@ -1555,10 +1789,10 @@
 									type	: type,
 									label	: label
 								};
-		
+
 							if(  type != 'textarea_html' )
 								atts.value = kc.tools.unesc_attr( atts.value );
-		
+
 							var tmpl_html = kc.template( 'field', {
 												label	: label,
 												content	: kc.template( 'field-type-'+type, atts ),
@@ -1566,44 +1800,90 @@
 												des		: des,
 												base	: n,
 											});
-							
+
 							tmpl_html = tmpl_html
 										.replace( /\&lt\;script/g, '<script' )
 										.replace( /\&lt\;\/script\&gt\;/g, '</script>' )
 										.replace( /kc\-param\"/g, 'kc-css-param"' )
 										.replace( /kc\-param /g, 'kc-css-param ' );
-							
+
 							var field = $( tmpl_html );
-							
+
 							screen_el.append( field );
-							
+
 							if( is_impt === true )
 								field.addClass( 'is-important' );
-								
+
 							field.addClass( 'kc-css-group-'+kc.tools.esc_slug( i )+' kc-css-hidden' )
 								 .attr({'data-name': n.replace(/\"/g,'') })
 								 .append('<span class="kc-css-important" title="Important"></span>');
-										
+
 							if( typeof atts.callback == 'function' )
 								setTimeout( atts.callback, 1, field, $, atts );
-						
+
+                            //if has refer field
+                            if( undefined != groups[i][n]['refer'] ){
+                                for (rf in groups[i][n]['refer']){
+                                    var rfn = groups[i][n]['refer'][rf]['property'] + '|' + groups[i][n]['refer'][rf]['selector'];
+                                    atts = {
+                                        value 	: rfn,
+                                        options : (( atts.options !== undefined ) ? atts.options : [] ),
+                                        params 	: [],
+                                        name	: 'kc-css['+sc+']['+kc.tools.esc_slug(i)+']['+n+']',
+                                        type	: 'hidden',
+                                        label	: ''
+                                    };
+
+                                    var rftmpl_html = kc.template( 'field-type-hidden', atts );
+
+                                    rftmpl_html = rftmpl_html
+                                        .replace( /\&lt\;script/g, '<script' )
+                                        .replace( /\&lt\;\/script\&gt\;/g, '</script>' )
+                                        .replace( /kc\-param\"/g, 'kc-css-refer"' )
+                                        .replace( /kc\-param /g, 'kc-css-refer' );
+
+                                    var rfield = $( rftmpl_html );
+                                    screen_el.append( rfield );
+                                }
+
+                            }
+
 						}
-						
+
 					}
-					
+
 					wrp.append( screen_el );
-					
+
+					screen_el.find('.kc-css-group-nav li').on('click', function(e){
+
+						var el = $(this),
+							rows = el.closest('.kc-css-screen').find('>.kc-param-row');
+							slug = kc.tools.esc_slug( el.html() );
+
+						if( el.hasClass('right') )
+							return;
+
+						el.parent().find('>li.active').removeClass('active');
+						el.addClass('active');
+
+						rows.addClass('kc-css-hidden');
+						rows.filter('.kc-css-group-'+slug).removeClass('kc-css-hidden');
+
+					}).first().trigger('click');
+
+					kc.do_action( 'kc-css-field-change', wrp, wrp.closest('.kc-params-popup') );
+
 					delete n, nav, name, des, type, value, grps, i;
-					
+
 				},
-				
+
 				responsive_icon : function( sc ){
-					
+
 					if( sc == 'any' )
 						return '<i class="fa-desktop"></i>';
-					
+
 					sc = parseInt(sc);
-					
+
 					if( sc < 480 )
 						return '<i class="fa-mobile"></i>';
 					else if( sc < 768 )
@@ -1612,102 +1892,181 @@
 						return '<i class="fa-tablet"></i>';
 					else if( sc < 1025 )
 						return '<i style="transform:rotate(90deg)" class="fa-tablet"></i>';
-						
+
 					return '<i class="fa-desktop"></i>';
-					
+
 				},
-				
+
 				save_fields : function( pop ){
-				
+
 					pop.find('.kc-param-row.field-css').each(function(){
-						
-						$(this).find('.kc-field-css-value').val( kc.params.fields.css.get_fields( $(this) ) );
-						
+
+						$(this).find('.kc-field-css-value').val(kc.params.fields.css.field_values(this));
+
 					});
-					
+
 					/*
 					*	when use new css system, we will remove all data of old css system
 					*/
-					
+
 					try{
 						delete kc.storage[ pop.data('model') ].args.css;
 					}catch( err ){}
 				},
-				
-				get_fields : function( wrp ){
-					
+
+				field_values : function(field) {
+
+					var el = $(field).find('.kc-field-css-value'),
+						newcss = this.get_fields($(field), true),
+						css = el.val();
+
+					try{
+				        css = JSON.parse(css.replace(/(?:\r\n|\r|\n)/g, '').replace(/\`/g, '"'));
+				        if (css['kc-css'] === undefined)
+				        	css = {'kc-css': {}};
+				    }catch(ex){
+				    	css = {'kc-css': {}};
+				    }
+
+					if (newcss['kc-css'] !== undefined) {
+
+						for (var scr in newcss['kc-css']) {
+                            if( Object.keys( newcss['kc-css'][scr] ).length === 0 )
+                                delete css['kc-css'][scr];
+                            else
+                                css['kc-css'][scr] = newcss['kc-css'][scr];
+						}
+
+						css = kc.params.fields.css.sort_screens(css);
+						css = JSON.stringify(css).replace(/\"/g,'`');
+						//el.val(css);
+
+						return css;
+
+					}
+
+					return '';
+
+				},
+
+				get_fields : function( wrp, isobj ){
+
 					var impt = {},
 						inputs = wrp.find('.kc-css-param').serializeArray(),
+						refers = wrp.find('.kc-css-refer').serializeArray(),
 						values = kc.tools.reIndexForm( inputs, [] ),
-						s, g, p;
-					
-					wrp.find('.kc-param-row.is-important').each(function(){
+                        rf_values = kc.tools.reIndexForm( refers, [] ),
+						s, g, p, rfp, rfps;
+ 					wrp.find('.kc-param-row.is-important').each(function(){
 						impt[$(this).find('.kc-css-param').attr('name')] = true;
 					});
-					
+
 					for( s in values['kc-css'] ){ // loop screen
-						
+
 						if( typeof values['kc-css'][s] == 'object' ){
-							
+
 							for( g in values['kc-css'][s] ){ // loop group
-								
-								if( typeof values['kc-css'][s][g] == 'object' ){ 
-									
+
+								if( typeof values['kc-css'][s][g] == 'object' ){
+
 									for (p in values['kc-css'][s][g])
 									{ // loop properties
 										values['kc-css'][s][g][p] = values['kc-css'][s][g][p]
 																	.toString().replace(/(?:\r\n|\r|\n)/g, '')
 																	.replace(/\`/g,'');
-										
+
 										if (values['kc-css'][s][g][p] === '')
 											delete values['kc-css'][s][g][p];
 										// This field has been marked as important
 										else if (impt['kc-css['+s+']['+g+']['+p+']'] === true && values['kc-css'][s][g][p] !== '')
 											values['kc-css'][s][g][p] = values['kc-css'][s][g][p]+' !important';
+
+                                        //add refer values
+                                        if( values['kc-css'][s][g][p] != '' &&
+                                            typeof rf_values['kc-css'] == 'object' &&
+                                            typeof rf_values['kc-css'][s] == 'object' &&
+                                            typeof rf_values['kc-css'][s][g] == 'object' &&
+                                            typeof rf_values['kc-css'][s][g][p] == 'string'){
+
+                                            rfps = rf_values['kc-css'][s][g][p].split(',');
+                                            for( rfp in rfps){
+                                                values['kc-css'][s][g][ rfps[rfp] ] = values['kc-css'][s][g][p];
+                                            }
+                                        }
 									}
 								}
-								
+
 								if( Object.keys( values['kc-css'][s][g] ).length === 0 )
 									delete values['kc-css'][s][g];
-									
+
 							}
-							
+							/*
 							if( Object.keys( values['kc-css'][s] ).length === 0 )
-								delete values['kc-css'][s];
-							
+								delete values['kc-css'][s];*/
+
 						}else if( values['kc-css'][s] === '' )
 							delete values['kc-css'][s];
-							
+
 					}
-					
-					if (Object.keys(values['kc-css']).length > 0)
-						return JSON.stringify( values ).replace(/\"/g,'`');
-					else return '';
-					
+
+					if (Object.keys(values['kc-css']).length > 0) {
+						if (isobj === true)
+							return values;
+						else return JSON.stringify(values).replace(/\"/g,'`');
+					}else return '';
+
+				},
+
+				sort_screens : function(css) {
+
+					var keys = [], scr, sort = {'kc-css': {}}, i, j, t;
+
+					for (scr in css['kc-css']) {
+						if (scr == 'any')
+							sort['kc-css']['any'] = css['kc-css']['any'];
+						else keys.push(parseInt(scr))
+					}
+
+					for (i=0; i<keys.length; i++) {
+						for (j=i+1; j<keys.length; j++) {
+							if (keys[i] < keys[j]) {
+								t = keys[j];
+								keys[j] = keys[i];
+								keys[i] = t;
+							}
+						}
+					}
+
+					for (scr in keys) {
+						sort['kc-css'][keys[scr].toString()] = css['kc-css'][keys[scr].toString()];
+					}
+
+					return sort;
+
 				}
-				
-			} 
+
+			}
 
 		},
-		
+
 		merge : function( input ){
-			
+
 			if( input === undefined || input == ''  )
 				return [];
-				
+
 			var params = [], merge = [];
-			
+
 			if( typeof input == 'object' )
 				params = input;
 			else if( kc.maps[ input ] !== undefined )
 				params = kc.maps[ input ].params;
-			
+
 			if( params[0] !== undefined ){
-				
+
 				return params;
-			
+
 			}else{
-				
+
 				var i, j;
 				for( i in params ){
 					if( params[ i ][0] !== undefined ){
@@ -1716,50 +2075,50 @@
 							merge.push( params[ i ][ j ] );
 					}
 				}
-				
+
 			}
-			
+
 			return merge;
-			
+
 		},
-		
+
 		get_types : function( name ){
-			
+
 			var merge = this.merge( name ), params = {};
-			
+
 			for( var i in merge ){
 				if( merge[i].name !== undefined ){
 					params[merge[i].name] = merge[i].type;
 				}
 			}
-			
+
 			return params;
-			
+
 		},
-		
+
 		get_values : function( name ){
-			
+
 			var merge = this.merge( name ), params = {};
-			
+
 			for( var i in merge ){
 				if( merge[i].name !== undefined && merge[i].value !== undefined ){
 					params[merge[i].name] = merge[i].value;
 				}
 			}
-			
+
 			return params;
-			
+
 		},
-		
+
 		get_atts : function( name ){
-			
+
 			var atts = '', params = this.get_values('kc_row');
-				
+
 			for( var name in params )
 				atts += ' '+name+'="'+kc.tools.esc_attr( params[name] )+'"';
-			
+
 			return atts;
-			
+
 		}
 
 	} );

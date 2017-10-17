@@ -4,6 +4,8 @@ $output = $title = $wrap_class = $taxonomy = $css = '';
 
 extract($atts);
 
+if( !isset( $atts['post_taxonomy']))
+    $post_taxonomy = 'post';
 
 $el_classess = apply_filters( 'kc-el-class', $atts );
 
@@ -75,22 +77,24 @@ if ( $the_query->have_posts() ) {
 	global $post;
 
 	echo '<div '. implode(' ', $element_attribute) .'>';
-	
+
 	if( !empty($title) ){
 		echo '<h3 class="list-post-title">'. esc_html($title) .'</h3>';
 	}
-	
+
 	while ( $the_query->have_posts() ) {
 		$the_query->the_post();
 		?>
 		<div class="list-item post-<?php echo esc_attr( $post->ID ); ?>">
-			<h3><a href="<?php echo esc_attr( get_permalink( $post->ID ) ); ?>"><?php the_title(); ?></a></h3>
 			<div class="post-content">
-				<?php
-				if ( has_post_thumbnail() && $thumbnail === 'yes' ) {
-					the_post_thumbnail($image_size);
-				}
-				?>
+				<figure>
+					<?php
+					if ( has_post_thumbnail() && $thumbnail === 'yes' ) {
+						the_post_thumbnail($image_size);
+					}
+					?>
+				</figure>
+				<h3><a href="<?php echo esc_attr( get_permalink( $post->ID ) ); ?>"><?php the_title(); ?></a></h3>
 				<div class="kc-entry_meta">
 				<?php
 					if ( has_post_format( array( 'chat', 'status' ) ) )
@@ -129,10 +133,10 @@ if ( $the_query->have_posts() ) {
 				<div class="text">
 					<?php echo wp_trim_words( get_the_excerpt(), $number_word, ' ...' ); ?>
 				</div>
-				
+
 
 				<?php if(!empty($show_button) && 'yes' === $show_button): ?>
-					<a class="read-more" href="<?php echo esc_attr( get_permalink( $post->ID ) ); ?>"><?php echo $readmore_text; ?></a>
+					<a class="kc-read-more" href="<?php echo esc_attr( get_permalink( $post->ID ) ); ?>"><?php echo $readmore_text; ?></a>
 				<?php endif; ?>
 			</div>
 

@@ -11,7 +11,12 @@
 	custom_template 	= ( atts['custom_template'] !== undefined ) ? atts['custom_template'] : '',
 	wrap_class 			= ( atts['wrap_class'] !== undefined ) ? atts['wrap_class'] : '',
 	title 				= ( atts['title'] !== undefined ) ? atts['title'] : '',
-	datetime 			= ( atts['datetime'] !== undefined && atts['datetime'] !== '__empty__' ) ? atts['datetime'] : '<?php echo date("D M d Y", strtotime("+1 week"));?>';
+    today = new Date(),
+	datetime 			= ( atts['datetime'] !== undefined && atts['datetime'] !== '__empty__' ) ? atts['datetime'] : '';
+    if( datetime == ''){
+        today.setTime(today.getTime() + 7 * 86400000);
+        datetime = today.toDateString();
+    }
 
 wpelm_class = kc.front.el_class( atts );
 

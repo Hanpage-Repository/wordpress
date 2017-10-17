@@ -36,12 +36,12 @@ if ( $post_title == 'yes'){
 	
 	$text_title = get_the_title();
 	
-	if( !empty($text_title) )
+	if( $text_title != '' )
 		$text = esc_attr($text_title);
 	
 }
 	
-	$wrap_class[] = $title_wrap_class;
+$wrap_class[] = $title_wrap_class;
 
 ?>
 

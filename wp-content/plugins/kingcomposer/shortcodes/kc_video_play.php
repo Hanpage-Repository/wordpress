@@ -3,7 +3,7 @@
 $video_upload = '';
 $video_height = '250';
 $check_video  = 'true';
-
+$video_mute = 'no';
 extract( $atts );
 
 
@@ -55,6 +55,11 @@ if( !$is_live && empty( $video_upload ) ){
 	$video_attributes[] = 'data-height="'. esc_attr( $video_height ) .'"';
 	$video_attributes[] = 'data-fullwidth="'. esc_attr( $full_width ) .'"';
 	$video_attributes[] = 'data-autoplay="'. esc_attr( $auto_play ) .'"';
+	$video_attributes[] = 'data-loop="'. esc_attr( $loop ) .'"';
+	$video_attributes[] = 'data-control="'. esc_attr( $control ) .'"';
+	$video_attributes[] = 'data-related="'. esc_attr( $related ) .'"';
+	$video_attributes[] = 'data-showinfo="'. esc_attr( $showinfo ) .'"';
+	$video_attributes[] = 'data-kc-video-mute="' . esc_attr( $video_mute ) . '"';
 }
 
 if( $check_video === 'true' ) {

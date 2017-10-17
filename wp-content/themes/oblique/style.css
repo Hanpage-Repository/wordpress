@@ -1140,6 +1140,8 @@ Top bar
 }
 
 /* plugin setting by KH */
+
+/* video setting */
 .wpvl_auto_thumb_box {
 	width: 100%;
 }
@@ -1154,6 +1156,16 @@ Top bar
 	width: 100%;
 	height: 100%;
 }
+
+.video-lightbox-550-350 .video_lightbox_auto_anchor_image {
+	width: 550px;
+	height: 350px;
+}
+
+.video-lightbox-550-350 .wpvl_auto_thumb_play {
+	top: -120%;
+}
+
 /* plugin setting by KH */
 
 .navigation.post-navigation {
@@ -1234,6 +1246,7 @@ div.header-search,
 .page-template-kh-home-page-php #main .svg-container,
 .post-template-kh-151515-single-php .svg-container,
 .post-template-kh-FFFFFF-A2A0A0-single-php .svg-container,
+.post-template-kh-FFFFFF-316BA0-single-php .svg-container,
 .page-template-kh-home-page-php .kc-blog-posts .post-grid h2.post-title-alt::before,
 .post-template-kh-46130E-single-php .svg-container,
 .post-template-kh-FFFFFF-single-php .svg-container,
@@ -1449,6 +1462,30 @@ div.header-search,
 .post-template-kh-FFFFFF-A2A0A0-single-php .sidebar-toggle {
 	color: #151515;
 }
+
+/* added by KH - FFFFFF-316BA0 */
+.post-template-kh-FFFFFF-316BA0-single-php {
+	background-color: #316BA0;
+}
+
+.post-template-kh-FFFFFF-316BA0-single-php .entry-title {
+	color: #151515;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-316BA0-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-316BA0-single-php .sidebar-toggle {
+	color: #151515;
+}
+
+
 
 /*--------------------------------------------------------------
 Responsive

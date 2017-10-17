@@ -7,7 +7,7 @@ $wrp_class 			= apply_filters( 'kc-el-class', $atts );
 
 extract($atts);
 
-wp_enqueue_script( 'kc-countdown-timer' );
+wp_enqueue_script( 'countdown-timer' );
 
 switch ( $timer_style ) {
 

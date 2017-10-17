@@ -30,6 +30,28 @@ function kc_row_filter( $atts ){
 	return $atts;
 
 }
+//Row filter
+function kc_column_filter( $atts ){
+
+	if( isset( $atts['video_bg'] ) && $atts['video_bg'] == 'yes' ){
+		wp_register_script('kc-youtube-iframe-api', 'https://www.youtube.com/iframe_api', null, KC_VERSION, true );
+		wp_enqueue_script('kc-youtube-iframe-api');
+	}
+
+	return $atts;
+
+}
+
+function kc_row_inner_filter( $atts ){
+
+	if( isset( $atts['video_bg'] ) && $atts['video_bg'] == 'yes' ){
+		wp_register_script('kc-youtube-iframe-api', 'https://www.youtube.com/iframe_api', null, KC_VERSION, true );
+		wp_enqueue_script('kc-youtube-iframe-api');
+	}
+
+	return $atts;
+
+}
 
 //Tab filter
 function kc_tabs_filter( $atts = array() ){
@@ -109,8 +131,8 @@ function kc_video_play_filter( $atts = array() ){
 
 function kc_counter_box_filter( $atts = array() ){
 
-	wp_enqueue_script('waypoints-min');
-	wp_enqueue_script('kc-counter-up');
+	wp_enqueue_script('waypoints');
+	wp_enqueue_script('counter-up');
 
 	return $atts;
 }
@@ -135,7 +157,7 @@ function kc_pie_chart_filter( $atts = array() ){
 
 	global $kc_front;
 
-	wp_enqueue_script( 'easypiechart' );
+	wp_enqueue_script( 'easypie-chart' );
 
 	return $atts;
 
@@ -175,16 +197,15 @@ function kc_carousel_images_filter( $atts = array() ){
 	return $atts;
 }
 
-
 function kc_image_gallery_filter( $atts = array() ){
 
 	global $kc_front;
 	$atts = kc_remove_empty_code( $atts );
-	
+
 	extract( $atts );
-	
+
 	wp_enqueue_script( 'masonry' );
-	
+
 	if( isset( $click_action ) && 'lightbox' === $click_action ){
 		wp_enqueue_script( 'prettyPhoto' );
 		wp_enqueue_style( 'prettyPhoto' );
@@ -196,7 +217,7 @@ function kc_image_gallery_filter( $atts = array() ){
 
 function kc_blog_posts_filter( $atts = array() ) {
 
-	if ( isset( $atts['layout'] ) && $atts['layout'] == '1' ) {
+	if ( isset( $atts['layout'] ) && ($atts['layout'] == '1' || $atts['layout'] == '4')  ) {
 
 		wp_enqueue_script( 'owl-carousel' );
 		wp_enqueue_style( 'owl-theme' );

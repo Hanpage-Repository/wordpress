@@ -1,8 +1,5 @@
 <?php
 
-kc_js_callback('kc_front.image_fade');
-// JS callback for live editor
-
 $title = $images = $transition = $delay = $force_size = $width = $height = $position = $wrap_class = '';
 $wrapper_class	= apply_filters( 'kc-el-class', $atts );
 extract( $atts );

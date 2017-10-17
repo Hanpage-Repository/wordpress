@@ -11,6 +11,8 @@ var output = '',
 	wrap_class = ( atts['wrap_class'] !== undefined ) ? atts['wrap_class'] : '',
 	images = ( atts['images'] !== undefined ) ? atts['images'] : '',
 	items_number = ( atts['items_number'] !== undefined ) ? atts['items_number'] : 4,
+	tablet = ( atts['tablet'] !== undefined ) ? atts['tablet'] : 2,
+	mobile = ( atts['mobile'] !== undefined ) ? atts['mobile'] : 1,
 	speed = ( atts['speed'] !== undefined ) ? atts['speed'] : 500,
 	navigation = ( atts['navigation'] !== undefined ) ? atts['navigation'] : false,
 	pagination = ( atts['pagination'] !== undefined ) ? atts['pagination'] : false,
@@ -58,6 +60,8 @@ if( typeof(images) == 'object' && images !== '' ) {
 	
 	owl_option = {
 		'items' : items_number,
+		'tablet' : tablet,
+		'mobile' : mobile,
 		'speed' : speed,
 		'navigation'  : navigation,
 		'pagination' : pagination,
@@ -95,7 +99,7 @@ if( typeof(images) == 'object' && images !== '' ) {
 			switch( onclick ){
 
 				case 'lightbox':
-						output += '<a class="kc-image-link kc-pretty-photo" data-lightbox="kc-lightbox" rel="prettyPhoto" href="' + attachment_data_full[i] + '"><img src="' + image + '" alt="" /></a>';
+						output += '<a class="kc-image-link kc-pretty-photo" data-lightbox="kc-lightbox" rel="prettyPhoto[' + atts['_id'] + ']" href="' + attachment_data_full[i] + '"><img src="' + image + '" alt="" /></a>';
 					break;
 
 				case 'custom_link':

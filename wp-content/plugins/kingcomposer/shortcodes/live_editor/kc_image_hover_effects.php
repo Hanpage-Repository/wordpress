@@ -11,6 +11,7 @@ var atts 			= ( data.atts !== undefined ) ? data.atts : {},
 	custom_link	= ( atts['custom_link'] !== undefined )? atts['custom_link'] : '||',
 	button_text	= ( atts['button_text'] !== undefined )? atts['button_text'] : '',
 	button_link	= ( atts['button_link'] !== undefined )? atts['button_link'] : '||',
+	icon		= ( atts['icon'] !== undefined )? atts['icon'] : 'fa-star',
 	custom_class	= ( atts['custom_class'] !== undefined )? atts['custom_class'] : '',
 	img_size	= ( atts['img_size'] !== undefined )? atts['img_size'] : '1170x700xct',
 	img_url = '',
@@ -35,8 +36,8 @@ if ( custom_class !== '' )
 	wrap_class.push( custom_class );
 
 
-if ( image > 0 ) {
-	image 	= image.replace( /[^\d]/, '' );
+if ( image != '' ) {
+	//image 	= image.replace( /[^\d]/, '' );
 	
 	if ( img_size !== 'full'  ) {
 		img_link = ajaxurl + '?action=kc_get_thumbn_size&id=' + image + '&size=' + img_size ;
@@ -165,9 +166,7 @@ if ( button_text !== '' ) {
 			{{{data_img}}}
 			{{{before_url}}}
 			<div class="overlay-effects">
-				<div class="overlay-content">
-					{{{data_title}}}
-				</div>
+				<i class="{{{icon}}}"></i>
 			</div>
 			{{{after_url}}}
 		<#

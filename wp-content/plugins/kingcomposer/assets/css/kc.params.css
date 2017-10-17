@@ -10,6 +10,9 @@ body{
 .wp-core-ui .button-primary {
     text-shadow: none !important;
 }
+.kc-params-popup * {
+	backface-visibility: hidden;
+}
 .kc-params-popup .m-p-body {
     padding: 15px;
     min-width: 250px;
@@ -23,6 +26,9 @@ body{
     box-sizing: content-box;
 	overflow-x: hidden;
     overflow-y: auto;
+}
+.kc-elm-settings-popup.kc-params-popup .m-p-body {
+	max-height: calc(100vh - 250px);
 }
 .kc-params-popup.hasTabs .m-p-body {
     margin-top: 60px;
@@ -133,15 +139,28 @@ body{
 .m-p-body .kc-pop-tab>.kc-param-row:last-child {
     border-bottom: none;
 }
-.m-p-body .kc-param-row .m-p-r-label, .kc-param-row .m-p-r-content {
+.m-p-body .kc-param-row .m-p-r-label{
     float: left;
-    width: 25%;
-    min-height: 45px;
-    line-height: 30px;
-    padding: 12px 15px 12px 0px;
-    text-align: right;
+    width: 100%;
+    padding: 0 15px;
+    text-align: left;
     font-weight: bold;
     box-sizing: border-box;
+}
+.m-p-body .kc-param-row .m-p-r-content {
+	float: left;
+    width: 100%;
+    min-height: 45px;
+    line-height: 30px;
+    padding: 8px 15px 15px 15px;
+    text-align: left;
+    font-weight: normal;
+    box-sizing: border-box;
+}
+.m-p-body .kc-param-row.field-css .m-p-r-content,
+.m-p-body .kc-param-row.field-css .m-p-r-label{
+	padding-left: 0px;
+	padding-right: 0px;	
 }
 .m-p-body .kc-param-row .m-p-r-label label {
     display: block;
@@ -154,14 +173,11 @@ body{
 .m-p-body .kc-param-row.field-corners label {
 	margin-top: 18px;	
 }
-.m-p-body .kc-param-row .m-p-r-content {
-    width: 75%;
-    padding-right: 0px;
-    text-align: left;
-    font-weight: normal;
-}
 .m-p-body .kc-param-row .wp-editor-container{
     border: 1px solid #ddd;
+}
+.m-p-body .kc-param-row .link-preview{
+	color: #888;
 }
 .m-p-body .kc-param-row .button {
     box-shadow: none;
@@ -230,6 +246,7 @@ body{
 }
 .m-p-body input[type="text"],
 .m-p-body input[type="search"],
+.m-p-body input[type="email"],
 .m-p-body input[type="number"] {
     width: 90%;
     height: 35px;
@@ -514,7 +531,6 @@ ul.kc-fonts-list h1{
 .kc-param-row.field-attach_image .m-p-r-content {
     line-height: 25px;
     display: inline-block;
-    padding: 10px 0;
 }
 .kc-param-row .multi-fields-ul, .kc-param-row .multi-fields-units-ul {
     display: inline-block;
@@ -535,7 +551,7 @@ ul.kc-fonts-list h1{
 	width: auto;	
 }
 .kc-param-row.field-css_border .multi-fields-ul li input.m-f-u-first{
-	width: 80px;
+	width: 60px;
 }
 .kc-param-row .multi-fields-units {
     width: 100%;
@@ -572,7 +588,10 @@ ul.kc-fonts-list h1{
     height: 32px;
 }
 .m-p-body .kc-param-row .multi-fields-ul input.m-f-bb-color {
-    width: 178px;
+    width: 165px;
+}
+.m-p-body .kc-param-row .css-border-advanced{
+	display: block;
 }
 .m-p-body .kc-param-row .multi-fields-ul input[type="number"]:focus {
     position: relative;
@@ -617,7 +636,7 @@ ul.kc-fonts-list h1{
 .m-p-body .kc-param-row .multi-fields-ul select {
     margin: 0px;
     width: 100%;
-    min-width: 100px;
+    min-width: 80px;
     height: 32px;
     border: none;
     box-shadow: none;
@@ -848,8 +867,8 @@ ul.kc-fonts-list h1{
 }
 .kc-param-row.field-autocomplete .kc_autocomplete_wrp .autcp-items li{
     background: #42bce2;
-    padding: 3px 10px;
-    border-radius: 3px;
+    padding: 5px 10px;
+    border-radius: 2px;
     box-sizing: border-box;
     width: auto;
     line-height: 20px;
@@ -955,7 +974,11 @@ input.kc-param-icons {
     font-size: 30px;
     line-height: 60px;
     color: #00a0d2;
+    cursor: pointer;
     box-shadow: 0 0 20px 0 rgba(0, 160, 210, 0.2) inset;
+}
+.icons-preview:hover>i {
+    box-shadow: 0 0 20px 0 rgba(0, 160, 210, 0.35) inset;
 }
 .icons-list span {
     display: inline-block;
@@ -996,6 +1019,7 @@ input.kc-param-icons {
     border-right: none;
     border-left: none;
     background: transparent !important;
+    font-weight: bold;
 }
 .seach-results span i {
     clear: both;
@@ -1005,6 +1029,14 @@ input.kc-param-icons {
     margin-right: 0px;
     font-size: 20px;
     background: transparent !important;
+}
+ul.kc-icon-picker-tabs{
+	margin-bottom: 10px;
+}
+ul.kc-icon-picker-tabs li{
+	font-weight: bold;
+	padding-left: 25px;
+	padding-right: 25px;
 }
 .icons-list i {
     font-size: 20px;
@@ -1017,6 +1049,7 @@ input.kc-param-icons {
     -webkit-transition: all 200ms;
     -moz-transition: all 200ms;
 }
+.icons-list i.active,
 .icons-list i:hover {
     color: #00a0d2;
     background: #fff;
@@ -1981,13 +2014,14 @@ input.kc-param-icons {
 }
 
 .kc-param-row.field-css ul.kc-css-group-nav{
-	margin: 0 0 15px 0;
+    margin: 0 0px 15px -15px;
     float: left;
-    width: 100%;
+    width: calc(100% + 30px);
     background: #e5e5e5;
     padding: 0px;
     color: #fff;
-	position: relative;
+    position: relative;
+    max-width: initial;
 }
 .kc-param-row.field-css ul.kc-css-group-nav li{
 	float: left;
@@ -2066,9 +2100,13 @@ input.kc-param-icons {
 .kc-param-row.field-css>.m-p-r-content, .kc-param-row.field-css .kc-param-row.field-css_background>.m-p-r-content{
 	width: 100%;
 }
+.kc-param-row.field-css>.m-p-r-content {
+	padding-left: 0px;
+	padding-right: 0px;
+}
 .kc-param-row.field-css .kc-param-row .kc-css-important{
     position: absolute;
-    top: 17px;
+    top: 0;
     left: -70px;
     width: 70px;
     height: 19px;
@@ -2083,24 +2121,25 @@ input.kc-param-icons {
 }
 .kc-param-row.field-css .kc-param-row:hover .kc-css-important:hover{
 	opacity: 1;
-	left: -20px;
+	left: -35px;
 }
 .kc-param-row.field-css .kc-param-row.is-important .kc-css-important{
 	background-position: 0px -19px;
 	opacity: 0.85;
 	width: 40px;
-	left: -35px;
+	left: -15px;
 }
 .kc-param-row.field-css .kc-param-row.is-important .kc-css-important:hover{
 	background-position: 0px -38px;
-	left: -20px;
+	left: -15px;
 }
 .kc-param-row.field-css .kc-css-screen{
-	background: #fcfcfc;
+	background: #fafafa;
+	padding: 0 15px;
 }
 .kc-param-row.field-css .kc-css-screens-nav{
 	margin: -10px 0 0 0;
-	padding: 0 10px;
+	padding: 0;
 	list-style: none;
 	text-align: right;
 }
@@ -2152,6 +2191,8 @@ input.kc-param-icons {
 	height: 160px;
 	width: 320px;
 	margin-bottom: 20px;
+	margin-right: 0px;
+	padding-right: 0px;
 }
 .kc-param-row .kc-param-row .kc-corners-wrp:after{
 	position: absolute;

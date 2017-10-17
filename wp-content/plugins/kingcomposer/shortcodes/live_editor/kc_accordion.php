@@ -15,6 +15,9 @@ if( atts['class'] !== undefined && atts['class'] !== '' )
 if( atts['open_all'] !== undefined && atts['open_all'] == 'yes' )
 	element_attributes.push( 'data-allowopenall="true"' );
 
+if( atts['close_all'] !== undefined && atts['close_all'] == 'yes' )
+	element_attributes.push( 'data-closeall="true"' );
+
 element_attributes.push( 'class="'+css_classes.join(' ')+'"' );
 
 #>

@@ -4,7 +4,7 @@
  * (c) Copyright king-theme.com
  *
  *
- * kc.builder.js
+ * kc.mapper.js
  *
 */
 
@@ -720,7 +720,7 @@
 						label: kc.tools.esc($this.find('input[name="label"]').val()),
 						value: kc.tools.esc($this.find('input[name="value"]').val()),
 						type: kc.tools.esc($this.find('select[name="type"]').val()),
-						admin_label: $this.find('input[name="admin_label"]').attr('checked'),
+						admin_label: $this.find('input[name="admin_label"]').get(0).checked,
 						description: kc.tools.esc($this.find('textarea[name="description"]').val())
 					};
 					
@@ -887,13 +887,15 @@
 	
 	$(document).ready(kc_mapper.init);
 	
-	$.fn.shake = function(){
-		return this.focus()
-			.animate({marginLeft: -30}, 100)
-			.animate({marginLeft: 20}, 100)
-			.animate({marginLeft: -10}, 100)
-			.animate({marginLeft: 5}, 100)
-			.animate({marginLeft: 0}, 100);
+	if ($.fn.shake === undefined) {
+		$.fn.shake = function(){
+			return this.focus()
+				.animate({marginLeft: -30}, 100)
+				.animate({marginLeft: 20}, 100)
+				.animate({marginLeft: -10}, 100)
+				.animate({marginLeft: 5}, 100)
+				.animate({marginLeft: 0}, 100);
+		}
 	}
 	
 })(jQuery)

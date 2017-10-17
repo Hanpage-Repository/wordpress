@@ -37,10 +37,6 @@ body.kc-request-iframe #wpbody-content{
 	margin: 0px !important;
 	padding: 0px !important;
 }
-#wpadminbar #wp-admin-bar-kc-edit>.ab-item:before {
-	content: "\f464";top: 2px;
-	color: #fff;
-}
 #wp-admin-bar-kc-edit a{
 	background: #42bce2;
     color: #fff !important;
@@ -772,8 +768,23 @@ pre.kc-mapper-pre{
     margin-top: 40px;	
 }
 
-
-
+#the-list tr.inactive .row-actions span.deactivate{
+	display: none;
+}
+#the-list tr.active .row-actions span.activate{
+	display: none;
+}
+#the-list tr.no-extension:not(:only-child){
+	display: none;
+}
+#the-list tr.no-extension td{
+	padding: 50px 0;	
+	text-align: center;
+}
+#kc-installed-extensions ul.subsubsub{
+	margin-top: 3px;
+	margin-left: 10px;
+}
 #kc_changelogs #kc_changelogs_body{
     background: #fff;
     padding: 30px 40px;

@@ -1,6 +1,7 @@
 <?php
 $title = $subtitle = $desc = $image = $custom_class = $data_img = $data_title = $data_desc = $data_subtitle = $img_size = $data_socials = $socials = $data_button = '';
 $layout = 1;
+$size_array = array('full', 'medium', 'large', 'thumbnail');
 $wrap_class	= apply_filters( 'kc-el-class', $atts );
 
 extract( $atts );
@@ -8,17 +9,17 @@ extract( $atts );
 $wrap_class[] = 'kc-team';
 $wrap_class[] = 'kc-team-' . $layout;
 
-if ( !empty( $custom_class ) )
+if ( $custom_class != '' )
 	$wrap_class[] = $custom_class;
 
-if ( $image > 0 ) {
-
-	if ( !in_array($img_size, array('full', 'thumbnail', 'medium', 'large')) ) {
-		$img_link = wp_get_attachment_image_src( $image, 'full' );
-		$img_link = kc_tools::createImageSize( $img_link[0], $img_size );
-	} else {
-		$img_link = wp_get_attachment_image_src( $image, 'full' );
-		$img_link = $img_link[0];
+if ( !empty( $image ) ) {
+	
+	if( in_array( $img_size, $size_array ) ){
+		$image_data       = wp_get_attachment_image_src( $image, $img_size );
+		$img_link        = $image_data[0];
+	}else{
+		$image_full_width = wp_get_attachment_image_src( $image, 'full' );
+		$img_link 	= kc_tools::createImageSize( $image_full_width[0], $img_size );
 	}
 
 	$data_img .= '<figure class="content-image">';

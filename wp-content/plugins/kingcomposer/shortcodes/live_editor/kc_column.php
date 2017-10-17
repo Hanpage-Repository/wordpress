@@ -6,14 +6,26 @@
 
 classes.push('kc_column');
 
-if( atts['col_class'] !== undefined )
+if (atts['col_class'] !== undefined)
 	classes.push( atts['col_class'] );
 
-if( atts['css'] !== undefined )
+if (atts['css'] !== undefined && typeof atts['css'] == 'string')
 	classes.push( atts['css'].split('|')[0] );
 	
 if( atts['col_id'] !== undefined && atts['col_id'] !== '' )
 	attributes.push( 'id="'+ atts['col_id'] +'"' );
+	
+	
+if( atts['video_bg'] !== undefined && atts['video_bg'] === 'yes' ){
+	
+	var video_bg_url = atts['video_bg_url'];
+	
+	if( atts['video_bg_url'] !== undefined ){
+	
+		classes.push('kc-video-bg');
+		attributes.push('data-kc-video-bg="'+atts['video_bg_url']+'"');
+	}
+}
 	
 attributes.push( 'class="'+classes.join(' ')+'"' );
 
@@ -26,9 +38,4 @@ data.content += '<div class="kc-element drag-helper" data-model="-1" droppable="
 
 #><div {{{attributes.join(' ')}}}>
 	<div class="kc-col-container{{col_container_class}}">{{{data.content}}}</div>
-	<#
-		if( atts[ 'css' ] !== undefined && atts[ 'responsive' ] !== undefined &&  atts[ 'responsive' ] !== '' ){
-			#><style type="text/css">{{{kc.front.ui.style.responsive(atts['responsive'],atts['css'].split('|')[0])}}}</style><#
-		}
-	#>
 </div>

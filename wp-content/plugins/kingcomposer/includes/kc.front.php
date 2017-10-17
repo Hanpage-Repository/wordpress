@@ -11,6 +11,7 @@ if(!defined('ABSPATH')) {
 	exit;
 }
 
+
 class kc_front{
 
 	public $KC_URL;
@@ -32,13 +33,14 @@ class kc_front{
 	private $content_master = true;
 	private $prevent_infinite_loop = array();
 	private $prevent_duplicate_ids = array();
-		
-	private $ex_styles = array();
-	private $ex_scripts = array();
+	private $min = '.min';
 
 	public function __construct(){
 
-		$this->KC_URL = trailingslashit( KC_URL ).'assets/frontend/';
+		$this->KC_URL = untrailingslashit( KC_URL ).'/assets/frontend/';
+
+		if (defined('KC_DEVELOPMENT') && KC_DEVELOPMENT === true)
+			$this->min = '';
 		
 		add_action( 'wp_enqueue_scripts', array( &$this, 'before_header' ), 9999 );
 		add_action( 'wp_head', array( &$this, 'front_head' ), 999 );
@@ -52,13 +54,15 @@ class kc_front{
 
 		foreach( $icl_array as $file => $dir ) {
 
-			if( file_exists( trailingslashit($dir).$file ) )
-				include trailingslashit($dir).$file;
+			if( file_exists( untrailingslashit($dir).KDS.$file ) )
+				include untrailingslashit($dir).KDS.$file;
 
 		}
 		
-		if( isset( $_GET['kc_action'] ) && !empty( $_GET['kc_action'] ) )
-			$this->action = sanitize_title( $_GET['kc_action'] );
+		if (isset($_GET['kc_action']) && !empty($_GET['kc_action']))
+			$this->action = sanitize_title($_GET['kc_action']);
+		else if (isset($_POST['kc_action']) && !empty($_POST['kc_action']))
+			$this->action = sanitize_title($_POST['kc_action']);
 		
 		if( $this->action == 'live-editor' )
 			show_admin_bar(false);
@@ -83,10 +87,10 @@ class kc_front{
 		$this->register_assets();
 		$this->load_scripts();
 			
-		if( $this->allowed_access() ){
+		if( $this->allowed_access() && kc_is_using()){
 			
 			global $post;
-			
+
 			if (isset($post) && !empty( $post->post_content_filtered))
 			{
 				 $post->post_content =  html_entity_decode( stripslashes_deep( $post->post_content_filtered ) );
@@ -115,6 +119,8 @@ class kc_front{
 				$this->do_filter_shortcode( apply_filters( 'kc-content-before', $post->post_content ), true )
 			);
 			
+			$post->post_content = '<div class="kc_clfw"></div>' . $post->post_content;
+			$post->kc_processed = true;
 			$this->css_str_master = $this->css_str;
 			$this->css_obj_master = $this->css_obj;
 
@@ -215,15 +221,16 @@ class kc_front{
 		global $kc;
 		
 	    $tag =  $m[2];
-		$params = $kc->params_obj( $tag );
+	    $maps = $kc->get_maps($tag);
+		$params = $kc->params_obj($tag);
 		$css_code = '';	
 		
-		$atts = shortcode_parse_atts( $m[3] );
+		$atts = (array)$this->shortcode_parse_atts($m[3]);
 
-		$closed = substr( $m[0], strlen( $m[0] ) - strlen( $tag ) - 3 );
+		$closed = substr($m[0], strlen($m[0]) - strlen($tag) - 3);
 
 		// If this shortcode has been disabled
-		if (isset($atts['disabled'] ) && $atts['disabled'] == 'on')
+		if (isset($atts['disabled']) && $atts['disabled'] == 'on' && $this->action != 'live-editor')
 			return '';
 		
 		/*
@@ -386,14 +393,57 @@ class kc_front{
 		}
 
 		$new_atts = '';
-
 		$new_atts = apply_filters( 'shortcode_'.$tag, $atts );
-
+		
 		if( !is_array( $new_atts ) )
 			$new_atts = $atts;
 			
+		if ($maps !== false && isset($maps['assets']) && is_array($maps['assets'])) {
+			if (isset($maps['assets']['styles']) && is_array($maps['assets']['styles'])) {
+				foreach($maps['assets']['styles'] as $key => $url)
+					wp_enqueue_style($key);
+			}
+			if (isset($maps['assets']['scripts']) && is_array($maps['assets']['scripts'])) {
+				foreach($maps['assets']['scripts'] as $key => $url){
+					wp_enqueue_script($key);
+				}
+			}
+		}
+		
 		return $m[1] . $this->filter_return( $new_atts ) .$m[6];
 
+	}
+
+	public function shortcode_parse_atts($text) {
+		
+	    $atts = array();
+	    $pattern = '/([a-zA-Z0-9\-\_\.]+)="([^"]+)+"/';
+	    $text = preg_replace("/[\x{00a0}\x{200b}]+/u", " ", $text);
+	    if ( preg_match_all($pattern, $text, $match, PREG_SET_ORDER) ) {
+            foreach ($match as $m) {
+                if (!empty($m[1]))
+                        $atts[strtolower($m[1])] = stripcslashes($m[2]);
+                elseif (!empty($m[3]))
+                        $atts[strtolower($m[3])] = stripcslashes($m[4]);
+                elseif (!empty($m[5]))
+                        $atts[strtolower($m[5])] = stripcslashes($m[6]);
+                elseif (isset($m[7]) && strlen($m[7]))
+                        $atts[] = stripcslashes($m[7]);
+                elseif (isset($m[8]))
+                        $atts[] = stripcslashes($m[8]);
+            }
+            // Reject any unclosed HTML elements
+            foreach( $atts as &$value ) {
+                if ( false !== strpos( $value, '<' ) ) {
+                        if ( 1 !== preg_match( '/^[^<]*+(?:<[^>]*+>[^<]*+)*+$/', $value ) ) {
+                                $value = '';
+                        }
+                }
+            }
+	    } else {
+	            $atts = ltrim($text);
+	    }
+	    return $atts;
 	}
 
 	public function filter_return( $atts ){
@@ -401,7 +451,9 @@ class kc_front{
 		global $kc;
 		
 		$full = '['.$atts['__name'];
-
+		$maps = $kc->get_maps();
+		$pure_name = str_replace( '#', '', $atts['__name'] );
+		
 		foreach( $atts as $k => $v ){
 			if( $k != '__name' && $k != '__content' )
 				$full .= ' '.$k.'="'.esc_attr($v).'"';
@@ -409,20 +461,25 @@ class kc_front{
 
 		$full .= ']';
 		
-		if( isset( $atts['__content'] ) ){
+		if (in_array($pure_name, array('kc_column', 'kc_column_inner')) || 
+			in_array($pure_name, $kc->maps_view) ||
+			(isset($maps[$pure_name]['nested']) && $maps[$pure_name]['nested'] === true)
+		) $is_nested = true;
+		else $is_nested = false;
+		
+		if (isset($atts['__content']) || $is_nested){
 
-			$full .= $atts['__content'];
+			$full .= isset($atts['__content']) ? $atts['__content'] : '';
 			
-			if( $this->action == 'live-editor' && $this->content_master === true ){
-				$pure_name = str_replace( '#', '', $atts['__name'] );
-				if( $pure_name == 'kc_column' || $pure_name == 'kc_column_inner' || in_array( $pure_name, $kc->maps_view ) ){
-					$full .= '<div class="kc-element drag-helper" data-model="-1"><a href="javascript:void(0)" class="kc-add-elements-inner"><i class="sl-plus kc-add-elements-inner"></i></a></div>';
-				}
+			if( $this->action == 'live-editor' && $this->content_master === true && $is_nested){
+				
+				$full .= '<div class="kc-element drag-helper" data-model="-1"><a href="javascript:void(0)" class="kc-add-elements-inner"><i class="sl-plus kc-add-elements-inner"></i></a></div>';
+				
 			}	
 			
 			$full .= '[/'.$atts['__name'].']';
 		}
-		
+
 		if( $this->action == 'live-editor' && $this->content_master === true ){
 			
 			if( isset( $atts['__name'] ) )
@@ -442,7 +499,6 @@ class kc_front{
 			$this->storage[ $model ] = $storage;
 			
 			$full = '<!--kc s '.$model.'-->'.trim($full).'<!--kc e '.$model.'-->';
-			
 			
 		}
 		
@@ -472,12 +528,11 @@ class kc_front{
 			/*
 			*	Sort screens
 			*/
-			
 			if (is_array( $screens['kc-css']))
 			{
 				
-				krsort ($screens['kc-css']);
-			
+				kc_screen_sort ($screens['kc-css']);
+
 				foreach ($screens['kc-css'] as $screen => $groups)
 				{
 				
@@ -493,7 +548,7 @@ class kc_front{
 							if ($sel[0] == 'gap')
 								$prefix = '';
 							else $prefix = 'body.kc-css-system ';
-								
+							
 							if (!empty( $sel[1]))
 							{
 								$_sel = explode(',', $sel[1]);
@@ -604,7 +659,12 @@ class kc_front{
 										'repeat' => 'repeat', 
 										'attachment' => 'scroll', 
 										'advanced' => 0 
-									); $val = '';
+									); $val = ''; $imp = '';
+									
+									if (strpos( $css, ' !important' ) !== false) {
+										$imp = ' !important';
+										$css = str_replace( ' !important', '', $css);
+									}
 									
 									$json = base64_decode( $css );
 									$json = json_decode( $json, true );
@@ -651,20 +711,16 @@ class kc_front{
 											else if( $css_obj['color'] == 'transparent' || $css_obj['color'] === '' )
 												$val .= ', transparent';
 											
-											$css_obj['image'] = str_replace( '%SITE_URL%', site_url(), $css_obj['image'] );
-											
 											$val .= ' url('.$css_obj['image'].') '.$css_obj['position'].'/'.$css_obj['size'].' '.$css_obj['repeat'].' '.$css_obj['attachment'];
-											
 										}
 										if (!empty($val))
-											array_push( $css_array[ $selector ], $sel[0].': '.$val );
+											array_push( $css_array[ $selector ], $sel[0].': '.$val . $imp );
 									
 									}
 									else if(!empty($css))
 									{
-										array_push( $css_array[ $selector ], $sel[0].': '.$css );
+										array_push( $css_array[ $selector ], $sel[0].': '.$css . $imp);
 									}
-			
 									
 								}else array_push( $css_array[ $selector ], $sel[0].': '.$css );
 									
@@ -707,7 +763,7 @@ class kc_front{
 			 echo "\n\n/*Caught exception: ",  $e->getMessage(), "*/\n\n";
 		};
 		
-		return $css_any_code.$css_code;
+		return kc_images_filter($css_any_code.$css_code);
 		
 	}
 	
@@ -731,35 +787,30 @@ class kc_front{
 		$styles = apply_filters( 'kc_register_styles', array() );
 		if( is_array( $styles ) && count( $styles ) ){
 			foreach( $styles as $sid => $url ){
-				$this->register_style( $sid, $url );
+				if (!empty($url)) $this->register_style( $sid, $url );
 			}
 		}
 		
 		#Register vonder scripts
 
-		$this->register_script('owl-carousel', $this->vendor_script_url('owl-carousel','owl.carousel.min.js'));
-
-		$this->register_script('kc-countdown-timer', $this->vendor_script_url('countdown','jquery.countdown.min.js'));
-		
-		$this->register_script('kc-progress-bars', $this->KC_URL. 'js/progress-bar.js');
-
-		$this->register_script('easypiechart', $this->KC_URL. 'js/jquery.easypiechart.js');
-
-		$this->register_script('waypoints-min', $this->vendor_script_url('waypoints','waypoints.min.js'));
-		$this->register_script('kc-counter-up', $this->KC_URL. 'js/jquery.counterup.js');
+		$this->register_script('owl-carousel', $this->vendor_script_url('owl-carousel','owl.carousel'.$this->min.'.js'));
+		$this->register_script('countdown-timer', $this->vendor_script_url('countdown','jquery.countdown'.$this->min.'.js'));
+		$this->register_script('easypie-chart', $this->KC_URL. 'js/easypie.chart'.$this->min.'.js');
+		$this->register_script('waypoints', $this->vendor_script_url('waypoints','waypoints.min.js'));
+		$this->register_script('counter-up', $this->KC_URL. 'js/counter.up.min.js');
 
 		$this->register_script('kc-youtube-api', 'https://www.youtube.com/iframe_api');
 		$this->register_script('kc-vimeo-api', 'https://f.vimeocdn.com/js/froogaloop2.min.js');
-		$this->register_script('kc-video-play', $this->KC_URL . 'js/kc-video-play.js');
+		$this->register_script('kc-video-play', $this->KC_URL . 'js/video.play'.$this->min.'.js');
 
 		//lightbox script have to add latest
 		$this->register_script('prettyPhoto', $this->vendor_script_url('prettyPhoto/js','jquery.prettyPhoto.js') );
 		
 		$scripts = apply_filters( 'kc_register_scripts', array() );
-		
+
 		if( is_array( $scripts ) && count( $scripts ) ){
 			foreach( $scripts as $sid => $url ){
-				$this->register_script( $sid, $url );
+				if (!empty($url)) $this->register_script( $sid, $url );
 			}
 		}
 
@@ -777,13 +828,7 @@ class kc_front{
 		
 		$styles = array(
 			'kc-general' => array(
-				'src'     => $this->KC_URL.'css/kingcomposer.css',
-				'deps'    => '',
-				'version' => KC_VERSION,
-				'media'   => 'all'
-			),
-			'kc-shortcodes' => array(
-				'src'     => $this->KC_URL.'css/shortcodes.css',
+				'src'     => $this->KC_URL.'css/kingcomposer'.$this->min.'.css',
 				'deps'    => '',
 				'version' => KC_VERSION,
 				'media'   => 'all'
@@ -793,7 +838,7 @@ class kc_front{
 		if (!isset($settings['animate']) || $settings['animate'] != 'disabled')
 		{
 			$styles['kc-animate'] = array(
-				'src'     => trailingslashit(KC_URL).'assets/css/animate.css',
+				'src'     => untrailingslashit(KC_URL).'/assets/css/animate.css',
 				'deps'    => '',
 				'version' => KC_VERSION,
 				'media'   => 'all'
@@ -803,8 +848,8 @@ class kc_front{
 		if( $this->action == 'live-editor' ){
 			
 			$styles['kc-backend-builder'] = array(
-				'src'     => str_replace( array( 'http:', 'https:' ), '', trailingslashit( KC_URL ) ) . 
-							 'assets/css/kc.builder.css',
+				'src'     => str_replace( array( 'http:', 'https:' ), '', untrailingslashit( KC_URL ) ) . 
+							 '/assets/css/kc.builder.css',
 				'deps'    => '',
 				'version' => KC_VERSION,
 				'media'   => 'all'
@@ -828,8 +873,10 @@ class kc_front{
 			wp_enqueue_style( $handle, $args['src'], $args['deps'], $args['version'], $args['media'] );
 		}
 		
+		$js_path = $this->KC_URL . 'js/kingcomposer'.$this->min.'.js';
+		
 		$scripts = array(
-			'kc-front-scripts' => $this->KC_URL . 'js/kingcomposer.js'
+			'kc-front-scripts' => $js_path
 		);
 		
 		foreach ( apply_filters( 'kc_enqueue_scripts', $scripts ) as $uid => $url ) {
@@ -889,9 +936,11 @@ class kc_front{
 		
 		if( is_array( $obj ) ){
 			
-			//krsort($this->css_obj);
-			
+			kc_screen_sort( $obj );
+
 			foreach( $obj as $screen => $properties ){
+				
+				$item = '';
 				
 				if( $screen == 'any' ){
 					$any .= implode('', $properties);
@@ -913,9 +962,10 @@ class kc_front{
 					
 				}
 			}
+			
 		}
 		
-		return $any.$css;
+		return kc_images_filter($any.$css);
 		
 	}
 	
@@ -935,7 +985,7 @@ class kc_front{
 	}
 
 	public function vendor_script_url($vendor_dir, $srcipt_file){
-		return trailingslashit(KC_URL).'includes/frontend/vendors/'.$vendor_dir.'/'.$srcipt_file;
+		return untrailingslashit(KC_URL).'/includes/frontend/vendors/'.$vendor_dir.'/'.$srcipt_file;
 	}
 
 	public function register_script( $handle, $path, $deps = array( 'jquery' ), $version = KC_VERSION, $in_footer = true ) {
@@ -1021,12 +1071,14 @@ class kc_front{
 		
 		$this->css = esc_html ($this->css);
 		$this->css = str_replace(
-						array( "\n","  ", ": ", " {", "  ", '&gt;', '&lt;'),
-						array( '', ' ', ':', '{', " ", '>', '<'),
-						$this->css
-					);
+					array( "\n","  ", ": ", " {", "  ", '&gt;', '&lt;', '&quot;', '&#039;', "</style>", "<style", "<script", "</script"),
+					array( '', ' ', ':', '{', " ", '>', '<', '"', "'", "&lt;/style&quot;", "&lt;style", "&lt;script", "&lt;/script"),
+					$this->css
+				);
+		
+		$this->css = kc_images_filter($this->css);
 					
-		echo '<style type="text/css" id="kc-css-general">.kc-off-notice{display: inline-block !important;'.$this->css.'</style>';
+		echo '<style type="text/css" id="kc-css-general">.kc-off-notice{display: inline-block !important;}'.$this->css.'</style>';
 		
 		/*
 		*	Start render CSS of all elements
@@ -1037,13 +1089,13 @@ class kc_front{
 		else
 			$this->css = $this->render_css ($this->css_obj_master);
 		
-		$this->css = esc_html ($this->css);
 		$this->css = str_replace(
-						array( "\n","  ", ": ", " {", "  ", '&gt;', '&lt;'),
-						array( '', ' ', ':', '{', " ", '>', '<'),
-						$this->css
-					);
-
+					array( "\n","  ", ": ", " {", "  ", '&gt;', '&lt;', '&quot;', '&#039;', "</style>", "<style", "<script", "</script"),
+					array( '', ' ', ':', '{', " ", '>', '<', '"', "'", "&lt;/style&quot;", "&lt;style", "&lt;script", "&lt;/script"),
+					$this->css
+				);
+				
+		$this->css = kc_images_filter($this->css);
 		echo '<style type="text/css" id="kc-css-render">'.$this->css.'</style>';
 
 
@@ -1077,7 +1129,7 @@ class kc_front{
 	}
 	
 	public function get_global_css(){
-		return $this->css;
+		return $this->css = kc_images_filter($this->css);
 	} 
 	
 }

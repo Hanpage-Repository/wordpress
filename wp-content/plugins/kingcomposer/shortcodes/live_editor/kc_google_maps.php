@@ -4,7 +4,9 @@ if( data === undefined )
 	data = {};
 
 
-var output 				= '', contact_form = '', map_location = '',
+var output 				= '',
+	contact_form = '',
+	map_location = '',
 	map_height 			= '250px',
 	contact_position 	= 'left',
 	element_attributes 	= [], map_attributes = [],
@@ -46,6 +48,10 @@ if( atts['show_ocf'] !== undefined && 'yes' == atts['show_ocf'] ){
 
 map_attributes.push( 'class="kc-google-maps"' );
 map_attributes.push( 'style="height: '+ parseInt(atts['map_height']) +'px"' );
+
+if( atts['disable_wheel_mouse'] !== undefined && atts['disable_wheel_mouse'] != '' ){
+	map_attributes.push( 'data-wheel="disable"' );
+}
 
 map_location = '<div style="width: 100%;height:'+atts['map_height']+';" class="disable-view-element"><h3>For best perfomance, the map has been disabled in this editing mode.</h3></div>';
 

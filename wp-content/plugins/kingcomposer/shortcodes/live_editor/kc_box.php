@@ -18,12 +18,9 @@ element_attributes.push( 'class="' + el_classes.join(' ') + '"' );
 data = kc.tools.base64.decode( atts['data'] );
 data = data.replace( /\%SITE\_URL\%/g, kc_site_url );
 
-if( data = JSON.parse( data ) )
+if (data = JSON.parse(data))
 {
-	#>{{{kc.front.loop_box( data )}}}<#
-	if( atts['css'] !== undefined ){
-		#><style type="text/css">{{{atts['css']}}}</style><#
-	}
+	#>{{{kc.front.loop_box(data)}}}<#
 }
 else
 {

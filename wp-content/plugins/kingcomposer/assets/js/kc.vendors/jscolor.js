@@ -374,10 +374,19 @@ var jscolor = {
 		this.pickerInsetColor = ''; // CSS color
 		this.pickerZIndex = 180000002;
 		this.opacity = 1;
+		this.position = 'absolute';
 
 		for(var p in prop) {
 			if(prop.hasOwnProperty(p)) {
 				this[p] = prop[p];
+			}
+		}
+
+		if (kc !== undefined) {
+			var pop = kc.get.popup(target);
+			if (pop !== null) {
+				if (pop.css('position') == 'fixed')
+					this.position = 'fixed';
 			}
 		}
 
@@ -670,7 +679,9 @@ var jscolor = {
 					btn : document.createElement('div'),
 					
 				};								
-				jscolor.picker.boxB.className="kc_color_picker";				
+				jscolor.picker.boxB.className="kc_color_picker";
+				jscolor.picker.boxB.style.position = THIS.position;
+							
 				for(var i=0,segSize=4; i<jscolor.images.sld[1]; i+=segSize) {
 					var seg = document.createElement('div');
 					seg.style.height = segSize+'px';
@@ -780,7 +791,7 @@ var jscolor = {
 						data = data.split('|');
 						
 						if( localStorage['kc_color_presets'] !== undefined )
-							data = localStorage['kc_color_presets'].split('|').concat(data);
+							data = localStorage['kc_color_presets'].split('|');
 						
 						if( color === '' )
 							alert('Error, please select color first');
@@ -790,7 +801,7 @@ var jscolor = {
 							
 							while(data.length > 9)
 								data.pop();
-							
+								
 							data.unshift(color);
 							
 							localStorage.removeItem( 'kc_color_presets' );
@@ -806,6 +817,30 @@ var jscolor = {
 					valueElement.value = e.target.title;
 					redrawOpacity();
 					THIS.importColor();
+				} else if(e.target.tagName == 'DEL'){
+					
+					if(localStorage['kc_color_presets'] === undefined || color === '')
+						return;
+					
+					if (localStorage['kc_color_presets'] === '')
+						data = "#61B0FF|#9782FF|#FFD970|#CBFF63|#4DFFAC|#FF21E1|#9021FF|#1F87FF|#21FFBC|#55FF21";
+					else data = localStorage['kc_color_presets'];
+					
+					data = data.split('|');
+					
+					var color = e.target.parentNode.title,
+						index = data.indexOf(color);
+					
+					if (index === -1)
+						return;
+						
+					data.splice(index, 1);
+					
+					localStorage.removeItem( 'kc_color_presets' );
+					localStorage.setItem( 'kc_color_presets', data.join('|') );
+					
+					this.render();
+					
 				}
 				
 				e.preventDefault();
@@ -823,15 +858,17 @@ var jscolor = {
 					
 					data = data.split('|');	
 					
-					if( localStorage['kc_color_presets'] !== undefined )
-						data = localStorage['kc_color_presets'].split('|').concat(data);
+					if (localStorage['kc_color_presets'] !== undefined && localStorage['kc_color_presets'] !== '')
+						data = localStorage['kc_color_presets'].split('|');
 					
 					for(i = 0; i < std.length; i++  ){
 						html += '<span class="fix-std" title="'+std[i]+'" style="background:'+std[i]+';"></span>';
 					}
 					html += '<div></div>';
-					for(i = 0; i < 10; i++){
-						html += '<span class="preset" title="'+data[i]+'" style="background:'+data[i]+';"></span>';
+					for(i = 0; i < data.length; i++){
+						html += '<span class="preset" title="'+data[i]+'" style="background:'+data[i]+';"><del title="Delete this preset color">x</del></span>';
+						if (i>8)
+							break;
 					}
 					
 					this.innerHTML = html;

@@ -6,16 +6,16 @@ var output = '', attributes = [], col_in_class_container = 'kc_wrapper',
 classes = kc.front.el_class( atts );
 classes.push( 'kc_column_inner' );
 
-if( undefined !== atts['col_in_class'] && atts['col_in_class'] !== '' )
+if (undefined !== atts['col_in_class'] && atts['col_in_class'] !== '')
 	classes.push( atts['col_in_class'] );
 
-if( undefined !== atts['css'] && atts['css'] !== '' )
+if (undefined !== atts['css'] && typeof atts['css'] == 'string')
 	classes .push( atts['css'].split('|')[0] );
 
-if( atts['width'] !== undefined )
+if (atts['width'] !== undefined)
 	classes.push( kc.front.ui.column.width_class( atts['width'] ) );
 
-if( undefined !== atts['col_in_class_container'] && atts['col_in_class_container'] !== '' )
+if (undefined !== atts['col_in_class_container'] && atts['col_in_class_container'] !== '')
 	col_in_class_container += ' '+atts['col_in_class_container'];
 	
 	
@@ -32,9 +32,4 @@ data.content += '<div class="kc-element drag-helper" data-model="-1" droppable="
 
 #><div {{{attributes.join(' ')}}}>
 	<div class="{{col_in_class_container}}">{{{data.content}}}</div>
-	<#
-		if( atts[ 'css' ] !== undefined && atts[ 'responsive' ] !== undefined &&  atts[ 'responsive' ] !== '' ){
-			#><style type="text/css">{{{kc.front.ui.style.responsive(atts['responsive'],atts['css'].split('|')[0])}}}</style><#
-		}
-	#>
 </div>

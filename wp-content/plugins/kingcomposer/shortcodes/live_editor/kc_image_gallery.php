@@ -1,22 +1,23 @@
 <#
 
-var output = '', atts = ( data.atts !== undefined ) ? data.atts : {},
-	custom_links = ( atts['custom_links'] !== undefined ) ? atts['custom_links'] : '',
-	click_action = ( atts['click_action'] !== undefined ) ? atts['click_action'] : 'none',
-	wrap_class = ( atts['wrap_class'] !== undefined ) ? atts['wrap_class'] : '',
-	type = ( atts['type'] !== undefined ) ? atts['type'] : '',
-	image_size = ( atts['image_size'] !== undefined ) ? atts['image_size'] : '',
-	images = ( atts['images'] !== undefined ) ? atts['images'] : '',
-	title = ( atts['title'] !== undefined ) ? atts['title'] : '',
-	columns = ( atts['columns'] !== undefined && atts['columns'] !== '__empty__' ) ? atts['columns'] : '4',
-	type_class = '',
-	slider_item_start = '',
-	slider_item_end = '',
-	attachment_data = [],
-	wrp_class = [],
-	attachment_data_full = [],
-	custom_links_arr = [],
-	element_attribute = [], el_classess = [ ];
+var output          = '', atts = ( data.atts !== undefined ) ? data.atts : {},
+	custom_links            = ( atts['custom_links'] !== undefined ) ? atts['custom_links'] : '',
+	click_action            = ( atts['click_action'] !== undefined ) ? atts['click_action'] : 'none',
+	wrap_class              = ( atts['wrap_class'] !== undefined ) ? atts['wrap_class'] : '',
+	type                    = ( atts['type'] !== undefined ) ? atts['type'] : '',
+	image_size              = ( atts['image_size'] !== undefined ) ? atts['image_size'] : '',
+	images                  = ( atts['images'] !== undefined ) ? atts['images'] : '',
+	title                   = ( atts['title'] !== undefined ) ? atts['title'] : '',
+	columns                 = ( atts['columns'] !== undefined && atts['columns'] !== '__empty__' ) ? atts['columns'] : '4',
+	type_class              = '',
+	slider_item_start       = '',
+	slider_item_end         = '',
+	attachment_data         = [],
+	wrp_class               = [],
+	attachment_data_full    = [],
+	custom_links_arr        = [],
+	element_attribute       = [], el_classess = [ ],
+	sizes 		            = ['full', 'thumbnail', 'medium', 'large'];
 
 type_class = 'kc-grid';
 
@@ -50,8 +51,17 @@ else
 	element_attribute.push('data-image_masonry=""');
 
 for ( var i=0; i < images.length; i++ ){
+	
 	image_id = images[i];
-	attachment_data.push( ajaxurl +  "?action=kc_get_thumbn&id="+image_id+'&size='+image_size);
+	
+	if ( sizes.indexOf( image_size ) > -1  ) {
+		attachment_data.push( ajaxurl + '?action=kc_get_thumbn&id=' + image_id + '&size=' + image_size );
+	}else if( image_size.indexOf('x') > 0 ){
+		attachment_data.push( ajaxurl + '?action=kc_get_thumbn_size&id=' + image_id + '&size=' + image_size );
+	}else{
+		attachment_data.push( ajaxurl + '?action=kc_get_thumbn&id=' + image_id + '&size=full');
+	}
+	
 	attachment_data_full.push( ajaxurl + "?action=kc_get_thumbn&size=full&id="+image_id );
 }
 

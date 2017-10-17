@@ -11,8 +11,10 @@ $linewidth  	= (!empty($linewidth)) ? $linewidth : '10';
 $size 			= ('custom' === $size && !empty( $size )) ? $custom_size : $size;
 
 $element_attributes = array();
-$wrap_class 		= apply_filters( 'kc-el-class', $atts );
-$wrap_class 		= implode( ' ', $wrap_class );
+$custom_class 		= apply_filters( 'kc-el-class', $atts );
+$custom_class[] 		= $wrap_class;
+
+$custom_class 		= implode( ' ', $custom_class );
 $css_classes 		= array( 'kc_shortcode', 'kc_piechart',);
 
 
@@ -38,7 +40,7 @@ $element_attributes[] = 'data-linewidth="' .esc_attr( $linewidth ). '"';
 $css_class            = implode(' ', $css_classes);
 $element_attributes[] = 'class="' . esc_attr( trim( $css_class ) ) . '"';
 
-?><div class="kc-pie-chart-wrapper <?php echo esc_attr( $wrap_class ); ?>">
+?><div class="kc-pie-chart-wrapper <?php echo esc_attr( $custom_class ); ?>">
 	<div class="kc-pie-chart-holder">
 		<span <?php echo implode( ' ', $element_attributes ); ?>>
 			<span class="pie_chart_percent">

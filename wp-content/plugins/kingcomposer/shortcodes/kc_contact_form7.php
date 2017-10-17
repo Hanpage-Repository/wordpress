@@ -1,27 +1,25 @@
 <?php
 
-$output = $class = $title = $css = '';
+global $wpdb;
 
-$el_class = apply_filters( 'kc-el-class', $atts );
+$title = $slug = $class = '';
 
 extract( $atts );
 
-$element_attribute = array();
+$wrp_el_classes = apply_filters( 'kc-el-class', $atts );
 
-if( $css != '' )$class .= ' '.$css;
+if( !empty( $class ) )
+	$wrp_el_classes[] = $class;
 
-$element_attribute[] = 'class="'. esc_attr( $class ) .'"';
+$form = $wpdb->get_results("SELECT `ID` FROM `".$wpdb->posts."` WHERE `post_type` = 'wpcf7_contact_form' AND `post_name` = '".esc_attr(sanitize_title($slug))."' LIMIT 1");
 
-if ( !empty( $title ) )
-	$output .= '<h3>' . $title . '</h3>';
-
-if(isset($contact_form_id) && $contact_form_id > 0){
-	$output .= '<div '. implode( ' ', $element_attribute) .'>';
-	$output .= do_shortcode('[contact-form-7 id="'. $contact_form_id .'"]');
-	$output .= '</div>';
+if( !empty( $form ) ){
+	echo '<div class="kc-contact-form7 '. esc_attr( implode(' ', $wrp_el_classes) ) .'">';
+	if ( !empty( $title ) ) {
+		echo '<h2>'. $title .'</h2>';
+	}
+	echo do_shortcode('[contact-form-7 id="'.$form[0]->ID.'" title="'.esc_attr($title).'"]');
+	echo '</div>';
 }else{
-	$output .= __( 'Please create new and select contact form 7.', 'kingcomposer' );
+	echo __('Please select one of contact form 7 for display.', 'kingcomposer');
 }
-echo '<div class="' . esc_attr( implode( ' ', $el_class)) . '">';
-echo $output;
-echo '</div>';

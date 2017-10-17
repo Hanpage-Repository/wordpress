@@ -9,14 +9,15 @@ if(!defined('KC_FILE')) {
 	header('HTTP/1.0 403 Forbidden');
 	exit;
 }
-
+global $kc;
+ob_start();
 ?>
 <div class="wrap about-wrap">
 	<h1><?php _e('KC Shortcode Mapper', 'kingcomposer'); ?></h1>
 	<p class="about-text">
 		<?php _e('Mapping custom 3rd party shortcodes to add & edit by KingComposer', 'kingcomposer'); ?>.
 	<br />
-		<?php _e('Shortcodes need to be installed, or you can do it by following', 'kingcomposer'); ?> 
+		<?php _e('Shortcodes need to be installed, or you can do it by following', 'kingcomposer'); ?>
 		<a href="http://docs.kingcomposer.com/display-the-output-of-the-shortcode/" target=_blank>
 			<?php _e('This Article', 'kingcomposer'); ?>
 		</a>
@@ -46,8 +47,8 @@ if(!defined('KC_FILE')) {
 			<strong><?php _e('Enter shortcode name or full shortcode string', 'kingcomposer'); ?>:</strong>
 			<textarea id="kc-mapper-string" class="mmp"></textarea>
 			<p class="desc">
-				<?php _e('Example', 'kingcomposer'); ?>: <strong>contact-form-7</strong> 
-				<?php _e('or full string', 'kingcomposer'); ?> 
+				<?php _e('Example', 'kingcomposer'); ?>: <strong>contact-form-7</strong>
+				<?php _e('or full string', 'kingcomposer'); ?>
 				<strong>[contact-form-7 id="1" title="Contact form 1"]</strong>
 			</p>
 			<p>
@@ -130,7 +131,7 @@ if(!defined('KC_FILE')) {
 					<input type="file" class="mbtn" />
 				</p>
 				<p>
-					<input type="checkbox" class="mbtn" id="kc-mapper-import-overwrite" /> 
+					<input type="checkbox" class="mbtn" id="kc-mapper-import-overwrite" />
 					<label for="kc-mapper-import-overwrite"><?php _e('Overwrite shortcode if exists?', 'kingcomposer'); ?></label>
 				</p>
 				<p>
@@ -145,12 +146,17 @@ if(!defined('KC_FILE')) {
 		</div>
 	</div>
 </div>
+<?php
+$kc_shortcodes_mapper = ob_get_contents();
+ob_end_clean();
+echo $kc->apply_filters('kc_shortcodes_mapper', $kc_shortcodes_mapper);
+?>
 <div style="display: none;"><?php wp_editor('', 'kc-editor-preload'); ?></div>
 <script type="text/javascript" src="<?php echo esc_url(KC_URL); ?>/assets/js/kc.mapper.js"></script>
 <script type="text/javascript">
 	var kc_mapper_shortcodes = <?php
 		$mapper = get_option('kc_shortcodes_mapper', true);
-		if (!$mapper || !is_array($mapper)) 
+		if (!$mapper || !is_array($mapper))
 			echo '{}';
 		else echo json_encode($mapper);
 	?>, kc_mapper_nonce = '<?php echo wp_create_nonce( "kc-mapper-nonce" ); ?>';
@@ -170,20 +176,20 @@ if(!defined('KC_FILE')) {
 				<input name="label" value="{{data.label}}" class="kc-mapper-inp" type="text" />
 				<p><?php _e('Heading of param', 'kingcomposer'); ?></p>
 				<label><?php _e('Field type', 'kingcomposer'); ?>:</label>
-				<# 
-					
-					if (data.level == 1) 
-					{	
+				<#
+
+					if (data.level == 1)
+					{
 						if (data.name == 'content'){
-						
+
 							var fields_support = {
 								textarea_html: 'Textarea Html',
 								text: 'Text field',
 								textarea: 'Textarea',
 							}
-							
+
 						}else{
-							
+
 							var fields_support = {
 								text: 'Text field',
 								textarea: 'Textarea',
@@ -208,9 +214,9 @@ if(!defined('KC_FILE')) {
 							}
 						}
 					} else {
-						
+
 						// fields level 2 into group
-							
+
 						var fields_support = {
 							text: 'Text field',
 							textarea: 'Textarea',
@@ -234,29 +240,29 @@ if(!defined('KC_FILE')) {
 						}
 					}
 				#>
-				
+
 				<select name="type" class="kc-mapper-inp">
-					<#	
+					<#
 						for (n in fields_support) {
-						#><option value="{{n}}"<# if (data.type == n){ #> selected<# } #>>{{fields_support[n]}}</option><#	
+						#><option value="{{n}}"<# if (data.type == n){ #> selected<# } #>>{{fields_support[n]}}</option><#
 						}
 					#>
 				</select>
-				
+
 				<p><?php _e('Select type for field', 'kingcomposer'); ?></p>
-				
+
 				<# if (data.level == 1){ #>
-				
+
 					<label><?php _e('Default value', 'kingcomposer'); ?>:</label>
 					<input name="value" value="{{data.value}}" class="kc-mapper-inp" type="text" />
 					<p><?php _e('The default value of field', 'kingcomposer'); ?></p>
-					
+
 					<label><?php _e('Admin label', 'kingcomposer'); ?>:</label>
 					<p class="rdo">
 						<# var randip = parseInt(Math.random()*10000); #>
-						<input name="admin_label" value="1" <# 
-							if (data.admin_label === true){ #> checked<# } 
-						#> class="kc-mapper-inp" type="checkbox" id="kc-mapper-field-admin-label-{{randip}}" /> 
+						<input name="admin_label" value="1" <#
+							if (data.admin_label === true){ #> checked<# }
+						#> class="kc-mapper-inp" type="checkbox" id="kc-mapper-field-admin-label-{{randip}}" />
 						<label for="kc-mapper-field-admin-label-{{randip}}">
 							<?php _e('The value will show in preview', 'kingcomposer'); ?>
 						</label>
@@ -264,11 +270,11 @@ if(!defined('KC_FILE')) {
 
 				<# }else{ #>
 				<p>
-					<?php _e('Need help how to set default value for field group?', 'kingcomposer'); ?> 
+					<?php _e('Need help how to set default value for field group?', 'kingcomposer'); ?>
 					<a href="http://docs.kingcomposer.com/available-param-types/group-fields/" target=_blank><?php _e('Check docs', 'kingcomposer'); ?></a>
 				</p>
 				<# } #>
-				<div class="dropdown-relation-hidden"<# 
+				<div class="dropdown-relation-hidden"<#
 					if(['dropdown', 'radio', 'checkbox', 'number_slider', 'autocomplete', 'radio_image'].indexOf(data.type) > -1){
 					#> style="display: block;"<#
 					}
@@ -288,7 +294,7 @@ if(!defined('KC_FILE')) {
 				<label><?php _e('Description', 'kingcomposer'); ?>:</label>
 				<textarea name="description" class="kc-mapper-inp">{{data.description}}</textarea>
 				<p><?php _e('Param Description', 'kingcomposer'); ?></p>
-				
+
 				<# if (data.level == 1 && data.name != 'content'){ #>
 				<label><?php _e('Relation', 'kingcomposer'); ?>:</label>
 				<#
@@ -302,17 +308,17 @@ if(!defined('KC_FILE')) {
 				<p class="rdo">
 					<# randip = parseInt(Math.random()*10000); #>
 					<input name="relation-op" value="1" <#
-						if (str !== ''){ #> checked<# } 
-					#> class="kc-mapper-inp" type="checkbox" id="kc-mapper-field-admin-label-{{randip}}" /> 
+						if (str !== ''){ #> checked<# }
+					#> class="kc-mapper-inp" type="checkbox" id="kc-mapper-field-admin-label-{{randip}}" />
 					<label for="kc-mapper-field-admin-label-{{randip}}">
 						<?php _e('Show or hide depending on the another field (Note: parent field must be placed above this field)', 'kingcomposer'); ?>
 					</label>
 					<textarea name="relation" class="kc-mapper-inp" data-std-vl="{{{str}}}" style="margin-top:10px;<#
-							if (str === ''){ #> display: none;<# } 
+							if (str === ''){ #> display: none;<# }
 						#>">{{{str}}}</textarea>
 					<# } #>
 				</p>
-				
+
 			</div>
 			<div class="groupfields-relation-hidden"<# if (data.type == 'group'){ #> style="display: block;"<#} #>>
 				<strong><?php _e('Children fields', 'kingcomposer'); ?>:</strong>
@@ -323,44 +329,44 @@ if(!defined('KC_FILE')) {
 	</div>
 <#
 	data.callback = function(wrp, data) {
-		
+
 		wrp.find('>.field-heading').on('mousedown', function(e)
 		{
 			this.clientX = e.clientX;
 			this.clientY = e.clientY;
 		}).on('mouseup', function(e) {
-			
+
 			if (this.clientX == e.clientX && this.clientY == e.clientY)
 			{
-				
+
 				if (e.target.getAttribute('data-action') == 'delete-field') {
 					kc_mapper.field.delete(this);
 					return;
 				}
-				
+
 				var $this = jQuery(this),
 					cur = $this.parent().find('>.field-row-body').css('display');
-				
+
 				$this.parent().parent().find('>.field_row>.field-row-body').hide();
-				
+
 				if (cur === 'block')
 					cur = 'hidden';
 				else cur = 'block';
-				
+
 				$this.parent().find('>.field-row-body').css('display', cur);
-				
+
 			}
 		});
-		
+
 		wrp.find('.kc-mapper-inp').on('change', kc_mapper.field.change);
-		
+
 		if (data.type == 'group' && data.params !== '' && Object.keys(data.params).length > 0) {
 			kc_mapper.field.render(
 				wrp.find('.kc-group-fields-render'),
 				data.params
 			);
 		}
-		
+
 	}
-#>	
+#>
 </script>

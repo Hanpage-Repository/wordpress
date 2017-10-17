@@ -46,6 +46,10 @@ if( !empty($show_ocf) && 'yes' === $show_ocf ){
 $map_attributes[] = 'style="height: '. esc_attr( $map_height ) .'px"';
 $map_attributes[] = 'class="kc-google-maps"';
 
+if( !empty( $disable_wheel_mouse ) ){
+	$element_attributes[] = 'data-wheel="disable"';
+}
+
 $map_location = preg_replace( array('/width="\d+"/i', '/height="\d+"/i'), array(
         sprintf('width="%s"', $map_width ),
         sprintf('height="%d"', intval( $map_height ))

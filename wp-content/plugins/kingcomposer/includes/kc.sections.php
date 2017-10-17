@@ -1,6 +1,6 @@
 <?php
 /**
-* 
+*
 *	(i) Sections manager
 *	(c) KingComposer.com
 *	(s) since version 2.5
@@ -18,7 +18,7 @@ class kc_sections{
 			add_filter ('manage_edit-kc-section_columns', array(&$this, 'edit_kc_section_columns'));
 			add_action ('manage_kc-section_posts_custom_column', array(&$this, 'manage_kc_section_columns'), 10, 2);
 		}
-		
+
 	}
 
 	public function edit_kc_section_columns( $columns ) {
@@ -35,24 +35,24 @@ class kc_sections{
 	}
 
 	public function manage_kc_section_columns( $column, $post_id ) {
-		
+
 		global $post;
 
 		switch( $column ) {
 
 			case 'screenshot' :
-				
+
 				$url = get_the_post_thumbnail_url( $post );
-				
+
 				//get thumbnail data
 				$get_data = get_post_meta ($post->ID , 'kc_data', true);
 				$thumbnail = '';
-				
+
 				if (!empty($get_data) && is_array($get_data))
 				{
 					$thumbnail = $get_data['thumbnail'];
 				}
-				
+
 				if( $url ){
 					echo '<img src="'. esc_url( $url ).'" style="max-width:100%;margin-top:10px;" />';
 				}else if( $thumbnail != '') {
@@ -67,13 +67,13 @@ class kc_sections{
 			default :
 				break;
 		}
-		
+
 	}
 
 	public function register(){
 
 		global $kc;
-		
+
 		$labels = array(
 			'name'               => __( 'KC Sections', 'kingcomposer' ),
 			'singular_name'      => __( 'KC Sections', 'kingcomposer' ),
@@ -91,6 +91,8 @@ class kc_sections{
 			'not_found_in_trash' => __( 'No section found in Trash.', 'kingcomposer' ),
 		);
 
+		$labels = $kc->apply_filters('kc_section_labels', $labels);
+
 		$args = array(
 			'labels'             => $labels,
 			'public'             => true,
@@ -98,16 +100,17 @@ class kc_sections{
 			'supports'           => array( 'title', 'editor', 'thumbnail' ),
 			'taxonomies' 		 => array( 'kc-section-category' ),
 			'rewrite'			 => array( 'slug' => 'kc-section', 'with_front' => false ),
+            'exclude_from_search' => true
 
 		);
-		
+
 		register_post_type( 'kc-section', $args );
-		
+
 		register_taxonomy(
-			
+
 			'kc-section-category' ,
 			'kc-section',
-			
+
 			array(
 				'hierarchical'          => true,
 				'labels'                => array(
@@ -137,15 +140,15 @@ class kc_sections{
 				'rewrite'               => array( 'slug' => 'kc-section-category' )
 			)
 		);
-		
+
 		$kc->add_content_type('kc-section');
-		
+
 	}
-	
+
 }
 /*
 *
-*	Activate	
+*	Activate
 *
 */
 new kc_sections();

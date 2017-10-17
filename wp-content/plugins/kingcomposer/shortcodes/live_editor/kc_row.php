@@ -49,12 +49,25 @@ if( atts['video_bg'] !== undefined && atts['video_bg'] === 'yes' ){
 		classes.push('kc-video-bg');
 		attributes.push('data-kc-video-bg="'+atts['video_bg_url']+'"');
 		css_data += 'position: relative;';
+	
+		if( atts['video_options'] !== undefined ){
+			attributes.push('data-kc-video-options="'+atts['video_options']+'"');
+		}
+		
 	}
 } 
 
 if( atts['row_id'] !== undefined && atts['row_id'] !== '' )
 	attributes.push( 'id="'+atts['row_id']+'"' );
 
+
+if( atts['force'] !== undefined && atts['force'] == 'yes'  ){
+    if( atts['use_container'] !== undefined && atts['use_container'] == 'yes' )
+        attributes.push( 'data-kc-fullwidth="row"' );
+    else
+        attributes.push( 'data-kc-fullwidth="content"' );
+}
+    
 if( atts['video_bg_url'] === undefined || atts['video_bg'] !== 'yes' )
 {
 	if( atts['parallax'] !== undefined )
@@ -76,7 +89,7 @@ attributes.push( 'class="'+classes.join(' ')+'"' );
 if( css_data !== '' )
 	attributes.push( 'style="'+css_data+'"' );
 
-output += '<div '+attributes.join(' ')+'>';
+output += '<section '+attributes.join(' ')+'>';
 
 output += '<div class="'+cont_class.join(' ')+'">';
 
@@ -84,10 +97,10 @@ output += '<div class="kc-wrap-columns">'+data.content+'</div>';
 
 output += '</div>';
 
-output += '</div>';
+output += '</section>';
 
 data.callback = function( wrp, $ ){
-	kc_front.init( wrp );	
+	kc_front.init( wrp );
 }
 	
 #>

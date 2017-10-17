@@ -15,9 +15,6 @@ var atts 				= ( data.atts !== undefined ) ? data.atts : {},
 	show_button 		= ( atts['show_button'] !== undefined )? atts['show_button'] : '',
 	text_on_button 		= ( atts['text_on_button'] !== undefined )? atts['text_on_button'] : '',
 	direction 			= ( atts['direction'] !== undefined )? atts['direction'] : '',
-	text_on_button 		= ( atts['text_on_button'] !== undefined )? atts['text_on_button'] : '',
-	text_on_button 		= ( atts['text_on_button'] !== undefined )? atts['text_on_button'] : '',
-	link 				= ( atts['link'] !== undefined )? atts['link'] : '',
 	
 	wrap_class 			= ( atts['wrap_class'] !== undefined )? atts['wrap_class'] : '',
 	
@@ -28,7 +25,10 @@ var atts 				= ( data.atts !== undefined ) ? data.atts : {},
 	b_show_button 			= ( atts['b_show_button'] !== undefined )? atts['b_show_button'] : '',
 	b_text_on_button 			= ( atts['b_text_on_button'] !== undefined )? atts['b_text_on_button'] : '',
 	b_link 			= ( atts['b_link'] !== undefined )? atts['b_link'] : '',
-	
+	btn_title       = '',
+	btn_target       = '',
+	but_link_text       = '',
+	button_link       = '',
 	image_data 			= kc_url + '/assets/images/get_start.jpg',
 	element_atttribute 	= [],
 	el_classess 		= [];
@@ -72,8 +72,19 @@ if( b_show_button == 'yes' ){
 	
 	if ( b_text_on_button == '' )
 		b_text_on_button = "<?php echo __( 'Read more', 'kingcomposer' );?>";
+
+	if ( b_link !== '' ) {
+		but_link_text = b_link.split( '|' );
+		button_link = but_link_text[0];
+	}
+
+	if( but_link_text[1] !== undefined )
+		btn_title =  but_link_text[1];
 	
-	back_data += '<a class="button" href="' + b_link + '">' + b_text_on_button + '</a>';
+	if( but_link_text[2] !== undefined )
+		btn_target =  but_link_text[2];
+	
+	back_data += '<a class="button" href="' + button_link + '  title="' + btn_title + '" target="' + btn_target + '">' + b_text_on_button + '</a>';
 	
 }
 

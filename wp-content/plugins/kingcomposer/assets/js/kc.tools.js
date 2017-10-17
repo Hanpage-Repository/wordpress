@@ -106,7 +106,8 @@
 			
 			css = css.replace( /\s+/g, ' ' )
 				 .replace(/\/\*[^\/\*]+\*\//g,'')
-				 .replace(/[^a-zA-Z0-9\-\_\. \:\(\)\%\+\~\;\#\'\{\}\@\/]+/g,'')
+				 .replace(/\"/g, "'")
+				 .replace(/[^a-zA-Z0-9\-\_\. \:\(\)\%\+\~\;\#\'\!\{\}\@\/]+/g,'')
 				 .trim().split( '{' );
 			
 			for( var n in css  ){
@@ -445,8 +446,8 @@
 				kc.tools.media.els = this;
 				
 				if( typeof e.data == 'function' )
-					kc.tools.media.callbacks = e.data;
-				else kc.tools.media.callbacks = null;	
+					kc.tools.media.callbacks = e.data;	
+				else kc.tools.media.callbacks = null;
 				
 		        if ( kc.tools.media.uploaders ) {
 		           kc.tools.media.uploaders.open();
@@ -468,7 +469,7 @@
 		        });
 		 
 		        kc.tools.media.uploaders.on('select', function( e ) {
-		        
+		
 		            var attachments = kc.tools.media.uploaders.state().get('selection');
 		            attachments.map( function( attachment ) {
 				     	 var attachment = attachment.toJSON();
@@ -571,7 +572,8 @@
 					this.el.on('click', function(e){
 						if( e.target === this )
 							$(this).find('button.cancel').trigger('click');
-					});	
+					});
+					$('html').css({'overflow': 'hidden'});
 				}
 				
 				if( atts.tip != 0 )
@@ -683,6 +685,7 @@
 			
 			cancel : function( e ){
 				
+				$('html').css({'overflow': ''});
 				kc.do_action( 'before_cancel_popup', this );
 				
 				// We will dont close the popup when in instant saving
@@ -995,6 +998,10 @@
 					
 				}
 					
+			},
+			
+			close_all : function() {
+				$('.kc-params-popup .sl-close.sl-func').trigger('click');
 			}
 			
 		}),
@@ -1131,6 +1138,24 @@
 			kc.icons = html;
 
 			return html;
+			
+		},
+		
+		filter_images : function(str) {
+				
+			var m, str, regxx = new RegExp('\%SITE\_URL\%(.+?)(\'|\"|\\)|\ )', 'g');
+
+			while (m = regxx.exec( str ) ) {
+
+                if( m[0].indexOf( 'kc_get_thumbn' ) === -1 ){
+                    str = str.replace( m[0], kc_ajax_url+'?action=kc_get_thumbn&type=filter_url&id='+encodeURIComponent(m[1])+m[2]);
+                }else{
+                    str = str.replace( m[0], kc_site_url + m[1]+m[2]);
+                }
+
+			}
+
+			return str;
 			
 		},
 		

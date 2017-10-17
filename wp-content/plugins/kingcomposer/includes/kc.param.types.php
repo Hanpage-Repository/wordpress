@@ -207,11 +207,11 @@ function kc_param_type_textarea_html(){
 				}
 			}, 'field-column-text-callback' );
 
-			wrp.find('.kc-insert-media').on('click', { callback : function( atts ){
+			wrp.find('.kc-insert-media').on('click', function( atts ){
 			
 				kc.tools.editor.insert( window.wpActiveEditor ,wp.media.string.image( atts ) );
 
-			}, atts : {frame:'post'} }, kc.tools.media.open );
+			}, kc.tools.media.opens );
 
 		}
 		
@@ -290,11 +290,11 @@ function kc_param_type_editor(){
 				}
 			}, 'field-editor-callback' );
 
-			wrp.find('.kc-insert-media').on('click', { callback : function( atts ){
+			wrp.find('.kc-insert-media').on('click', function( atts ){
+			
+				kc.tools.editor.insert( window.wpActiveEditor ,wp.media.string.image( atts ) );
 
-				kc.tools.editor.insert( window.wpActiveEditor ,wp.media.string.image( null, atts ) );
-
-			}, atts : {frame:'post'} }, kc.tools.media.open );
+			}, kc.tools.media.opens );
 
 		}
 	#>
@@ -476,6 +476,17 @@ function kc_param_type_toggle(){
 			<input type="checkbox" checked class="kc-param kc-hidden kc-empty-param" value="" name="{{data.name}}" />
 		</div>
 	</div>
+	<#
+		data.callback = function( el, $ ){
+			el.find('.toggle-button').on( 'click', el, function(e){
+
+			    if( this.checked )
+			        $(this).val('yes');
+			    else
+			        $(this).val('no');
+			});
+		}
+	#>
 <?php
 }
 
@@ -609,7 +620,7 @@ function kc_param_type_color_picker(){
 ?>
 	<input name="{{data.name}}" value="{{data.value}}" placeholder="Select color" class="kc-param" type="search" />
 	<#
-		data.callback = function( el ){
+		data.callback = function( el, $ ){
 			el.find('input').each(function(){
 				this.color = new jscolor.color(this, {});
 			});
@@ -751,63 +762,7 @@ function kc_param_type_wp_widget(){
 
 	#>{{{html}}}<#
 
-	data.callback = function( wrp, $ ){
-
-		wrp.find('*[data-value]').each(function(){
-			switch( this.tagName ){
-				case 'INPUT' :
-					if( this.type == 'radio' || this.type == 'checkbox' )
-						this.checked = true;
-					else this.value = jQuery(this).data('value');
-				break;
-				case 'TEXTAREA' :
-					this.value = jQuery(this).data('value');
-				break;
-				case 'SELECT' :
-					var vls = jQuery(this).data('value');
-					if( vls )vls = vls.toString().split(',');
-					else vls = [''];
-
-					if( vls.length > 1 )
-						this.multiple = 'multiple';
-					jQuery(this).find('option').each(function(){
-						if( vls.indexOf( this.value ) > -1 )
-							this.selected = true;
-						else this.selected = false;
-					});
-				break;
-			}
-		});
-
-		var pop = kc.get.popup( wrp );
-
-		kc.tools.popup.callback( pop, { 
-			
-			before_callback : function( wrp ){
-
-				var name = wrp.find('.kc-widgets-container').data('name'),
-					fields = wrp.find('form.fields-edit-form').serializeArray(),
-					data = {};
-	
-				data[ name ] = {};
-	
-				fields.forEach(function(n){
-					if( data[ name ][n.name] == undefined )
-						data[ name ][n.name] = n.value;
-					else data[ name ][n.name] += ','+n.value;
-				});
-	
-				var string = kc.tools.base64.encode( JSON.stringify( data ) );
-	
-				wrp.find('.m-p-r-content').append('<textarea name="data" class="kc-param kc-widget-area forceHide">'+string+'</textarea>');
-	
-			},
-			after_callback : function( wrp ){
-				wrp.find('.m-p-r-content .kc-param').remove();
-			}
-		}, 'field-wp-widget-callback' );
-
-	}
+	data.callback = kc.ui.callbacks.wp_widgets;
 
 #>
 <?php
@@ -1057,7 +1012,7 @@ function kc_param_type_group(){
 
 function kc_param_type_css(){
 ?>
-<input type="hidden" name="{{data.name}}" class="kc-param kc-field-css-value" />
+<input type="hidden" name="{{data.name}}" class="kc-param kc-field-css-value" value="{{data.value}}" />
 <div class="kc-css-rows" style="min-height:500px"></div>
 <# data.callback = kc.ui.callbacks.css; #>
 <?php

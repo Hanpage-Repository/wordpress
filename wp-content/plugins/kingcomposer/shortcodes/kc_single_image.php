@@ -3,8 +3,8 @@
  * Single image shortcode
  *--------------------------------*/
 
-$output = $title_link  = $alt = $image = $target = $overlay = $image_title = $image_source = $image_external_link = $image_size = $image_size_el = $caption = $on_click_action = $custom_link = $class = $ieclass = $image_full = $html = $css = '';
-
+$output     = $title_link  = $alt = $image = $target = $overlay = $image_title = $image_source = $image_external_link = $image_size = $image_size_el = $caption = $on_click_action = $custom_link = $class = $ieclass = $image_full = $html = $css = '';
+$size_array = array('full', 'medium', 'large', 'thumbnail');
 $image_wrap = 'yes';
 
 extract( $atts );
@@ -59,7 +59,7 @@ if( $image_source == 'external_link' ) {
 } else {
 
 	if( $image_source == 'media_library' ) {
-		$image_id = preg_replace( '/[^\d]/', '', $image_id );
+		//$image_id = preg_replace( '/[^\d]/', '', $image_id );
 	} else {
 		$post_id = get_the_ID();
 
@@ -72,8 +72,14 @@ if( $image_source == 'external_link' ) {
 
 	$image_full_width = wp_get_attachment_image_src( $image_id, 'full' );
 	$image_full       = $image_full_width[0];
-	$image_data       = wp_get_attachment_image_src( $image_id, $image_size );
-	$image_url        = $image_data[0];
+	
+	if( in_array( $image_size, $size_array ) ){
+		$image_data       = wp_get_attachment_image_src( $image_id, $image_size );
+		$image_url        = $image_data[0];
+	}else{
+		$image_url 	= kc_tools::createImageSize( $image_full, $image_size );
+	}
+	
 
 	if( !empty( $image_url ) ) {
 		$image_attributes[] = 'src="'.$image_url.'"';
@@ -138,12 +144,12 @@ $element_attributes[] = 'class="' . esc_attr( trim( $css_class ) ) . '"';
     if( !empty($on_click_action) ) {
     ?>
     <a <?php echo $data_lightbox ;?> href="<?php echo esc_attr( $image_full );?>" title="<?php echo strip_tags( $title_link ) ;?>" target="<?php echo esc_attr( $target );?>">
-        <figure><img <?php echo implode( ' ', $image_attributes ) ;?> alt="<?php echo html_entity_decode( $caption );?>" /><?php echo $html;?></figure>
+        <img <?php echo implode( ' ', $image_attributes ) ;?> /><?php echo $html;?>
     </a>
     <?php
     } else {
     ?>
-    <figure><img <?php echo implode( ' ', $image_attributes ) ;?> /><?php echo $html; ?></figure>
+    <img <?php echo implode( ' ', $image_attributes ) ;?> /><?php echo $html; ?>
     <?php
     }
     if( !empty( $caption ) ){

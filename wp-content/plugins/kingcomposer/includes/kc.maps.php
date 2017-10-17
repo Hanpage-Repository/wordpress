@@ -20,8 +20,8 @@ $kc->add_map(
 	array(
 
 		'_value' => array(
-			'name' => 'KC Element',
-			'description' => 'KC Element',
+			'name' => __(' KC Element', 'kingcomposer'),
+			'description' => __(' KC Element', 'kingcomposer'),
 			'icon' => 'sl-info',	   /* Class name of icon show on "Add Elements" */
 			'category' => '',	  /* Category to group elements when "Add Elements" */
 			'is_container' => false, /* Container has begin + end [name]...[/name] -  Single has only [name param=""] */
@@ -29,7 +29,7 @@ $kc->add_map(
 			'system_only' => true, /* Use for system only and dont show up to Add Elements */
 			'params' => array()
 		),
-		
+
 		'_styling' => array(
 			'system_only' => true,
 			'options' => array(
@@ -48,7 +48,7 @@ $kc->add_map(
 						array('property' => 'line-height', 'label' => 'Line Height'),
 						array('property' => 'letter-spacing', 'label' => 'Letter Spacing'),
 						array('property' => 'overflow', 'label' => 'Overflow'),
-						array('property' => 'word-break', 'label' => 'Word Break'),					
+						array('property' => 'word-break', 'label' => 'Word Break'),
 					),
 
 					//Background group
@@ -66,10 +66,12 @@ $kc->add_map(
 						array('property' => 'border-radius', 'label' => 'Border Radius'),
 						array('property' => 'float', 'label' => 'Float'),
 						array('property' => 'display', 'label' => 'Display'),
+						array('property' => 'position', 'label' => 'Position'),
 						array('property' => 'box-shadow', 'label' => 'Box Shadow'),
 						array('property' => 'opacity', 'label' => 'Opacity'),
+						
 					),
-					
+
 					//Custom code css
 					'Custom' => array(
 						array('property' => 'custom', 'label' => 'Custom CSS')
@@ -101,7 +103,7 @@ $kc->add_map(
 						array('property' => 'float', 'label' => 'Float'),
 						array('property' => 'display', 'label' => 'Display'),
 					),
-					
+
 					'Custom' => array(
 						array('property' => 'custom', 'label' => 'Custom CSS')
 					)
@@ -110,7 +112,7 @@ $kc->add_map(
 		),
 
 		'kc_undefined' => array(
-			'name' => 'Undefined Element',
+			'name' => __(' Undefined Element', 'kingcomposer'),
 			'icon' => 'sl-flag',
 			'category' => '',
 			'is_container' => true,
@@ -119,7 +121,7 @@ $kc->add_map(
 			'params' => array(
 				array(
 					'name' => 'content',
-					'label' => 'Content',
+					'label' => __(' Content', 'kingcomposer'),
 					'type' => 'textarea_html',
 					'value' => 'Sample Text',
 					'admin_label' => true,
@@ -128,16 +130,11 @@ $kc->add_map(
 		),
 
 		'kc_wp_widget' => array(
-			'name' => 'Wordpress Widget',
+			'name' => __(' Wordpress Widget', 'kingcomposer'),
 			'icon' => 'kc-icon-wordpress',
 			'category' => '',
 			'pop_width' => 450,
 			'system_only' => true,
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 			'params' => array(
 				'general' => array(
 					array(
@@ -161,26 +158,21 @@ $kc->add_map(
 				),
 			)
 		),
-		
+
 		'kc_wp_sidebar' => array(
-			'name' => 'Wordpress Sidebar',
+			'name' => __(' Wordpress Sidebar', 'kingcomposer'),
 			'icon' => 'kc-icon-sidebar',
 			'category' => '',
 			'pop_width' => 450,
 			'system_only' => true,
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 			'params' => array(
 				'general' => array(
 					array(
 						'name' => 'name',
-						'label' => 'Sidebar',
+						'label' => __(' Sidebar', 'kingcomposer'),
 						'type' => 'wp_sidebars',
 						'admin_label' => true,
-						'description' => __('Select available sidebars, go to Widgets manager to add or remove widgets from sidebar', 'kingcomposer'),
+						'description' => __(' Select available sidebars, go to Widgets manager to add or remove widgets from sidebar', 'kingcomposer'),
 					)
 				),
 				'styling' => array(
@@ -197,28 +189,23 @@ $kc->add_map(
 				),
 			)
 		),
-					
+
 		'kc_row' => array(
 			'name' => 'Row',
 			'description' => __( 'Place content elements inside the row', 'kingcomposer' ),
 			'category' => '',
-			'title' => 'Row Settings',
+			'title' => __(' Row Settings', 'kingcomposer'),
 			'is_container' => true,
 			'system_only' => true,
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 			'live_editor' => $live_tmpl.'kc_row.php',
 			'params' => array(
 				'general' => array(
-					
+
 					array(
 						'name' => 'row_id',
 						'label' => 'Row ID',
 						'type' => 'text',
-						'description' => __('The unique identifier of the row.', 'kingcomposer'),
+						'description' => __(' The unique identifier of the row.', 'kingcomposer'),
 					),
 					array(
 						'name' => 'cols_gap',
@@ -226,21 +213,32 @@ $kc->add_map(
 						'options' => array(
 							array(
 								'group' => array(
-									array('property' => 'gap', 'label' => 'Columns Gap', 'des' => __('The distance between the columns in this row', 'kingcomposer'), 'selector' => '.kc_column'),
-									array('property' => 'max-width', 'label' => 'Max width container', 'des' => __('The default value of row container max-width: 1170px, you can change it here', 'kingcomposer'), 'selector' => '.kc-container'),
+									array('property' => 'gap', 'label' => 'Columns Gap', 'des' => __(' The distance between the columns in this row', 'kingcomposer'), 'selector' => '.kc_column'),
+									array('property' => 'max-width', 'label' => 'Max width container', 'des' => __(' The default value of row container max-width: 1170px, you can change it here', 'kingcomposer'), 'selector' => '.kc-container'),
 								)
 							)
 						)
 					),
 					array(
 						'name' => 'use_container',
-						'label' => 'Full width',
+						'label' => __(' Full width', 'kingcomposer'),
 						'type' => 'radio',
 						'value' => 'yes',
-						'description' => sprintf( __('This is important option, please click here to %s', 'kingcomposer'), '<a href="http://docs.kingcomposer.com/row-full-width/" target=_blank>read more</a>'),
+						'description' => sprintf( __(' This is important option, please click here to %s', 'kingcomposer'), '<a href="http://docs.kingcomposer.com/row-full-width/" target=_blank>read more</a>'),
 						'options' => array(
-							'yes' => 'Stretch wrapper only',
-							'no' => 'Stretch all content & wrapper'
+							'yes' => __(' Stretch wrapper only', 'kingcomposer'),
+							'no' => __(' Stretch all content & wrapper', 'kingcomposer')
+						),
+					),
+					array(
+						'name' => 'force',
+						'label' => __( 'Force Fullwidth?', 'kingcomposer' ),
+						'type' => 'toggle',
+						'value' => 'no',
+						'description' => __( 'This option will force full with for all website which not compatibility with KingComposer rule', 'kingcomposer' ),
+						'relation' => array(
+							'parent' => 'use_container',
+							'show_when' => array('yes','no')
 						),
 					),
 					array(
@@ -295,12 +293,33 @@ $kc->add_map(
 						'name' => 'video_bg_url',
 						'label' => __( 'YouTube link', 'kingcomposer' ),
 						'type' => 'text',
-						'value' => 'https://www.youtube.com/watch?v=dOWFVKb2JqM',
-						'description' => __( 'Add YouTube link.', 'kingcomposer' ),
+						'value' => '',
+						'description' => __( 'Add YouTube link. Default value : https://www.youtube.com/watch?v=dOWFVKb2JqM', 'kingcomposer' ),
 						'relation' => array(
 							'parent' => 'video_bg',
 							'show_when' => 'yes'
 						),
+					),
+					array(
+						'name' => 'video_options',
+						'label' => __( 'Youtube Extra Options', 'kingcomposer' ),
+						'type' => 'text',
+						'relation' => array(
+							'parent' => 'video_bg',
+							'show_when' => 'yes'
+						),
+						'description' => __( 'Extra option for video player as modestbranding, loop. Example: modestbranding=1&loop=0', 'kingcomposer' )
+					),
+					array(
+						'name' => 'video_mute',
+						'label' => __( 'Mute Youtube Sound', 'kingcomposer' ),
+						'type' => 'toggle',
+						'value' => 'no',
+						'relation' => array(
+							'parent' => 'video_bg',
+							'show_when' => 'yes'
+						),
+						'description' => __( 'This option allow mute sound of player.', 'kingcomposer' )
 					),
 					array(
 						'name' => 'parallax',
@@ -361,17 +380,13 @@ $kc->add_map(
 		),
 
 		'kc_row_inner' => array(
-			'name' => 'Row Inner',
-			'description' => 'nested rows & columns ',
+			'name' => __(' Row Inner', 'kingcomposer'),
+			'description' => __(' nested rows & columns ', 'kingcomposer'),
 			'icon' => 'kc-icon-row',
 			'category' => '',
-			'title' => 'Row Inner Settings',
+			'title' => __(' Row Inner Settings', 'kingcomposer'),
 			'is_container' => true,
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 100,
 			'live_editor' => $live_tmpl.'kc_row_inner.php',
 			'params' => array(
 				'general' => array(
@@ -388,7 +403,7 @@ $kc->add_map(
 						'options' => array(
 							array(
 								'group' => array(
-									array('property' => 'gap', 'label' => 'Columns Gap', 'des' => __('The distance between the columns in this row', 'kingcomposer'), 'selector' => '>.kc_column_inner, >div>.kc_column_inner'),
+									array('property' => 'gap', 'label' => 'Columns Gap', 'des' => __(' The distance between the columns in this row', 'kingcomposer'), 'selector' => '>.kc_column_inner, >div>.kc_column_inner'),
 								)
 							)
 						)
@@ -414,6 +429,44 @@ $kc->add_map(
 							'parent' => 'equal_height',
 							'show_when' => 'yes'
 						),
+					),
+					array(
+						'name' => 'video_bg',
+						'label' => __( 'Use video background?', 'kingcomposer' ),
+						'type' => 'toggle',
+						'description' => __( 'Background video will be applied to the row.', 'kingcomposer' )
+					),
+					array(
+						'name' => 'video_bg_url',
+						'label' => __( 'YouTube link', 'kingcomposer' ),
+						'type' => 'text',
+						'value' => '',
+						'description' => __( 'Add YouTube link. Default value : https://www.youtube.com/watch?v=dOWFVKb2JqM', 'kingcomposer' ),
+						'relation' => array(
+							'parent' => 'video_bg',
+							'show_when' => 'yes'
+						),
+					),
+					array(
+						'name' => 'video_options',
+						'label' => __( 'Youtube Extra Options', 'kingcomposer' ),
+						'type' => 'text',
+						'relation' => array(
+							'parent' => 'video_bg',
+							'show_when' => 'yes'
+						),
+						'description' => __( 'Extra option for video player as modestbranding, loop. Example: modestbranding=1&loop=0', 'kingcomposer' )
+					),
+					array(
+						'name' => 'video_mute',
+						'label' => __( 'Mute Youtube Sound', 'kingcomposer' ),
+						'type' => 'toggle',
+						'value' => 'no',
+						'relation' => array(
+							'parent' => 'video_bg',
+							'show_when' => 'yes'
+						),
+						'description' => __( 'This option allow mute sound of player.', 'kingcomposer' )
 					),
 					array(
 						'name' => 'row_class',
@@ -446,14 +499,9 @@ $kc->add_map(
 		'kc_column' => array(
 			'name' => 'Column',
 			'category' => '',
-			'title' => 'Column Settings',
+			'title' => __(' Column Settings', 'kingcomposer'),
 			'is_container' => true,
 			'system_only' => true,
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 			'live_editor' => $live_tmpl.'kc_column.php',
 			'params' => array(
 				'general' => array(
@@ -474,12 +522,41 @@ $kc->add_map(
 						'label' => __( 'Column ID', 'kingcomposer' ),
 						'type' => 'text',
 						'description' => __( 'Add ID attribute to ther outer layer of a column.', 'kingcomposer' )
-					)
+					),
+					array(
+						'name' => 'video_bg',
+						'label' => __( 'Use video background?', 'kingcomposer' ),
+						'type' => 'toggle',
+						'description' => __( 'Background video will be applied to the column.', 'kingcomposer' )
+					),
+					array(
+						'name' => 'video_bg_url',
+						'label' => __( 'YouTube link', 'kingcomposer' ),
+						'type' => 'text',
+						'value' => '',
+						'description' => __( 'Add YouTube link. Default value : https://www.youtube.com/watch?v=dOWFVKb2JqM', 'kingcomposer' ),
+						'relation' => array(
+							'parent' => 'video_bg',
+							'show_when' => 'yes'
+						),
+					),
+					array(
+						'name' => 'video_mute',
+						'label' => __( 'Mute Youtube Sound', 'kingcomposer' ),
+						'type' => 'toggle',
+						'value' => 'no',
+						'relation' => array(
+							'parent' => 'video_bg',
+							'show_when' => 'yes'
+						),
+						'description' => __( 'This option allow mute sound of player.', 'kingcomposer' )
+					),
 				),
 				'styling' => array(
 					array(
 						'name'    => 'css_custom',
 						'type'    => 'css',
+                        'options' => kc_column_options('.kc-col-container'),
 					)
 				),
 				'animate' => array(
@@ -492,16 +569,11 @@ $kc->add_map(
 		),
 
 		'kc_column_inner' => array(
-			'name' => 'Column Inner',
+			'name' => __(' Column Inner', 'kingcomposer'),
 			'category' => '',
-			'title' => 'Column Inner Settings',
+			'title' => __(' Column Inner Settings', 'kingcomposer'),
 			'is_container' => true,
 			'system_only' => true,
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 			'live_editor' => $live_tmpl.'kc_column_inner.php',
 			'params' => array(
 				'general' => array(
@@ -527,7 +599,8 @@ $kc->add_map(
 				'styling' => array(
 					array(
 						'name'    => 'css_custom',
-						'type'    => 'css'
+						'type'    => 'css',
+                        'options' => kc_column_options('.kc-col-inner-container'),
 					)
 				),
 				'animate' => array(
@@ -540,16 +613,12 @@ $kc->add_map(
 		),
 
 		'kc_box' => array(
-			'name' => 'KC Box',
+			'name' => __(' KC Box', 'kingcomposer'),
 			'category' => 'Content',
-			'title' => 'KC Box Design',
+			'title' => __(' KC Box Design', 'kingcomposer'),
 			'icon' => 'kc-icon-box',
 			'pop_width' => 900,
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'      => 110,
 			'description' => __( 'Helping design static block', 'kingcomposer' ),
 			'live_editor' => $live_tmpl.'kc_box.php',
 			'params' => array(
@@ -582,105 +651,94 @@ $kc->add_map(
 		),
 
 		'kc_tabs' => array(
-			'name' => 'Tabs - Sliders',
+			'name' => __(' Tabs - Sliders', 'kingcomposer'),
 			'description' => __( 'Tabbed or Sliders content', 'kingcomposer' ),
 			'category' => 'Content',
 			'icon' => 'kc-icon-tabs',
-			'title' => 'Tabs - Sliders Settings',
+			'title' => __(' Tabs - Sliders Settings', 'kingcomposer'),
 			'is_container' => true,
 			'views' => array(
 				'type' => 'views_sections',
 				'sections' => 'kc_tab'
 			),
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 120,
 			'live_editor' => $live_tmpl.'kc_tabs.php',
 			'params' => array(
 				'general' => array(
 					array(
 						'name' => 'class',
-						'label' => 'Extra Class',
+						'label' => __(' Extra Class', 'kingcomposer'),
 						'type' => 'text'
 					),
 					array(
 						'name' => 'type',
-						'label' => __('How Display', 'kingcomposer'),
+						'label' => __(' How Display', 'kingcomposer'),
 						'type' => 'select',
 						'options' => array(
-							'horizontal_tabs' => __('Horizontal Tabs', 'kingcomposer'),
-							'vertical_tabs' => __('Vertical Tabs', 'kingcomposer'),
-							'slider_tabs' => __('Owl Sliders', 'kingcomposer')
+							'horizontal_tabs' => __(' Horizontal Tabs', 'kingcomposer'),
+							'vertical_tabs' => __(' Vertical Tabs', 'kingcomposer'),
+							'slider_tabs' => __(' Owl Sliders', 'kingcomposer')
 						),
-						'description' => __('Use sidebar view of your tabs as horizontal, vertical or slider.', 'kingcomposer')
+						'description' => __(' Use sidebar view of your tabs as horizontal, vertical or slider.', 'kingcomposer')
 					),
 					array(
 						'name' => 'title_slider',
-						'label' => 'Display Titles?',
+						'label' => __(' Display Titles?', 'kingcomposer'),
 						'type' => 'toggle',
 						'relation' => array(
 							'parent' => 'type',
 							'show_when' => 'slider_tabs'
 						),
-						'description' => __('Display tabs title above of the slider', 'kingcomposer')
+						'description' => __(' Display tabs title above of the slider', 'kingcomposer')
 					),
 					array(
 						'name' => 'items',
-						'label' => 'Number Items?',
-						'type' => 'select',
-						'options' => array(
-							'1' => '1',
-							'2' => '2',
-							'3' => '3',
-							'4' => '4',
-							'5' => '5',
-							'6' => '6',
-						),
+						'label' => __(' Number Items?', 'kingcomposer'),
+						'type' => 'number_slider',
+                        'options' => array(
+                            'min' => 1,
+                            'max' => 10,
+                            'show_input' => true
+                        ),
 						'relation' => array(
 							'parent' => 'type',
 							'show_when' => 'slider_tabs'
 						),
-						'description' => __('Display number of items per each slide (Desktop Screen)', 'kingcomposer')
+						'description' => __(' Display number of items per each slide (Desktop Screen)', 'kingcomposer')
 					),
 					array(
 						'name' => 'tablet',
-						'label' => 'Items on tablet?',
-						'type' => 'select',
-						'options' => array(
-							'1' => '1',
-							'2' => '2',
-							'3' => '3',
-							'4' => '4',
-							'5' => '5',
-							'6' => '6',
-						),
+						'label' => __(' Items on tablet?', 'kingcomposer'),
+						'type' => 'number_slider',
+                        'options' => array(
+                            'min' => 1,
+                            'max' => 6,
+                            'show_input' => true
+                        ),
 						'relation' => array(
 							'parent' => 'type',
 							'show_when' => 'slider_tabs'
 						),
-						'description' => __('Display number of items per each slide (Tablet Screen)', 'kingcomposer')
+						'description' => __(' Display number of items per each slide (Tablet Screen)', 'kingcomposer')
 					),
 					array(
 						'name' => 'mobile',
-						'label' => 'Items on smartphone?',
-						'type' => 'select',
-						'options' => array(
-							'1' => '1',
-							'2' => '2',
-							'3' => '3',
-							'4' => '4',
-						),
+						'label' => __(' Items on smartphone?', 'kingcomposer'),
+						'type' => 'number_slider',
+                        'options' => array(
+                            'min' => 1,
+                            'max' => 4,
+                            'show_input' => true
+                        ),
 						'relation' => array(
 							'parent' => 'type',
 							'show_when' => 'slider_tabs'
 						),
-						'description' => __('Display number of items per each slide (Smartphone Screen)', 'kingcomposer')
+						'description' => __(' Display number of items per each slide (Smartphone Screen)', 'kingcomposer')
 					),
 					array(
 						'name' => 'speed',
-						'label' => 'Speed of slider',
+						'label' => __(' Speed of slider', 'kingcomposer'),
 						'type' => 'number_slider',
 						'options' => array(
 							'min' => 100,
@@ -692,76 +750,76 @@ $kc->add_map(
 							'parent' => 'type',
 							'show_when' => 'slider_tabs'
 						),
-						'description' => __('The speed of sliders in millisecond', 'kingcomposer')
+						'description' => __(' The speed of sliders in millisecond', 'kingcomposer')
 					),
 					array(
 						'name' => 'navigation',
-						'label' => 'Navigation',
+						'label' => __(' Navigation', 'kingcomposer'),
 						'type' => 'toggle',
 						'relation' => array(
 							'parent' => 'type',
 							'show_when' => 'slider_tabs'
 						),
-						'description' => __('Display the "Next" and "Prev" buttons.', 'kingcomposer')
+						'description' => __(' Display the "Next" and "Prev" buttons.', 'kingcomposer')
 					),
 					array(
 						'name' => 'pagination',
-						'label' => 'Pagination',
+						'label' => __(' Pagination', 'kingcomposer'),
 						'type' => 'toggle',
 						'relation' => array(
 							'parent' => 'type',
 							'show_when' => 'slider_tabs'
 						),
 						'value' => 'yes',
-						'description' => __('Show the pagination.', 'kingcomposer')
+						'description' => __(' Show the pagination.', 'kingcomposer')
 					),
 					array(
 						'name' => 'autoplay',
-						'label' => 'Auto Play',
+						'label' => __(' Auto Play', 'kingcomposer'),
 						'type' => 'toggle',
 						'relation' => array(
 							'parent' => 'type',
 							'show_when' => 'slider_tabs'
 						),
-						'description' => __('The slider automatically plays when site loaded', 'kingcomposer')
+						'description' => __(' The slider automatically plays when site loaded', 'kingcomposer')
 					),
 					array(
 						'name' => 'autoheight',
-						'label' => 'Auto Height',
+						'label' => __(' Auto Height', 'kingcomposer'),
 						'type' => 'toggle',
 						'relation' => array(
 							'parent' => 'type',
 							'show_when' => 'slider_tabs'
 						),
-						'description' => __('The slider height will change automatically', 'kingcomposer')
+						'description' => __(' The slider height will change automatically', 'kingcomposer')
 					),
 					array(
 						'name' => 'effect_option',
-						'label' => 'Enable fadein effect?',
+						'label' => __(' Enable fadein effect?', 'kingcomposer'),
 						'type' => 'toggle',
 						'relation' => array(
 							'parent' => 'type',
 							'hide_when' => 'slider_tabs'
 						),
-						'description' => __('Quickly apply fade in and face out effect when users click on tab.', 'kingcomposer')
+						'description' => __(' Quickly apply fade in and face out effect when users click on tab.', 'kingcomposer')
 					),
 					array(
 						'name' => 'vertical_tabs_position',
-						'label' => __('Position', 'kingcomposer'),
+						'label' => __(' Position', 'kingcomposer'),
 						'type' => 'select',
 						'options' => array(
-							'left' => __('Left', 'kingcomposer'),
-							'right' => __('Right', 'kingcomposer')
+							'left' => __(' Left', 'kingcomposer'),
+							'right' => __(' Right', 'kingcomposer')
 						),
 						'relation' => array(
 							'parent' => 'type',
 							'show_when' => array('vertical_tabs')
 						),
-						'description' => __('View tabs with at top or bottom', 'kingcomposer')
+						'description' => __(' View tabs with at top or bottom', 'kingcomposer')
 					),
 					array(
 						'name' => 'open_mouseover',
-						'label' => __('Open on mouseover', 'kingcomposer'),
+						'label' => __(' Open on mouseover', 'kingcomposer'),
 						'type' => 'toggle',
 						'relation' => array(
 							'parent' => 'type',
@@ -770,14 +828,14 @@ $kc->add_map(
 					),
 					array(
 						'name' => 'active_section',
-						'label' => __('Active section', 'kingcomposer'),
+						'label' => __(' Active section', 'kingcomposer'),
 						'type' => 'text',
 						'value' => '1',
 						'relation' => array(
 							'parent' => 'type',
 							'hide_when' => 'slider_tabs'
 						),
-						'description' => __('Enter active section number.', 'kingcomposer')
+						'description' => __(' Enter active section number.', 'kingcomposer')
 					)
 				),
 				'styling' => array(
@@ -786,23 +844,18 @@ $kc->add_map(
 						'type'    => 'css',
 						'options' => array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Tab' => array(
-									array('property' => 'font-family', 'label' => 'Text Font Family', 'selector' => '.kc_tabs_nav, .kc_tabs_nav > li a,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li>a'),
-									array('property' => 'font-size', 'label' => 'Text Size', 'selector' => '.kc_tabs_nav, .kc_tabs_nav > li a,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li>a'),
-									array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.kc_tabs_nav, .kc_tabs_nav > li a,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li>a'),
-									array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.kc_tabs_nav, .kc_tabs_nav > li a,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li>a'),
-									array('property' => 'text-transform', 'label' => 'Text-transform', 'selector' => '.kc_tabs_nav, .kc_tabs_nav > li a,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li>a'),
-									array('property' => 'text-align', 'label' => 'Text-align', 'selector' => '.kc_tabs_nav, .kc_tabs_nav > li a,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li>a'),
-									array('property' => 'font-size', 'label' => 'Icon Size', 'selector' => '.kc_tabs_nav a i,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li>a i'),
+									array('property' => 'font-family,font-size,line-height,font-weight,text-transform,text-align', 'label' => 'Font family', 'selector' => '.kc_tabs_nav, .kc_tabs_nav > li a,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li>a'),
+									array('property' => 'font-size,color,padding', 'label' => 'Icon Size,Icon Color,Icon Spacing', 'selector' => '.kc_tabs_nav a i,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li>a i'),
 									array('property' => 'color', 'label' => 'Text Color', 'selector' => '.kc_tabs_nav a, .kc_tabs_nav,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li>a'),
-									array('property' => 'color', 'label' => 'Icon Color', 'selector' => '.kc_tabs_nav a i,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li>a i'),
 									array('property' => 'background-color', 'label' => 'Background Color', 'selector' => '.kc_tabs_nav,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav'),
 									array('property' => 'background-color', 'label' => 'Background Color tab item', 'selector' => '.kc_tabs_nav li,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav li'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => '.kc_tabs_nav > li, .kc_tab.ui-tabs-body-active, .kc_tabs_nav,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav ~ div.kc_tab.ui-tabs-body-active,+.kc_vertical_tabs.tabs_right>.kc_wrapper>ul.ui-tabs-nav ~ div.kc_tab'),
 									array('property' => 'border-radius', 'label' => 'Border-radius', 'selector' => '.kc_tabs_nav > li, .kc_tab.ui-tabs-body-active, .kc_tabs_nav,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav ~ div.kc_tab.ui-tabs-body-active,+.kc_vertical_tabs.tabs_right>.kc_wrapper>ul.ui-tabs-nav ~ div.kc_tab'),
-									array('property' => 'padding', 'label' => 'Icon Spacing', 'selector' => '.kc_tabs_nav a i,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li>a i'),
 									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.kc_tabs_nav > li > a,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li>a'),
 									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.kc_tabs_nav > li > a,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li'),
+									array('property' => 'width', 'label' => 'Width', 'selector' => '.kc_tabs_nav > li,+.kc_vertical_tabs>.kc_wrapper>ul.ui-tabs-nav>li'),
 								),
 
 								'Tab Hover' => array(
@@ -818,6 +871,7 @@ $kc->add_map(
 								'Tab Body' => array(
 									array('property' => 'background-color', 'label' => 'Background Color', 'selector' => '.kc_tab'),
 									array('property' => 'padding', 'label' => 'Spacing', 'selector' => '.kc_tab .kc_tab_content'),
+									array('property' => 'display', 'label' => 'Display'),
 								),
 
 
@@ -841,39 +895,35 @@ $kc->add_map(
 			'title' => 'Tab Settings',
 			'is_container' => true,
 			'system_only' => true,
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'body styling' => 'et-adjustments'
-			),
 			'live_editor' => $live_tmpl.'kc_tab.php',
 			'params' => array(
 				'general' => array(
 					array(
 						'name' => 'title',
-						'label' => 'Title',
+						'label' => __(' Title', 'kingcomposer'),
 						'type' => 'text',
-						'value' => __('New Tab', 'kingcomposer'),
+						'value' => __(' New Tab', 'kingcomposer'),
 					),
 					array(
 						'name' => 'advanced',
-						'label' => 'Advance Title?',
+						'label' => __(' Advance Title?', 'kingcomposer'),
 						'type' => 'toggle',
-						'description' => __('If you want more flexible options to display tab title', 'kingcomposer')
+						'description' => __(' If you want more flexible options to display tab title', 'kingcomposer')
 					),
 					array(
 						'name' => 'adv_title',
-						'label' => 'Title Format',
+						'label' => __(' Title Format', 'kingcomposer'),
 						'type' => 'textarea',
-						'value' => base64_encode( __('<a href="#">New Tab</a>', 'kingcomposer') ),
+						'value' => base64_encode( __(' <a href="#">New Tab</a>', 'kingcomposer') ),
 						'relation' => array(
 							'parent' => 'advanced',
 							'show_when' => 'yes'
 						),
-						'description' => __('You can use short varibles {title}, {icon} , {icon_class}, {image}, {image_id}, {image_url}, {image_thumbnail}, {image_medium}, {image_large}, {image_full}, {tab_id}', 'kingcomposer')
+						'description' => __(' You can use short varibles {title}, {icon} , {icon_class}, {image}, {image_id}, {image_url}, {image_thumbnail}, {image_medium}, {image_large}, {image_full}, {tab_id}', 'kingcomposer')
 					),
 					array(
 						'name' => 'adv_icon',
-						'label' => 'Icon Title',
+						'label' => __(' Icon Title', 'kingcomposer'),
 						'type' => 'icon_picker',
 						'value' => '',
 						'relation' => array(
@@ -883,7 +933,7 @@ $kc->add_map(
 					),
 					array(
 						'name' => 'adv_image',
-						'label' => 'Image Title',
+						'label' => __(' Image Title', 'kingcomposer'),
 						'type' => 'attach_image',
 						'value' => '',
 						'relation' => array(
@@ -892,26 +942,26 @@ $kc->add_map(
 						)
 					),
 					array(
-						array(
-							'name' => 'icon',
-							'label' => 'Icon Title',
-							'type' => 'icon_picker',
-							'value' => '',
-							'description' => __('Choose an icon to display with title', 'kingcomposer'),
-							'relation' => array(
-								'parent' => 'icon_option',
-								'show_when' => 'yes'
-							)
-						),				'name' => 'icon_option',
-						'label' => 'Use Icon?',
+						'name' => 'icon_option',
+						'label' => __(' Use Icon?', 'kingcomposer'),
 						'type' => 'toggle',
-						'description' => __('Display an icon beside the title', 'kingcomposer'),
+						'description' => __(' Display an icon beside the title', 'kingcomposer'),
 						'relation' => array(
 							'parent' => 'advanced',
 							'hide_when' => 'yes'
 						)
 					),
-					
+					array(
+						'name' => 'icon',
+						'label' => __(' Icon Title', 'kingcomposer'),
+						'type' => 'icon_picker',
+						'value' => '',
+						'description' => __(' Choose an icon to display with title', 'kingcomposer'),
+						'relation' => array(
+							'parent' => 'icon_option',
+							'show_when' => 'yes'
+						)
+					),
 					array(
 						'name' => 'class',
 						'label' => 'Extra Class',
@@ -928,42 +978,44 @@ $kc->add_map(
 		),
 
 		'kc_accordion' => array(
-			'name' => 'Accordion',
+			'name' => __(' Accordion', 'kingcomposer'),
 			'description' => __( 'Collapsible content panels', 'kingcomposer' ),
 			'category' => 'Content',
 			'icon' => 'kc-icon-accordion',
-			'title' => 'Accordion Settings',
+			'title' => __(' Accordion Settings', 'kingcomposer'),
 			'is_container' => true,
+			'priority'  => 130,
 			'views' => array(
 				'type' => 'views_sections',
 				'sections' => 'kc_accordion_tab',
 				'display' => 'vertical'
-			),
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'global style' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
 			),
 			'live_editor' => $live_tmpl.'kc_accordion.php',
 			'params' => array(
 				'general' => array(
 					array(
 						'name' => 'title',
-						'label' => 'Title',
+						'label' => __(' Title', 'kingcomposer'),
 						'type' => 'text',
-						'description' => __('Enter accordion title (Note: It is located above the content).', 'kingcomposer')
+						'description' => __(' Enter accordion title (Note: It is located above the content).', 'kingcomposer')
+					),
+					array(
+						'name' => 'close_all',
+						'label' => __(' Close all?', 'kingcomposer'),
+						'type' => 'toggle',
+						'description' => __(' Do not open accordion tab when page loaded', 'kingcomposer')
 					),
 					array(
 						'name' => 'open_all',
-						'label' => 'Collapse all?',
+						'label' => __(' Collapse all?', 'kingcomposer'),
 						'type' => 'toggle',
-						'description' => __('Allow all accordion tabs able to open', 'kingcomposer')
+						'description' => __(' Allow all accordion tabs able to open', 'kingcomposer')
 					),
 					array(
 						'name' => 'class',
-						'label' => 'Extra class name',
+						'label' => __(' Extra class name', 'kingcomposer'),
 						'type' => 'text',
-						'description' => __('If you wish to style particular content element differently, please add a class name to this field and refer to it in your custom CSS file.', 'kingcomposer')
+						'description' => __(' If you wish to style particular content element differently, please add a class name to this field and refer to it in your custom CSS file.', 'kingcomposer')
 					)
 				),
 				'global style' => array(
@@ -972,19 +1024,16 @@ $kc->add_map(
 						'type'    => 'css',
 						'options' => array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Header' => array(
 									array('property' => 'font-family', 'label' => 'Text Font Family', 'selector' => '.kc_accordion_header, .kc_accordion_header > a'),
 									array('property' => 'font-size', 'label' => 'Text Size', 'selector' => '.kc_accordion_header, .kc_accordion_header > a'),
-									array('property' => 'font-size', 'label' => 'Icon Size', 'selector' => '.kc_accordion_header a i'),
+									array('property' => 'font-size,color,padding', 'label' => 'Icon Size,Icon Color,Icon Spacing', 'selector' => '.kc_accordion_header a i'),
 									array('property' => 'text-align', 'label' => 'Text Alignment', 'selector' => '.kc_accordion_header'),
-									array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.kc_accordion_header a'),
-									array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.kc_accordion_header a'),
-									array('property' => 'color', 'label' => 'Text Color', 'selector' => '.kc_accordion_header a'),
-									array('property' => 'color', 'label' => 'Icon Color', 'selector' => '.kc_accordion_header a i'),
+									array('property' => 'color,font-weight,text-transform', 'label' => 'Text Color,Font Weight,Text Transform', 'selector' => '.kc_accordion_header a'),
 									array('property' => 'color', 'label' => 'State Icon Color', 'selector' => '.ui-icon'),
 									array('property' => 'background-color', 'label' => 'Background Color', 'selector' => '.kc_accordion_header'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => '.kc_accordion_header'),
-									array('property' => 'padding', 'label' => 'Icon Spacing', 'selector' => '.kc_accordion_header a i'),
 									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.kc_accordion_header'),
 								),
 								'Active' => array(
@@ -1005,6 +1054,7 @@ $kc->add_map(
 									array('property' => 'background-color', 'label' => 'Background Color', 'selector' => '.kc-panel-body'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => '.kc_accordion_content'),
 									array('property' => 'padding', 'label' => 'Spacing', 'selector' => '.kc-panel-body'),
+									array('property' => 'display', 'label' => 'Display'),
 								),
 
 
@@ -1023,35 +1073,32 @@ $kc->add_map(
 		),
 
 		'kc_accordion_tab' => array(
-			'name' => 'Accordion Tab',
+			'name' => __(' Accordion Tab', 'kingcomposer'),
 			'category' => '',
-			'title' => 'Accordion Tab Settings',
+			'title' => __(' Accordion Tab Settings', 'kingcomposer'),
 			'is_container' => true,
 			'system_only' => true,
-			'tab_icons' => array(
-				'general' => 'et-tools',
-			),
 			'live_editor' => $live_tmpl.'kc_accordion_tab.php',
 			'params' => array(
 				'general' => array(
 					array(
 						'name' => 'title',
-						'label' => __('Title', 'kingcomposer'),
-						'value' => __('New Accordion Tab', 'kingcomposer'),
+						'label' => __(' Title', 'kingcomposer'),
+						'value' => __(' New Accordion Tab', 'kingcomposer'),
 						'type' => 'text'
 					),
 					array(
 						'name' => 'icon_option',
-						'label' => 'Use Icon?',
+						'label' => __(' Use Icon?', 'kingcomposer'),
 						'type' => 'toggle',
-						'description' => __('Display an icon beside the title', 'kingcomposer')
+						'description' => __(' Display an icon beside the title', 'kingcomposer')
 					),
 					array(
 						'name' => 'icon',
-						'label' => 'Icon Title',
+						'label' => __(' Icon Title', 'kingcomposer'),
 						'type' => 'icon_picker',
 						'value' => '',
-						'description' => __('Choose an icon to display with title', 'kingcomposer'),
+						'description' => __(' Choose an icon to display with title', 'kingcomposer'),
 						'relation' => array(
 							'parent' => 'icon_option',
 							'show_when' => 'yes'
@@ -1059,9 +1106,9 @@ $kc->add_map(
 					),
 					array(
 						'name' => 'class',
-						'label' => 'Extra class name',
+						'label' => __(' Extra class name', 'kingcomposer'),
 						'type' => 'text',
-						'description' => __('', 'kingcomposer')
+						'description' => __(' ', 'kingcomposer')
 					)
 				),
 
@@ -1069,27 +1116,23 @@ $kc->add_map(
 		),
 
 		'kc_column_text' => array(
-			'name' => 'Text Block',
-			'description' => __('A block of text with TINYMCE editor', 'kingcomposer'),
+			'name' => __(' Text Block', 'kingcomposer'),
+			'description' => __(' A block of text with TINYMCE editor', 'kingcomposer'),
 			'icon' => 'kc-icon-text',
 			'category' => 'Content',
 			'is_container' => true,
+			'priority'  => 140,
 			'pop_width' => 650,
 			'admin_view'	=> 'text',
 			'preview_editable' => true,
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 			'live_editor' => $live_tmpl.'kc_column_text.php',
 			'params' => array(
 				'general' => array(
 					array(
 						'name' => 'content',
-						'label' => 'Content',
+						'label' => __('Content', 'kingcomposer'),
 						'type' => 'textarea_html',
-						'value' => 'Sample Text',
+						'value' => __('Sample Text', 'kingcomposer'),
 					),
 					array(
 						'name' => 'class',
@@ -1103,6 +1146,7 @@ $kc->add_map(
 						'type'		=> 'css',
 						'options'	=> array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Typography' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => ',p'),
 									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => ',p'),
@@ -1118,8 +1162,10 @@ $kc->add_map(
 									array('property' => 'background', 'label' => 'Background'),
 									array('property' => 'border', 'label' => 'Border'),
 									array('property' => 'border-radius', 'label' => 'Border Radius'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'padding', 'label' => 'Padding'),
-									array('property' => 'margin', 'label' => 'Margin'),
+									array('property' => 'margin', 'label' => 'Margin', 'selector' => 'p'),
+
 								)
 							)
 						)
@@ -1135,15 +1181,16 @@ $kc->add_map(
 		),
 
 		'kc_spacing' => array(
-			'name' => 'Spacing',
-			'description' => __('Custom the spacing between the blocks', 'kingcomposer'),
+			'name' => __(' Spacing', 'kingcomposer'),
+			'description' => __(' Custom the spacing between the blocks', 'kingcomposer'),
 			'icon' => 'kc-icon-spacing',
 			'category' => 'Content',
+			'priority'  => 150,
 			'live_editor' => $live_tmpl.'kc_spacing.php',
 			'params' => array(
 				array(
 					'name' => 'height',
-					'label' => 'Height',
+					'label' => __(' Height', 'kingcomposer'),
 					'type' => 'number_slider',
 					'value' => '20',
 					'options' => array(
@@ -1153,29 +1200,30 @@ $kc->add_map(
 						'show_input' => true
 					),
 					'admin_label' => true,
-					'description' => __('Enter the value of spacing height', 'kingcomposer'),
+					'description' => __(' Enter the value of spacing height', 'kingcomposer'),
 				),
 				array(
 					'name' => 'class',
-					'label' => __('Extra class name', 'kingcomposer'),
+					'label' => __(' Extra class name', 'kingcomposer'),
 					'type' => 'text',
 					'admin_label' => true,
-					'description' => __('If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS file.', 'kingcomposer')
+					'description' => __(' If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS file.', 'kingcomposer')
 				)
 			)
 		),
 
 		'kc_raw_code' => array(
-			'name' => 'Raw Code',
-			'description' => __('Allow to put code: html, shortcode', 'kingcomposer'),
+			'name' => __(' Raw Code', 'kingcomposer'),
+			'description' => __(' Allow to put code: html, shortcode', 'kingcomposer'),
 			'icon' => 'kc-icon-code',
 			'category' => 'Content',
 			'pop_width' => 750,
+			'priority'  => 160,
 			'live_editor' => $live_tmpl.'kc_raw_code.php',
 			'params' => array(
 				array(
 					'name' => 'code',
-					'label' => 'Code',
+					'label' => __(' Code', 'kingcomposer'),
 					'type' => 'textarea',
 					'value' => 'U2FtcGxlIENvZGU=',
 					'admin_label' => true,
@@ -1184,34 +1232,30 @@ $kc->add_map(
 		),
 
 		'kc_single_image' => array(
-			'name' => 'Single Image',
-			'description' => __('Single image', 'kingcomposer'),
+			'name' => __(' Single Image', 'kingcomposer'),
+			'description' => __(' Single image', 'kingcomposer'),
 			'icon' => 'kc-icon-image',
 			'category' => 'Medias',
 			'admin_view' => 'image',
+			'priority'  => 170,
 			'preview_editable' => true,
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 			'live_editor' => $live_tmpl.'kc_single_image.php',
 			'params' => array(
 				'general' => array(
 					array(
 						'name'    => 'image_source',
-						'label'   => __('Image Source', 'kingcomposer'),
+						'label'   => __(' Image Source', 'kingcomposer'),
 						'type'    => 'select',
 						'options' => array(
-							'media_library'  => __('Media library', 'kingcomposer'),
-							'external_link'  => __('External link', 'kingcomposer'),
-							'featured_image' => __('Featured Image', 'kingcomposer'),
+							'media_library'  => __(' Media library', 'kingcomposer'),
+							'external_link'  => __(' External link', 'kingcomposer'),
+							'featured_image' => __(' Featured Image', 'kingcomposer'),
 						),
-						'description' => __('Select image source.', 'kingcomposer')
+						'description' => __(' Select image source.', 'kingcomposer')
 					),
 					array(
 						'name'        => 'image',
-						'label'       => 'Upload Image',
+						'label'       => __(' Upload Image', 'kingcomposer'),
 						'type'        => 'attach_image',
 						'admin_label' => true,
 						'relation'    => array(
@@ -1221,99 +1265,98 @@ $kc->add_map(
 					),
 					array(
 						'name'     => 'image_external_link',
-						'label'    => 'Image external link',
+						'label'    => __(' Image external link', 'kingcomposer'),
 						'type'     => 'text',
 						'relation' => array(
 							'parent'    => 'image_source',
 							'show_when' => 'external_link'
 						),
-						'description' => __('Enter external link.', 'kingcomposer')
+						'description' => __(' Enter external link.', 'kingcomposer')
 					),
 					array(
 						'name'          => 'image_size',
 						'label'         => 'Image Size',
 						'type'          => 'text',
-						'value'         => 'thumbnail',
+						'value'         => 'full',
 						'relation'      => array(
 							'parent'    => 'image_source',
 							'show_when' => array('media_library', 'featured_image')
 						),
-						'description'   => __('Set the image size: "thumbnail", "medium", "large" or "full"', 'kingcomposer'),
-						'value'         => 'full'
+						'description'   => __(' Set the image size: "thumbnail", "medium", "large", "full" or "400x200"', 'kingcomposer'),
 					),
 					array(
 						'name'          => 'image_size_el',
-						'label'         => 'Image Size',
+						'label'         => __( 'Image Size', 'kingcomposer'),
 						'type'          => 'text',
 						'relation'      => array(
 							'parent'    => 'image_source',
 							'show_when' => 'external_link'
 						),
-						'description'   => __('Enter the image size in pixels. Example: 200x100 (Width x Height).', 'kingcomposer')
+						'description'   => __(' Enter the image size in pixels. Example: 200x100 (Width x Height).', 'kingcomposer')
 					),
 					array(
 						'name'        => 'alt',
 						'label'       => 'Alt',
 						'type'        => 'text',
-						'description' => __('Enter the image alt property.', 'kingcomposer')
+						'description' => __(' Enter the image alt property.', 'kingcomposer')
 					),
 					array(
 						'name'        => 'caption',
-						'label'       => 'Caption',
+						'label'       => __(' Caption', 'kingcomposer'),
 						'type'        => 'text',
-						'description' => __('Enter the image caption bellow image.', 'kingcomposer')
+						'description' => __(' Enter the image caption bellow image.', 'kingcomposer')
 					),
 					array(
 						'name'    => 'on_click_action',
-						'label'   => __('On click event', 'kingcomposer'),
+						'label'   => __(' On click event', 'kingcomposer'),
 						'type'    => 'select',
 						'options' => array(
-							''                 => __('None', 'kingcomposer'),
-							'op_large_image'   => __('Link to large image', 'kingcomposer'),
-							'lightbox'         => __('Open Image In Lightbox', 'kingcomposer'),
-							'open_custom_link' => __('Open Custom Link', 'kingcomposer')
+							''                 => __(' None', 'kingcomposer'),
+							'op_large_image'   => __(' Link to large image', 'kingcomposer'),
+							'lightbox'         => __(' Open Image In Lightbox', 'kingcomposer'),
+							'open_custom_link' => __(' Open Custom Link', 'kingcomposer')
 						),
-						'description' => __('Select the click event when users click on the image.', 'kingcomposer')
+						'description' => __(' Select the click event when users click on the image.', 'kingcomposer')
 					),
 					array(
 						'name'     => 'custom_link',
-						'label'    => __('Custom Link', 'kingcomposer'),
+						'label'    => __(' Custom Link', 'kingcomposer'),
 						'type'     => 'link',
 						'value'    => '#',
 						'relation' => array(
 							'parent'    => 'on_click_action',
 							'show_when' => 'open_custom_link'
 						),
-						'description' => __('The URL which image assigned to. You can select page/post or other post type', 'kingcomposer')
+						'description' => __(' The URL which image assigned to. You can select page/post or other post type', 'kingcomposer')
 					),
 					array(
 						'name'          => 'overlay',
-						'label'         => 'Overlay Hover Effect',
+						'label'         => __(' Overlay Hover Effect', 'kingcomposer'),
 						'type'          => 'toggle',
-						'description'   => __('Enable to add layer overlay will show up when hover on the image.', 'kingcomposer')
+						'description'   => __(' Enable to add layer overlay will show up when hover on the image.', 'kingcomposer')
 					),
 					array(
 						'name'     => 'icon',
-						'label'    => __('Icon Overlay', 'kingcomposer'),
+						'label'    => __(' Icon Overlay', 'kingcomposer'),
 						'type'     => 'icon_picker',
 						'value'    => 'fa-plus',
 						'relation' => array(
 							'parent'    => 'overlay',
 							'show_when' => 'yes'
 						),
-						'description' => __('The icon show on center of overlay laver.', 'kingcomposer')
+						'description' => __(' The icon show on center of overlay laver.', 'kingcomposer')
 					),
 					array(
 						'name'        => 'ieclass',
-						'label'       => __('Image extra class', 'kingcomposer'),
+						'label'       => __(' Image extra class', 'kingcomposer'),
 						'type'        => 'text',
-						'description' => __('Add class name for img tag.', 'kingcomposer')
+						'description' => __(' Add class name for img tag.', 'kingcomposer')
 					),
 					array(
 						'name'        => 'class',
-						'label'       => __('Wrapper extra class', 'kingcomposer'),
+						'label'       => __(' Wrapper extra class', 'kingcomposer'),
 						'type'        => 'text',
-						'description' => __('If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS file.', 'kingcomposer'),
+						'description' => __(' If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS file.', 'kingcomposer'),
 					)
 				),
 				'styling' => array(
@@ -1322,9 +1365,11 @@ $kc->add_map(
 						'type'    => 'css',
 						'options'		=> array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Image Style' => array(
 									array('property' => 'text-align', 'label' => 'Image Alignment'),
 									array('property' => 'display', 'label' => 'Image Display'),
+									array('property' => 'float', 'label' => 'Image Float'),
 									array('property' => 'background-color', 'label' => 'Background Color', 'selector' => 'img'),
 									array('property' => 'box-shadow', 'label' => 'Box Shadow', 'selector' => 'img'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => 'img'),
@@ -1332,7 +1377,8 @@ $kc->add_map(
 									array('property' => 'width', 'label' => 'Width', 'selector' => 'img'),
 									array('property' => 'height', 'label' => 'Height', 'selector' => 'img'),
 									array('property' => 'max-width', 'label' => 'Max Width', 'selector' => 'img'),
-									array('property' => 'margin', 'label' => 'Margin', 'selector' => 'img'),
+									array('property' => 'vertical-align', 'label' => 'Vertical Align', 'selector' => 'img'),
+									array('property' => 'margin', 'label' => 'Margin', 'selector' => ''),
 									array('property' => 'padding', 'label' => 'Padding', 'selector' => 'img')
 								),
 								'Caption' => array(
@@ -1373,29 +1419,25 @@ $kc->add_map(
 		),
 
 		'kc_icon' => array(
-			'name'		  => 'Icon',
-			'description' => __('Display single icon', 'kingcomposer'),
+			'name'		  => __(' Icon', 'kingcomposer'),
+			'description' => __(' Display single icon', 'kingcomposer'),
 			'icon'		  => 'kc-icon-icon',
 			'category'	  => 'Content',
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 200,
 			'live_editor' => $live_tmpl.'kc_icon.php',
 			'params'	  => array(
 				'general' => array(
 					array(
 						'name'	      => 'icon',
-						'label'	      => 'Select Icon',
+						'label'	      => __( 'Select Icon', 'kingcomposer' ),
 						'type'	      => 'icon_picker',
 						'admin_label' => true,
 					),
 					array(
 						'name'	      => 'use_link',
-						'label'       => 'Add Link ?',
+						'label'       => __(' Add Link ?'),
 						'type'	      => 'toggle',
-						'description' => __('Add a link for icon.', 'kingcomposer')
+						'description' => __(' Add a link for icon.', 'kingcomposer')
 					),
 					array(
 						'type'			=> 'link',
@@ -1409,16 +1451,16 @@ $kc->add_map(
 					),
 					array(
 						'name'	      => 'class',
-						'label'	      => __('Extra class name', 'kingcomposer'),
+						'label'	      => __(' Extra class name', 'kingcomposer'),
 						'type'	      => 'text',
 						'admin_label' => true,
-						'description' => __('If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS file.', 'kingcomposer')
+						'description' => __(' If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS file.', 'kingcomposer')
 					),
 					array(
 						'name'	        => 'icon_wrap_class',
-						'label'	        => 'Wrapper class name',
+						'label'	        => __(' Wrapper class name', 'kingcomposer'),
 						'type'	        => 'text',
-						'description'   => __('Enter class name for wrapper', 'kingcomposer'),
+						'description'   => __(' Enter class name for wrapper', 'kingcomposer'),
 					)
 				),
 				'styling' => array(
@@ -1427,13 +1469,17 @@ $kc->add_map(
 						'type'    => 'css',
 						'options'		=> array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Icon Style' => array(
 									array('property' => 'color', 'label' => 'Icon Color', 'selector' => 'i'),
 									array('property' => 'background-color', 'label' => 'Icon BG Color', 'selector' => 'i'),
 									array('property' => 'font-size', 'label' => 'Icon Size', 'selector' => 'i'),
 									array('property' => 'line-height', 'label' => 'Line Height', 'selector' => 'i'),
                                     array('property' => 'text-align', 'label' => 'Icon Alignment'),
-									array('property' => 'width', 'label' => 'Width', 'selector' => 'i'),
+									array('property' => 'display', 'label' => 'Display', 'selector' => 'i'),
+									array('property' => 'float', 'label' => 'Float', 'selector' => 'i'),
+									array('property' => 'float', 'label' => 'Float', 'selector' => 'i'),
+									array('property' => 'position', 'label' => 'Position', 'selector' => ''),
 									array('property' => 'height', 'label' => 'Height', 'selector' => 'i'),
 									array('property' => 'border', 'label' => 'Icon Border', 'selector' => 'i'),
 									array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => 'i'),
@@ -1459,34 +1505,30 @@ $kc->add_map(
 		),
 
 		'kc_title' => array(
-			'name'		  => 'Title',
-			'description' => __('Heading titles H(n) Tag', 'kingcomposer'),
+			'name'		  => __(' Title', 'kingcomposer'),
+			'description' => __(' Heading titles H(n) Tag', 'kingcomposer'),
 			'icon'		  => 'kc-icon-title',
 			'category'	  => 'Content',
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 210,
 			'live_editor' => $live_tmpl.'kc_title.php',
 			'params'	  => array(
 				'general' => array(
 					array(
 						'name'	      => 'text',
-						'label'       => 'Text',
+						'label'       => __(' Text'),
 						'type'	      => 'textarea',
 						'value'		  => base64_encode('The Title'),
 						'admin_label' => true,
 					),
 					array(
 						'name'	      => 'post_title',
-						'label'       => 'Use Post Title?',
+						'label'       => __(' Use Post Title?'),
 						'type'	      => 'toggle',
-						'description' => __('Use the title of current post/page as content element instead of text input value.', 'kingcomposer')
+						'description' => __(' Use the title of current post/page as content element instead of text input value.', 'kingcomposer')
 					),
 					array(
 						'name'	  => 'type',
-						'label'   => 'Type',
+						'label'   => __(' Type'),
 						'type'	  => 'select',
 						'admin_label' => true,
 						'options' => array(
@@ -1503,20 +1545,20 @@ $kc->add_map(
 					),
 					array(
 						'name'	=> 'class',
-						'label' => 'Extra Class',
+						'label' => __(' Extra Class', 'kingcomposer'),
 						'type'	=> 'text'
 					),
 					array(
 						'name'	      => 'title_wrap',
-						'label'       => 'Advanced',
+						'label'       => __(' Advanced', 'kingcomposer'),
 						'type'	      => 'toggle',
-						'description' => __('Add a &lt;div&gt; tag around the head tag, more code before or after the head tag.', 'kingcomposer')
+						'description' => __(' Add a &lt;div&gt; tag around the head tag, more code before or after the head tag.', 'kingcomposer')
 					),
 					array(
 						'name'	      => 'before',
-						'label'       => 'Before Head Tag',
+						'label'       => __(' Before Head Tag', 'kingcomposer'),
 						'type'	      => 'textarea',
-						'description' => __('Add HTML text before the head tag.', 'kingcomposer'),
+						'description' => __(' Add HTML text before the head tag.', 'kingcomposer'),
 						'relation'      => array(
 							'parent'    => 'title_wrap',
 							'show_when' => 'yes'
@@ -1526,7 +1568,7 @@ $kc->add_map(
 						'name'	      => 'after',
 						'label'       => 'After Head Tag',
 						'type'	      => 'textarea',
-						'description' => __('Add HTML text after the head tag.', 'kingcomposer'),
+						'description' => __(' Add HTML text after the head tag.', 'kingcomposer'),
 						'relation'      => array(
 							'parent'    => 'title_wrap',
 							'show_when' => 'yes'
@@ -1534,15 +1576,15 @@ $kc->add_map(
 					),
 					array(
 						'name'     => 'title_link',
-						'label'    => __('Link Title', 'kingcomposer'),
+						'label'    => __(' Link Title', 'kingcomposer'),
 						'type'     => 'link',
-						'description' => __('Insert link for title', 'kingcomposer')
+						'description' => __(' Insert link for title', 'kingcomposer')
 					),
 					array(
 						'name'	        => 'title_wrap_class',
-						'label'         => 'Wrapper class name',
+						'label'         => __(' Wrapper class name', 'kingcomposer'),
 						'type'	        => 'text',
-						'description'   => __('Enter class name for wrapper', 'kingcomposer'),
+						'description'   => __(' Enter class name for wrapper', 'kingcomposer'),
 						'relation'      => array(
 							'parent'    => 'title_wrap',
 							'show_when' => 'yes'
@@ -1555,6 +1597,7 @@ $kc->add_map(
 						'type'    => 'css',
 						'options'		=> array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Title Style' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '+.kc_title,.kc_title,.kc_title a.kc_title_link'),
 									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '+.kc_title,.kc_title,.kc_title a.kc_title_link'),
@@ -1564,6 +1607,7 @@ $kc->add_map(
 									array('property' => 'letter-spacing', 'label' => 'Letter Spacing', 'selector' => '+.kc_title,.kc_title,.kc_title a.kc_title_link'),
 									array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '+.kc_title,.kc_title,.kc_title a.kc_title_link'),
 									array('property' => 'text-align', 'label' => 'Alignment', 'selector' => '+.kc_title,.kc_title,.kc_title a.kc_title_link'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'padding', 'label' => 'Padding', 'selector' => '+.kc_title,.kc_title,.kc_title a.kc_title_link'),
 									array('property' => 'margin', 'label' => 'Margin', 'selector' => '+.kc_title,.kc_title,.kc_title a.kc_title_link')
 								)
@@ -1582,15 +1626,12 @@ $kc->add_map(
 
 		'kc_google_maps' => array(
 
-			'name'			   => __('Google Maps', 'kingcomposer'),
-			'description'	   => __('Show google maps with embed', 'kingcomposer'),
+			'name'			   => __(' Google Maps', 'kingcomposer'),
+			'description'	   => __(' Show google maps with embed', 'kingcomposer'),
 			'icon'			   => 'kc-icon-map',
 			'category'		   => 'Medias',
 			'admin_view'	   => 'gmaps',
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments'
-			),
+			'priority'  => 220,
 			'live_editor' => $live_tmpl.'kc_google_maps.php',
 			'params'		   => array(
 				'general' => array(
@@ -1612,6 +1653,12 @@ $kc->add_map(
 						'name'		=> 'map_height',
 						'label'		=> __( 'Map Height (px)', 'kingcomposer' ),
 						'value'		=> 350
+					),
+					array(
+						'name'          => 'disable_wheel_mouse',
+						'label'         => __(' Disable Wheel Zoom', 'kingcomposer'),
+						'type'          => 'toggle',
+						'description'   => __(' Disable the zoom action when mouse wheel focus on maps.', 'kingcomposer')
 					),
 					array(
 						'type'			     => 'toggle',
@@ -1649,6 +1696,7 @@ $kc->add_map(
 						'type'		=> 'css',
 						'options'	=> array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Contact Form' => array(
 									array('property' => 'width', 'label' => 'Width Wrap', 'value' => '45%', 'selector' => '.map_popup_contact_form'),
 									array('property' => 'color', 'label' => 'Color', 'value' => '#FFFFFF', 'selector' => '.map_popup_contact_form'),
@@ -1682,15 +1730,11 @@ $kc->add_map(
 		),
 
 		'kc_twitter_feed' => array(
-			'name'			=> __('Twitter Feed', 'kingcomposer'),
-			'description'	=> __('New tweets from twitter', 'kingcomposer'),
+			'name'			=> __(' Twitter Feed', 'kingcomposer'),
+			'description'	=> __(' New tweets from twitter', 'kingcomposer'),
 			'icon' => 'kc-icon-twitter',
 			'category' => 'Socials',
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 230,
 			'params' => array(
 				'general' => array(
 					array(
@@ -1847,6 +1891,7 @@ $kc->add_map(
 						'type'    => 'css',
 						'options' => array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Text - Icon' => array(
 									array('property' => 'color', 'label' => 'Text Color', 'selector' => '.description'),
 									array('property' => 'font-family', 'label' => 'Text Font Family', 'selector' => '.description'),
@@ -1870,6 +1915,7 @@ $kc->add_map(
 								),
 								'Box' => array(
 									array('property' => 'background-color', 'label' => 'Background', 'selector' => '.result_twitter_feed', 'des' => __( 'The background of list posts', 'kingcomposer')),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => '.result_twitter_feed'),
 									array('property' => 'height', 'label' => 'Height', 'selector' => '.result_twitter_feed', 'des' => __( 'The height of list posts', 'kingcomposer')),
 									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.result_twitter_feed', 'des' => __( 'Spacing of list with wrapper', 'kingcomposer')),
@@ -1899,15 +1945,11 @@ $kc->add_map(
 
 		'kc_instagram_feed' => array(
 
-			'name' => __('Instagram Feed', 'kingcomposer'),
-			'description' => __('', 'kingcomposer'),
+			'name' => __(' Instagram Feed', 'kingcomposer'),
+			'description' => __(' ', 'kingcomposer'),
 			'icon' => 'kc-icon-instagram',
 			'category' => 'Socials',
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 240,
 			'params' => array(
 				'general' => array(
 					array(
@@ -1982,10 +2024,18 @@ $kc->add_map(
 						'type'    => 'css',
 						'options'		=> array(
 							array(
-								'Instagaram Style' => array(
+								"screens" => "any,1024,999,767,479",
+								'Item' => array(
 									array('property' => 'border', 'label' => 'Border', 'selector' => 'ul li img'),
 									array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => 'ul li img'),
 									array('property' => 'padding', 'label' => 'Padding', 'selector' => 'ul li'),
+									array('property' => 'margin', 'label' => 'Margin', 'selector' => 'ul li')
+								),
+								'Box' => array(
+									array('property' => 'width', 'label' => 'Width', 'selector' => ''),
+									array('property' => 'display', 'label' => 'Display'),
+									array('property' => 'padding', 'label' => 'Padding', 'selector' => ''),
+									array('property' => 'margin', 'label' => 'Margin', 'selector' => '')
 								)
 							)
 						)
@@ -2003,15 +2053,11 @@ $kc->add_map(
 
 		'kc_fb_recent_post' => array(
 
-			'name' => __('FaceBook Post', 'kingcomposer'),
-			'description' => __('', 'kingcomposer'),
+			'name' => __(' FaceBook Post', 'kingcomposer'),
+			'description' => __(' ', 'kingcomposer'),
 			'icon' => 'kc-icon-facebook',
 			'category' => 'Socials',
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 250,
 			'params' => array(
 				'general' => array(
 					array(
@@ -2122,6 +2168,7 @@ $kc->add_map(
 						'type'    => 'css',
 						'options' => array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Text - Icon' => array(
 									array('property' => 'color', 'label' => 'Text Color', 'selector' => '.fb-message'),
 									array('property' => 'font-family', 'label' => 'Text Font Family', 'selector' => '.fb-message'),
@@ -2143,6 +2190,7 @@ $kc->add_map(
 								),
 								'Box' => array(
 									array('property' => 'background-color', 'label' => 'Background', 'selector' => 'ul.list-posts', 'des' => __( 'The background of list posts', 'kingcomposer')),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => 'ul.list-posts'),
 									array('property' => 'height', 'label' => 'Height', 'selector' => 'ul', 'des' => __( 'The height of list posts', 'kingcomposer')),
 									array('property' => 'padding', 'label' => 'Padding', 'selector' => 'ul.list-posts', 'des' => __( 'Spacing of list with wrapper', 'kingcomposer')),
@@ -2168,16 +2216,12 @@ $kc->add_map(
 		),
 
 		'kc_flip_box' => array(
-			'name' => __('Flip Box', 'kingcomposer'),
-			'description' => __('', 'kingcomposer'),
+			'name' => __(' Flip Box', 'kingcomposer'),
+			'description' => __(' ', 'kingcomposer'),
 			'icon' => 'kc-icon-flip',
+			'priority'  => 260,
 			'category' => 'Content',
 			'live_editor' => $live_tmpl.'kc_flip_box.php',
-			'tab_icons' => array(
-				'front' => 'et-adjustments',
-				'back'  => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 			'params' => array(
 				'front' => array(
 					array(
@@ -2210,7 +2254,7 @@ $kc->add_map(
 						'type'			=> 'textarea',
 						'label'			=> __( 'Description', 'kingcomposer' ),
 						'name'			=> 'description',
-						'value'			=> base64_encode( __('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.', 'kingcomposer')),
+						'value'			=> base64_encode( __(' Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.', 'kingcomposer')),
 						'description'	=> __( 'Enter description for the front side, Shortcode are supported in this field.', 'kingcomposer' )
 					),
 					array(
@@ -2235,6 +2279,7 @@ $kc->add_map(
 						'type'     => 'css',
 						'options' => array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Icon' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.front i'),
 									array('property' => 'background-color', 'label' => 'Background Color', 'selector' => '.front i'),
@@ -2270,6 +2315,7 @@ $kc->add_map(
 									array('property' => 'background', 'label' => 'Background', 'selector' => '.front'),
 									array('property' => 'width', 'label' => 'Width', 'selector' => '.front, .back'),
 									array('property' => 'height', 'label' => 'Height', 'selector' => '.front, .back'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'text-align', 'label' => 'Height', 'selector' => '.front .front-content'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => '.front'),
 									array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.front'),
@@ -2309,7 +2355,7 @@ $kc->add_map(
 						'type'			=> 'textarea',
 						'label'			=> __( 'Description', 'kingcomposer' ),
 						'name'			=> 'b_description',
-						'value'			=> base64_encode( __('Lorem ipsum dolor sit amet, consectetur adipiscing.', 'kingcomposer')),
+						'value'			=> base64_encode( __(' Lorem ipsum dolor sit amet, consectetur adipiscing.', 'kingcomposer')),
 						'description'	=> __( 'Enter description for the back side, Shortcode are supported in this field.', 'kingcomposer' )
 					),
 					array(
@@ -2344,6 +2390,7 @@ $kc->add_map(
 						'type'     => 'css',
 						'options' => array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Icon' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.back i'),
 									array('property' => 'background-color', 'label' => 'Background Color', 'selector' => '.back i'),
@@ -2393,6 +2440,7 @@ $kc->add_map(
 								'Boxes' => array(
 									array('property' => 'background', 'label' => 'Background', 'selector' => '.back'),
 									array('property' => 'text-align', 'label' => 'Border', 'selector' => '.back .des'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => '.back'),
 									array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.back'),
 									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.back'),
@@ -2405,15 +2453,11 @@ $kc->add_map(
 		),
 
 		'kc_pie_chart' => array(
-			'name' 		=> __('Pie Chart', 'kingcomposer'),
-			'description' => __('', 'kingcomposer'),
+			'name' 		=> __(' Pie Chart', 'kingcomposer'),
+			'description' => __(' ', 'kingcomposer'),
 			'icon'		=> 'kc-icon-pie',
+			'priority'  => 270,
 			'category'	=> 'Content',
-			'tab_icons'	=> array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 			'live_editor'	=> $live_tmpl.'kc_pie_chart.php',
 			'params'		=> array(
 				'general' => array(
@@ -2459,7 +2503,7 @@ $kc->add_map(
 						'name' => 'auto_width',
 						'label' => 'Auto Width',
 						'type' => 'toggle',
-						'description' => __('Width pie chart auto set to 100% of wrapper element ', 'kingcomposer'),
+						'description' => __(' Width pie chart auto set to 100% of wrapper element ', 'kingcomposer'),
 					),
 					array(
 						'type'			=> 'toggle',
@@ -2469,16 +2513,16 @@ $kc->add_map(
 					),
 					array(
 						'name' => 'icon_option',
-						'label' => 'Add Icon?',
+						'label' => __(' Add Icon?', 'kingcomposer'),
 						'type' => 'toggle',
-						'description' => __('Display an icon above the number', 'kingcomposer'),
+						'description' => __(' Display an icon above the number', 'kingcomposer'),
 					),
 					array(
 						'name' => 'icon',
-						'label' => 'Select Icon',
+						'label' => __(' Select Icon', 'kingcomposer'),
 						'type' => 'icon_picker',
 						'value' => 'fa-leaf',
-						'description' => __('Choose an icon to display with number', 'kingcomposer'),
+						'description' => __(' Choose an icon to display with number', 'kingcomposer'),
 						'relation' => array(
 							'parent' => 'icon_option',
 							'show_when' => 'yes'
@@ -2511,7 +2555,7 @@ $kc->add_map(
 						'name'			=> 'custom_css',
 						'options'		=> array(
 							array(
-								'screens' 	=> 'any',
+								'screens' 	=> 'any,1024,999,767,479',
 								'Number Style' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.percent', 'des' => __( 'Set color for number percent text', 'kingcomposer' )),
 									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.percent', 'des' => __( 'Set size of number percent text', 'kingcomposer' )),
@@ -2526,6 +2570,7 @@ $kc->add_map(
 								),
 								'Wrapper' => array(
 									array('property' => 'background', 'label' => 'Background'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'margin', 'label' => 'Margin'),
 									array('property' => 'padding', 'label' => 'Padding'),
 								)
@@ -2545,15 +2590,11 @@ $kc->add_map(
 
 		'kc_progress_bars' => array(
 
-			'name' => __('Progress Bar', 'kingcomposer'),
-			'description' => __('', 'kingcomposer'),
+			'name' => __(' Progress Bar', 'kingcomposer'),
+			'description' => __(' ', 'kingcomposer'),
 			'icon' => 'kc-icon-progress',
 			'category' => 'Content',
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 300,
 			'live_editor' => $live_tmpl.'kc_progress_bars.php',
 			'params' => array(
 				'general' => array(
@@ -2563,9 +2604,9 @@ $kc->add_map(
 						'name'			=> 'style',
 						'description'	=> __( 'Select the style of progress bars.', 'kingcomposer' ),
 						'options'		=> array(
-							'1' => __('Style 1', 'kingcomposer'),
-							'2' => __('Style 2 (Value in tooltip)', 'kingcomposer'),
-							'3' => __('Style 3 (Value in progress bar)', 'kingcomposer')
+							'1' => __(' Style 1', 'kingcomposer'),
+							'2' => __(' Style 2 (Value in tooltip)', 'kingcomposer'),
+							'3' => __(' Style 3 (Value in progress bar)', 'kingcomposer')
 						),
 						'admin_label'	=> true,
 					),
@@ -2575,21 +2616,21 @@ $kc->add_map(
 						'name'			=> 'speed',
 						'description'	=> __( 'Select speed for animation.', 'kingcomposer' ),
 						'options'		=> array(
-							'2000' => __('Normal', 'kingcomposer'),
-							'1600' => __('Fast', 'kingcomposer'),
-							'1200' => __('Very Fast', 'kingcomposer'),
-							'2400' => __('Slow', 'kingcomposer'),
-							'2800' => __('Very Slow', 'kingcomposer'),
+							'2000' => __(' Normal', 'kingcomposer'),
+							'1600' => __(' Fast', 'kingcomposer'),
+							'1200' => __(' Very Fast', 'kingcomposer'),
+							'2400' => __(' Slow', 'kingcomposer'),
+							'2800' => __(' Very Slow', 'kingcomposer'),
 						),
 						'value'			=> '2000',
 						'admin_label'	=> true,
 					),
 					array(
 						'type'			=> 'group',
-						'label'			=> __('Options', 'kingcomposer'),
+						'label'			=> __(' Options', 'kingcomposer'),
 						'name'			=> 'options',
 						'description'	=> __( 'Repeat this fields with each item created, Each item corresponding processbar element.', 'kingcomposer' ),
-						'options'		=> array('add_text' => __('Add new progress bar', 'kingcomposer')),
+						'options'		=> array('add_text' => __(' Add new progress bar', 'kingcomposer')),
 
 						'value' => base64_encode( json_encode(array(
 							"1" => array(
@@ -2661,7 +2702,7 @@ $kc->add_map(
 						'name'			=> 'custom_css',
 						'options'		=> array(
 							array(
-								'screens' => 'any',
+								'screens' => 'any,1024,999,767,479',
 								'Title' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.progress-item span.label'),
 									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.progress-item span.label'),
@@ -2687,6 +2728,7 @@ $kc->add_map(
 								),
 								'Wrapper' => array(
 									array('property' => 'width', 'label' => 'Width'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'margin', 'label' => 'Margin'),
 									array('property' => 'padding', 'label' => 'Padding'),
 									array('property' => 'background', 'label' => 'Background'),
@@ -2708,15 +2750,11 @@ $kc->add_map(
 
 		'kc_button' => array(
 
-			'name' => __('Button', 'kingcomposer'),
-			'description' => __('', 'kingcomposer'),
+			'name' => __(' Button', 'kingcomposer'),
+			'description' => __(' ', 'kingcomposer'),
 			'icon' => 'kc-icon-button',
 			'category' => 'Content',
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 310,
 			'live_editor' => $live_tmpl.'kc_button.php',
 			'params' => array(
 				'general' => array(
@@ -2759,8 +2797,8 @@ $kc->add_map(
 						'description'	=> '',
 						'value'     	=> 'left',
 						'options'		=> array(
-							'left'	=> __('Left', 'kingcomposer'),
-							'right'	=> __('Right', 'kingcomposer'),
+							'left'	=> __(' Left', 'kingcomposer'),
+							'right'	=> __(' Right', 'kingcomposer'),
 						),
 						'relation'		=> array(
 							'parent'	=> 'show_icon',
@@ -2776,9 +2814,9 @@ $kc->add_map(
 					),
 					array(
 						'name'        => 'ex_class',
-						'label'       => __('Button extra class', 'kingcomposer'),
+						'label'       => __(' Button extra class', 'kingcomposer'),
 						'type'        => 'text',
-						'description' => __('Add class name for a tag.', 'kingcomposer')
+						'description' => __(' Add class name for a tag.', 'kingcomposer')
 					),
 					array(
 						'type'			=> 'text',
@@ -2794,7 +2832,7 @@ $kc->add_map(
 						'name'			=> 'custom_css',
 						'options'		=> array(
 							array(
-								'screens' => 'any',
+								'screens' => 'any,1024,999,767,479',
 								'Button Style' => array(
 									array('property' => 'color', 'label' => 'Text Color', 'selector' => '.kc_button'),
 									array('property' => 'background-color', 'label' => 'Background Color', 'selector' => '.kc_button'),
@@ -2807,6 +2845,9 @@ $kc->add_map(
 									array('property' => 'text-align', 'label' => 'Align'),
 									array('property' => 'letter-spacing', 'label' => 'Letter Spacing', 'selector' => '.kc_button'),
 									array('property' => 'text-shadow', 'label' => 'Text Shadow', 'selector' => '.kc_button'),
+									array('property' => 'width', 'selector' => '.kc_button'),
+									array('property' => 'height', 'selector' => '.kc_button'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => '.kc_button'),
 									array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.kc_button'),
 									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.kc_button'),
@@ -2835,15 +2876,11 @@ $kc->add_map(
 
 		'kc_video_play' => array(
 
-			'name' => __('Video Player', 'kingcomposer'),
-			'description' => __('', 'kingcomposer'),
+			'name' => __(' Video Player', 'kingcomposer'),
+			'description' => __(' ', 'kingcomposer'),
 			'icon' => 'kc-icon-play',
 			'category' => 'Medias',
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 320,
 			'live_editor' => $live_tmpl.'kc_video_play.php',
 			'params' => array(
 				'general' => array(
@@ -2851,10 +2888,10 @@ $kc->add_map(
 						'type' 			=> 'select',
 						'name' 			=> 'source',
 						'label' 		=> __( 'Source', 'kingcomposer' ),
-						'description' 	=> __('Choose source of video', 'kingcomposer'),
+						'description' 	=> __(' Choose source of video', 'kingcomposer'),
 						'options' 		=> array(
-							'upload' => __('From media library', 'kingcomposer'),
-							'youtube' => __('From youtube or vimeo', 'kingcomposer'),
+							'upload' => __(' From media library', 'kingcomposer'),
+							'youtube' => __(' From youtube or vimeo', 'kingcomposer'),
 						)
 					),
 					array(
@@ -2874,17 +2911,28 @@ $kc->add_map(
 						'name'			=> 'video_link',
 						'description'	=> __( 'Enter the Youtube or Vimeo URL. For example: https://www.youtube.com/watch?v=iNJdPyoqt8U', 'kingcomposer' ),
 						'admin_label'	=> true,
-						'value'			=> 'https://www.youtube.com/watch?v=iNJdPyoqt8U',
+						'value'			=> 'https://www.youtube.com/watch?v=kFANGxXh6Fw',
 						'relation'		=> array(
 							'parent'	=> 'source',
 							'show_when' => 'youtube'
 						)
 					),
 					array(
+						'name' => 'video_mute',
+						'label' => __( 'Mute Youtube Sound', 'kingcomposer' ),
+						'type' => 'toggle',
+						'value' => 'no',
+						'relation' => array(
+							'parent' => 'source',
+							'show_when' => 'youtube'
+						),
+						'description' => __( 'This option allow mute sound of player.', 'kingcomposer' )
+					),
+					array(
 						'type' 			=> 'toggle',
 						'name' 			=> 'full_width',
 						'label' 		=> __( 'Video Fullwidth', 'kingcomposer' ),
-						'description' 	=> __('Stretch the video to fit the content width.', 'kingcomposer'),
+						'description' 	=> __(' Stretch the video to fit the content width.', 'kingcomposer'),
 					),
 					array(
 						'type'			=> 'text',
@@ -2903,6 +2951,34 @@ $kc->add_map(
 						'label' 		=> __( 'Auto Play', 'kingcomposer' ),
 						'description' 	=> __('The video automatically plays when site loaded.', 'kingcomposer')
 					),
+                    array(
+                        'type' 			=> 'toggle',
+                        'name' 			=> 'loop',
+                        'label' 		=> __( 'Loop', 'kingcomposer' ),
+                        'description' 	=> __('The player to play the initial video again and again.', 'kingcomposer'),
+                        'value'         => 'yes'
+                    ),
+                    array(
+                        'type' 			=> 'toggle',
+                        'name' 			=> 'control',
+                        'label' 		=> __( 'Show Control', 'kingcomposer' ),
+                        'description' 	=> __('This option indicates whether the video player controls are displayed.', 'kingcomposer'),
+                        'value'         => 'yes'
+                    ),
+                    array(
+                        'type' 			=> 'toggle',
+                        'name' 			=> 'related',
+                        'label' 		=> __( 'Show Related', 'kingcomposer' ),
+                        'description' 	=> __('This option indicates whether the player should show related videos when playback of the initial video ends.', 'kingcomposer'),
+                        'value'         => 'no'
+                    ),
+                    array(
+                        'type' 			=> 'toggle',
+                        'name' 			=> 'showinfo',
+                        'label' 		=> __( 'Show Info', 'kingcomposer' ),
+                        'description' 	=> __('Display information like the video title and uploader before the video starts playing..', 'kingcomposer'),
+                        'value'         => 'no'
+                    ),
 					array(
 						'type'			=> 'text',
 						'label'			=> __( 'Wrapper class name', 'kingcomposer' ),
@@ -2927,15 +3003,11 @@ $kc->add_map(
 		),
 
 		'kc_counter_box' => array(
-			'name' => __('Counter Box', 'kingcomposer'),
-			'description' => __('', 'kingcomposer'),
+			'name' => __(' Counter Box', 'kingcomposer'),
+			'description' => __(' ', 'kingcomposer'),
 			'icon' => 'kc-icon-counter',
 			'category' => '',
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 330,
 			'live_editor' => $live_tmpl.'kc_counter_box.php',
 			'params'		=> array(
 				'general' => array(
@@ -2959,13 +3031,13 @@ $kc->add_map(
 						'type' 			=> 'toggle',
 						'name' 			=> 'label_above',
 						'label' 		=> __( 'Label above number', 'kingcomposer' ),
-						'description' 	=> __('Place the label above the number counting. By default, it is placed underneath the number counting.', 'kingcomposer')
+						'description' 	=> __(' Place the label above the number counting. By default, it is placed underneath the number counting.', 'kingcomposer')
 					),
 					array(
 						'type'	      => 'toggle',
 						'name'	      => 'icon_show',
-						'label'       => 'Display Icon',
-						'description' => __('Display icon in box counter', 'kingcomposer')
+						'label'       => __(' Display Icon', 'kingcomposer'),
+						'description' => __(' Display icon in box counter', 'kingcomposer')
 					),
 					array(
 						'type'			=> 'icon_picker',
@@ -2990,6 +3062,7 @@ $kc->add_map(
 						'type'    => 'css',
 						'options' => array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Label' => array(
 									array('property' => 'color', 'label' => 'Label Color', 'selector' => 'h4'),
 									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => 'h4'),
@@ -3023,6 +3096,7 @@ $kc->add_map(
 								),
 								'Box Style' => array(
 									array('property' => 'background', 'label' => 'Background'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'border', 'label' => 'Border'),
 									array('property' => 'border-radius', 'label' => 'Border Radius'),
 									array('property' => 'padding', 'label' => 'Padding'),
@@ -3042,15 +3116,11 @@ $kc->add_map(
 
 		'kc_post_type_list' => array(
 
-			'name' => __('List Blog Posts', 'kingcomposer'),
-			'description' => __('', 'kingcomposer'),
+			'name' => __(' List Blog Posts', 'kingcomposer'),
+			'description' => __(' ', 'kingcomposer'),
 			'icon' => 'kc-icon-post',
 			'category' => 'Blog Posts',
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 340,
 			'params'		=> array(
 				'general' => array(
 					array(
@@ -3087,15 +3157,15 @@ $kc->add_map(
 						'description'	=> __( '', 'kingcomposer' ),
 						'admin_label'	=> true,
 						'options' 		=> array(
-							'ID'		=> __('Post ID', 'kingcomposer'),
-							'author'	=> __('Author', 'kingcomposer'),
-							'title'		=> __('Title', 'kingcomposer'),
-							'name'		=> __('Post name (post slug)', 'kingcomposer'),
-							'type'		=> __('Post type (available since Version 4.0)', 'kingcomposer'),
-							'date'		=> __('Date', 'kingcomposer'),
-							'modified'	=> __('Last modified date', 'kingcomposer'),
-							'rand'		=> __('Random order', 'kingcomposer'),
-							'comment_count'	=> __('Number of comments', 'kingcomposer')
+							'ID'		=> __(' Post ID', 'kingcomposer'),
+							'author'	=> __(' Author', 'kingcomposer'),
+							'title'		=> __(' Title', 'kingcomposer'),
+							'name'		=> __(' Post name (post slug)', 'kingcomposer'),
+							'type'		=> __(' Post type (available since Version 4.0)', 'kingcomposer'),
+							'date'		=> __(' Date', 'kingcomposer'),
+							'modified'	=> __(' Last modified date', 'kingcomposer'),
+							'rand'		=> __(' Random order', 'kingcomposer'),
+							'comment_count'	=> __(' Number of comments', 'kingcomposer')
 						)
 					),
 					array(
@@ -3105,8 +3175,8 @@ $kc->add_map(
 						'description'	=> __( '', 'kingcomposer' ),
 						'admin_label'	=> true,
 						'options' 		=> array(
-							'ASC'		=> __('ASC', 'kingcomposer'),
-							'DESC'		=> __('DESC', 'kingcomposer'),
+							'ASC'		=> __(' ASC', 'kingcomposer'),
+							'DESC'		=> __(' DESC', 'kingcomposer'),
 						)
 					),
 					array(
@@ -3155,7 +3225,7 @@ $kc->add_map(
 						'label'			=> __( 'Number of words', 'kingcomposer' ),
 						'name'			=> 'number_word',
 						'description'	=> __( 'Show a certain number of words in each post.', 'kingcomposer' ),
-						'value'			=> '30'
+						'value'			=> '50'
 					),
 					array(
 						'type'			=> 'toggle',
@@ -3188,8 +3258,10 @@ $kc->add_map(
 						'type'    => 'css',
 						'options' => array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Title' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.list-item h3 a'),
+									array('property' => 'color', 'label' => 'Hover Color', 'selector' => '.list-item h3 a:hover'),
 									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.list-item h3 a'),
 									array('property' => 'font-size', 'label' => 'Text Size', 'selector' => '.list-item h3 a'),
 									array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.list-item h3 a'),
@@ -3200,14 +3272,18 @@ $kc->add_map(
 									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.list-item h3 a'),
 								),
 								'Meta Text' => array(
-									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.kc-entry_meta .date, .kc-entry_meta a'),
-									array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.kc-entry_meta .date, .kc-entry_meta a'),
-									array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.kc-entry_meta .date, .kc-entry_meta a'),
-									array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.kc-entry_meta .date, .kc-entry_meta a'),
-									array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.kc-entry_meta .date, .kc-entry_meta a'),
-									array('property' => 'color', 'label' => 'Color', 'selector' => '.kc-entry_meta .date, .kc-entry_meta a'),
-									array('property' => 'color', 'label' => 'Icon Color', 'selector' => '.kc-entry_meta .date i, .kc-entry_meta i'),
-									array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.kc-entry_meta .date, .kc-entry_meta a'),
+									array('property' => 'color', 'label' => 'Color', 'selector' => '.kc-entry_meta span'),
+									array('property' => 'color', 'label' => 'Hover Color', 'selector' => '.kc-entry_meta a:hover'),
+									array('property' => 'color', 'label' => 'Icon Color', 'selector' => '.kc-entry_meta i'),
+									array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.kc-entry_meta span'),
+									array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.kc-entry_meta span'),
+									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.kc-entry_meta span'),
+									array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.kc-entry_meta span'),
+									array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.kc-entry_meta span'),
+									array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.kc-entry_meta span'),
+									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.kc-entry_meta'),
+									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.kc-entry_meta span'),
+									array('property' => 'margin', 'label' => 'Icon Spacing', 'selector' => '.kc-entry_meta span i'),
 								),
 								'Text' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.post-content .text'),
@@ -3216,6 +3292,8 @@ $kc->add_map(
 									array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.post-content .text'),
 									array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.post-content .text'),
 									array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.post-content .text'),
+									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.post-content .text'),
+									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.post-content .text'),
 								),
 								'Read More'=> array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.read-more'),
@@ -3228,9 +3306,17 @@ $kc->add_map(
 									array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.read-more'),
 									array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.read-more'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => '.read-more'),
+									array('property' => 'border-color', 'label' => 'Border Hover Color', 'selector' => '.read-more:hover'),
 									array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.read-more'),
-									array('property' => 'padding', 'label' => 'Button Size', 'selector' => '.read-more'),
+									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.read-more'),
+									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.read-more'),
 								),
+								'Item'=> array(
+									array('property' => 'border', 'label' => 'Border', 'selector' => '.list-item'),
+									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.list-item'),
+									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.list-item'),
+								),
+
 							)
 						)
 					)
@@ -3245,15 +3331,11 @@ $kc->add_map(
 		),
 		'kc_carousel_images' => array(
 
-			'name' => __('Image Carousel', 'kingcomposer'),
-			'description' => __('', 'kingcomposer'),
+			'name' => __(' Image Carousel', 'kingcomposer'),
+			'description' => __(' ', 'kingcomposer'),
 			'icon' => 'kc-icon-icarousel',
 			'category' => 'Medias',
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 350,
 			'live_editor' => $live_tmpl.'kc_carousel_images.php',
 			'params' => array(
 
@@ -3287,7 +3369,7 @@ $kc->add_map(
 						'type' 			=> 'number_slider',
 						'label' 		=> __( 'Items per slide', 'kingcomposer' ),
 						'name' 			=> 'items_number',
-						'description' 	=> __( 'The number of items displayed per slide (not apply for autohight)', 'kingcomposer' ),
+						'description' 	=> __( 'The number of items displayed per slide (not apply for autoheight). Default is 3 items and 1 item on mobile.', 'kingcomposer' ),
 						'admin_label'	=> true,
 						'value'			=> '3',
 						'options' => array(
@@ -3295,6 +3377,32 @@ $kc->add_map(
 							'max' => 15,
 							'show_input' => true
 						)
+					),
+					array(
+						'type' 			=> 'number_slider',
+						'label' 		=> __( 'Items On Tablet?', 'kingcomposer' ),
+						'name' 			=> 'tablet',
+						'value'			=> 2,
+						'options' => array(
+							'min' => 1,
+							'max' => 10,
+							'show_input' => true
+						),
+                        'description'   => __('Display number of items per each slide (Tablet Screen)')
+
+					),
+					array(
+						'type' 			=> 'number_slider',
+						'label' 		=> __( 'Items On Smartphone?', 'kingcomposer' ),
+						'name' 			=> 'mobile',
+						'value'			=> 1,
+						'options' => array(
+							'min' => 1,
+							'max' => 10,
+							'show_input' => true
+						),
+                        'description'   => __('Display number of items per each slide (Mobile Screen)')
+
 					),
 					array(
 						'type' 			=> 'number_slider',
@@ -3418,7 +3526,13 @@ $kc->add_map(
 							'show_when' => 'yes'
 						)
 					),
-
+					array(
+						'type'			=> 'toggle',
+						'label'			=> __( 'Images Alt Text', 'kingcomposer' ),
+						'name'			=> 'alt_text',
+						'description'	=> __( 'Display the text into image tag.', 'kingcomposer' ),
+						'value'			=> 'no',
+					),
 					array(
 						'type' => 'text',
 						'label' => __( 'Wrapper class name', 'kingcomposer' ),
@@ -3444,15 +3558,11 @@ $kc->add_map(
 
 		'kc_carousel_post' => array(
 
-			'name' => __('Post Carousel', 'kingcomposer'),
-			'description' => __('', 'kingcomposer'),
+			'name' => __(' Post Carousel', 'kingcomposer'),
+			'description' => __(' ', 'kingcomposer'),
 			'icon' => 'kc-icon-pcarousel',
 			'category' => 'Blog Posts',
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 360,
 			'params' => array(
 				'general' => array(
 					array(
@@ -3475,15 +3585,15 @@ $kc->add_map(
 						'description'	=> __( '', 'kingcomposer' ),
 						'admin_label'	=> true,
 						'options' 		=> array(
-							'ID'		=> __('Post ID', 'kingcomposer'),
-							'author'	=> __('Author', 'kingcomposer'),
-							'title'		=> __('Title', 'kingcomposer'),
-							'name'		=> __('Post name (post slug)', 'kingcomposer'),
-							'type'		=> __('Post type (available since Version 4.0)', 'kingcomposer'),
-							'date'		=> __('Date', 'kingcomposer'),
-							'modified'	=> __('Last modified date', 'kingcomposer'),
-							'rand'		=> __('Random order', 'kingcomposer'),
-							'comment_count'	=> __('Number of comments', 'kingcomposer')
+							'ID'		=> __(' Post ID', 'kingcomposer'),
+							'author'	=> __(' Author', 'kingcomposer'),
+							'title'		=> __(' Title', 'kingcomposer'),
+							'name'		=> __(' Post name (post slug)', 'kingcomposer'),
+							'type'		=> __(' Post type (available since Version 4.0)', 'kingcomposer'),
+							'date'		=> __(' Date', 'kingcomposer'),
+							'modified'	=> __(' Last modified date', 'kingcomposer'),
+							'rand'		=> __(' Random order', 'kingcomposer'),
+							'comment_count'	=> __(' Number of comments', 'kingcomposer')
 						)
 					),
 					array(
@@ -3493,8 +3603,8 @@ $kc->add_map(
 						'description'	=> __( '', 'kingcomposer' ),
 						'admin_label'	=> true,
 						'options' 		=> array(
-							'ASC'		=> __('ASC', 'kingcomposer'),
-							'DESC'		=> __('DESC', 'kingcomposer'),
+							'ASC'		=> __(' ASC', 'kingcomposer'),
+							'DESC'		=> __(' DESC', 'kingcomposer'),
 						)
 					),
 					array(
@@ -3549,6 +3659,32 @@ $kc->add_map(
 							'min' => 1,
 							'max' => 10
 						)
+					),
+					array(
+						'type' 			=> 'number_slider',
+						'label' 		=> __( 'Items On Tablet?', 'kingcomposer' ),
+						'name' 			=> 'tablet',
+						'value'			=> 2,
+						'options' => array(
+							'min' => 1,
+							'max' => 10,
+							'show_input' => true
+						),
+                        'description'   => __('Display number of items per each slide (Tablet Screen)')
+
+					),
+					array(
+						'type' 			=> 'number_slider',
+						'label' 		=> __( 'Items On Smartphone?', 'kingcomposer' ),
+						'name' 			=> 'mobile',
+						'value'			=> 1,
+						'options' => array(
+							'min' => 1,
+							'max' => 10,
+							'show_input' => true
+						),
+                        'description'   => __('Display number of items per each slide (Mobile Screen)')
+
 					),
 					array(
 						'type' 			=> 'number_slider',
@@ -3616,6 +3752,7 @@ $kc->add_map(
 						'type'    => 'css',
 						'options' => array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Title' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.kc-owl-post-carousel .owl-item .title a, .kc-owl-post-carousel .caption a'),
 									array('property' => 'background-color', 'label' => 'Background Color', 'selector' => '.kc-owl-post-carousel .caption'),
@@ -3676,15 +3813,11 @@ $kc->add_map(
 
 		'kc_image_gallery' => array(
 
-			'name' => __('Image Gallery', 'kingcomposer'),
-			'description' => __('', 'kingcomposer'),
+			'name' => __(' Image Gallery', 'kingcomposer'),
+			'description' => __(' ', 'kingcomposer'),
 			'icon' => 'kc-icon-gallery',
 			'category' => 'Medias',
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 370,
 			'live_editor' => $live_tmpl.'kc_image_gallery.php',
 			'params' => array(
 				'general' => array(
@@ -3728,7 +3861,7 @@ $kc->add_map(
 						'type'			=> 'text',
 						'label'			=> __( 'Image size', 'kingcomposer' ),
 						'name'			=> 'image_size',
-						'description'	=> __( 'Set the image size : thumbnail, medium, large or full.', 'kingcomposer' ),
+						'description'	=> __( 'Set the image size : "thumbnail", "medium", "large", "full" or "400x200".', 'kingcomposer' ),
 						'value'			=> 'full'
 					),
 					array(
@@ -3754,6 +3887,30 @@ $kc->add_map(
 						)
 					),
 					array(
+						'name'          => 'overlay',
+						'label'         => __(' Overlay Hover Effect', 'kingcomposer'),
+						'type'          => 'toggle',
+						'description'   => __(' Enable to add layer overlay will show up when hover on the image.', 'kingcomposer')
+					),
+					array(
+						'name'     => 'icon',
+						'label'    => __(' Icon Overlay', 'kingcomposer'),
+						'type'     => 'icon_picker',
+						'value'    => 'fa-plus',
+						'relation' => array(
+							'parent'    => 'overlay',
+							'show_when' => 'yes'
+						),
+						'description' => __(' The icon show on center of overlay laver.', 'kingcomposer')
+					),
+					array(
+						'type'			=> 'toggle',
+						'name'			=> 'alt_text',
+						'label'			=> __( 'Alt attribute for image', 'kingcomposer' ),
+						'description'	=> __('Show/Hide alt attribute and title for image.', 'kingcomposer'),
+						'value'         => 'no'
+					),
+					array(
 						'type'			=> 'text',
 						'label'			=> __( 'Wrapper class name', 'kingcomposer' ),
 						'name'			=> 'wrap_class',
@@ -3764,6 +3921,35 @@ $kc->add_map(
 					array(
 						'name'    => 'css_custom',
 						'type'    => 'css',
+						'options'		=> array(
+							array(
+								"screens" => "any,1024,999,767,479",
+								'Image Style' => array(
+									array('property' => 'text-align', 'label' => 'Image Alignment'),
+									array('property' => 'display', 'label' => 'Image Display'),
+									array('property' => 'background-color', 'label' => 'Background Color', 'selector' => 'img'),
+									array('property' => 'box-shadow', 'label' => 'Box Shadow', 'selector' => 'img'),
+									array('property' => 'border', 'label' => 'Border', 'selector' => 'img'),
+									array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => 'img'),
+									array('property' => 'width', 'label' => 'Width', 'selector' => 'img'),
+									array('property' => 'height', 'label' => 'Height', 'selector' => 'img'),
+									array('property' => 'max-width', 'label' => 'Max Width', 'selector' => 'img'),
+									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.item-grid'),
+									array('property' => 'padding', 'label' => 'Padding', 'selector' => 'img')
+								),
+								'Overlay Effect' => array(
+									array('property' => 'background-color', 'label' => 'Overlay Background Color', 'selector' => '.kc_image_gallery .item-grid .kc-image-overlay'),
+									array('property' => 'background-color', 'label' => 'Icon BG Color', 'selector' => '.kc-image-overlay i'),
+									array('property' => 'color', 'label' => 'Icon Color', 'selector' => '.kc-image-overlay i'),
+									array('property' => 'font-size', 'label' => 'Icon Size', 'selector' => '.kc-image-overlay i'),
+									array('property' => 'line-height', 'label' => 'Icon Line Height', 'selector' => '.kc-image-overlay i'),
+									array('property' => 'width', 'label' => 'Icon Width', 'selector' => '.kc-image-overlay i'),
+									array('property' => 'height', 'label' => 'Icon Height', 'selector' => '.kc-image-overlay i'),
+									array('property' => 'border', 'label' => 'Icon Border', 'selector' => '.kc-image-overlay i'),
+									array('property' => 'border-radius', 'label' => 'Icon Border Radius', 'selector' => '.kc-image-overlay i')
+								),
+							)
+						)
 					)
 				),
 				'animate' => array(
@@ -3776,15 +3962,11 @@ $kc->add_map(
 		),
 
 		'kc_coundown_timer' => array(
-			'name' => __('Countdown Timer', 'kingcomposer'),
-			'description' => __('', 'kingcomposer'),
+			'name' => __(' Countdown Timer', 'kingcomposer'),
+			'description' => __(' ', 'kingcomposer'),
 			'icon' => 'kc-icon-coundown',
 			'category' => 'Content',
-			'tab_icons' => array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 400,
 			'live_editor' => $live_tmpl.'kc_coundown_timer.php',
 			'params' => array(
 				'general' => array(
@@ -3837,6 +4019,7 @@ $kc->add_map(
 						'type'    => 'css',
 						'options' => array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Number' => array(
 									array('property' => 'color', 'label' => 'Color', 'value' => '#FFFFFF', 'selector' => '.timer'),
 									array('property' => 'background-color', 'label' => 'Background Color', 'selector' => '.timer'),
@@ -3873,6 +4056,7 @@ $kc->add_map(
 								),
 								'Box'=> array(
 									array('property' => 'background', 'label' => 'Background Color'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'border', 'label' => 'Border'),
 									array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.kc-countdown-timer'),
 									array('property' => 'box-shadow', 'label' => 'Box Shadow', 'selector' => '.kc-countdown-timer'),
@@ -3900,12 +4084,8 @@ $kc->add_map(
 			'icon'			=> 'kc-icon-divider',
 			'category'		=> 'Content',
 			'wrapper_class'	=> 'clearfix',
+			'priority'  => 410,
 			'description'	=> __( 'List of horizontal divider line', 'kingcomposer' ),
-			'tab_icons'		=> array(
-				'general'	=> 'et-tools',
-				'styling'	=> 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 			'live_editor'	=> $live_tmpl.'kc_divider.php',
 			'params'		=> array(
 				'general'	=> array(
@@ -3917,9 +4097,9 @@ $kc->add_map(
 						'description'	=> __( 'Style of divider', 'kingcomposer' ),
 						'value'			=> '1',
 						'options'		=> array(
-							'1'	=> 'Line Simple',
-							'2'	=> 'Line With Icon',
-							'3'	=> 'Line With Text'
+							'1'	=> __( 'Line Simple', 'kingcomposer' ),
+							'2'	=> __( 'Line With Icon', 'kingcomposer' ),
+							'3'	=> __( 'Line With Text', 'kingcomposer' )
 						)
 					),
 					array(
@@ -3956,12 +4136,14 @@ $kc->add_map(
 						'type'		=> 'css',
 						'options'	=> array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Line' => array(
 									array('property' => 'border-color', 'label' => 'Line Color', 'selector' => '.divider_inner'),
 									array('property' => 'border-style', 'label' => 'Divider Style', 'value' => 'solid', 'selector' => '.divider_inner'),
 									array('property' => 'width', 'label' => 'Width Line', 'selector' => '.divider_inner'),
 									array('property' => 'border-width', 'label' => 'Height Line', 'selector' => '.divider_inner'),
 									array('property' => 'text-align', 'label' => 'Text Align'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'margin', 'label' => 'Spacing'),
 								),
 								'Icon' => array(
@@ -4008,12 +4190,8 @@ $kc->add_map(
 			'icon'			=> 'kc-icon-box-alert',
 			'category'		=> 'Content',
 			'wrapper_class'	=> 'clearfix',
+			'priority'  => 420,
 			'description'	=> __( 'Display box alert for message', 'kingcomposer' ),
-			'tab_icons'		=> array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 			'params'		=> array(
 				'general' => array(
 					array(
@@ -4034,7 +4212,7 @@ $kc->add_map(
 						'type'			=> 'toggle',
 						'name'			=> 'show_button',
 						'label'			=> __( 'Show Button', 'kingcomposer' ),
-						'description'	=> __('Show/Hide button click hidden boxes.', 'kingcomposer'),
+						'description'	=> __(' Show/Hide button click hidden boxes.', 'kingcomposer'),
 					),
 					array(
 						'type'			=> 'text',
@@ -4049,6 +4227,7 @@ $kc->add_map(
 						'type'		=> 'css',
 						'options'	=> array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Text' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.message-box-wrap'),
 									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.message-box-wrap'),
@@ -4066,6 +4245,7 @@ $kc->add_map(
 								),
 								'Boxes' => array(
 									array('property' => 'background', 'label' => 'Background', 'selector' => '.message-box-wrap'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => '.message-box-wrap'),
 									array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.message-box-wrap'),
 									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.message-box-wrap'),
@@ -4090,11 +4270,7 @@ $kc->add_map(
 			'icon'			=> 'kc-icon-feature-box',
 			'category'		=> 'Content',
 			'wrapper_class'	=> 'clearfix',
-			'tab_icons'		=> array(
-				'general'	=> 'et-tools',
-				'styling'	=> 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 430,
 			'live_editor' => $live_tmpl.'kc_feature_box.php',
 			'description'	=> __( 'Display feature boxes styles.', 'kingcomposer' ),
 			'params'		=> array(
@@ -4199,6 +4375,7 @@ $kc->add_map(
 						'type'		=> 'css',
 						'options'	=> array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Title' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.content-title'),
 									array('property' => 'color', 'label' => 'Color Hover', 'selector' => '+:hover .content-title'),
@@ -4260,17 +4437,17 @@ $kc->add_map(
 									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.content-image img'),
 								),
 								'Button' => array(
-									array('property' => 'color', 'label' => 'Button Color', 'selector' => '.content-button a'),
-									array('property' => 'color', 'label' => 'Button Hover Color', 'selector' => '.content-button a:hover'),
-									array('property' => 'background-color', 'label' => 'Button BG Color', 'selector' => '.content-button a'),
-									array('property' => 'background-color', 'label' => 'Button BG Hover Color', 'selector' => '.content-button a:hover'),
+									array('property' => 'color', 'label' => 'Text Color', 'selector' => '.content-button a'),
+									array('property' => 'color', 'label' => 'Text Hover Color', 'selector' => '.content-button a:hover'),
+									array('property' => 'background-color', 'label' => 'BG Color', 'selector' => '.content-button a'),
+									array('property' => 'background-color', 'label' => 'BG Hover Color', 'selector' => '.content-button a:hover'),
 									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.content-button a'),
 									array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.content-button a'),
 									array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.content-button a'),
 									array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.content-button a'),
 									array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.content-button a'),
-									array('property' => 'border', 'label' => 'Button Border', 'selector' => '.content-button a'),
-									array('property' => 'border-color', 'label' => 'Button Border Color Hover', 'selector' => '.content-button a:hover'),
+									array('property' => 'border', 'label' => 'Border', 'selector' => '.content-button a'),
+									array('property' => 'border-color', 'label' => 'Border Color Hover', 'selector' => '.content-button a:hover'),
 									array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.content-button a'),
 									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.content-button a'),
 									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.content-button a')
@@ -4281,6 +4458,7 @@ $kc->add_map(
 									array('property' => 'box-shadow', 'label' => 'Box Shadow'),
 									array('property' => 'box-shadow', 'label' => 'Box Shadow Hover', 'selector' => '+:hover'),
 									array('property' => 'text-align', 'label' => 'Text Align'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'border', 'label' => 'Border'),
 									array('property' => 'border-color', 'label' => 'Border Color Hover', 'selector' => '+:hover'),
 									array('property' => 'border-radius', 'label' => 'Border Radius'),
@@ -4308,11 +4486,7 @@ $kc->add_map(
 			'icon'			=> 'kc-icon-testi',
 			'category'		=> 'Content',
 			'wrapper_class'	=> 'clearfix',
-			'tab_icons'		=> array(
-				'general'	=> 'et-tools',
-				'styling'	=> 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 440,
 			'live_editor' => $live_tmpl.'kc_testimonial.php',
 			'description'	=> __( 'Display testimonials styles.', 'kingcomposer' ),
 			'params'		=> array(
@@ -4360,17 +4534,11 @@ $kc->add_map(
 						)
 					),
 					array(
-						'type'			=> 'select',
+						'type'			=> 'text',
 						'label'			=> __( 'Image Size', 'kingcomposer' ),
 						'name'			=> 'img_size',
 						'value'			=> 'full',
-						'description'	=> __('Set the image size: "full", "thumbnail", "medium", "large" or other size ', 'kingcomposer'),
-						'options'		=> array(
-							'full' 		 => __( 'Full Size', 'kingcomposer' ),
-							'120x120xct' => __( 'Size 120x120', 'kingcomposer' ),
-							'220x220xct' => __( 'Size 220x220', 'kingcomposer' ),
-							'400x400xct' => __( 'Size 400x400', 'kingcomposer' )
-						),
+						'description'	=> __(' Set the image size: "full", "thumbnail", "medium", "large" or other size ', 'kingcomposer'),
 						'relation'		=> array(
 							'parent'	=> 'layout',
 							'show_when'	=> array( '1','3','4','5' )
@@ -4389,6 +4557,7 @@ $kc->add_map(
 						'type'		=> 'css',
 						'options'	=> array(
 							array(
+								'screens' => "any,1024,999,767,479",
 								'Title' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.content-title'),
 									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.content-title'),
@@ -4467,6 +4636,7 @@ $kc->add_map(
 									array('property' => 'border-color', 'label' => 'Border Color Hover', 'selector' => '+:hover'),
 									array('property' => 'box-shadow', 'label' => 'Box Shadow'),
 									array('property' => 'box-shadow', 'label' => 'Box Shadow Hover', 'selector' => '+:hover'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'border-radius', 'label' => 'Border Radius'),
 									array('property' => 'border-radius', 'label' => 'Border Radius Hover', 'selector' => '+:hover'),
 									array('property' => 'margin', 'label' => 'Position Hover', 'selector' => '+:hover'),
@@ -4492,12 +4662,7 @@ $kc->add_map(
 			'icon'			=> 'kc-icon-team',
 			'category'		=> 'Content',
 			'wrapper_class'	=> 'clearfix',
-			'tab_icons'		=> array(
-				'general'	=> 'et-tools',
-				'socials'	=> 'sl-link',
-				'styling'	=> 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 460,
 	        'live_editor' => $live_tmpl.'kc_team.php',
 			'description'	=> __( 'Display teams layout style.', 'kingcomposer' ),
 			'params'		=> array(
@@ -4520,20 +4685,12 @@ $kc->add_map(
 						'type'	=> 'attach_image'
 					),
 					array(
-						'type'			=> 'select',
+						'type'			=> 'text',
 						'label'			=> __( 'Image Size', 'kingcomposer' ),
 						'name'			=> 'img_size',
 						'value'			=> 'full',
-						'description'   => __('Set the image size: "full", "thumbnail", "medium", "large" or other size ', 'kingcomposer'),
-						'options'		=> array(
-							'full' => 'Full Size',
-							'thumbnail' => 'Thumbnail',
-							'medium' => 'Medium',
-							'large' => 'Large',
-							'120x120xct' => __( 'Size 120x120', 'kingcomposer' ),
-							'220x220xct' => __( 'Size 220x220', 'kingcomposer' ),
-							'400x400xct' => __( 'Size 400x400', 'kingcomposer' )
-						)
+						'description'   => __(' Set the image size: "full", "thumbnail", "medium", "large" or other size ', 'kingcomposer'),
+
 					),
 					array(
 						'type'			=> 'text',
@@ -4709,6 +4866,7 @@ $kc->add_map(
 						'type'		=> 'css',
 						'options'	=> array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Title'	=> array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.content-title'),
 									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.content-title'),
@@ -4786,6 +4944,7 @@ $kc->add_map(
 									array('property' => 'text-align', 'label' => 'Box Align'),
 									array('property' => 'border', 'label' => 'Border'),
 									array('property' => 'border-color', 'label' => 'Border Color Hover'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'border-radius', 'label' => 'Border Radius'),
 									array('property' => 'box-shadow', 'label' => 'Box Shadow', 'selector' => '+.kc-team'),
 									array('property' => 'box-shadow', 'label' => 'Box Shadow Hover', 'selector' => '+.kc-team:hover'),
@@ -4811,12 +4970,8 @@ $kc->add_map(
 			'title'			=> 'Pricing Settings',
 			'icon'			=> 'kc-icon-pricing',
 			'category'		=> 'Content',
+			'priority'  => 470,
 			'wrapper_class'	=> 'clearfix',
-			'tab_icons'		=> array(
-				'general'	=> 'et-tools',
-				'styling'	=> 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 	        'live_editor' => $live_tmpl.'kc_pricing.php',
 			'description'	=> __( 'Display pricing tables layout style.', 'kingcomposer' ),
 			'params'		=> array(
@@ -4954,6 +5109,7 @@ $kc->add_map(
 						'type'		=> 'css',
 						'options'	=> array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Title'	=> array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.content-title'),
 									array('property' => 'color', 'label' => 'Color Hover', 'selector' => '+:hover .header-pricing .content-title,+:hover .content-title'),
@@ -5034,8 +5190,8 @@ $kc->add_map(
 									array('property' => 'margin', 'label' => 'Icon Spacing', 'selector' => '.content-desc li i'),
 								),
 								'Button' => array(
-									array('property' => 'color', 'label' => 'Button Color', 'selector' => '.content-button a'),
-									array('property' => 'color', 'label' => 'Button Hover Color', 'selector' => '.content-button a:hover'),
+									array('property' => 'color', 'label' => 'Text Color', 'selector' => '.content-button a'),
+									array('property' => 'color', 'label' => 'Text Hover Color', 'selector' => '.content-button a:hover'),
 									array('property' => 'background-color', 'label' => 'Button BG Color', 'selector' => '.content-button a'),
 									array('property' => 'background-color', 'label' => 'Button BG Hover Color', 'selector' => '.content-button a:hover'),
 									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.content-button a'),
@@ -5070,6 +5226,7 @@ $kc->add_map(
 								'Boxes'	=> array(
 									array('property' => 'background'),
 									array('property' => 'background-color', 'label' => 'BG Color Hover', 'selector' => '+:hover'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'box-shadow', 'label' => 'Box Shadow', 'selector' => '+.kc-pricing-tables'),
 									array('property' => 'box-shadow', 'label' => 'Box Shadow Hover', 'selector' => '+:hover'),
 									array('property' => 'border', 'label' => 'Border'),
@@ -5095,14 +5252,10 @@ $kc->add_map(
 
 		'kc_dropcaps'	=> array(
 			'name'			=> __( 'Dropcaps', 'kingcomposer' ),
-			'title'			=> 'Dropcaps Settings',
+			'title'			=> __( 'Dropcaps Settings', 'kingcomposer' ),
 			'icon'			=> 'kc-icon-dropcaps',
 			'category'		=> 'Content',
-			'tab_icons'		=> array(
-				'general'	=> 'et-tools',
-				'styling'	=> 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'  => 500,
 			'live_editor'	=> $live_tmpl.'kc_dropcaps.php',
 			'description'	=> __( 'Display dropcaps styles.', 'kingcomposer' ),
 			'params'		=> array(
@@ -5127,6 +5280,7 @@ $kc->add_map(
 						'type'		=> 'css',
 						'options'	=> array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Dropcaps'	=> array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.dropcaps-text'),
 									array('property' => 'background-color', 'label' => 'Background Color', 'selector' => '.dropcaps-text'),
@@ -5138,6 +5292,7 @@ $kc->add_map(
 									array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.dropcaps-text'),
 									array('property' => 'width', 'label' => 'Width', 'selector' => '.dropcaps-text'),
 									array('property' => 'height', 'label' => 'Height', 'selector' => '.dropcaps-text'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => '.dropcaps-text'),
 									array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.dropcaps-text'),
 									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.dropcaps-text')
@@ -5156,9 +5311,10 @@ $kc->add_map(
 		),
 
 		'kc_image_fadein'	=> array(
-			'name'			=> __('Image FadeIn Slider', 'kingcomposer'),
-			'description'	=> __('', 'kingcomposer'),
+			'name'			=> __(' Image FadeIn Slider', 'kingcomposer'),
+			'description'	=> __(' ', 'kingcomposer'),
 			'category'		=> 'Medias',
+			'priority'      => 510,
 			'icon'			=> 'kc-icon-image-fade',
 			'live_editor'	=> $live_tmpl.'kc_image_fadein.php',
 			'params'		=> array(
@@ -5232,11 +5388,11 @@ $kc->add_map(
 					'label'			=> __( 'Position cutting', 'kingcomposer' ),
 					'name'			=> 'position',
 					'options'		=> array(
-						'c' => 'Center Center',
-						'ct' => 'Center Top',
-						'cl' => 'Center Left',
-						'cr' => 'Center Right',
-						'cb' => 'Center Bottom',
+						'c' => __( 'Center Center', 'kingcomposer' ),
+						'ct' => __( 'Center Top', 'kingcomposer' ),
+						'cl' => __( 'Center Left', 'kingcomposer' ),
+						'cr' => __( 'Center Right', 'kingcomposer' ),
+						'cb' => __( 'Center Bottom', 'kingcomposer' ),
 					),
 					'relation'		=> array(
 						'parent'	=> 'force_size',
@@ -5259,11 +5415,7 @@ $kc->add_map(
 			'icon'			=> 'kc-icon-image-hover',
 			'category'		=> 'Content',
 			'wrapper_class'	=> 'clearfix',
-			'tab_icons'		=> array(
-				'general'	=> 'et-tools',
-				'styling'	=> 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'      => 520,
 			'live_editor'	=> $live_tmpl.'kc_image_hover_effects.php',
 			'description'	=> __( 'Display image background, title and button link.', 'kingcomposer' ),
 			'params'		=> array(
@@ -5274,11 +5426,11 @@ $kc->add_map(
 						'name'			=> 'layout',
 						'admin_label'	=> true,
 						'options'		=> array(
-							'1'	=> KC_URL . '/assets/frontend/images/banner/layout-1.png',
-							'2'	=> KC_URL . '/assets/frontend/images/banner/layout-2.png',
-							'3'	=> KC_URL . '/assets/frontend/images/banner/layout-3.png',
-							'4'	=> KC_URL . '/assets/frontend/images/banner/layout-4.png',
-							'5'	=> KC_URL . '/assets/frontend/images/banner/layout-5.png'
+							'1'	=> KC_URL . '/assets/frontend/images/banner/layout1.jpg',
+							'2'	=> KC_URL . '/assets/frontend/images/banner/layout2.jpg',
+							'3'	=> KC_URL . '/assets/frontend/images/banner/layout3.jpg',
+							'4'	=> KC_URL . '/assets/frontend/images/banner/layout4.jpg',
+							'5'	=> KC_URL . '/assets/frontend/images/banner/layout5.jpg'
 						),
 						'value'			=> '1'
 					),
@@ -5371,11 +5523,34 @@ $kc->add_map(
 						'name'			=> 'icon',
 						'label'			=> __( 'Icon', 'kingcomposer' ),
 						'type'			=> 'icon_picker',
+						'value'			=> 'fa-star',
 						'admin_label'	=> true,
 						'relation'		=> array(
 							'parent'	=> 'layout',
 							'show_when'	=> '5'
 						)
+					),
+					array(
+						'type'		=> 'select',
+						'label'		=> __( 'Caption Animation', 'kingcomposer' ),
+						'name'		=> 'caption_animation',
+						'options'	=> array(
+							'default'		    => __( 'Default', 'kingcomposer' ),
+							'slide_left'		=> __( 'Slide Left', 'kingcomposer' ),
+							'slide_right'		=> __( 'Slide Right', 'kingcomposer' ),
+							'slide_bottom'		=> __( 'Slide Bottom', 'kingcomposer' ),
+							'slide_top'		    => __( 'Slide Top', 'kingcomposer' ),
+							'push_left'		    => __( 'Push Left', 'kingcomposer' ),
+							'push_right'		=> __( 'Push Right', 'kingcomposer' ),
+							'push_bottom'		=> __( 'Push Bottom', 'kingcomposer' ),
+							'push_top'		    => __( 'Push Top', 'kingcomposer' ),
+							'zoom_in'		    => __( 'Zoom In', 'kingcomposer' ),
+							'zoom_out'		    => __( 'Zoom Out', 'kingcomposer' ),
+							'tranlate'		    => __( 'Overlay Tranlate', 'kingcomposer' ),
+							'overlay_scale_in'  => __( 'Overlay Scale In', 'kingcomposer' ),
+							'overlay_scale_out' => __( 'Overlay Scale Out', 'kingcomposer' ),
+						),
+						'value'		=> 'Default',
 					),
 					array(
 						'type'			=> 'text',
@@ -5390,6 +5565,7 @@ $kc->add_map(
 						'type'		=> 'css',
 						'options'	=> array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Title' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.content-title'),
 									array('property' => 'background-color', 'label' => 'Background Color', 'selector' => '.content-title'),
@@ -5410,6 +5586,7 @@ $kc->add_map(
 									array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.content-desc'),
 									array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.content-desc'),
 									array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.content-desc'),
+									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.content-desc'),
 									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.content-desc')
 								),
 								'Button' => array(
@@ -5445,7 +5622,7 @@ $kc->add_map(
 									array('property' => 'font-size', 'label' => 'Font Size', 'selector' => 'i'),
 									array('property' => 'line-height', 'label' => 'Line Height', 'selector' => 'i'),
 									array('property' => 'height', 'label' => 'Height', 'selector' => 'i'),
-									array('property' => 'width', 'label' => 'Line Height', 'selector' => 'i'),
+									array('property' => 'width', 'label' => 'Width', 'selector' => 'i'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => 'i'),
 									array('property' => 'border-color', 'label' => 'Border Color Hover', 'selector' => 'i:hover'),
 									array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => 'i'),
@@ -5457,6 +5634,12 @@ $kc->add_map(
 									array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.overlay-effects'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => '.overlay-effects'),
 									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.overlay-effects')
+								),
+								'Box' => array(
+									array('property' => 'border', 'label' => 'Border'),
+									array('property' => 'border-radius', 'label' => 'Border Radius'),
+									array('property' => 'padding', 'label' => 'Padding'),
+									array('property' => 'margin', 'label' => 'Margin'),
 								)
 							)
 						)
@@ -5473,15 +5656,11 @@ $kc->add_map(
 
 		'kc_creative_button'	=> array(
 			'name'			=> __( 'Creative Button', 'kingcomposer' ),
-			'title'			=> 'Creative Button Settings',
+			'title'			=> __( 'Creative Button Settings', 'kingcomposer' ),
 			'icon'			=> 'kc-icon-creative-button',
 			'category'		=> 'Content',
+			'priority'      => 530,
 			'wrapper_class'	=> 'clearfix',
-			'tab_icons'		=> array(
-				'general'	=> 'et-tools',
-				'styling'	=> 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 			'live_editor'	=> $live_tmpl.'kc_creative_button.php',
 			'description'	=> __( 'Display creative button styles.', 'kingcomposer' ),
 			'params'		=> array(
@@ -5563,6 +5742,7 @@ $kc->add_map(
 						'type'		=> 'css',
 						'options'	=> array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Button' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => 'a'),
 									array('property' => 'background', 'selector' => 'a'),
@@ -5612,15 +5792,11 @@ $kc->add_map(
 
 		'kc_call_to_action'	=> array(
 			'name'			=> __( 'Call To Action', 'kingcomposer' ),
-			'title'			=> 'Call To Action Settings',
+			'title'			=> __( 'Call To Action Settings', 'kingcomposer' ),
 			'icon'			=> 'kc-icon-call-action',
 			'category'		=> 'Content',
 			'wrapper_class'	=> 'clearfix',
-			'tab_icons'		=> array(
-				'general'	=> 'et-tools',
-				'styling'	=> 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
+			'priority'      => 540,
             'live_editor'	=> $live_tmpl.'kc_call_to_action.php',
 			'description'   => __( 'Display call to action styles.', 'kingcomposer' ),
 			'params'        => array(
@@ -5708,6 +5884,7 @@ $kc->add_map(
 						'type'		=> 'css',
 						'options'	=> array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Title' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.kc-cta-desc h2'),
 									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.kc-cta-desc h2'),
@@ -5754,6 +5931,7 @@ $kc->add_map(
 									array('property' => 'width', 'label' => 'Width'),
 									array('property' => 'background', 'label' => 'Background Color'),
 									array('property' => 'text-align', 'label' => 'Text Align'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'box-shadow', 'label' => 'Box Shadow'),
 									array('property' => 'border', 'label' => 'Border'),
 									array('property' => 'border-radius', 'label' => 'Border Radius'),
@@ -5773,17 +5951,13 @@ $kc->add_map(
 		),
 
 		'kc_tooltip'	=> array(
-			'name'			=> __('Popover & Tooltip', 'kingcomposer'),
-			'title'			=> 'Popover & Tooltip Settings',
+			'name'			=> __(' Popover & Tooltip', 'kingcomposer'),
+			'title'			=> __( 'Popover & Tooltip Settings', 'kingcomposer' ),
 			'icon'			=> 'kc-icon-tooltip',
 			'category'		=> 'Content',
 			'wrapper_class'	=> 'clearfix',
+			'priority'      => 550,
 			'description'	=> __( 'Tooltip for a link button', 'kingcomposer' ),
-			'tab_icons'		=> array(
-				'general'	=> 'et-tools',
-				'styling'	=> 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 			'live_editor'	=> $live_tmpl.'kc_tooltip.php',
 			'params'		=> array(
 				'general' => array(
@@ -5805,10 +5979,10 @@ $kc->add_map(
 						'label'		=> __( 'Position', 'kingcomposer' ),
 						'value'		=> 'top',
 						'options'	=> array(
-							'top'		=> __('Top', 'kingcomposer'),
-							'right'		=> __('Right', 'kingcomposer'),
-							'bottom' 	=> __('Bottom', 'kingcomposer'),
-							'left'		=> __('Left', 'kingcomposer'),
+							'top'		=> __(' Top', 'kingcomposer'),
+							'right'		=> __(' Right', 'kingcomposer'),
+							'bottom' 	=> __(' Bottom', 'kingcomposer'),
+							'left'		=> __(' Left', 'kingcomposer'),
 						)
 					),
 					array(
@@ -5838,7 +6012,7 @@ $kc->add_map(
 						'label'			=> __( 'Image Size', 'kingcomposer' ),
 						'name'			=> 'img_size',
 						'value'			=> 'full',
-						'description'	=> __('Set the image size: "full", "thumbnail", "medium", "large" or other size ', 'kingcomposer'),
+						'description'	=> __(' Set the image size: "full", "thumbnail", "medium", "large" or other size ', 'kingcomposer'),
 						'options'		=> array(
 							'full' 		 => __( 'Full Size', 'kingcomposer' ),
 							'120x120xct' => __( 'Size 120x120', 'kingcomposer' ),
@@ -5890,6 +6064,7 @@ $kc->add_map(
 						'type'		=> 'css',
 						'options'	=> array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Icon' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => '.kc_tooltip .fati17'),
 									array('property' => 'color', 'label' => 'Color Hover', 'selector' => '.kc_tooltip:hover .fati17'),
@@ -5931,7 +6106,15 @@ $kc->add_map(
 								),
 								'Tooltip' => array(
 									array('property' => 'color', 'label' => 'Text Color', 'selector' => '.kc_tooltip span'),
-									array('property' => 'background', 'label' => 'Background Color', 'selector' => '.kc_tooltip span'),
+									array(
+										'property' => 'background', 'label' => 'Background Color', 'selector' => '.kc_tooltip span',
+										'refer' => array(
+											array(
+												'property' => 'background',
+												'selector' =>'.kc_tooltip span:before'
+											),
+										)
+									),
 									array('property' => 'width', 'label' => 'Width', 'selector' => '.kc_tooltip span'),
 									array('property' => 'font-family', 'label' => 'Text Family', 'selector' => '.kc_tooltip span'),
 									array('property' => 'font-size', 'label' => 'Text Size', 'selector' => '.kc_tooltip span'),
@@ -5947,6 +6130,7 @@ $kc->add_map(
 								'Box' => array(
 									array('property' => 'background-color', 'label' => 'Background Color', 'selector' => '.fati17, .kc_tooltip img, .kc_tooltip.style2'),
 									array('property' => 'text-align', 'label' => 'Text Align'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => '.fati17, .kc_tooltip.style2'),
 									array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.fati17, .kc_tooltip.style2'),
 									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.fati17, .kc_tooltip.style2'),
@@ -5963,18 +6147,14 @@ $kc->add_map(
 				),
 			)
 		),
-		
+
 		'kc_multi_icons' => array(
 			'name'			=> __( 'Multi Icons', 'kingcomposer' ),
-			'title'			=> 'Multi Icons Settings',
+			'title'			=> __( 'Multi Icons Settings', 'kingcomposer' ),
 			'icon'			=> 'kc-icon-multi-icons',
 			'category'		=> 'Content',
+			'priority'      => 560,
 			'description'	=> __( 'List of icon with link. Apply for soical.', 'kingcomposer' ),
-			'tab_icons'		=> array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 			'live_editor'	=> $live_tmpl.'kc_multi_icons.php',
 			'params'		=> array(
 				'general' => array(
@@ -5986,28 +6166,34 @@ $kc->add_map(
 					),
 					array(
 						'type'			=> 'group',
-						'label'			=> __('Icons', 'kingcomposer'),
+						'label'			=> __(' Icons', 'kingcomposer'),
 						'name'			=> 'icons',
 						'description'	=> __( 'Repeat this fields with each item created, Each item corresponding an icon element.', 'kingcomposer' ),
-						'options'		=> array('add_text' => __('Add new icon', 'kingcomposer')),
-						
+						'options'		=> array('add_text' => __(' Add new icon', 'kingcomposer')),
+
 						'value' => base64_encode( json_encode(array(
 							"1" => array(
 								"label" => "Facebook",
 								"icon" => "fa-facebook",
 								"link" => "",
+								"color" => "",
+								"bg_color" => "",
 							),
 							"2" => array(
 								"label" => "Twitter",
 								"icon" => "fa-twitter",
 								"link" => "",
+								"color" => "",
+								"bg_color" => "",
 							),
 							"3" => array(
 								"label" => "Google+",
 								"icon" => "fa-google-plus",
 								"link" => "",
+								"color" => "",
+								"bg_color" => "",
 							),
-							
+
 						) ) ),
 						'params' => array(
 							array(
@@ -6021,17 +6207,29 @@ $kc->add_map(
 								'name' => 'icon',
 								'label' => 'Icon',
 								'type' => 'icon_picker',
-								'description' => __('Choose an icon to display', 'kingcomposer'),
+								'description' => __(' Choose an icon to display', 'kingcomposer'),
 							),
 							array(
 								'name'     => 'link',
-								'label'    => __('Icon Link', 'kingcomposer'),
+								'label'    => __(' Icon Link', 'kingcomposer'),
 								'type'     => 'link',
-								'description' => __('The URL which icon assigned to. You can select page/post or other post type', 'kingcomposer')
+								'description' => __(' The URL which icon assigned to. You can select page/post or other post type', 'kingcomposer')
+							),
+							array(
+								'name'     => 'color',
+								'label'    => __(' Icon Color', 'kingcomposer'),
+								'type'     => 'color_picker',
+								'description' => __(' The color for this icon. You can set color for all icon from Styling tab.', 'kingcomposer')
+							),
+							array(
+								'name'     => 'bg_color',
+								'label'    => __(' Icon BG Color', 'kingcomposer'),
+								'type'     => 'color_picker',
+								'description' => __(' The background color for this icon. You can set background color for all icon from Styling tab.', 'kingcomposer')
 							),
 						),
 					),
-				
+
 				),
 				'styling' => array(
 					array(
@@ -6039,10 +6237,16 @@ $kc->add_map(
 						'type'    => 'css',
 						'options' => array(
 							array(
+								"screens" => "any,1024,999,767,479",
 								'Icon Style' => array(
 									array('property' => 'color', 'label' => 'Icon Color', 'selector' => 'i'),
 									array('property' => 'background-color', 'label' => 'Icon BG Color', 'selector' => 'a'),
 									array('property' => 'font-size', 'label' => 'Icon Size', 'selector' => 'i'),
+									array('property' => 'text-align', 'label' => 'Icon Align', 'selector' => 'a'),
+									array('property' => 'line-height', 'label' => 'Line Height', 'selector' => 'i'),
+									array('property' => 'width', 'label' => 'Width', 'selector' => 'a'),
+									array('property' => 'height', 'label' => 'Height', 'selector' => 'a'),
+									array('property' => 'box-shadow', 'label' => 'Box Shadow', 'selector' => 'a'),
 									array('property' => 'border', 'label' => 'Icon Border', 'selector' => 'a'),
 									array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => 'a'),
 									array('property' => 'padding', 'label' => 'Icon Padding', 'selector' => 'a'),
@@ -6051,12 +6255,15 @@ $kc->add_map(
 								'Icon Hover' => array(
 									array('property' => 'color', 'label' => 'Color', 'selector' => 'a:hover i'),
 									array('property' => 'background-color', 'label' => 'BG Color', 'selector' => 'a:hover'),
+									array('property' => 'box-shadow', 'label' => 'Box Shadow', 'selector' => 'a:hover'),
 									array('property' => 'border-color', 'label' => 'Border Color', 'selector' => 'a:hover'),
 									array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => 'a:hover'),
 								),
 								'Box' => array(
 									array('property' => 'text-align', 'label' => 'Icon Align'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'padding', 'label' => 'Padding'),
+									array('property' => 'margin', 'label' => 'Margin'),
 								)
 							),
 						),
@@ -6073,26 +6280,20 @@ $kc->add_map(
 
 		'kc_blog_posts'	=> array(
 			'name'			=> __( 'Blog Posts', 'kingcomposer' ),
-			'title'			=> 'Blog Posts Settings',
+			'title'			=> __( 'Blog Posts Settings', 'kingcomposer' ),
 			'icon'			=> 'kc-icon-blog-posts',
 			'category'		=> 'Blog Posts',
 			'wrapper_class'	=> 'clearfix',
+			'priority'      => 570,
 			'description'	=> __( 'List of latest post with more layouts.', 'kingcomposer' ),
-			'tab_icons'		=> array(
-				'general' => 'et-tools',
-				'styling' => 'et-adjustments',
-				'animate' => 'et-lightbulb'
-			),
 			'params'		=> array(
 				'general' => array(
 					array(
-						'type'			=> 'multiple',
-						'label'			=> __( 'Select Categories', 'kingcomposer' ),
+						'type'			=> 'post_taxonomy',
+						'label'			=> __( 'Content Type', 'kingcomposer' ),
 						'name'			=> 'tax_term',
-						'options'		=> kc_tools::get_terms( 'category', 'slug' ),
-						'height'		=> '120px',
-						'admin_label'	=> true,
-						'description'	=> __( 'Select category which you chosen for posts ( hold ctrl or shift to select multiple )', 'kingcomposer' )
+						'description'	=> __( '', 'kingcomposer' ),
+						'admin_label'	=> true
 					),
 					array(
 						'type'			=> 'radio_image',
@@ -6100,10 +6301,10 @@ $kc->add_map(
 						'name'			=> 'layout',
 						'admin_label'	=> true,
 						'options'		=> array(
-							'1'	=> KC_URL . '/assets/frontend/images/blog/layout-1.png',
-							'2'	=> KC_URL . '/assets/frontend/images/blog/layout-2.png',
-							'3'	=> KC_URL . '/assets/frontend/images/blog/layout-3.png',
-							'4'	=> KC_URL . '/assets/frontend/images/blog/layout-4.png'
+							'1'	=> KC_URL . '/assets/frontend/images/blog/layout1.jpg',
+							'2'	=> KC_URL . '/assets/frontend/images/blog/layout2.jpg',
+							'3'	=> KC_URL . '/assets/frontend/images/blog/layout3.jpg',
+							'4'	=> KC_URL . '/assets/frontend/images/blog/layout4.jpg'
 						),
 						'value'			=> '1'
 					),
@@ -6112,9 +6313,9 @@ $kc->add_map(
 						'label'			=> __( 'Items Limit', 'kingcomposer' ),
 						'type'			=> 'number_slider',
 						'value'			=> '3',
-						'description'	=> __('Specify number of post that you want to show. Enter -1 to get all team', 'kingcomposer'),
+						'description'	=> __(' Specify number of post that you want to show. Set 0 to get all team', 'kingcomposer'),
 						'options'		=> array(
-							'min'			=> 1,
+							'min'			=> 0,
 							'max'			=> 15,
 							'unit'			=> '',
 							'show_input'	=> false
@@ -6145,11 +6346,73 @@ $kc->add_map(
 						'description'	=> __( 'Limit words you want show as short description', 'kingcomposer' )
 					),
 					array(
+						'type'			=> 'select',
+						'label'			=> __( 'Image Align', 'kingcomposer' ),
+						'name'			=> 'image_align',
+						'description'	=> __( 'Enter number item per row', 'kingcomposer' ),
+						'value'			=> 'both',
+						'options'		=> array(
+							'both'	=> __( 'Left & Right', 'kingcomposer' ),
+							'left'	=> __( 'Left', 'kingcomposer' ),
+							'right'	=> __( 'Right', 'kingcomposer' ),
+						),
+						'relation'    => array(
+							'parent'    => 'layout',
+							'show_when' => array('2')
+						)
+					),
+					array(
+						'name'          => 'image_size',
+						'label'         => 'Image Size',
+						'type'          => 'text',
+						'value'         => '',
+						'description'   => __(' Set the image size: "thumbnail", "medium", "large", "full" or "400x200"', 'kingcomposer'),
+					),
+					array(
 						'type'			=> 'toggle',
 						'name'			=> 'show_date',
-						'label'			=> __( 'Show Meta', 'kingcomposer' ),
+						'label'			=> __( 'Show Date', 'kingcomposer' ),
 						'value'			=> 'yes',
-						'description'	=> __('Display meta of post in post items.', 'kingcomposer')
+						'description'	=> __(' Display date of post in post items.', 'kingcomposer')
+					),
+					array(
+						'type'			=> 'toggle',
+						'name'			=> 'show_author',
+						'label'			=> __( 'Show Author', 'kingcomposer' ),
+						'value'			=> 'yes',
+						'description'	=> __(' Display author of post in post items.', 'kingcomposer')
+					),
+					array(
+						'type'			=> 'toggle',
+						'name'			=> 'show_category',
+						'label'			=> __( 'Show Categories', 'kingcomposer' ),
+						'value'			=> 'yes',
+						'description'	=> __(' Display categories of post in post items.', 'kingcomposer')
+					),
+					array(
+						'type'			=> 'toggle',
+						'name'			=> 'force_image',
+						'label'			=> __( 'Force Featured Image', 'kingcomposer' ),
+						'value'			=> 'no',
+						'description'	=> __(' Auto get first image on post as featured image when post does not have it.', 'kingcomposer')
+					),
+					array(
+						'type'			=> 'toggle',
+						'name'			=> 'show_readmore',
+						'label'			=> __( 'Show Readmore', 'kingcomposer' ),
+						'value'			=> 'yes',
+						'description'	=> __('Display read more link.', 'kingcomposer')
+					),
+					array(
+						'type'			=> 'text',
+						'label'			=> __( 'Read more text', 'kingcomposer' ),
+						'name'			=> 'readmore_text',
+						'value'			=> __('Read more', 'kingcomposer'),
+						'relation'    => array(
+							'parent'    => 'show_readmore',
+							'show_when' => array('yes')
+						),
+						'description'	=> __( 'The label of read more button. Default : Read more', 'kingcomposer' )
 					),
 					array(
 						'type'		=> 'select',
@@ -6158,6 +6421,24 @@ $kc->add_map(
 						'options'	=> array(
 							'DESC'	=> __( 'Descending', 'kingcomposer' ),
 							'ASC'	=> __( 'Ascending', 'kingcomposer' )
+						)
+					),
+					array(
+						'name' => 'socials',
+						'label' => 'Social Icons',
+						'type' => 'checkbox',  // USAGE CHECKBOX TYPE
+						'options' => array(    // REQUIRED
+							'comment' => __( 'Comment Count', 'kingcomposer' ),
+							'facebook' => __( 'Facebook', 'kingcomposer' ),
+							'twitter' => __( 'Twitter', 'kingcomposer' ),
+							'google' => __( 'Google Plus', 'kingcomposer' ),
+							'pinterest' => __( 'Pinterest', 'kingcomposer' ),
+						),
+						'value' => 'comment,facebook,twitter,google,pinterest', // remove this if you do not need a default content
+						'description' => __( 'Select the social icons you want to show.', 'kingcomposer' ),
+						'relation'    => array(
+							'parent'    => 'layout',
+							'show_when' => array('4')
 						)
 					),
 					array(
@@ -6172,7 +6453,7 @@ $kc->add_map(
 						'name'    => 'css_custom',
 						'type'    => 'css',
 						'options' => array(
-							
+
 							array(
 								"screens" => "any",
 								'Title' => array(
@@ -6183,17 +6464,17 @@ $kc->add_map(
 									array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.kc-list-item-4 .kc-post-header .post-title-alt a,.kc-list-item-1 .post-title-alt a,.kc-list-item-2 .post-title-alt a,.kc-list-item-3 .post-title-alt a'),
 									array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.kc-list-item-4 .kc-post-header .post-title-alt a,.kc-list-item-1 .post-title-alt a,.kc-list-item-2 .post-title-alt a,.kc-list-item-3 .post-title-alt a'),
 									array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.kc-list-item-4 .kc-post-header .post-title-alt a,.kc-list-item-1 .post-title-alt a,.kc-list-item-2 .post-title-alt a,.kc-list-item-3 .post-title-alt a'),
-									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.kc-list-item-4 .kc-post-header .post-title-alt a,.kc-list-item-1 .post-title-alt a,.kc-list-item-2 .post-title-alt a,.kc-list-item-3 .post-title-alt a'),
+									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.kc-list-item-4 .kc-post-header .post-title-alt,.kc-list-item-1 .post-title-alt,.kc-list-item-2 .post-title-alt,.kc-list-item-3 .post-title-alt'),
 								),
 								'Desc' => array(
-									array('property' => 'color', 'label' => 'Color', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 .post_details p,.kc-list-item-3 .entry-excerpt p'),
-									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 .post_details p,.kc-list-item-3 .entry-excerpt p'),
-									array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 .post_details p,.kc-list-item-3 .entry-excerpt p'),
-									array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 .post_details p,.kc-list-item-3 .entry-excerpt p'),
-									array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 .post_details p,.kc-list-item-3 .entry-excerpt p'),
-									array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 .post_details p,.kc-list-item-3 .entry-excerpt p'),
-									array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 .post_details p,.kc-list-item-3 .entry-excerpt p'),
-									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 .post_details p,.kc-list-item-3 .entry-excerpt p'),
+									array('property' => 'color', 'label' => 'Color', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 p,.kc-list-item-3 .entry-excerpt p'),
+									array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 p,.kc-list-item-3 .entry-excerpt p'),
+									array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 p,.kc-list-item-3 .entry-excerpt p'),
+									array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 p,.kc-list-item-3 .entry-excerpt p'),
+									array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 p,.kc-list-item-3 .entry-excerpt p'),
+									array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 p,.kc-list-item-3 .entry-excerpt p'),
+									array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 p,.kc-list-item-3 .entry-excerpt p'),
+									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.kc-list-item-4 .post-content p,.kc-list-item-2 p,.kc-list-item-3 .entry-excerpt p'),
 								),
 								'Image' => array(
 									array('property' => 'background-color', 'label' => 'BG Color', 'selector' => '.kc-list-item-4 .kc-post-header img,.kc-list-item-1 img,.kc-list-item-2 img,.post-grid .kc-list-item-3 img'),
@@ -6245,13 +6526,14 @@ $kc->add_map(
 								),
 								'Boxes' => array(
 									array('property' => 'background-color', 'label' => 'BG Color', 'selector' => '.kc-list-item-4,.kc-list-item-1,.kc-list-item-2,.kc-list-item-3'),
+									array('property' => 'display', 'label' => 'Display'),
 									array('property' => 'border', 'label' => 'Border', 'selector' => '.kc-list-item-4,.kc-list-item-1,.kc-list-item-2,.kc-list-item-3'),
 									array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.kc-list-item-4,.kc-list-item-1,.kc-list-item-2,.kc-list-item-3'),
 									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.kc-list-item-4,.kc-list-item-1,.kc-list-item-2,.kc-list-item-3'),
 									array('property' => 'padding', 'label' => 'Padding', 'selector' => '.kc-list-item-4,.kc-list-item-1,.kc-list-item-2,.kc-list-item-3'),
 								)
 							),
-							
+
 							array(
 								"screens" => "1024,999,767,479",
 								'Title' => array(
@@ -6280,7 +6562,7 @@ $kc->add_map(
 									array('property' => 'margin', 'label' => 'Margin', 'selector' => '.kc-list-item-4 .post-footer .social-share li a', 'des' => 'Just applied for layout default'),
 								),
 								'Boxes' => array(
-									array('property' => 'width', 'label' => 'Item Width', 'des' => 'Just apply for layout grid', 'selector' => '+.kc-blog-posts-3.kc-blog-grid .post-grid.grid-3'),
+									array('property' => 'width', 'label' => 'Item Width', 'des' => 'Just apply for layout grid', 'selector' => '+.kc-blog-posts-3 .grid-2,+.kc-blog-posts-3 .grid-3,+.kc-blog-posts-3 .grid-4,+.kc-blog-posts-4 .grid-2,+.kc-blog-posts-4 .grid-3,+.kc-blog-posts-4 .grid-4'),
 								)
 							)
 						)
@@ -6293,8 +6575,27 @@ $kc->add_map(
 					)
 				),
 			)
-		)
+		),
 
+
+		/*  for test  */
+		'kc_nested'	=> array(
+			'name'			=> __( 'Nested Parent', 'kingcomposer' ),
+			'title'			=> __( 'Nested Title', 'kingcomposer' ),
+			'icon'			=> 'fa-star',
+			'category'		=> 'Content',
+			'nested'		=> true,
+			'description'	=> __( 'Nested test', 'kingcomposer' ),
+			'params'		=> array(
+				array(
+					'type'			=> 'text',
+					'label'			=> __( 'Field', 'kingcomposer' ),
+					'name'			=> 'tax',
+					'admin_label'	=> true,
+					'description'	=> __( 'The description text', 'kingcomposer' )
+				)
+			)
+		)
 
 	),
 
@@ -6302,9 +6603,286 @@ $kc->add_map(
 
 );
 
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+if ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
+
+	$contact_forms = kc_tools::get_cf7_names();
+
+	$kc_extra_elements['kc_contact_form7'] = array(
+		'name' => __( 'Contact Form 7', 'kingcomposer' ),
+		'title' => 'Contact Form 7',
+		'icon' => 'fa fa-arrows-h',
+		'category' => 'Content',
+		'wrapper_class' => 'clearfix',
+		'description' => __( 'Display contact form 7', 'kingcomposer' ),
+		'tab_icons' => array(
+			'general' => 'et-tools',
+			'styling' => 'et-adjustments',
+			'hover' => 'et-adjustments',
+			'focus' => 'et-adjustments',
+		),
+		'params' => array(
+			'general' => array(
+				array(
+					'type'  => 'text',
+					'label' => __( 'Title', 'kingcomposer' ),
+					'name'  => 'title',
+				),
+				array(
+					'name'        => 'slug',
+					'type'        => 'select',
+					'label'       => __( 'Select Contact Form', 'kingcomposer' ),
+					'admin_label' => true,
+					'options'     => $contact_forms,
+					'description' => __( 'Choose previously created contact form from the drop down list.', 'kingcomposer' )
+				),
+				array(
+					'type'  => 'text',
+					'label' => __( 'Extra Class', 'kingcomposer' ),
+					'name'  => 'class',
+					'value' => '',
+				)
+			),
+			'styling' => array(
+				array(
+					'name'    => 'css_custom',
+					'type'    => 'css',
+					'options' => array(
+
+						array(
+							"screens" => "any",
+							'Label' => array(
+								array('property' => 'color', 'label' => 'Color', 'selector' => 'label'),
+								array('property' => 'background', 'label' => 'Background Color', 'selector' => 'label'),
+								array('property' => 'font-family', 'label' => 'Font Family', 'selector' => 'label'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => 'label'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => 'label'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => 'label'),
+								array('property' => 'text-align', 'selector' => 'label'),
+								array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => 'label'),
+								array('property' => 'margin', 'label' => 'Margin', 'selector' => 'label'),
+								array('property' => 'padding', 'label' => 'Padding', 'selector' => 'label'),
+							),
+							'Input' => array(
+								array('property' => 'color', 'label' => 'Color', 'selector' => '.wpcf7-text'),
+								array('property' => 'background', 'label' => 'Background Color', 'selector' => '.wpcf7-text'),
+								array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.wpcf7-text'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.wpcf7-text'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.wpcf7-text'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.wpcf7-text'),
+								array('property' => 'text-align', 'selector' => '.wpcf7-text'),
+								array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.wpcf7-text'),
+								array('property' => 'width', 'selector' => '.wpcf7-text'),
+								array('property' => 'height', 'selector' => '.wpcf7-text'),
+								array('property' => 'border', 'selector' => '.wpcf7-text'),
+								array('property' => 'border-radius', 'selector' => '.wpcf7-text'),
+								array('property' => 'margin', 'label' => 'Margin', 'selector' => '.wpcf7-text'),
+								array('property' => 'padding', 'selector' => '.wpcf7-text'),
+							),
+							'Text Area' => array(
+								array('property' => 'color', 'label' => 'Color', 'selector' => '.wpcf7-textarea'),
+								array('property' => 'background', 'label' => 'Background Color', 'selector' => '.wpcf7-textarea'),
+								array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.wpcf7-textarea'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.wpcf7-textarea'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.wpcf7-textarea'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.wpcf7-textarea'),
+								array('property' => 'text-align', 'selector' => '.wpcf7-textarea'),
+								array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.wpcf7-textarea'),
+								array('property' => 'width', 'selector' => '.wpcf7-textarea'),
+								array('property' => 'height', 'selector' => '.wpcf7-textarea'),
+								array('property' => 'border', 'selector' => '.wpcf7-textarea'),
+								array('property' => 'border-radius', 'selector' => '.wpcf7-textarea'),
+								array('property' => 'margin', 'label' => 'Margin', 'selector' => '.wpcf7-textarea'),
+								array('property' => 'padding', 'selector' => '.wpcf7-textarea'),
+							),
+
+							'Select' => array(
+								array('property' => 'color', 'label' => 'Color', 'selector' => '.wpcf7-select'),
+								array('property' => 'background', 'label' => 'Background Color', 'selector' => '.wpcf7-select'),
+								array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.wpcf7-select'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.wpcf7-select'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.wpcf7-select'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.wpcf7-select'),
+								array('property' => 'text-align', 'selector' => '.wpcf7-select'),
+								array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.wpcf7-select'),
+								array('property' => 'width', 'selector' => '.wpcf7-select'),
+								array('property' => 'height', 'selector' => '.wpcf7-select'),
+								array('property' => 'border', 'selector' => '.wpcf7-select'),
+								array('property' => 'border-radius', 'selector' => '.wpcf7-select'),
+								array('property' => 'margin', 'label' => 'Margin', 'selector' => '.wpcf7-select'),
+								array('property' => 'padding', 'selector' => '.wpcf7-select'),
+							),
+							'Radio - Checkbox' => array(
+								array('property' => 'color', 'selector' => '.wpcf7-radio .wpcf7-list-item-label, .wpcf7-checkbox .wpcf7-list-item-label'),
+								array('property' => 'background-color', 'selector' => '.wpcf7-radio .wpcf7-list-item-label, .wpcf7-checkbox .wpcf7-list-item-label'),
+								array('property' => 'display', 'selector' => '.wpcf7-radio .wpcf7-list-item-label, .wpcf7-checkbox .wpcf7-list-item-label'),
+								array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.wpcf7-radio .wpcf7-list-item-label, .wpcf7-checkbox .wpcf7-list-item-label'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.wpcf7-radio .wpcf7-list-item-label, .wpcf7-checkbox .wpcf7-list-item-label'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.wpcf7-radio .wpcf7-list-item-label, .wpcf7-checkbox .wpcf7-list-item-label'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.wpcf7-radio .wpcf7-list-item-label, .wpcf7-checkbox .wpcf7-list-item-label'),
+								array('property' => 'text-align', 'selector' => '.wpcf7-radio .wpcf7-list-item-label, .wpcf7-checkbox .wpcf7-list-item-label'),
+								array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.wpcf7-radio .wpcf7-list-item-label, .wpcf7-checkbox .wpcf7-list-item-label'),
+								array('property' => 'margin', 'label' => 'Margin', 'selector' => '.wpcf7-radio .wpcf7-list-item-label, .wpcf7-checkbox .wpcf7-list-item-label'),
+								array('property' => 'padding', 'label' => 'Padding', 'selector' => '.wpcf7-radio .wpcf7-list-item-label, .wpcf7-checkbox .wpcf7-list-item-label'),
+							),
+
+							'Submit' => array(
+								array('property' => 'color', 'selector' => '.wpcf7-submit'),
+								array('property' => 'background', 'selector' => '.wpcf7-submit'),
+								array('property' => 'display', 'selector' => '.wpcf7-submit'),
+								array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.wpcf7-submit'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.wpcf7-submit'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.wpcf7-submit'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.wpcf7-submit'),
+								array('property' => 'text-align', 'selector' => '.wpcf7-submit'),
+								array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.wpcf7-submit'),
+								array('property' => 'border', 'label' => 'Border', 'selector' => '.wpcf7-submit'),
+								array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.wpcf7-submit'),
+								array('property' => 'margin', 'label' => 'Margin', 'selector' => '.wpcf7-submit'),
+								array('property' => 'padding', 'label' => 'Padding', 'selector' => '.wpcf7-submit'),
+							)
+						),
+
+					)
+				)
+			),
+			'focus' => array(
+				array(
+					'name'    => 'css_hover_custom',
+					'type'    => 'css',
+					'options' => array(
+
+						array(
+							"screens" => "any",
+							'Input' => array(
+								array('property' => 'color', 'label' => 'Color', 'selector' => '.wpcf7-text:focus'),
+								array('property' => 'background', 'label' => 'Background Color', 'selector' => '.wpcf7-text:focus'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.wpcf7-text:focus'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.wpcf7-text:focus'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.wpcf7-text:focus'),
+								array('property' => 'width', 'selector' => '.wpcf7-text:focus'),
+								array('property' => 'height', 'selector' => '.wpcf7-text:focus'),
+								array('property' => 'border', 'selector' => '.wpcf7-text:focus'),
+								array('property' => 'border-radius', 'selector' => '.wpcf7-text:focus'),
+							),
+							'Text Area' => array(
+								array('property' => 'color', 'label' => 'Color', 'selector' => '.wpcf7-textarea:focus'),
+								array('property' => 'background', 'label' => 'Background Color', 'selector' => '.wpcf7-textarea:focus'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.wpcf7-textarea:focus'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.wpcf7-textarea:focus'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.wpcf7-textarea:focus'),
+								array('property' => 'width', 'selector' => '.wpcf7-textarea:focus'),
+								array('property' => 'height', 'selector' => '.wpcf7-textarea:focus'),
+								array('property' => 'border', 'selector' => '.wpcf7-textarea:focus'),
+								array('property' => 'border-radius', 'selector' => '.wpcf7-textarea:focus'),
+							),
+							'Select' => array(
+								array('property' => 'color', 'label' => 'Color', 'selector' => '.wpcf7-select:focus'),
+								array('property' => 'background', 'label' => 'Background Color', 'selector' => '.wpcf7-select:focus'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.wpcf7-select:focus'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.wpcf7-select:focus'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.wpcf7-select:focus'),
+								array('property' => 'width', 'selector' => '.wpcf7-select:focus'),
+								array('property' => 'height', 'selector' => '.wpcf7-select:focus'),
+								array('property' => 'border', 'selector' => '.wpcf7-select:focus'),
+								array('property' => 'border-radius', 'selector' => '.wpcf7-select:focus'),
+							),
+							'Radio - Checkbox' => array(
+								array('property' => 'color', 'selector' => '.wpcf7-radio .wpcf7-list-item-label:focus, .wpcf7-checkbox .wpcf7-list-item-label:focus'),
+								array('property' => 'background-color', 'selector' => '.wpcf7-radio .wpcf7-list-item-label:focus, .wpcf7-checkbox .wpcf7-list-item-label:focus'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.wpcf7-radio .wpcf7-list-item-label:focus, .wpcf7-checkbox .wpcf7-list-item-label:focus'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.wpcf7-radio .wpcf7-list-item-label:focus, .wpcf7-checkbox .wpcf7-list-item-label:focus'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.wpcf7-radio .wpcf7-list-item-label:focus, .wpcf7-checkbox .wpcf7-list-item-label:focus'),
+								array('property' => 'text-align', 'selector' => '.wpcf7-radio .wpcf7-list-item-label:focus, .wpcf7-checkbox .wpcf7-list-item-label:focus'),
+							),
+
+							'Submit' => array(
+								array('property' => 'color', 'selector' => '.wpcf7-submit:focus'),
+								array('property' => 'background', 'selector' => '.wpcf7-submit:focus'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.wpcf7-submit:focus'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.wpcf7-submit:focus'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.wpcf7-submit:focus'),
+								array('property' => 'border', 'label' => 'Border', 'selector' => '.wpcf7-submit:focus'),
+								array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.wpcf7-submit:focus'),
+								array('property' => 'margin', 'label' => 'Margin', 'selector' => '.wpcf7-submit:focus'),
+								array('property' => 'padding', 'label' => 'Padding', 'selector' => '.wpcf7-submit:focus'),
+							)
+						),
+
+					)
+				)
+			),
+			'hover' => array(
+				array(
+					'name'    => 'css_hover_custom',
+					'type'    => 'css',
+					'options' => array(
+
+						array(
+							"screens" => "any",
+							'Input' => array(
+								array('property' => 'color', 'label' => 'Color', 'selector' => '.wpcf7-text:hover'),
+								array('property' => 'background', 'label' => 'Background Color', 'selector' => '.wpcf7-text:hover'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.wpcf7-text:hover'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.wpcf7-text:hover'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.wpcf7-text:hover'),
+								array('property' => 'width', 'selector' => '.wpcf7-text:hover'),
+								array('property' => 'height', 'selector' => '.wpcf7-text:hover'),
+								array('property' => 'border', 'selector' => '.wpcf7-text:hover'),
+								array('property' => 'border-radius', 'selector' => '.wpcf7-text:hover'),
+							),
+							'Text Area' => array(
+								array('property' => 'color', 'label' => 'Color', 'selector' => '.wpcf7-textarea:hover'),
+								array('property' => 'background', 'label' => 'Background Color', 'selector' => '.wpcf7-textarea:hover'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.wpcf7-textarea:hover'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.wpcf7-textarea:hover'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.wpcf7-textarea:hover'),
+								array('property' => 'width', 'selector' => '.wpcf7-textarea:hover'),
+								array('property' => 'height', 'selector' => '.wpcf7-textarea:hover'),
+								array('property' => 'border', 'selector' => '.wpcf7-textarea:hover'),
+								array('property' => 'border-radius', 'selector' => '.wpcf7-textarea:hover'),
+							),
+							'Select' => array(
+								array('property' => 'color', 'label' => 'Color', 'selector' => '.wpcf7-select:hover'),
+								array('property' => 'background', 'label' => 'Background Color', 'selector' => '.wpcf7-select:hover'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.wpcf7-select:hover'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.wpcf7-select:hover'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.wpcf7-select:hover'),
+								array('property' => 'width', 'selector' => '.wpcf7-select:hover'),
+								array('property' => 'height', 'selector' => '.wpcf7-select:hover'),
+								array('property' => 'border', 'selector' => '.wpcf7-select:hover'),
+								array('property' => 'border-radius', 'selector' => '.wpcf7-select:hover'),
+							),
+							'Radio - Checkbox' => array(
+								array('property' => 'color', 'selector' => '.wpcf7-radio .wpcf7-list-item-label:hover, .wpcf7-checkbox .wpcf7-list-item-label:hover'),
+								array('property' => 'background-color', 'selector' => '.wpcf7-radio .wpcf7-list-item-label:hover, .wpcf7-checkbox .wpcf7-list-item-label:hover'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.wpcf7-radio .wpcf7-list-item-label:hover, .wpcf7-checkbox .wpcf7-list-item-label:hover'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.wpcf7-radio .wpcf7-list-item-label:hover, .wpcf7-checkbox .wpcf7-list-item-label:hover'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.wpcf7-radio .wpcf7-list-item-label:hover, .wpcf7-checkbox .wpcf7-list-item-label:hover'),
+							),
+
+							'Submit' => array(
+								array('property' => 'color', 'selector' => '.wpcf7-submit:hover'),
+								array('property' => 'background', 'selector' => '.wpcf7-submit:hover'),
+								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.wpcf7-submit:hover'),
+								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.wpcf7-submit:hover'),
+								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.wpcf7-submit:hover'),
+								array('property' => 'border', 'label' => 'Border', 'selector' => '.wpcf7-submit:hover'),
+								array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.wpcf7-submit:hover'),
+							)
+						),
+
+					)
+				)
+			),
+		)
+	);
+
+	$kc->add_map( $kc_extra_elements, 'core' );
+}
+
 
 if ($mapper && is_array($mapper)) {
 	$kc->add_map ($mapper);
 }
-
-

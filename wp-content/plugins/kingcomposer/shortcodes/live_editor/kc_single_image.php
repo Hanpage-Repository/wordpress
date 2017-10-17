@@ -22,7 +22,8 @@ var output 				= '',
 	caption 		    = ( atts['caption'] !== undefined &&  atts['caption'] !== '__empty__' ) ?  atts['caption'] : '',
 	alt 		        = ( atts['alt'] !== undefined &&  atts['alt'] !== '__empty__' ) ?  atts['alt'] : '',
 	image_wrap 			= 'yes',
-	data_lightbox 		= '';
+	data_lightbox 		= '',
+	sizes 		= ['full', 'thumbnail', 'medium', 'large'];
 
 css_classes.push( 'kc_shortcode' );
 css_classes.push( 'kc_single_image' );
@@ -61,27 +62,22 @@ if( image_source == 'external_link' ) {
 
 	if( image_source == 'media_library' )
 	{
-		image_id 	= image_id.replace( /[^\d]/, '' );
+		//image_id 	= image_id.replace( /[^\d]/, '' );
 	}
 	else
 	{
-		<?php
-
-		$post_id = get_the_ID();
-
-		if ( $post_id && has_post_thumbnail( $post_id ) ) {
-			$image_id = get_post_thumbnail_id( $post_id );
-		} else {
-			$image_id = 0;
-		}
-
-		echo 'image_id = '.$image_id.';';
-
-		?>
+		image_id 	= kc_post_thumnail_ID;
 	}
 
 	image_full 	= ajaxurl + '?action=kc_get_thumbn&size=full&id=' + image_id;
-	image_url 	= ajaxurl + '?action=kc_get_thumbn&id=' + image_id + '&size=' + image_size ;
+	
+	if ( sizes.indexOf( image_size ) > -1  ) {
+		image_url 	= ajaxurl + '?action=kc_get_thumbn&id=' + image_id + '&size=' + image_size ;
+	}else if( image_size.indexOf('x') > 0 ){
+		image_url 	= ajaxurl + '?action=kc_get_thumbn_size&id=' + image_id + '&size=' + image_size ;
+	}
+	
+	
 
 	if( image_url !== '' ) {
 		image_attributes.push('src="' + image_url + '"');
@@ -132,10 +128,10 @@ if( overlay === 'yes' )
 	
 
 if( on_click_action !== '' ) {
-		output += '<a ' + data_lightbox + ' href="' + image_full + '" title="' + title_link + '"><figure><img ' + image_attributes.join(' ') + ' target="' + target + '" />' + overlay_html +'</figure></a>';
+		output += '<a ' + data_lightbox + ' href="' + image_full + '" title="' + title_link + '"><img ' + image_attributes.join(' ') + ' target="' + target + '" />' + overlay_html +'</a>';
 
 } else {
-	output += '<figure><img ' + image_attributes.join(' ') + ' alt="' + caption + '"/>' + overlay_html + '</figure>';
+	output += '<img ' + image_attributes.join(' ') + '/>' + overlay_html;
 }
 
 if( caption !== '' ){

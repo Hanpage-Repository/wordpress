@@ -168,7 +168,7 @@ class kc_tools {
 		return $_terms;
 
 	}
-	
+
 	public static function get_featured_image( $post, $thumbnail = 'single-post-thumbnail' , $first = true ) {
 
 		$featured = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $thumbnail );
@@ -176,12 +176,12 @@ class kc_tools {
 		if( empty($featured) )
 		{
 			if( $first == true )return self::get_first_image( $post->post_content, $post->ID );
-			else return KC_URL.'/assets/images/default.jpg';
+			else return $kc->default_image();
 		}
 		return $featured[0];
 
 	}
-	
+
 	public static function images_attached( $id ){
 
 		$args = array(
@@ -206,7 +206,7 @@ class kc_tools {
 	}
 
 	public static function get_first_image( $content, $id = null ) {
-
+		global $kc;
 		$first_img = self::get_first_video( $content );
 
 		if( $first_img != null ){
@@ -225,7 +225,7 @@ class kc_tools {
 			if( !empty( $first[0] ) )
 				return $first[0][0];
 
-			else $first_img = KC_URL.'/assets/images/default.jpg';
+			else $first_img = $kc->default_image();
 		}
 
 		return $first_img;
@@ -245,12 +245,16 @@ class kc_tools {
 		return 	$first_video;
 
 	}
-	
+
 	public static function createImageSize( $source, $attr ){
-		
-		$attr = explode( 'x', $attr );
-		$arg = array();
-		if( !empty( $attr[2] ) ){
+
+		if (strpos($source, KC_SITE) === false || $source == KC_URL.'/assets/images/get_start.jpg')
+			return $source;
+
+		$attr = explode( 'x', $attr ); $arg = array();
+
+		if ( !empty( $attr[2] ) ) {
+
 			$arg['w'] = $attr[0];
 			$arg['h'] = $attr[1];
 			$arg['a'] = $attr[2];
@@ -260,7 +264,7 @@ class kc_tools {
 			}else{
 				$attr = '-'.$attr[0].'x'.$attr[1].'xc';
 			}
-			
+
 		}else if( !empty( $attr[0] ) && !empty( $attr[1] ) ){
 			$arg['w'] = $attr[0];
 			$arg['h'] = $attr[1];
@@ -268,32 +272,32 @@ class kc_tools {
 		}else{
 			return $source;
 		}
-		
+
 		$source = strrev( $source );
 		$st = strpos( $source, '.');
-		
+
 		if( strpos( $source, strrev( 'images/default.jpg' ) ) === 0 ){
 			return strrev( $source );
 		}else if( $st === false ){
 			return strrev( $source ).$attr;
 		}else{
-			
+
 			$file = str_replace( array( untrailingslashit( site_url() ).'/', '\\', '/' ), array( ABSPATH, KDS, KDS ), strrev( $source ) );
-			
+
 			$_return = strrev( substr( $source, 0, $st+1 ).strrev($attr).substr( $source, $st+1 ) );
 			$__return = str_replace( array( untrailingslashit( site_url() ).'/', '\\', '/' ), array( ABSPATH, KDS, KDS ), $_return );
-	
+
 			if( file_exists( $file ) && !file_exists( $__return ) ){
 				ob_start();
 				self::processImage( $file, $arg, $__return );
 				ob_end_clean();
 			}
-			
+
 			return $_return;
-			
+
 		}
 	}
-	
+
 	public static function processImage( $localImage, $params = array(), $tempfile ){
 
 		$sData = getimagesize($localImage);
@@ -501,13 +505,13 @@ class kc_tools {
 		}
 
 		$imgType = "";
-		
+
 		if(preg_match('/^image\/(?:jpg|jpeg)$/i', $mimeType)){
 			$imgType = 'jpg';
-			imagejpeg($canvas, $tempfile, 100);
+			imagejpeg($canvas, $tempfile, 70);
 		} else if(preg_match('/^image\/png$/i', $mimeType)){
 			$imgType = 'png';
-			imagepng($canvas, $tempfile, 0);
+			imagepng($canvas, $tempfile, 7);
 		} else if(preg_match('/^image\/gif$/i', $mimeType)){
 			$imgType = 'gif';
 			imagegif($canvas, $tempfile);
@@ -593,6 +597,10 @@ class kc_tools {
 		if( !empty( $atts['amount'] ) ){
 			$atts['items']        = intval($atts['amount']);
 		}
+		if( $atts['amount'] == 0 ){
+			$atts['items'] = -1;
+		}
+
 
 		//assign category for work shortcode
 		if($atts['tax_term'] !=''){
@@ -645,27 +653,30 @@ class kc_tools {
 			foreach( $args as $i => $arg ){
 
 				if( !post_type_exists( $arg[1] ) ){
-
+					$params = array(
+						'menu_icon' => $arg[3],
+						'labels' => array(
+							'name' => $arg[0],
+							'singular_name' => $arg[1],
+							'add_new' => 'Add new '.$arg[2],
+							'edit_item' => 'Edit '.$arg[2],
+							'new_item' => 'New '.$arg[2],
+							'add_new_item' => 'New '.$arg[2],
+							'view_item' => 'View '.$arg[2],
+							'search_items' => 'Search '.$arg[2].'s',
+							'not_found' => 'No '.$arg[2].' found',
+							'not_found_in_trash' => 'No '.$arg[2].' found in Trash'
+						),
+						'public' => true,
+						'supports' => $arg[4],
+						'taxonomies' => array( $arg[1].'-category' )
+					);
+					if( isset($arg[5]) ){
+						$params[ 'rewrite' ] = array('slug' => $arg[5], 'with_front' => false);
+					}
 					register_post_type(
 						$arg[1],
-						array(
-							'menu_icon' => $arg[3],
-						    'labels' => array(
-							    'name' => $arg[0],
-							    'singular_name' => $arg[1],
-							    'add_new' => 'Add new '.$arg[2],
-							    'edit_item' => 'Edit '.$arg[2],
-							    'new_item' => 'New '.$arg[2],
-							    'add_new_item' => 'New '.$arg[2],
-							    'view_item' => 'View '.$arg[2],
-							    'search_items' => 'Search '.$arg[2].'s',
-							    'not_found' => 'No '.$arg[2].' found',
-							    'not_found_in_trash' => 'No '.$arg[2].' found in Trash'
-						    ),
-						    'public' => true,
-						    'supports' => $arg[4],
-						    'taxonomies' => array( $arg[1].'-category' )
-					    )
+						$params
 					);
 
 				}
