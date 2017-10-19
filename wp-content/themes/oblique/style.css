@@ -1233,6 +1233,10 @@ Top bar
 	display: none;
 }
 
+/* added by KH */
+/* one line commands */
+.kh-display-inline { display: inline !important; }
+
 /*
 .page-template-kh-home-page-php .svg-container,
 */
