@@ -1236,6 +1236,7 @@ Top bar
 /* added by KH */
 /* one line commands */
 .kh-display-inline { display: inline !important; }
+.kh-pointer-events-none { pointer-events: none !important; }
 
 /*
 .page-template-kh-home-page-php .svg-container,
