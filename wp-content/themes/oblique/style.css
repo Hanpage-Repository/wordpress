@@ -1099,13 +1099,12 @@ Top bar
 	text-align: center;
 }
 
-.sidebar-toggle {
-	position: fixed !important;
+.owl-theme .owl-controls .owl-buttons div {
+	background: #000 !important;
 }
 
-.kh-gives-padding {
-	padding-left: 60px;
-	padding-right: 60px;
+.sidebar-toggle {
+	position: fixed !important;
 }
 
 .ufbl-form-field {
@@ -1234,10 +1233,29 @@ Top bar
 }
 
 /* added by KH */
-/* one line commands */
+/* custom commands */
 .kh-display-inline { display: inline !important; }
 .kh-pointer-events-none { pointer-events: none !important; }
 
+.kh-owl-buttons-medium .owl-controls .owl-buttons div {
+	padding: 6px 20px !important;
+	font-size: 12px !important;
+}
+
+.kh-owl-buttons-large .owl-controls .owl-buttons div {
+	padding: 9px 30px !important;
+	font-size: 14px !important;
+}
+
+.kh-owl-buttons-white .owl-controls .owl-buttons div {
+	background: #fff !important;
+	color: #000 !important;
+}
+
+.kh-gives-padding {
+	padding-left: 60px;
+	padding-right: 60px;
+}
 /*
 .page-template-kh-home-page-php .svg-container,
 */
@@ -1326,10 +1344,6 @@ div.header-search,
 .page-template-kh-home-page-php div.progressBar {
 	width: 60%;
 	margin: auto;
-}
-
-.page-template-kh-home-page-php .owl-theme .owl-controls .owl-buttons div {
-	background: #000;
 }
 
 /* added by KH - 151515 */
