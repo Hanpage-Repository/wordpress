@@ -1270,9 +1270,11 @@ div.header-search,
 .post-template-kh-151515-single-php .svg-container,
 .post-template-kh-FFFFFF-A2A0A0-single-php .svg-container,
 .post-template-kh-FFFFFF-DDE0AE-single-php .svg-container,
+.post-template-kh-gradient-40AFDF-95D6F2-068AC3-single-php .svg-container,
 .post-template-kh-FFFFFF-316BA0-single-php .svg-container,
 .page-template-kh-home-page-php .kc-blog-posts .post-grid h2.post-title-alt::before,
 .post-template-kh-46130E-single-php .svg-container,
+.post-template-kh-C00000-single-php .svg-container,
 .post-template-kh-FFFFFF-single-php .svg-container,
 .post-template-kh-1561AC-single-php .svg-container {
 	display: none !important;
@@ -1387,6 +1389,37 @@ div.header-search,
 	background: #642721;
 }
 
+/* added by KH - C00000 */
+.post-template-kh-C00000-single-php {
+	background-color: #C00000;
+}
+.post-template-kh-C00000-single-php .entry-title {
+	color: #000;
+	margin-top: 40px;
+}
+.post-template-kh-C00000-single-php .site-footer {
+	background-color: #F84545;
+}
+.post-template-kh-C00000-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background-color: #FFFFFF;
+	color: rgba(137, 137, 137, 0.9);
+}
+.post-template-kh-C00000-single-php .widget-area {
+	background-color: #C00000;
+}
+
+.post-template-kh-C00000-single-php .sidebar-toggle {
+	color: #F84545;
+}
+
+.post-template-kh-C00000-single-php .kc-multi-icons-wrapper a {
+	background: #F20B0B;
+}
+
 /* added by KH - 1561AC */
 .post-template-kh-1561AC-single-php {
 	background-color: #1561AC;
@@ -1481,6 +1514,54 @@ div.header-search,
 
 .post-template-kh-FFFFFF-A2A0A0-single-php .sidebar-toggle {
 	color: #151515;
+}
+
+/* added by KH - gradient-40AFDF-95D6F2-068AC3
+
+95D6F2
+66C1E8
+40AFDF - core
+1D9CD3
+068AC3
+
+*/
+
+.post-template-kh-gradient-40AFDF-95D6F2-068AC3-single-php {
+	/*background: #FFFFFF;*/
+	background: linear-gradient(#40afdf, #95d6f2, #068ac3);
+}
+
+.post-template-kh-gradient-40AFDF-95D6F2-068AC3-single-php article.post {
+	/*
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	*/
+
+	background: rgba(255,255,255,0.1);
+}
+
+.post-template-kh-gradient-40AFDF-95D6F2-068AC3-single-php .entry-title {
+	color: #444;
+	margin-top: 40px;
+
+	color: #FFFFFF;
+}
+
+.post-template-kh-gradient-40AFDF-95D6F2-068AC3-single-php .sidebar-toggle {
+	color: #66C1E8;
+}
+
+.post-template-kh-gradient-40AFDF-95D6F2-068AC3-single-php .widget-area {
+	background-color: #068AC3;
+}
+
+.post-template-kh-gradient-40AFDF-95D6F2-068AC3-single-php .site-footer {
+	background-color: #068AC3;
+}
+
+.post-template-kh-gradient-40AFDF-95D6F2-068AC3-single-php ul {
+	color: #000000 !important;
 }
 
 /* added by KH - FFFFFF-DDE0AE 

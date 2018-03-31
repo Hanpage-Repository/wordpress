@@ -16,29 +16,17 @@ jQuery(function($) {
 
 //Toggle sidebar
 // edit by KH
+
 jQuery(function($) {
 	$('.sidebar-toggle').click(function() {
+		console.log("toggle");
 		sidebar_toggle();
 	});
 	$('.sidebar-toggle-inside').click(function() {
+		console.log("toggle_inside");
 		sidebar_toggle_inside();
 	});	
-	/*
-	$('.kh-inside a').click(function() {
-		console.log("hello");
-		sidebar_toggle_inside();
-	});	
-	*/
 });
-
-// added by KH
-// Check First Item on payment_method
-/*
-jQuery(function($) {
-	$("input[name=payment_method][disabled=false]:first").attr('checked', true);
-});
-*/
-
 
 function sidebar_toggle() {
 	jQuery('.widget-area').toggleClass('widget-area-visible');
@@ -63,6 +51,15 @@ jQuery(function($) {
 	$('.sidebar-toggle-inside').click(function() {
 		$('.widget-area').toggleClass('widget-area-visible');
 	});	
+});
+*/
+
+
+// added by KH
+// Check First Item on payment_method
+/*
+jQuery(function($) {
+	$("input[name=payment_method][disabled=false]:first").attr('checked', true);
 });
 */
 
