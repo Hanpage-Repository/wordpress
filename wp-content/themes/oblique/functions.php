@@ -255,7 +255,7 @@ function oblique_footer_credits() {
 	echo '<br>';
 
 	echo '<div style="color:white; text-align:center;">';
-		printf( __( 'COPYRIGHT © 2016 - %d  HAN PAGE', 'oblique' ), 2017 );
+		printf( __( 'COPYRIGHT © 2016 - %d  HAN PAGE', 'oblique' ), date("Y") );
 	echo '<br>';
 		printf( __( 'ALL RIGHTS RESERVED', 'oblique' ) );
 	echo '</div>';

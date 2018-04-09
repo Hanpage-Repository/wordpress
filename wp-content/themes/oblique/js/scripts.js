@@ -16,14 +16,12 @@ jQuery(function($) {
 
 //Toggle sidebar
 // edit by KH
-
 jQuery(function($) {
 	$('.sidebar-toggle').click(function() {
-		console.log("toggle");
 		sidebar_toggle();
 	});
-	$('.sidebar-toggle-inside').click(function() {
-		console.log("toggle_inside");
+//	$('.sidebar-toggle-inside').click(function() {
+	$('.sidebar-nav').click(function() {
 		sidebar_toggle_inside();
 	});	
 });

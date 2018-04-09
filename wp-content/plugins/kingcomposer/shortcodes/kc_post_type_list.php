@@ -39,6 +39,8 @@ $args = array(
 	'order' 			=> $order,
 );
 
+if($orderby == 'rand') unset($args['order']);
+
 if( count($taxonomy_term) )
 {
 	$tax_query = array(

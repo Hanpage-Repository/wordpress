@@ -149,7 +149,7 @@ $css_class[] = 'kc-image-align-' . $image_align;
 							<div class="post-item-left">
 								<figure>
 									<img src="<?php echo esc_url( $img_url ); ?>"
-									     alt="<?php echo get_the_title( $item ); ?>">
+									     alt="<?php echo strip_tags(get_the_title( $item )); ?>">
 								</figure>
 							</div>
 						<?php endif; ?>
@@ -157,7 +157,7 @@ $css_class[] = 'kc-image-align-' . $image_align;
 							<div class="post_details">
 								<h2 class="post-title-alt"><a
 										href="<?php echo esc_url( get_permalink( $item->ID ) ); ?>"
-										title="<?php echo get_the_title( $item ); ?>"><?php echo get_the_title( $item ); ?></a>
+										title="<?php echo strip_tags(get_the_title( $item )); ?>"><?php echo get_the_title( $item ); ?></a>
 								</h2>
 
 								<?php if ( $meta_data == 'yes'): ?>
@@ -199,7 +199,7 @@ $css_class[] = 'kc-image-align-' . $image_align;
 							<div class="post_details">
 								<h2 class="post-title-alt"><a
 										href="<?php echo esc_url( get_permalink( $item->ID ) ); ?>"
-										title="<?php echo get_the_title( $item ); ?>"><?php echo get_the_title( $item ); ?></a>
+										title="<?php echo strip_tags(get_the_title( $item )); ?>"><?php echo get_the_title( $item ); ?></a>
 								</h2>
 								<?php if ( $meta_data == 'yes'): ?>
 									<div class="post-meta">
@@ -236,7 +236,7 @@ $css_class[] = 'kc-image-align-' . $image_align;
 						<div class="post-item-right">
 							<figure>
 								<img src="<?php echo esc_url( $img_url ); ?>"
-								     alt="<?php echo get_the_title( $item ); ?>">
+								     alt="<?php echo strip_tags(get_the_title( $item )); ?>">
 							</figure>
 						</div>
 
@@ -379,7 +379,7 @@ $css_class[] = 'kc-image-align-' . $image_align;
 						<div class="kc-post-header">
 							<?php if ( ! empty( $img_url ) ): ?>
 								<a href="<?php echo esc_url( get_permalink( $item->ID ) ); ?>">
-									<img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo get_the_title( $item ); ?>">
+									<img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo strip_tags(get_the_title( $item )); ?>">
 								</a>
 							<?php endif; ?>
 							<div class="meta-title">
@@ -399,7 +399,7 @@ $css_class[] = 'kc-image-align-' . $image_align;
 
 								<h2 class="post-title-alt">
 									<a href="<?php echo esc_url( get_permalink( $item->ID ) ); ?>" class="post-title-link"
-									   title="<?php echo get_the_title( $item ); ?>"><?php echo get_the_title( $item ); ?></a>
+									   title="<?php echo strip_tags(get_the_title( $item )); ?>"><?php echo get_the_title( $item ); ?></a>
 								</h2>
 							</div>
 						</div>
@@ -445,7 +445,7 @@ $css_class[] = 'kc-image-align-' . $image_align;
 						</figure>
 						<div class="post-details">
 							<h2 class="post-title-alt">
-								<a href="<?php echo esc_url( get_permalink( $item->ID ) ); ?>" title="<?php echo get_the_title( $item ); ?>"><?php echo get_the_title( $item ); ?></a>
+								<a href="<?php echo esc_url( get_permalink( $item->ID ) ); ?>" title="<?php echo strip_tags(get_the_title( $item )); ?>"><?php echo get_the_title( $item ); ?></a>
 							</h2>
 
 							<?php if ( $meta_data == 'yes' ): ?>

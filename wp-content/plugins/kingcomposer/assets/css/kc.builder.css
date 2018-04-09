@@ -644,7 +644,7 @@ div.kc-column ul.kc-column-control.pos-bottom li {
 .kc-column .kc-column-control li:hover > i {
     height: 30px;
     display: block;
-    padding-top: 4px;
+    padding-top: 0px;
     z-index: 12;
     position: relative;
 }
@@ -987,7 +987,11 @@ ul>li.more .mme-more-actions li {
     margin: 0px;
     padding: 0px 12px;
     height: 31px;
+    line-height: 32px!important;
+}
+ul>li.more .mme-more-actions li i{
     line-height: 32px;
+    padding-top: 0;
 }
 ul>li.more .mme-more-actions li:last-child {
     border: none;
@@ -998,9 +1002,7 @@ ul>li.more .mme-more-actions li:hover {
     position: relative;
     z-index: 3;
 }
-ul>li.more .mme-more-actions li:hover i {
-    padding-top: 0;
-}
+
 ul>li.more div.mme-more-actions:before {
     position: absolute;
     width: 0px;
@@ -1347,6 +1349,7 @@ h3.kc-vertical-label:before {
     margin-right: 5px;
     max-width: 100%;
     overflow: hidden;
+    box-sizing: content-box;
 }
 .kc-element>div.admin-view:last-child{
 	clear: both;

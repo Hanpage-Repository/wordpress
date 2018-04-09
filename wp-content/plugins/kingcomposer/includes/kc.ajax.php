@@ -117,6 +117,7 @@ class kc_ajax{
 		{
 			header( 'location: '. $kc->default_image());
 		}
+		exit();
 	}
 
     public function get_thumbn_size( $abc ){

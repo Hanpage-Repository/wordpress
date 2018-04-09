@@ -104,7 +104,7 @@ div.kc_col-of-5 {
 
 .kc_single_image img {
     max-width: 100%;
-    display: block;
+    display: inline-block;
 }
 
 .kc-video-bg .kc_column {
@@ -2734,7 +2734,8 @@ body div.dark_rounded .pp_nav .pp_play, body div.ppt {
 .kc_single_image {
     max-width: 100%;
     width: 100%;
-    position: relative
+    position: relative;
+    line-height: 0
 }
 
 .kc_single_image figure {
@@ -4658,6 +4659,19 @@ button.kc-close-but:hover {
 @media only screen and ( max-width: 479px ) {
     .kc-blog-posts-3.kc-blog-grid .post-grid.grid-3,.kc-blog-posts-3.kc-blog-grid .post-grid.grid-4,.kc-blog-posts-3.kc-blog-grid .post-grid.grid-2,.kc-blog-posts-2 .kc-list-item-2 .post-item-left,.kc-blog-posts-2 .kc-list-item-2 .post-item-right {
         width: 100%
+    }
+    div.dark_rounded .pp_content_container .pp_left,
+    div.dark_rounded .pp_content_container .pp_right{
+        padding: 0;
+    }
+    div.pp_pic_holder{
+        width: 85% !important;
+        left: 7.5% !important;
+    }
+    div.pp_pic_holder img,
+    div.dark_rounded .pp_content{
+        width: 100% !important;
+        height: auto !important;
     }
 }
 

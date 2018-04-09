@@ -1612,7 +1612,12 @@
 							$(el).parent().removeClass('kc-sorting');
 						}
 					});
-
+					
+					if(
+						typeof tinymce !== 'undefined' && 
+						tinymce.activeEditor !== null
+					) tinymce.activeEditor.hidden = true;
+					
 				}, 100 );
 
 			},
@@ -6797,8 +6802,14 @@
 			/*
 			*	if forced to switch to KC 
 			*/
-			if( force === true )
+			if( force === true ){
 				kc.cfg.mode = '';
+				if(
+					typeof tinymce !== 'undefined' && 
+					tinymce.activeEditor !== null
+				) tinymce.activeEditor.hidden = true;
+			}
+				
 			
 			/*
 			*	make sure in backend editor
@@ -6815,7 +6826,11 @@
 			if( kc.cfg.mode == 'kc' ){
 				
 				// back to classic mode
-					
+				if(
+					typeof tinymce !== 'undefined' && 
+					tinymce.activeEditor !== null
+				) tinymce.activeEditor.hidden = false;
+				
 				kc.cfg.mode = '';
 				kc.backbone.stack.set( 'KC_Configs', kc.cfg );
 				
@@ -6855,6 +6870,10 @@
 			}else{
 				
 				// switch to KC
+				if(
+					typeof tinymce !== 'undefined' && 
+					tinymce.activeEditor !== null
+				) tinymce.activeEditor.hidden = true;
 				
 				$('#kc-switcher-buttons').hide();
 				kc.cfg.mode = 'kc';
@@ -7054,4 +7073,3 @@
 	}
 	
 })( jQuery );
-

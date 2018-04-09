@@ -6,7 +6,7 @@ Author URI: https://kingcomposer.com
 Store link: https://kingcomposer.com
 Tags: wordpress, builder, drag drop, website builder, site-builder, site builder, page-builder, website-builder, page builder, king builder, kingcomposer, design, Adaptive Editor, responsive, custom pages, Drag And Drop editor, edit, editing, fonts, drag and drop builder, editor, BackEnd builder, BackEnd editor, FrontEnd builder, FrontEnd editor, html5, image, image backgrounds, images, home page builder, landing page builder, live editor, widgets , king theme, TinyMCE, transitions, video backgrounds, visual editor, content composer layout builder, page, builder, page builder plugin, Page Layout, site builder, Template Builder, visual builder, website builder, wysiwyg editor, theme builder, visual builder, visual composer, visual editor, layout, layout builder, layout builder plugin, page editor, all in one, coming soon page, create landing pages, creating landing pages, responsive, short, short code, shortcode, template, templates
 Requires at least: 4.0
-Tested up to: 4.8
+Tested up to: 4.9.1
 Stable tag: 4.8
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -157,6 +157,17 @@ Do you have questions or issues with KingComposer? Use these support channels ap
 7. screenshot-7.jpg
 
 == Changelog ==
+
+= 2.6.17 (14 Jan, 2018) =
+* [Fix] Background image on some virtual server.
+
+= 2.6.16 (14 Jan, 2018) =
+* [Fix] Mute sound setting for row and row inner
+* [Fix] Images do not display on BackEnd
+* [Fix] Align image setting does not works
+* [Fix] Background image issue on save.
+* [Fix] Blog post title
+
 = 2.6.15 (Sep 16, 2017) =
 * [Fix] Content disappeared on Chrome 6.1.
 * [Fix] Error loading icon on some hosting

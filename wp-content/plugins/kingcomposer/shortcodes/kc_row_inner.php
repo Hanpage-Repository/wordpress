@@ -55,6 +55,8 @@ if( isset( $atts['video_bg'] ) && $atts['video_bg'] === 'yes' )
 		if( isset( $atts['video_options'] ) && !empty( $video_options ) ){
 			$element_attributes[] = 'data-kc-video-options="' . esc_attr( trim( $video_options )) . '"';
 		}
+		if( isset( $atts['video_mute'] ) && !empty( $atts['video_mute'] ) )
+			$element_attributes[] = 'data-kc-video-mute="' . esc_attr( $atts['video_mute'] ) . '"';
 	}
 }
 

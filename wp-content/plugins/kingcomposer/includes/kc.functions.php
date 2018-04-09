@@ -761,8 +761,8 @@ function kc_attach_url($url = '') {
 	$xmls = $kc->get_prebuilt_templates();
 
 	$test_exist = str_replace(
-		array(KC_SITE, '/', '\\'),
-		array(untrailingslashit(ABSPATH), KDS, KDS),
+		array(KC_SITE . '/wp-content', '/', '\\'),
+		array(untrailingslashit(WP_CONTENT_DIR), KDS, KDS),
 		$url
 	);
 
