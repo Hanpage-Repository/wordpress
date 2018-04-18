@@ -1270,6 +1270,11 @@ div.header-search,
 .post-template-kh-151515-single-php .svg-container,
 .post-template-kh-FFFFFF-A2A0A0-single-php .svg-container,
 .post-template-kh-FFFFFF-DDE0AE-single-php .svg-container,
+.post-template-kh-FFFFFF-3B4662-single-php .svg-container,
+.post-template-kh-FFFFFF-CFE9BC-single-php .svg-container,
+.post-template-kh-FFFFFF-333333-single-php .svg-container,
+.post-template-kh-FFFFFF-FFBEAB-single-php .svg-container,
+.post-template-kh-FFFFFF-594655-single-php .svg-container,
 .post-template-kh-FFFFFF-FFC2DC-single-php .svg-container,
 .post-template-kh-FFFFFF-91D7E8-single-php .svg-container,
 .post-template-kh-FFFFFF-353535-single-php .svg-container,
@@ -1600,12 +1605,194 @@ FDFEF3
 	color: #BABE7C;
 }
 
+.post-template-kh-FFFFFF-DDE0AE-single-php .site-footer,
 .post-template-kh-FFFFFF-DDE0AE-single-php .widget-area {
 	background-color: #9A9F53;
 }
 
-.post-template-kh-FFFFFF-DDE0AE-single-php .site-footer {
-	background-color: #9A9F53;
+/* added by KH - FFFFFF-3B4662 
+
+091228 
+16213C 
+252f4b – core  
+3B4662 
+55607D 
+
+*/
+.post-template-kh-FFFFFF-3B4662-single-php {
+	background-color: #3B4662;
+}
+
+.post-template-kh-FFFFFF-3B4662-single-php .entry-title {
+	color: #444;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-3B4662-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-3B4662-single-php .sidebar-toggle {
+	color: #16213C;
+}
+
+.post-template-kh-FFFFFF-3B4662-single-php .site-footer,
+.post-template-kh-FFFFFF-3B4662-single-php .widget-area {
+	background-color: #16213C;
+}
+
+
+/* added by KH - FFFFFF-CFE9BC 
+
+5B9135 
+81B35D 
+ADD690 – core  
+CFE9BC 
+E8F5E0 
+
+*/
+.post-template-kh-FFFFFF-CFE9BC-single-php {
+	background-color: #CFE9BC;
+}
+
+.post-template-kh-FFFFFF-CFE9BC-single-php .entry-title {
+	color: #444;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-CFE9BC-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-CFE9BC-single-php .sidebar-toggle {
+	color: #81B35D;
+}
+
+.post-template-kh-FFFFFF-CFE9BC-single-php .site-footer,
+.post-template-kh-FFFFFF-CFE9BC-single-php .widget-area {
+	background-color: #81B35D;
+}
+
+/* added by KH - FFFFFF-333333 
+
+000000
+6B6A6A
+333333 – core 
+9D9C9C
+F7F6F4
+
+*/
+.post-template-kh-FFFFFF-333333-single-php {
+	background-color: #333333;
+}
+
+.post-template-kh-FFFFFF-333333-single-php .entry-title {
+	color: #444;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-333333-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-333333-single-php .sidebar-toggle {
+	color: #222;
+}
+
+.post-template-kh-FFFFFF-333333-single-php .widget-area {
+	background-color: #222;
+}
+
+.post-template-kh-FFFFFF-333333-single-php .site-footer {
+	background-color: #222;
+}
+
+/* added by KH - FFFFFF-FFBEAB 
+
+AA3817
+D55631
+EC7756 – core 
+FF9D80
+FFBEAB
+
+*/
+.post-template-kh-FFFFFF-FFBEAB-single-php {
+	background-color: #FFBEAB;
+}
+
+.post-template-kh-FFFFFF-FFBEAB-single-php .entry-title {
+	color: #444;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-FFBEAB-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-FFBEAB-single-php .sidebar-toggle {
+	color: #EC7756;
+}
+
+.post-template-kh-FFFFFF-FFBEAB-single-php .widget-area {
+	background-color: #EC7756;
+}
+
+.post-template-kh-FFFFFF-FFBEAB-single-php .site-footer {
+	background-color: #EC7756;
+}
+
+/* added by KH - FFFFFF-594655 
+
+B2A8B0
+90818D
+746270 – core 
+594655
+32242F
+
+*/
+.post-template-kh-FFFFFF-594655-single-php {
+	background-color: #594655;
+}
+
+.post-template-kh-FFFFFF-594655-single-php .entry-title {
+	color: #444;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-594655-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-594655-single-php .sidebar-toggle {
+	color: #32242F;
+}
+
+.post-template-kh-FFFFFF-594655-single-php .widget-area {
+	background-color: #32242F;
+}
+
+.post-template-kh-FFFFFF-594655-single-php .site-footer {
+	background-color: #32242F;
 }
 
 /* added by KH - FFFFFF-FFC2DC 
