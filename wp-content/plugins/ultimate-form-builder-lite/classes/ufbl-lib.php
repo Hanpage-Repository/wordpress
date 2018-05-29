@@ -317,8 +317,8 @@ if ( !class_exists( 'UFBL_Lib' ) ) {
 			}//foreach form data close
 			$form_response['error_flag'] = $error_flag;
 			// edit by KH
-			//$form_submission_message = (isset( $form_detail['form_design']['form_submission_message'] ) && $form_detail['form_design']['form_submission_message'] != '') ? esc_attr( $form_detail['form_design']['form_submission_message'] ) : __( 'Form submitted successfully.', 'ultimate-form-builder-lite' );
-			$form_submission_message = (isset( $form_detail['form_design']['form_submission_message'] ) && $form_detail['form_design']['form_submission_message'] != '') ? esc_attr( $form_detail['form_design']['form_submission_message'] ) : __( '정상적으로 전송되었습니다.', 'ultimate-form-builder-lite' );
+			$form_submission_message = (isset( $form_detail['form_design']['form_submission_message'] ) && $form_detail['form_design']['form_submission_message'] != '') ? esc_attr( $form_detail['form_design']['form_submission_message'] ) : __( 'Form submitted successfully.', 'ultimate-form-builder-lite' );
+			//$form_submission_message = (isset( $form_detail['form_design']['form_submission_message'] ) && $form_detail['form_design']['form_submission_message'] != '') ? esc_attr( $form_detail['form_design']['form_submission_message'] ) : __( '정상적으로 전송되었습니다.', 'ultimate-form-builder-lite' );
 			$form_error_message = ( isset( $form_detail['form_design']['form_error_message'] ) && $form_detail['form_design']['form_error_message'] != '') ? esc_attr( $form_detail['form_design']['form_error_message'] ) : __( 'Validation Errors Occured.Please check and submit the form again.', 'ultimate-form-builder-lite' );
 			$form_response['response_message'] = ($error_flag == 1) ? $form_error_message : $form_submission_message;
 			if ( $error_flag == 0 ) {
