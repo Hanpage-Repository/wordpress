@@ -419,3 +419,32 @@ function custom_override_checkout_fields( $fields ) {
 
  	return $fields;
 }
+
+// Below Codes not impletemented perfectly
+// "Hello World" shortcode
+function shortcode_HelloWorld() {
+	child_load_google_fonts();
+
+	return '<p>Wow!</p>';
+}
+add_shortcode('helloworld', 'shortcode_HelloWorld');
+
+
+add_action( 'wp_enqueue_scripts', 'child_load_google_fonts' );
+/**
+ * Enqueue Google Fonts using a function
+ */
+function child_load_google_fonts() {
+
+  	// Setup font arguments
+  	$query_args = array(
+  	    	//'family' => 'Song+Myung:300,400,700' // Change this font to whatever font you'd like
+  	    	'family' => 'Sunflower:300' // Change this font to whatever font you'd like
+  	    	);
+
+  	// A safe way to register a CSS style file for later use
+  	wp_register_style( 'google-fonts', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), array(), null );
+
+  	// A safe way to add/enqueue a CSS style file to a WordPress generated page
+  	wp_enqueue_style( 'google-fonts' );
+}
