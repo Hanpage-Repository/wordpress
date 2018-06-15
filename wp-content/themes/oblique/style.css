@@ -1271,6 +1271,12 @@ div.header-search,
 .post-template-kh-151515-single-php .svg-container,
 .post-template-kh-FFFFFF-A2A0A0-single-php .svg-container,
 .post-template-kh-FFFFFF-DDE0AE-single-php .svg-container,
+.post-template-kh-FFFFFF-EFE2F0-single-php .svg-container,
+.post-template-kh-FFFFFF-F85770-single-php .svg-container,
+.post-template-kh-FFFFFF-F7C0CD-single-php .svg-container,
+.post-template-kh-FFFFFF-426277-single-php .svg-container,
+.post-template-kh-FFFFFF-B15B67-single-php .svg-container,
+.post-template-kh-FFFFFF-CD86BE-single-php .svg-container,
 .post-template-kh-FFFFFF-D1BAAD-single-php .svg-container,
 .post-template-kh-FFFFFF-173677-single-php .svg-container,
 .post-template-kh-FFFFFF-FFE669-single-php .svg-container,
@@ -1626,6 +1632,180 @@ added by KH - FFFFFF-DDE0AE
 .post-template-kh-FFFFFF-DDE0AE-single-php .site-footer,
 .post-template-kh-FFFFFF-DDE0AE-single-php .widget-area {
 	background-color: #9A9F53;
+}
+
+/* 
+added by KH - FFFFFF-EFE2F0 
+*/
+.post-template-kh-FFFFFF-EFE2F0-single-php {
+	background-color: #EFE2F0;
+}
+
+.post-template-kh-FFFFFF-EFE2F0-single-php .entry-title {
+	color: #444;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-EFE2F0-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-EFE2F0-single-php .sidebar-toggle {
+	color: #B485B7;
+}
+
+.post-template-kh-FFFFFF-EFE2F0-single-php .site-footer,
+.post-template-kh-FFFFFF-EFE2F0-single-php .widget-area {
+	background-color: #B485B7;
+}
+
+/* 
+added by KH - FFFFFF-F85770 
+*/
+.post-template-kh-FFFFFF-F85770-single-php {
+	background-color: #F85770;
+}
+
+.post-template-kh-FFFFFF-F85770-single-php .entry-title {
+	color: #444;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-F85770-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-F85770-single-php .sidebar-toggle {
+	color: #F43755;
+}
+
+.post-template-kh-FFFFFF-F85770-single-php .site-footer,
+.post-template-kh-FFFFFF-F85770-single-php .widget-area {
+	background-color: #F43755;
+}
+
+/* 
+added by KH - FFFFFF-F7C0CD 
+*/
+.post-template-kh-FFFFFF-F7C0CD-single-php {
+	background-color: #F7C0CD;
+}
+
+.post-template-kh-FFFFFF-F7C0CD-single-php .entry-title {
+	color: #444;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-F7C0CD-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-F7C0CD-single-php .sidebar-toggle {
+	color: #F09BAD;
+}
+
+.post-template-kh-FFFFFF-F7C0CD-single-php .site-footer,
+.post-template-kh-FFFFFF-F7C0CD-single-php .widget-area {
+	background-color: #F09BAD;
+}
+
+/* 
+added by KH - FFFFFF-426277 
+*/
+.post-template-kh-FFFFFF-426277-single-php {
+	background-color: #426277;
+}
+
+.post-template-kh-FFFFFF-426277-single-php .entry-title {
+	color: #444;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-426277-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-426277-single-php .sidebar-toggle {
+	color: #18394E;
+}
+
+.post-template-kh-FFFFFF-426277-single-php .site-footer,
+.post-template-kh-FFFFFF-426277-single-php .widget-area {
+	background-color: #18394E;
+}
+
+/* 
+added by KH - FFFFFF-B15B67 
+*/
+.post-template-kh-FFFFFF-B15B67-single-php {
+	background-color: #B15B67;
+}
+
+.post-template-kh-FFFFFF-B15B67-single-php .entry-title {
+	color: #444;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-B15B67-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-B15B67-single-php .sidebar-toggle {
+	color: #8D3A46;
+}
+
+.post-template-kh-FFFFFF-B15B67-single-php .site-footer,
+.post-template-kh-FFFFFF-B15B67-single-php .widget-area {
+	background-color: #8D3A46;
+}
+
+/* 
+added by KH - FFFFFF-CD86BE 
+*/
+.post-template-kh-FFFFFF-CD86BE-single-php {
+	background-color: #CD86BE;
+}
+
+.post-template-kh-FFFFFF-CD86BE-single-php .entry-title {
+	color: #444;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-CD86BE-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-CD86BE-single-php .sidebar-toggle {
+	color: #93367F;
+}
+
+.post-template-kh-FFFFFF-CD86BE-single-php .site-footer,
+.post-template-kh-FFFFFF-CD86BE-single-php .widget-area {
+	background-color: #93367F;
 }
 
 /* 
