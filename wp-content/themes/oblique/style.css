@@ -1257,6 +1257,18 @@ Top bar
 	padding-left: 60px;
 	padding-right: 60px;
 }
+
+.kh-font-notosanskr p,
+.kh-font-notosanskr h1,
+.kh-font-notosanskr h2,
+.kh-font-notosanskr h3,
+.kh-font-notosanskr h4,
+.kh-font-notosanskr h5,
+.kh-font-notosanskr h6,
+.kh-font-notosanskr {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
 /*
 .page-template-kh-home-page-php .svg-container,
 */
@@ -1271,6 +1283,7 @@ div.header-search,
 .post-template-kh-151515-single-php .svg-container,
 .post-template-kh-FFFFFF-A2A0A0-single-php .svg-container,
 .post-template-kh-FFFFFF-DDE0AE-single-php .svg-container,
+.post-template-kh-FFFFFF-FAE1E5-single-php .svg-container,
 .post-template-kh-FFFFFF-EFE2F0-single-php .svg-container,
 .post-template-kh-FFFFFF-F85770-single-php .svg-container,
 .post-template-kh-FFFFFF-F7C0CD-single-php .svg-container,
@@ -1635,6 +1648,36 @@ added by KH - FFFFFF-DDE0AE
 }
 
 /* 
+added by KH - FFFFFF-FAE1E5 
+*/
+.post-template-kh-FFFFFF-FAE1E5-single-php {
+	background-color: #FAE1E5;
+}
+
+.post-template-kh-FFFFFF-FAE1E5-single-php .entry-title {
+	color: #444;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-FAE1E5-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-FAE1E5-single-php .sidebar-toggle {
+	color: #9A3242;
+}
+
+.post-template-kh-FFFFFF-FAE1E5-single-php .site-footer,
+.post-template-kh-FFFFFF-FAE1E5-single-php .widget-area {
+	background-color: #9A3242;
+}
+
+
+/* 
 added by KH - FFFFFF-EFE2F0 
 */
 .post-template-kh-FFFFFF-EFE2F0-single-php {
@@ -1899,7 +1942,7 @@ added by KH - FFFFFF-FFE669
 added by KH - FFFFFF-FEF7F8 
 */
 .post-template-kh-FFFFFF-FEF7F8-single-php {
-	background-color: #FAFCDE;
+	background-color: #FEF7F8;
 }
 
 .post-template-kh-FFFFFF-FEF7F8-single-php .entry-title {
@@ -1921,7 +1964,7 @@ added by KH - FFFFFF-FEF7F8
 
 .post-template-kh-FFFFFF-FEF7F8-single-php .site-footer,
 .post-template-kh-FFFFFF-FEF7F8-single-php .widget-area {
-	background-color: #737f67;
+	background-color: #737F67;
 }
 
 /* 

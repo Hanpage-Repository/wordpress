@@ -15,6 +15,7 @@
 
 <!-- added by KH  -->
 <meta name="naver-site-verification" content="b676af98f9416dcfe882719998d94a34ba22dbcc"/>
+<meta name="google-site-verification" content="V_P0JXxKqXKQHL1j_mL_W28WWfsW7QYEnFP05PB1_i8" />
 <!-- edit by KH
 <meta name="description" content="개인용 프로필, 기업 홈페이지, 동호회·동아리·이벤트 전용 페이지 제작 등 서비스 제공.">
 <meta property="og:type" content="website">

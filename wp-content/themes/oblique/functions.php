@@ -341,6 +341,8 @@ function kh_clear_cart() {
 // added by KH
 add_action( 'woocommerce_single_product_summary', 'woocommerce_total_product_price', 31 ); 
 function woocommerce_total_product_price() { 
+	return;// contents below is not necessary
+
 	global $woocommerce, $product; 
 	echo '<div id="product-total-price">'; 
 	_e('총 결제 금액 : ','woocommerce'); 
@@ -420,31 +422,21 @@ function custom_override_checkout_fields( $fields ) {
  	return $fields;
 }
 
-// Below Codes not impletemented perfectly
-// "Hello World" shortcode
-function shortcode_HelloWorld() {
-	child_load_google_fonts();
+function kh_shortcode_font($atts) {
+	$style_name = $atts['name'] . '-css';
 
-	return '<p>Wow!</p>';
+	wp_enqueue_style($style_name);
 }
-add_shortcode('helloworld', 'shortcode_HelloWorld');
+add_shortcode('KHFONT', 'kh_shortcode_font');
 
+// google and google early access is allowed
+function kh_font_enqueue_scripts() {
+	$query_args_kopubbatang = array( 'family' => 'KoPub Batang' );
+	$query_args_notosanskr = array( 'family' => 'Noto Sans KR' );
 
-add_action( 'wp_enqueue_scripts', 'child_load_google_fonts' );
-/**
- * Enqueue Google Fonts using a function
- */
-function child_load_google_fonts() {
-
-  	// Setup font arguments
-  	$query_args = array(
-  	    	//'family' => 'Song+Myung:300,400,700' // Change this font to whatever font you'd like
-  	    	'family' => 'Sunflower:300' // Change this font to whatever font you'd like
-  	    	);
-
-  	// A safe way to register a CSS style file for later use
-  	wp_register_style( 'google-fonts', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), array(), null );
-
-  	// A safe way to add/enqueue a CSS style file to a WordPress generated page
-  	wp_enqueue_style( 'google-fonts' );
+	//wp_register_style('kopubbatang-css', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), 'parent-stylesheet', '1.0', all );
+	wp_register_style('kopubbatang-css', add_query_arg( $query_args_kopubbatang, "//fonts.googleapis.com/earlyaccess/kopubbatang.css" ), 'parent-stylesheet', '1.0', all );
+	wp_register_style('notosanskr-css', add_query_arg( $query_args_kopubbatang, "//fonts.googleapis.com/earlyaccess/notosanskr.css" ), 'parent-stylesheet', '1.0', all );
 }
+add_action( 'wp_enqueue_scripts', 'kh_font_enqueue_scripts' );
+
