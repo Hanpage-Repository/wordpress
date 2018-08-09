@@ -436,7 +436,7 @@ function kh_font_enqueue_scripts() {
 
 	//wp_register_style('kopubbatang-css', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), 'parent-stylesheet', '1.0', all );
 	wp_register_style('kopubbatang-css', add_query_arg( $query_args_kopubbatang, "//fonts.googleapis.com/earlyaccess/kopubbatang.css" ), 'parent-stylesheet', '1.0', all );
-	wp_register_style('notosanskr-css', add_query_arg( $query_args_kopubbatang, "//fonts.googleapis.com/earlyaccess/notosanskr.css" ), 'parent-stylesheet', '1.0', all );
+	wp_register_style('notosanskr-css', add_query_arg( $query_args_notosanskr, "//fonts.googleapis.com/earlyaccess/notosanskr.css" ), 'parent-stylesheet', '1.0', all );
 }
 add_action( 'wp_enqueue_scripts', 'kh_font_enqueue_scripts' );
 

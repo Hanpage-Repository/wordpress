@@ -1283,6 +1283,7 @@ div.header-search,
 .post-template-kh-151515-single-php .svg-container,
 .post-template-kh-FFFFFF-A2A0A0-single-php .svg-container,
 .post-template-kh-FFFFFF-DDE0AE-single-php .svg-container,
+.post-template-kh-FFFFFF-BE7670-single-php .svg-container,
 .post-template-kh-FFFFFF-FAE1E5-single-php .svg-container,
 .post-template-kh-FFFFFF-EFE2F0-single-php .svg-container,
 .post-template-kh-FFFFFF-F85770-single-php .svg-container,
@@ -1645,6 +1646,35 @@ added by KH - FFFFFF-DDE0AE
 .post-template-kh-FFFFFF-DDE0AE-single-php .site-footer,
 .post-template-kh-FFFFFF-DDE0AE-single-php .widget-area {
 	background-color: #9A9F53;
+}
+
+/* 
+added by KH - FFFFFF-BE7670 
+*/
+.post-template-kh-FFFFFF-BE7670-single-php {
+	background-color: #BE7670;
+}
+
+.post-template-kh-FFFFFF-BE7670-single-php .entry-title {
+	color: #444;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-BE7670-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-BE7670-single-php .sidebar-toggle {
+	color: #81302A;
+}
+
+.post-template-kh-FFFFFF-BE7670-single-php .site-footer,
+.post-template-kh-FFFFFF-BE7670-single-php .widget-area {
+	background-color: #81302A;
 }
 
 /* 
