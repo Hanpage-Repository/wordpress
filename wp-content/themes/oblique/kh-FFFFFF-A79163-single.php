@@ -6,27 +6,44 @@
  * Template Name Posts: FFFFFF-A79163
  */
 
-?>
-<?php
-
-
 get_header(); 
 
-//$atts['name'] = "kopubbatang";
-
-//kh_shortcode_font($atts);
-
-//wp_enqueue_style( 'oblique-style', get_stylesheet_uri() );
-
-// oblique-style
-
 $custom_css = "
+<style>
 .post-template-kh-FFFFFF-A79163-single-php .svg-container {
-	display: none !important;
-}";
+	    display: none !important;
+}
 
-wp_add_inline_style( 'oblique-style', $custom_css );
+.post-template-kh-FFFFFF-A79163-single-php {
+	    background-color: #A79163;
+}
 
+.post-template-kh-FFFFFF-A79163-single-php .entry-title {
+	    color: #444;
+        margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-A79163-single-php article.post {
+	    padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+
+	    background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-A79163-single-php .sidebar-toggle {
+	    color: #7D693F;
+}
+
+.post-template-kh-FFFFFF-A79163-single-php .site-footer,
+.post-template-kh-FFFFFF-A79163-single-php .widget-area {
+	    background-color: #7D693F;
+}
+
+</style>
+";
+
+echo $custom_css;
 
 ?>
 

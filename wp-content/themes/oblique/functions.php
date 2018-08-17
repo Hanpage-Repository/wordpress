@@ -440,3 +440,149 @@ function kh_font_enqueue_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'kh_font_enqueue_scripts' );
 
+function kh_shortcode_account($atts) {
+
+	if( !isset($atts['board-id']) ||
+			!isset($atts['lang']) ) {
+		echo 'return;';
+	}
+
+	$board = new KBoard($atts['board-id']);
+
+	echo '<div style="width:100%; text-align:right; padding-right:30px;">';
+	if($atts['lang'] == 'KOR') {
+		if($board->isWriter()) {
+			$current_user = wp_get_current_user();
+			echo '<B>' . $current_user->user_login . '</B> 님 반갑습니다! <a href="' . get_site_url() . '/my-account/customer-logout?redirect-board=' . get_permalink() . '">(로그아웃하기)</a>' ;
+		}
+		else {
+			echo '<a href="' . get_site_url() . '/my-account" class="kboard-default-button-small">로그인</a>';
+		}
+	}
+	else if($atts['lang'] == 'ENG') {
+	}
+	echo '</div>';
+}
+add_shortcode('KHACCOUNT', 'kh_shortcode_account');
+
+function redirect_user_back_to_board() {
+
+	if(isset($_REQUEST['redirect-user'])) 
+		$referer = $_REQUEST['redirect-user'];
+	else
+		$referer = wp_get_referer();
+
+	if( $referer ) {
+		$post_id = url_to_postid( $referer );
+		$post_data = get_post( $post_id );
+		if( $post_data ) {
+?>
+			<?php echo $referer; ?>
+			<input type="hidden" name="redirect-user" value="<?php echo $referer; ?>">
+<?php
+		}
+	}
+}
+add_action( 'woocommerce_login_form', 'redirect_user_back_to_board' );
+
+function wc_custom_user_redirect( $redirect, $user ) {
+	//$redirect = esc_url( $_POST['redirect-user'] ); 
+	$redirect = esc_url( $_REQUEST['redirect-user'] ); 
+
+	return $redirect; 
+} 
+add_filter( 'woocommerce_login_redirect', 'wc_custom_user_redirect', 10, 2 );
+
+function custom_login_failed() {
+	$login_page  = home_url('/my-account/');
+
+	$query = '?login=failed';
+
+	if( isset($_REQUEST['redirect-user']) )
+		$query = $query . '&redirect-user=' . $_REQUEST['redirect-user'];
+
+	//wp_redirect($login_page . '?login=failed');
+	wp_redirect($login_page . $query);
+	exit();
+}
+add_action('wp_login_failed', 'custom_login_failed');
+
+function auto_redirect_after_logout(){
+	if( isset($_SERVER['HTTP_REFERER']) )
+		wp_redirect( $_SERVER['HTTP_REFERER'] );
+
+	exit();
+}
+add_action('wp_logout','auto_redirect_after_logout');
+
+/*
+function wc_custom_user_logout_redirect( $redirect, $user ) {
+	$redirect = esc_url( $_REQUEST['redirect-board'] );
+
+	$redirect = "http://www.naver.com";
+
+	return $redirect;
+} 
+add_filter( 'woocommerce_logout_redirect', 'wc_custom_user_logout_redirect', 10, 2 );
+*/
+
+/*
+// bypass logout confirmation
+function kh_bypass_logout_confirmation() {
+	global $wp;
+
+	$log_txt = "hello world"; //$wp->query_vars['customer-logout'];
+	
+	$log_dir = "/home/ubuntu";   
+	$log_file = fopen($log_dir."/log.txt", "a");  
+	fwrite($log_file, $log_txt."\r\n");  
+	fclose($log_file);  
+
+	//$log_txt = $wp->query_vars['customer-logout'];
+	if ( isset( $wp->query_vars['customer-logout'] ) ) {
+	wp_redirect( wp_logout_url( $_REQUEST['redirect-board'] ) );
+	//wp_redirect( wp_logout_url( "www.naver.com" ) );
+	//wp_redirect( str_replace( '&amp;', '&', wp_logout_url( wc_get_page_permalink( 'myaccount' ) ) ) );
+	    exit;
+	}
+}
+add_action( 'template_redirect', 'kh_bypass_logout_confirmation' );
+*/
+
+/*
+// Main redirection of the default login page 
+function redirect_login_page() {
+	$login_page  = home_url('/my-account/');
+	$page_viewed = basename($_SERVER['REQUEST_URI']);
+
+	if($page_viewed == "wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET') {
+		wp_redirect($login_page);
+		exit;
+	}
+}
+add_action('init','redirect_login_page');
+
+// Where to go if a login failed
+function custom_login_failed() {
+	$login_page  = home_url('/my-account/');
+
+	$query = '?login=failed'
+	if( isset($_REQUEST['redirect-user']) )
+		$query = $query . '?redirect-user=' . $_REQUEST['redirect-user'];
+
+	wp_redirect($login_page . '?login=failed');
+	//wp_redirect($login_page . $query);
+	exit;
+}
+add_action('wp_login_failed', 'custom_login_failed');
+
+// Where to go if any of the fields were empty 
+function verify_user_pass($user, $username, $password) {
+	$login_page  = home_url('/my-account/');
+	if($username == "" || $password == "") {
+		wp_redirect($login_page . "?login=empty");
+		exit;
+	}
+}
+add_filter('authenticate', 'verify_user_pass', 1, 3);
+*/

@@ -1166,9 +1166,21 @@ Top bar
 }
 
 /* plugin setting by KH */
-
+.kboard-button-like,
+.kboard-button-unlike,
+.kboard-total-count,
+#kboard-default-list span.select.null-wrapper::after,
+#kboard-document span.select.null-wrapper::after,
+.kboard-default-poweredby,
 .navigation.post-navigation {
 	display: none;
+}
+
+/* added by KH */
+#kboard-document,
+#kboard-default-editor,
+#kboard-default-list {
+    padding: 30px !important;
 }
 
 /* plugin setting -- WooCommerce by KH */
@@ -1646,6 +1658,35 @@ added by KH - FFFFFF-DDE0AE
 .post-template-kh-FFFFFF-DDE0AE-single-php .site-footer,
 .post-template-kh-FFFFFF-DDE0AE-single-php .widget-area {
 	background-color: #9A9F53;
+}
+
+/* 
+added by KH - FFFFFF-A79163 
+*/
+.post-template-kh-FFFFFF-A79163-single-php {
+	background-color: #A79163;
+}
+
+.post-template-kh-FFFFFF-A79163-single-php .entry-title {
+	color: #444;
+	margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-A79163-single-php article.post {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-A79163-single-php .sidebar-toggle {
+	color: #7D693F;
+}
+
+.post-template-kh-FFFFFF-A79163-single-php .site-footer,
+.post-template-kh-FFFFFF-A79163-single-php .widget-area {
+	background-color: #7D693F;
 }
 
 /* 

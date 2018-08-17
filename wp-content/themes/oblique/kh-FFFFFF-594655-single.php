@@ -5,7 +5,6 @@
  * @package Oblique
  * Template Name Posts: FFFFFF-594655
  */
-
 get_header(); ?>
 
 	<div id="primary" class="content-area kh-FFFFFF-594655">
