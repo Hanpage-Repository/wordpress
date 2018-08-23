@@ -516,73 +516,9 @@ function auto_redirect_after_logout(){
 add_action('wp_logout','auto_redirect_after_logout');
 
 /*
-function wc_custom_user_logout_redirect( $redirect, $user ) {
-	$redirect = esc_url( $_REQUEST['redirect-board'] );
-
-	$redirect = "http://www.naver.com";
-
-	return $redirect;
-} 
-add_filter( 'woocommerce_logout_redirect', 'wc_custom_user_logout_redirect', 10, 2 );
-*/
-
-/*
-// bypass logout confirmation
-function kh_bypass_logout_confirmation() {
-	global $wp;
-
-	$log_txt = "hello world"; //$wp->query_vars['customer-logout'];
-	
-	$log_dir = "/home/ubuntu";   
-	$log_file = fopen($log_dir."/log.txt", "a");  
-	fwrite($log_file, $log_txt."\r\n");  
-	fclose($log_file);  
-
-	//$log_txt = $wp->query_vars['customer-logout'];
-	if ( isset( $wp->query_vars['customer-logout'] ) ) {
-	wp_redirect( wp_logout_url( $_REQUEST['redirect-board'] ) );
-	//wp_redirect( wp_logout_url( "www.naver.com" ) );
-	//wp_redirect( str_replace( '&amp;', '&', wp_logout_url( wc_get_page_permalink( 'myaccount' ) ) ) );
-	    exit;
-	}
+function kboard_redirected_to_kh_point( $next_page_url, $execute_uid, $board_id ) {
+	$next_page_url = $next_page_url . "#kh";
+	return $next_page_url;
 }
-add_action( 'template_redirect', 'kh_bypass_logout_confirmation' );
-*/
-
-/*
-// Main redirection of the default login page 
-function redirect_login_page() {
-	$login_page  = home_url('/my-account/');
-	$page_viewed = basename($_SERVER['REQUEST_URI']);
-
-	if($page_viewed == "wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET') {
-		wp_redirect($login_page);
-		exit;
-	}
-}
-add_action('init','redirect_login_page');
-
-// Where to go if a login failed
-function custom_login_failed() {
-	$login_page  = home_url('/my-account/');
-
-	$query = '?login=failed'
-	if( isset($_REQUEST['redirect-user']) )
-		$query = $query . '?redirect-user=' . $_REQUEST['redirect-user'];
-
-	wp_redirect($login_page . '?login=failed');
-	//wp_redirect($login_page . $query);
-	exit;
-}
-add_action('wp_login_failed', 'custom_login_failed');
-
-// Where to go if any of the fields were empty 
-function verify_user_pass($user, $username, $password) {
-	$login_page  = home_url('/my-account/');
-	if($username == "" || $password == "") {
-		wp_redirect($login_page . "?login=empty");
-		exit;
-	}
-}
-add_filter('authenticate', 'verify_user_pass', 1, 3);
+add_filter( 'kboard_after_executing_url', 'kboard_redirected_to_kh_point', 10, 3 );
 */

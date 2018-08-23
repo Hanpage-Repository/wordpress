@@ -99,11 +99,15 @@ class KBUrl {
 		$query_strings = $this->getCleanQueryStrings();
 		$this->init();
 		if($this->path){
-			return $this->path . ($query_strings ? "?{$query_strings}" : '');
+			// edit by KH
+			//return $this->path . ($query_strings ? "?{$query_strings}" : '');
+			return $this->path . ($query_strings ? "?{$query_strings}" : '') . "#khboard";
 		}
 		else{
 			$url = parse_url($_SERVER['REQUEST_URI']);
-			return (isset($url['path']) ? $url['path'] : '') . ($query_strings ? "?{$query_strings}" : '');
+			// edit by KH
+			//return (isset($url['path']) ? $url['path'] : '') . ($query_strings ? "?{$query_strings}" : '');
+			return (isset($url['path']) ? $url['path'] : '') . ($query_strings ? "?{$query_strings}" . "#khboard" : '' . "#khboard");
 		}
 	}
 	
@@ -114,7 +118,9 @@ class KBUrl {
 	public function toStringWithPath($path){
 		// 경로가 없을경우
 		if(!$path && $this->data['uid']){
-			return $this->getDocumentRedirect($this->data['uid']);
+			// edit by KH
+			//return $this->getDocumentRedirect($this->data['uid']);
+			return $this->getDocumentRedirect($this->data['uid']) . "#khboard";
 		}
 		
 		// 입력받은 경로를 처리한다.
@@ -130,7 +136,9 @@ class KBUrl {
 		
 		$query_strings = $this->getCleanQueryStrings();
 		$this->init();
-		return (isset($url['path']) ? $url['path'] : '') . ($query_strings ? "?{$query_strings}" : '');
+		// edit by KH
+		//return (isset($url['path']) ? $url['path'] : '') . ($query_strings ? "?{$query_strings}" : '');
+		return (isset($url['path']) ? $url['path'] : '') . ($query_strings ? "?{$query_strings}" . "#khboard" : '' . "#khboard");
 	}
 	
 	/**

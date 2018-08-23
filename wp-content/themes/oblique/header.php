@@ -16,14 +16,6 @@
 <!-- added by KH  -->
 <meta name="naver-site-verification" content="b676af98f9416dcfe882719998d94a34ba22dbcc"/>
 <meta name="google-site-verification" content="V_P0JXxKqXKQHL1j_mL_W28WWfsW7QYEnFP05PB1_i8" />
-<!-- edit by KH
-<meta name="description" content="개인용 프로필, 기업 홈페이지, 동호회·동아리·이벤트 전용 페이지 제작 등 서비스 제공.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="한 페이지">
-<meta property="og:description" content="개인용 프로필, 기업 홈페이지, 동호회·동아리·이벤트 전용 페이지 제작 등 서비스 제공.">
-<meta property="og:url" content="http://hanpage.net">
-<meta property="og:image" content="http://d1fav6wwj1iaz1.cloudfront.net/public/016.png">
--->
 
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -52,6 +44,14 @@ ga('send', 'pageview');
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed site">
 	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'oblique' ); ?></a>
+	
+	<?php // added by KH
+		$menu_arr = get_nav_menu_locations();
+		$menu = wp_get_nav_menu_object($menu_arr["primary"]);
+		$menu_name = $menu->name;
+
+		if($menu_name != "primary") {
+	?>
 
 	<?php $menu_text = get_theme_mod('menu_text'); ?>
 	<div class="sidebar-toggle">
@@ -62,6 +62,10 @@ ga('send', 'pageview');
 		<?php echo '<span class="' . (!$menu_text && is_customize_preview() ? " oblique-only-customizer" : "" ) . '">' . esc_html($menu_text) . '<span>'; ?>
 		<?php endif; ?>
 	</div>
+
+	<?php // added by KH
+		}
+	?>
 
 	<div class="top-bar container">
 		<?php if ( has_nav_menu( 'social' ) ) : ?>
