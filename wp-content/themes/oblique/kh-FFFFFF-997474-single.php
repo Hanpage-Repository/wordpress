@@ -6,7 +6,46 @@
  * Template Name Posts: FFFFFF-997474
  */
 
-get_header(); ?>
+get_header(); 
+
+$custom_css = "
+<style>
+.post-template-kh-FFFFFF-997474-single-php .svg-container {
+	    display: none !important;
+}
+
+.post-template-kh-FFFFFF-997474-single-php {
+	    background-color: #997474;
+}
+
+.post-template-kh-FFFFFF-997474-single-php .entry-title {
+	    color: #444;
+        margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-997474-single-php article.post {
+	    padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+
+	    background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-997474-single-php .sidebar-toggle {
+	    color: #B99E9E;
+}
+
+.post-template-kh-FFFFFF-997474-single-php .site-footer,
+.post-template-kh-FFFFFF-997474-single-php .widget-area {
+	    background-color: #B99E9E;
+}
+
+</style>
+";
+
+echo $custom_css;
+
+?>
 
 	<div id="primary" class="content-area kh-FFFFFF-997474">
 		<main id="main" class="site-main" role="main">

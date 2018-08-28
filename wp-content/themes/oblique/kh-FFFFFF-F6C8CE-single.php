@@ -3,27 +3,27 @@
  * The template for displaying all single posts.
  *
  * @package Oblique
- * Template Name Posts: FFFFFF-594655
+ * Template Name Posts: FFFFFF-F6C8CE
  */
 
 get_header(); 
 
 $custom_css = "
 <style>
-.post-template-kh-FFFFFF-594655-single-php .svg-container {
+.post-template-kh-FFFFFF-F6C8CE-single-php .svg-container {
 	    display: none !important;
 }
 
-.post-template-kh-FFFFFF-594655-single-php {
-	    background-color: #594655;
+.post-template-kh-FFFFFF-F6C8CE-single-php {
+	    background-color: #F6C8CE;
 }
 
-.post-template-kh-FFFFFF-594655-single-php .entry-title {
+.post-template-kh-FFFFFF-F6C8CE-single-php .entry-title {
 	    color: #444;
         margin-top: 40px;
 }
 
-.post-template-kh-FFFFFF-594655-single-php article.post {
+.post-template-kh-FFFFFF-F6C8CE-single-php article.post {
 	    padding-left: 0;
         padding-right: 0;
         padding-bottom: 0;
@@ -31,13 +31,13 @@ $custom_css = "
 	    background: #FFFFFF;
 }
 
-.post-template-kh-FFFFFF-594655-single-php .sidebar-toggle {
-	    color: #32242F;
+.post-template-kh-FFFFFF-F6C8CE-single-php .sidebar-toggle {
+	    color: #E79EA8;
 }
 
-.post-template-kh-FFFFFF-594655-single-php .site-footer,
-.post-template-kh-FFFFFF-594655-single-php .widget-area {
-	    background-color: #32242F;
+.post-template-kh-FFFFFF-F6C8CE-single-php .site-footer,
+.post-template-kh-FFFFFF-F6C8CE-single-php .widget-area {
+	    background-color: #E79EA8;
 }
 
 </style>
@@ -47,7 +47,7 @@ echo $custom_css;
 
 ?>
 
-	<div id="primary" class="content-area kh-FFFFFF-594655">
+	<div id="primary" class="content-area kh-FFFFFF-F6C8CE">
 		<main id="main" class="site-main" role="main">
 
 		<?php while ( have_posts() ) : the_post(); ?>

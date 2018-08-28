@@ -6,7 +6,46 @@
  * Template Name Posts: FFFFFF-FFC2DC
  */
 
-get_header(); ?>
+get_header(); 
+
+$custom_css = "
+<style>
+.post-template-kh-FFFFFF-FFC2DC-single-php .svg-container {
+	    display: none !important;
+}
+
+.post-template-kh-FFFFFF-FFC2DC-single-php {
+	    background-color: #FFC2DC;
+}
+
+.post-template-kh-FFFFFF-FFC2DC-single-php .entry-title {
+	    color: #444;
+        margin-top: 40px;
+}
+
+.post-template-kh-FFFFFF-FFC2DC-single-php article.post {
+	    padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+
+	    background: #FFFFFF;
+}
+
+.post-template-kh-FFFFFF-FFC2DC-single-php .sidebar-toggle {
+	    color: #FF89BD;
+}
+
+.post-template-kh-FFFFFF-FFC2DC-single-php .site-footer,
+.post-template-kh-FFFFFF-FFC2DC-single-php .widget-area {
+	    background-color: #FF89BD;
+}
+
+</style>
+";
+
+echo $custom_css;
+
+?>
 
 	<div id="primary" class="content-area kh-FFFFFF-FFC2DC">
 		<main id="main" class="site-main" role="main">
