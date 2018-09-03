@@ -1207,8 +1207,8 @@ Top bar
 }
 
 .woocommerce-account .woocommerce-MyAccount-navigation,
-.woocommerce-result-count,
 .woocommerce-message,
+.woocommerce-result-count,
 .woocommerce-breadcrumb,
 .woocommerce.woocommerce-page .ufbl-form-title {
 	display: none;
@@ -1281,9 +1281,23 @@ Top bar
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
+.kh-font-kopubbatang p,
+.kh-font-kopubbatang h1,
+.kh-font-kopubbatang h2,
+.kh-font-kopubbatang h3,
+.kh-font-kopubbatang h4,
+.kh-font-kopubbatang h5,
+.kh-font-kopubbatang h6,
+.kh-font-kopubbatang {
+	font-family: 'KoPub Batang', serif;
+}
+
+
 /*
 .page-template-kh-home-page-php .svg-container,
 */
+.woocommerce-MyAccount-content,
+.woocommerce-LostPassword.lost_password,
 div.header-search,
 .single-post #masthead,
 .single-post .header-search,

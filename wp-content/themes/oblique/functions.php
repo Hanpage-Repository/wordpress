@@ -422,24 +422,6 @@ function custom_override_checkout_fields( $fields ) {
  	return $fields;
 }
 
-function kh_shortcode_font($atts) {
-	$style_name = $atts['name'] . '-css';
-
-	wp_enqueue_style($style_name);
-}
-add_shortcode('KHFONT', 'kh_shortcode_font');
-
-// google and google early access is allowed
-function kh_font_enqueue_scripts() {
-	$query_args_kopubbatang = array( 'family' => 'KoPub Batang' );
-	$query_args_notosanskr = array( 'family' => 'Noto Sans KR' );
-
-	//wp_register_style('kopubbatang-css', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), 'parent-stylesheet', '1.0', all );
-	wp_register_style('kopubbatang-css', add_query_arg( $query_args_kopubbatang, "//fonts.googleapis.com/earlyaccess/kopubbatang.css" ), 'parent-stylesheet', '1.0', all );
-	wp_register_style('notosanskr-css', add_query_arg( $query_args_notosanskr, "//fonts.googleapis.com/earlyaccess/notosanskr.css" ), 'parent-stylesheet', '1.0', all );
-}
-add_action( 'wp_enqueue_scripts', 'kh_font_enqueue_scripts' );
-
 function kh_shortcode_account($atts) {
 
 	if( !isset($atts['board-id']) ||
@@ -477,7 +459,7 @@ function redirect_user_back_to_board() {
 		$post_data = get_post( $post_id );
 		if( $post_data ) {
 ?>
-			<?php echo $referer; ?>
+			<?php //debugged by KH //echo $referer; ?>
 			<input type="hidden" name="redirect-user" value="<?php echo $referer; ?>">
 <?php
 		}
@@ -522,3 +504,23 @@ function kboard_redirected_to_kh_point( $next_page_url, $execute_uid, $board_id 
 }
 add_filter( 'kboard_after_executing_url', 'kboard_redirected_to_kh_point', 10, 3 );
 */
+
+function kh_shortcode_font($atts) {
+	$style_name = $atts['name'] . '-css';
+
+	wp_enqueue_style($style_name);
+}
+add_shortcode('KHFONT', 'kh_shortcode_font');
+
+// google and google early access is allowed
+function kh_font_enqueue_scripts() {
+	$query_args_kopubbatang = array( 'family' => 'KoPub Batang' );
+	$query_args_notosanskr = array( 'family' => 'Noto Sans KR' );
+
+	//wp_register_style('kopubbatang-css', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), 'parent-stylesheet', '1.0', all );
+	wp_register_style('kopubbatang-css', add_query_arg( $query_args_kopubbatang, "//fonts.googleapis.com/earlyaccess/kopubbatang.css" ), 'parent-stylesheet', '1.0', all );
+	wp_register_style('notosanskr-css', add_query_arg( $query_args_notosanskr, "//fonts.googleapis.com/earlyaccess/notosanskr.css" ), 'parent-stylesheet', '1.0', all );
+}
+add_action( 'wp_enqueue_scripts', 'kh_font_enqueue_scripts' );
+
+
