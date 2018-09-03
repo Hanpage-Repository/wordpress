@@ -421,17 +421,6 @@ do_action( 'login_form_' . $action );
 $http_post = ('POST' == $_SERVER['REQUEST_METHOD']);
 $interim_login = isset($_REQUEST['interim-login']);
 
-// added by KH
-switch ($action) {
-	case 'logout':
-	    break;
-	default:
-	    $redirect_to = home_url('/access-denied/');
-	    wp_safe_redirect($redirect_to);
-	    exit();
-	    break;
-}
-
 switch ($action) {
 
 case 'postpass' :
