@@ -1166,6 +1166,10 @@ Top bar
 }
 
 /* plugin setting by KH */
+.kboard-comments-default .comments-list-controller .right,
+.kboard-comments-wrap .comments-sort,
+.kboard-list-vote,
+.kboard-sort,
 .kboard-button-like,
 .kboard-button-unlike,
 .kboard-total-count,
@@ -1173,7 +1177,7 @@ Top bar
 #kboard-document span.select.null-wrapper::after,
 .kboard-default-poweredby,
 .navigation.post-navigation {
-	display: none;
+	display: none !important;
 }
 
 /* added by KH */

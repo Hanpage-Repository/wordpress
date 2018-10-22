@@ -24,7 +24,20 @@ jQuery(function($) {
 	$('.sidebar-nav').click(function() {
 		sidebar_toggle_inside();
 	});	
+
+// added by KH
+	$('.kh-js-copy').click(function() {
+		document.getElementById('kh-id-js-copy').value= document.URL;
+		document.getElementById('kh-id-js-copy').select();
+				
+		if(document.execCommand("copy")) {
+			window.alert("현재의 URL이 복사되었습니다. 다른 곳에 붙여넣기 하세요.");
+		}
+
+	});
 });
+
+
 
 function sidebar_toggle() {
 	jQuery('.widget-area').toggleClass('widget-area-visible');

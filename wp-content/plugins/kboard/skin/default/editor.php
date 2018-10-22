@@ -98,12 +98,14 @@
 			<?php endif?>
 		</div>
 		
+		<!-- edit by KH
 		<div class="kboard-attr-row">
 			<label class="attr-name"><?php echo __('Photos', 'kboard')?></label>
 			<div class="attr-value">
 				<a href="#" onclick="kboard_editor_open_media();return false;"><?php echo __('KBoard Add Media', 'kboard')?></a>
 			</div>
 		</div>
+		-->
 		
 		<div class="kboard-attr-row">
 			<label class="attr-name" for="kboard-input-thumbnail"><?php echo __('Thumbnail', 'kboard')?></label>

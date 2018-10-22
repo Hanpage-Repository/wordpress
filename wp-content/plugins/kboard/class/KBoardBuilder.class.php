@@ -79,9 +79,12 @@ class KBoardBuilder {
 			wp_localize_script('kboard-script', 'kbaord_current', array('board_id'=>$this->board_id, 'content_uid'=>$this->uid));
 			
 			// KBoard 미디어 추가
+			// edit by KH
+			/*
 			add_action('media_buttons_context',  'kboard_editor_button');
 			add_filter('mce_buttons', 'kboard_register_media_button');
 			add_filter('mce_external_plugins', 'kboard_add_media_button');
+			*/
 			
 			// font-awesome 출력
 			if(!get_option('kboard_fontawesome')){
